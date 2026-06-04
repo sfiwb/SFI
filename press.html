@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+
+<html data-theme="dark" lang="bn">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>প্রেস বিবৃতি | এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটি</title>
+<meta content="ভারতের ছাত্র ফেডারেশন (এসএফআই) পশ্চিমবঙ্গ রাজ্য কমিটির সাম্প্রতিক প্রেস বিবৃতি ও বিজ্ঞপ্তিসমূহ।" name="description"/>
+<meta content="SFI, SFI WB, West Bengal, Students Federation of India, ছাত্র ফেডারেশন, এসএফআই, ছাত্র আন্দোলন" name="keywords"/>
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.css" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/><link href="style.css" rel="stylesheet"/><link href="home.css" rel="stylesheet"/><style>
+        /* ── Hero ── */
+        .press-hero {
+            background: linear-gradient(135deg, #0c0d10 0%, #1a0a0a 100%);
+            padding: 100px 0 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .press-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--color-primary);
+            margin-bottom: 12px;
+        }
+        .press-hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        /* ── Press Cards Grid ── */
+        .press-section {
+            padding: 60px 0;
+        }
+        .press-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 28px;
+            padding-bottom: 20px;
+        }
+        .press-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            padding: 28px 26px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+        .press-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--color-primary);
+            border-radius: 4px 0 0 4px;
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+        .press-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--border-hover);
+        }
+        .press-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Date badge */
+        .press-date-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(211, 26, 39, 0.12);
+            color: var(--color-primary);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 30px;
+            border: 1px solid rgba(211, 26, 39, 0.25);
+            width: fit-content;
+            letter-spacing: 0.02em;
+        }
+        .press-date-badge svg {
+            width: 13px;
+            height: 13px;
+            flex-shrink: 0;
+        }
+
+        /* Card title */
+        .press-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.55;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        /* Card excerpt */
+        .press-card-excerpt {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin: 0;
+            flex: 1;
+        }
+
+        /* Tag */
+        .press-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            background: rgba(255, 189, 9, 0.1);
+            border: 1px solid rgba(255, 189, 9, 0.25);
+            padding: 2px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        /* Read more button */
+        .press-read-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 20px;
+            border-radius: var(--border-radius-sm);
+            background: var(--color-primary);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: var(--font-body);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            width: fit-content;
+            margin-top: 4px;
+        }
+        .press-read-btn:hover {
+            background: #b8161f;
+            transform: translateX(2px);
+        }
+        .press-read-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Section heading */
+        .section-heading-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+        .section-heading-row h2 {
+            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .section-heading-row h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--color-primary);
+            border-radius: 2px;
+        }
+        .press-count-badge {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 4px 14px;
+            border-radius: 30px;
+        }
+
+        /* No more divider */
+        .press-divider {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 14px 0 0;
+        }
+
+        /* Pagination stub */
+        .press-pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 52px;
+        }
+        .press-page-btn {
+            padding: 8px 18px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-muted);
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        .press-page-btn.active,
+        .press-page-btn:hover {
+            background: var(--color-primary);
+            color: #fff;
+            border-color: var(--color-primary);
+        }
+
+        @media (max-width: 600px) {
+            .press-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style></head>
+<body><div class="pointer-glow" id="pointerGlow"></div><div class="topbar py-1">
+<div class="container">
+<div class="row align-items-center">
+<div class="col-8 topbar-left">
+<span class="small text-white opacity-75 d-none d-md-inline"><i class="bi bi-info-circle me-1"></i> ভারতের ছাত্র ফেডারেশন (পশ্চিমবঙ্গ রাজ্য কমিটি) অফিসিয়াল ওয়েবসাইট</span>
+</div>
+<div class="col-12 col-md-4 topbar-right text-end">
+<div class="social-links d-inline-block">
+<a aria-label="Search" class="text-white opacity-75 hover-opacity-100 me-3" href="/docs/search"><i class="bi bi-search"></i></a>
+<a aria-label="Facebook" class="text-white opacity-75 hover-opacity-100 me-3" href="https://www.facebook.com/sfiwestbengalofficial/" target="_blank"><i class="bi bi-facebook"></i></a>
+<a aria-label="Twitter" class="text-white opacity-75 hover-opacity-100 me-3" href="https://twitter.com/SFI_WestBengal" target="_blank"><i class="bi bi-twitter-x"></i></a>
+<a aria-label="Instagram" class="text-white opacity-75 hover-opacity-100 me-3" href="https://www.instagram.com/sfi_west_bengal/" target="_blank"><i class="bi bi-instagram"></i></a>
+<a aria-label="YouTube" class="text-white opacity-75 hover-opacity-100" href="https://www.youtube.com/@sfiwestbengalofficial" target="_blank"><i class="bi bi-youtube"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div><header class="header d-flex align-items-center fixed-top" id="header">
+<div class="container position-relative align-items-center justify-content-between">
+<div class="row w-100 align-items-center">
+<!-- Logo Image Toggler -->
+<div class="col-10 col-xl-4">
+<a class="logo d-flex align-items-center me-auto" href="index.html">
+<img alt="SFI WB State Committee Logo" class="img-fluid logo-img" id="siteLogoImg" src="assets/SFI-WB-WEB-LOGO-DARK.png"/>
+</a>
+</div>
+<!-- Navigation menu (Cleaned, simplified, and inline theme toggler) -->
+<div class="col-2 col-xl-8 text-end p-0">
+<nav class="navmenu" id="navmenu" lang="bn">
+<ul>
+<li class="dropdown"><a href="about.html">সংগঠন <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+<ul>
+<li><a href="about.html">আমাদের কথা</a></li>
+<li><a href="polit-bureau.html">পলিট ব্যুরো সদস্যদের তালিকা</a></li>
+<li><a href="central-committee.html">কেন্দ্রীয় কমিটি সদস্যদের তালিকা</a></li>
+<li><a href="state-committee.html">পশ্চিমবঙ্গ রাজ্য কমিটি সদস্যদের তালিকা</a></li>
+<li class="dropdown"><a href="#">ডকুমেন্টস <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+<ul>
+<li><a href="programme.html">পার্টি কর্মসূচি</a></li>
+<li><a href="constitution.html">পার্টি গঠনতন্ত্র</a></li>
+<li><a href="booklets.html">পার্টি পুস্তিকা</a></li>
+</ul>
+</li>
+<li><a href="gallery.html">ফটো গ্যালারি</a></li>
+<li><a href="links.html">প্রাসঙ্গিক লিংক</a></li>
+</ul>
+</li>
+<li><a href="press.html">প্রেস বিবৃতি</a></li>
+<li class="dropdown"><a href="#">সোশ্যাল স্ট্রীম <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+<ul>
+<li><a href="https://www.youtube.com/@sfiwestbengalofficial" target="_blank">ইউটিউব চ্যানেল</a></li>
+<li><a href="https://www.facebook.com/sfiwestbengalofficial/" target="_blank">ফেসবুক পেজ</a></li>
+<li><a href="https://twitter.com/SFI_WestBengal" target="_blank">এক্স (টুইটার) হ্যান্ডেল</a></li>
+<li><a href="https://www.instagram.com/sfi_west_bengal/" target="_blank">ইনস্টাগ্রাম অ্যাকাউন্ট</a></li>
+</ul>
+</li>
+<li><a href="videos.html">ভিডিও</a></li>
+<li><a href="donate.html">অনুদান</a></li>
+<li><a href="contact.html">যোগাযোগ</a></li>
+<!-- Inline Theme Switcher inside the menu -->
+<li>
+<a aria-label="Toggle Theme" class="nav-theme-toggle" href="#" id="themeToggle">
+<i class="fas fa-sun text-warning" id="themeIcon"></i>
+</a>
+</li>
+</ul>
+<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+</nav>
+</div>
+</div>
+</div>
+</header>
+<!-- Preloader -->
+<!-- Particle Canvas -->
+<!-- Theme Toggle Floating -->
+<!-- Header / Navbar -->
+<main>
+<!-- Hero -->
+<section class="press-hero">
+<div class="container">
+<h1>📢 প্রেস বিবৃতি ও বিজ্ঞপ্তি</h1>
+<p>এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটির সাম্প্রতিক প্রেস বিবৃতি ও বিজ্ঞপ্তিসমূহ</p>
+</div>
+</section>
+<!-- Press Releases -->
+<section class="press-section">
+<div class="container">
+<div class="section-heading-row">
+<h2>সর্বশেষ বিবৃতি</h2>
+<span class="press-count-badge">মোট ৬টি বিবৃতি</span>
+</div>
+<div class="press-grid">
+<!-- Card 1 -->
+<article class="press-card">
+<span class="press-date-badge">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                            ২৫ মে, ২০২৬
+                        </span>
+<span class="press-tag">শিক্ষা নীতি</span>
+<h3 class="press-card-title">কেন্দ্রীয় বিশ্ববিদ্যালয়গুলিতে অর্থায়ন কাটছাঁটের বিরুদ্ধে এসএফআইয়ের তীব্র প্রতিবাদ</h3>
+<p class="press-card-excerpt">কেন্দ্রীয় সরকার উচ্চশিক্ষা খাতে বরাদ্দ বাজেটের প্রায় ৩০% কমিয়ে দেওয়ার পর এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটি তীব্র নিন্দা জানিয়েছে। সংগঠনের রাজ্য সম্পাদক জানান, এই সিদ্ধান্ত দেশের লক্ষ লক্ষ দরিদ্র ও মধ্যবিত্ত পরিবারের পড়ুয়াদের উচ্চশিক্ষার পথ বন্ধ করে দেবে। অবিলম্বে এই সিদ্ধান্ত প্রত্যাহার এবং শিক্ষাখাতে জিডিপির ৬% বরাদ্দের দাবি জানানো হয়েছে।</p>
+<hr class="press-divider"/>
+<a class="press-read-btn" href="#">
+                            সম্পূর্ণ পড়ুন
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+</a>
+</article>
+<!-- Card 2 -->
+<article class="press-card">
+<span class="press-date-badge">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                            ১৮ মে, ২০২৬
+                        </span>
+<span class="press-tag">গণতন্ত্র</span>
+<h3 class="press-card-title">ছাত্র সংসদ নির্বাচন স্থগিত রাখার বিরুদ্ধে এসএফআইয়ের রাজ্যব্যাপী আন্দোলনের ডাক</h3>
+<p class="press-card-excerpt">পশ্চিমবঙ্গের একাধিক বিশ্ববিদ্যালয়ে গত তিন বছর ধরে ছাত্র সংসদ নির্বাচন অনুষ্ঠিত না হওয়ায় এসএফআই গভীর উদ্বেগ প্রকাশ করেছে। ছাত্রদের গণতান্ত্রিক অধিকার হরণের এই ঘটনাকে সংগঠন রাজ্য সরকারের উদ্দেশ্যমূলক পদক্ষেপ হিসেবে চিহ্নিত করেছে। আগামী ১ জুনের মধ্যে নির্বাচনের সময়সূচি ঘোষণা না হলে লাগাতার অবস্থান বিক্ষোভের হুঁশিয়ারি দেওয়া হয়েছে।</p>
+<hr class="press-divider"/>
+<a class="press-read-btn" href="#">
+                            সম্পূর্ণ পড়ুন
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+</a>
+</article>
+<!-- Card 3 -->
+<article class="press-card">
+<span class="press-date-badge">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                            ৮ মে, ২০২৬
+                        </span>
+<span class="press-tag">বেসরকারিকরণ</span>
+<h3 class="press-card-title">মেডিক্যাল কলেজ বেসরকারিকরণের সিদ্ধান্ত অবিলম্বে বাতিল করুন — এসএফআই</h3>
+<p class="press-card-excerpt">রাজ্যের দুটি সরকারি মেডিক্যাল কলেজকে পিপিপি মডেলে রূপান্তরিত করার প্রস্তাব সামনে আসতেই এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটি শক্তিশালী প্রতিবাদ জানিয়েছে। সরকারি স্বাস্থ্য শিক্ষা প্রতিষ্ঠান বেসরকারি হাতে তুলে দেওয়া মানে সাধারণ মানুষের ডাক্তার হওয়ার স্বপ্নকে ধ্বংস করা। এই সিদ্ধান্তের বিরুদ্ধে রাজ্যের সমস্ত মেডিক্যাল কলেজে একযোগে প্রতিবাদ কর্মসূচি নেওয়া হবে।</p>
+<hr class="press-divider"/>
+<a class="press-read-btn" href="#">
+                            সম্পূর্ণ পড়ুন
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+</a>
+</article>
+<!-- Card 4 -->
+<article class="press-card">
+<span class="press-date-badge">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                            ২২ এপ্রিল, ২০২৬
+                        </span>
+<span class="press-tag">ছাত্র অধিকার</span>
+<h3 class="press-card-title">হস্টেল থেকে ছাত্রছাত্রীদের উচ্ছেদের নিন্দা — এসএফআইয়ের জরুরি সংবাদ সম্মেলন</h3>
+<p class="press-card-excerpt">যাদবপুর বিশ্ববিদ্যালয়ের হস্টেল থেকে গবেষক ছাত্রছাত্রীদের জোরপূর্বক উচ্ছেদের ঘটনায় এসএফআই জরুরি সংবাদ সম্মেলন ডেকেছে। সংগঠনের রাজ্য সভাপতি বলেন, এটি স্পষ্টতই বিশ্ববিদ্যালয় কর্তৃপক্ষের প্রতিশোধমূলক পদক্ষেপ। উচ্ছেদ করা সমস্ত ছাত্রছাত্রীকে অবিলম্বে তাদের বাসস্থান ফিরিয়ে দেওয়ার দাবি জানানো হয়েছে।</p>
+<hr class="press-divider"/>
+<a class="press-read-btn" href="#">
+                            সম্পূর্ণ পড়ুন
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+</a>
+</article>
+<!-- Card 5 -->
+<article class="press-card">
+<span class="press-date-badge">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                            ১৫ মার্চ, ২০২৬
+                        </span>
+<span class="press-tag">সাম্প্রদায়িকতাবিরোধী</span>
+<h3 class="press-card-title">ক্যাম্পাসে সাম্প্রদায়িক উসকানির বিরুদ্ধে এসএফআইয়ের ঐক্যবদ্ধ প্রতিরোধের আহ্বান</h3>
+<p class="press-card-excerpt">রাজ্যের কয়েকটি কলেজে সংঘবদ্ধ সাম্প্রদায়িক গোষ্ঠীর ছাত্রছাত্রীদের মধ্যে বিভেদ তৈরির অপচেষ্টার বিরুদ্ধে এসএফআই সতর্কতা জারি করেছে। ধর্ম, জাতি বা ভাষার ভিত্তিতে ছাত্রছাত্রীদের বিভক্ত করার প্রয়াস শিক্ষার পরিবেশকে বিনষ্ট করে। ধর্মনিরপেক্ষ ও বৈজ্ঞানিক শিক্ষার আদর্শ প্রতিষ্ঠায় সমস্ত সংগঠনকে ঐক্যবদ্ধ হওয়ার ডাক দেওয়া হয়েছে।</p>
+<hr class="press-divider"/>
+<a class="press-read-btn" href="#">
+                            সম্পূর্ণ পড়ুন
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+</a>
+</article>
+<!-- Card 6 -->
+<article class="press-card">
+<span class="press-date-badge">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                            ৩ ডিসেম্বর, ২০২৫
+                        </span>
+<span class="press-tag">কর্মসংস্থান</span>
+<h3 class="press-card-title">এসএসসি নিয়োগ দুর্নীতিতে ক্ষতিগ্রস্ত চাকরিপ্রার্থীদের ন্যায়বিচার নিশ্চিত করুন — এসএফআই</h3>
+<p class="press-card-excerpt">স্কুল সার্ভিস কমিশনের নিয়োগ কেলেঙ্কারিতে হাজার হাজার যোগ্য চাকরিপ্রার্থীর স্বপ্ন ভেঙে পড়েছে — এই পরিস্থিতিতে এসএফআই রাজ্য সরকারের কাছে জবাবদিহিতা দাবি করেছে। দুর্নীতিমুক্ত, স্বচ্ছ এবং মেধাভিত্তিক নিয়োগ প্রক্রিয়া নিশ্চিত করা রাজ্যের দায়িত্ব। সমস্ত ক্ষতিগ্রস্ত প্রার্থীকে অবিলম্বে নিয়োগপত্র প্রদানের জন্য সরকারের প্রতি আহ্বান জানানো হয়েছে।</p>
+<hr class="press-divider"/>
+<a class="press-read-btn" href="#">
+                            সম্পূর্ণ পড়ুন
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+</a>
+</article>
+</div><!-- /.press-grid -->
+<!-- Pagination -->
+<div class="press-pagination">
+<button class="press-page-btn active">১</button>
+<button class="press-page-btn">২</button>
+<button class="press-page-btn">৩</button>
+<button class="press-page-btn">পরবর্তী →</button>
+</div>
+</div>
+</section>
+</main>
+<!-- ============================================================
+       FOOTER - পাদটীকা
+  ============================================================ -->
+<!-- Back to Top -->
+<script>
+        // Pagination interaction (static demo)
+        document.querySelectorAll('.press-page-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.press-page-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+<footer class="footer light-background border-top border-secondary border-opacity-25" id="footer">
+<div class="container py-5">
+<div class="row g-4">
+<!-- Col 1: Address -->
+<div class="col-lg-3 col-md-6">
+<h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">ঠিকানা</h5>
+<p class="text-body leading-relaxed mb-0">
+<strong>ভারতের ছাত্র ফেডারেশন</strong><br/>
+                        পশ্চিমবঙ্গ রাজ্য কমিটি<br/>
+                        ৩১ আলিমুদ্দিন স্ট্রিট, মুজফ্ফর আহমদ ভবন<br/>
+                        কলকাতা - ৭০০০১৬
+                    </p>
+</div>
+<!-- Col 2: Organization & Docs -->
+<div class="col-lg-2 col-md-6">
+<h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">সংগঠন ও দস্তাবেজ</h5>
+<ul class="list-unstyled footer-links mb-0">
+<li><a class="text-body hover-text-danger small d-block py-1" href="about.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> আমাদের কথা</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="polit-bureau.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> পলিট ব্যুরো</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="central-committee.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> কেন্দ্রীয় কমিটি</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="state-committee.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> রাজ্য কমিটি</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="programme.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> পার্টি কর্মসূচি</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="constitution.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> গঠনতন্ত্র</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="booklets.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> পুস্তিকা</a></li>
+</ul>
+</div>
+<!-- Col 3: Media & Publications -->
+<div class="col-lg-2 col-md-6">
+<h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">মিডিয়া ও প্রকাশনা</h5>
+<ul class="list-unstyled footer-links mb-0">
+<li><a class="text-body hover-text-danger small d-block py-1" href="news.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> সংবাদ ও খবর</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="press.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রেস বিবৃতি</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="publications.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রকাশনা</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="videos.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> ভিডিও গ্যালারি</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="gallery.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> ফটো গ্যালারি</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="martyrs.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> শহীদ স্মরণ</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="international.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> আন্তর্জাতিক</a></li>
+</ul>
+</div>
+<!-- Col 4: Action & Support -->
+<div class="col-lg-2 col-md-6">
+<h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">যোগাযোগ ও সমর্থন</h5>
+<ul class="list-unstyled footer-links mb-0">
+<li><a class="text-body hover-text-danger small d-block py-1" href="contact.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> যোগাযোগ করুন</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="donate.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> অনুদান দিন</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="join.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> যোগ দিন</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="links.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রাসঙ্গিক লিংক</a></li>
+</ul>
+</div>
+<!-- Col 5: Newsletter & Socials -->
+<div class="col-lg-3 col-md-6">
+<h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">নিউজলেটার</h5>
+<p class="text-body small leading-relaxed mb-3">নতুন পোস্টের আপডেট সরাসরি পেতে সাবস্ক্রাইব করুন।</p>
+<form action="#" class="mt-2 mb-4" method="post">
+<div class="input-group">
+<input class="form-control form-control-sm bg-dark bg-opacity-50 text-white border-secondary border-opacity-25" name="email" placeholder="আপনার ইমেল লিখুন" required="" type="email"/>
+<button class="btn btn-danger btn-sm" type="submit">সাবস্ক্রাইব</button>
+</div>
+</form>
+<div class="social-links d-flex">
+<a class="btn btn-outline-danger btn-sm rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" href="https://www.facebook.com/sfiwestbengalofficial/" style="width: 38px; height: 38px;" target="_blank"><i class="bi bi-facebook"></i></a>
+<a class="btn btn-outline-danger btn-sm rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" href="https://twitter.com/SFI_WestBengal" style="width: 38px; height: 38px;" target="_blank"><i class="bi bi-twitter-x"></i></a>
+<a class="btn btn-outline-danger btn-sm rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" href="https://www.instagram.com/sfi_west_bengal/" style="width: 38px; height: 38px;" target="_blank"><i class="bi bi-instagram"></i></a>
+<a class="btn btn-outline-danger btn-sm rounded-circle p-2 d-flex align-items-center justify-content-center" href="https://www.youtube.com/@sfiwestbengalofficial" style="width: 38px; height: 38px;" target="_blank"><i class="bi bi-youtube"></i></a>
+</div>
+</div>
+</div>
+</div>
+<!-- Copyright & Credits -->
+<div class="copyright-bar bg-dark bg-opacity-50 border-top border-secondary border-opacity-10 py-3 text-center">
+<div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+<p class="mb-0 text-body small">© ২০২৬ ভারতের ছাত্র ফেডারেশন - পশ্চিমবঙ্গ রাজ্য কমিটি। সর্বস্বত্ব সংরক্ষিত।</p>
+<p class="mb-0 text-body small mt-2 mt-md-0">★ স্বাধীনতা • গণতন্ত্র • সমাজতন্ত্র</p>
+</div>
+</div>
+</footer><a class="scroll-top d-flex align-items-center justify-content-center bg-danger rounded text-white shadow" href="#" id="scroll-top"><i class="bi bi-arrow-up-short"></i></a><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script><script src="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script><script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // AOS Init
+            AOS.init({
+                duration: 600,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false
+            });
+
+            // Mobile Nav Toggle
+            const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
+            const body = document.querySelector('body');
+            
+            if (mobileNavToggleBtn) {
+                mobileNavToggleBtn.addEventListener('click', function(e) {
+                    body.classList.toggle('mobile-nav-active');
+                    mobileNavToggleBtn.classList.toggle('bi-list');
+                    mobileNavToggleBtn.classList.toggle('bi-x');
+                });
+            }
+
+            // Toggle Dropdown menu in Mobile View
+            document.querySelectorAll('.navmenu .dropdown > a').forEach(el => {
+                el.addEventListener('click', function(e) {
+                    if (window.innerWidth < 1200) {
+                        e.preventDefault();
+                        this.parentNode.classList.toggle('active');
+                        this.nextElementSibling.classList.toggle('dropdown-active');
+                    }
+                });
+            });
+
+            // Swiper Affairs Slider
+            if (document.querySelector(".team-slider")) {
+                var swiperTeam = new Swiper(".team-slider", {
+                    loop: true,
+                    speed: 800,
+                    autoplay: {
+                        delay: 5000
+                    },
+                    slidesPerView: 1,
+                    spaceBetween: 30,
+                    pagination: {
+                        el: ".swiper-pagination",
+                        type: "bullets",
+                        clickable: true
+                    },
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev"
+                    },
+                    breakpoints: {
+                        576: { slidesPerView: 2 },
+                        992: { slidesPerView: 3 }
+                    }
+                });
+            }
+
+            // Scroll to Top Button Action
+            const scrollTop = document.querySelector('.scroll-top');
+            if (scrollTop) {
+                const toggleScrollTop = function() {
+                    window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
+                }
+                window.addEventListener('load', toggleScrollTop);
+                document.addEventListener('scroll', toggleScrollTop);
+                scrollTop.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // Mouse-following cursor spotlight in Hero Section
+            const heroSection = document.getElementById('hero');
+            const spotlight = document.getElementById('heroSpotlight');
+            if (heroSection && spotlight) {
+                heroSection.addEventListener('mousemove', (e) => {
+                    const rect = heroSection.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    spotlight.style.setProperty('--mouse-x', `${x}px`);
+                    spotlight.style.setProperty('--mouse-y', `${y}px`);
+                });
+            }
+
+            // Smooth trailing global cursor glow (Pointer Glow)
+            const glow = document.getElementById('pointerGlow');
+            let mouseX = -500, mouseY = -500;
+            let glowX = -500, glowY = -500;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            
+            function animateCursorGlow() {
+                glowX += (mouseX - glowX) * 0.08;
+                glowY += (mouseY - glowY) * 0.08;
+                
+                if (glow) {
+                    glow.style.left = `${glowX}px`;
+                    glow.style.top = `${glowY}px`;
+                }
+                requestAnimationFrame(animateCursorGlow);
+            }
+            animateCursorGlow();
+
+            // Theme Toggle Logic (dynamic swap of logo & theme icons)
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const htmlElement = document.documentElement;
+            const logoImg = document.getElementById('siteLogoImg');
+
+            function applyTheme(themeName) {
+                htmlElement.setAttribute('data-theme', themeName);
+                if (themeName === 'dark') {
+                    if (themeIcon) {
+                        themeIcon.className = 'fas fa-sun text-warning';
+                    }
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO-DARK.png';
+                } else {
+                    if (themeIcon) {
+                        themeIcon.className = 'fas fa-moon text-dark';
+                    }
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO.png';
+                }
+            }
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const currentTheme = htmlElement.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    applyTheme(newTheme);
+                    localStorage.setItem('theme', newTheme);
+                });
+            }
+
+            // Initialize theme on load
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+        });
+    </script></body>
+</html>

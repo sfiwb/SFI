@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+
+<html data-theme="dark" lang="bn">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>আমাদের কথা | এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটি | Official Website</title>
+<meta content="ভারতের ছাত্র ফেডারেশন (এসএফআই) পশ্চিমবঙ্গ রাজ্য কমিটির ইতিহাস, আদর্শ ও বর্তমান রাজ্য নেতৃত্ব সম্পর্কে জানুন। শিক্ষা-একতা-প্রগতির ইতিহাস।" name="description"/>
+<meta content="SFI History, SFI Ideals, SFI Bengal Leadership, Debanjan Dey, Pranay Karjee" name="keywords"/>
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.css" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/><link href="style.css" rel="stylesheet"/><link href="home.css" rel="stylesheet"/><style>
+        /* Hero Overrides */
+        .about-hero {
+            background: linear-gradient(135deg, var(--background-color) 0%, color-mix(in srgb, var(--accent-color), transparent 94%) 100%) !important;
+            padding: 120px 0 70px !important;
+            text-align: center;
+            border-bottom: 1px solid var(--surface-border) !important;
+            position: relative;
+        }
+        .about-hero h1 {
+            font-size: clamp(2.2rem, 6vw, 3.5rem);
+            color: var(--accent-color) !important;
+            font-family: var(--font-heading) !important;
+            font-weight: 800;
+            margin-bottom: 12px;
+            text-shadow: 0 0 15px var(--accent-glow) !important;
+        }
+        .about-hero p {
+            color: var(--text-muted) !important;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Ideology Section */
+        .ideology-banner {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        .ideology-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .ideology-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-color);
+            opacity: 0.8;
+        }
+        .ideology-card.accent-gold::before {
+            background: var(--color-accent);
+        }
+        .ideology-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--border-hover);
+        }
+        .ideology-card h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-family: var(--font-heading) !important;
+        }
+        .ideology-card p {
+            font-size: 0.95rem;
+            line-height: 1.65;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        .ideology-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(255, 30, 56, 0.08);
+            border: 1px solid rgba(255, 30, 56, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(255, 30, 56, 0.1);
+        }
+        .ideology-card.accent-gold .ideology-icon {
+            background: rgba(255, 234, 0, 0.08);
+            border-color: rgba(255, 234, 0, 0.25);
+            color: var(--color-accent);
+            box-shadow: 0 0 15px rgba(255, 234, 0, 0.1);
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            position: relative;
+            padding: 80px 0;
+        }
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 40px auto 0;
+        }
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--accent-color) 0%, var(--color-accent) 50%, var(--accent-color) 100%);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--background-color);
+            border: 4px solid var(--accent-color);
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+        .timeline-item.left {
+            left: 0;
+            text-align: right;
+        }
+        .timeline-item.right {
+            left: 50%;
+        }
+        .timeline-item.right::after {
+            left: -10px;
+        }
+        .timeline-item:hover::after {
+            transform: scale(1.3);
+            border-color: var(--color-accent);
+            box-shadow: 0 0 15px rgba(255, 234, 0, 0.6);
+        }
+        .timeline-item-content {
+            padding: 25px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            position: relative;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .timeline-item:hover .timeline-item-content {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-3px);
+        }
+        .timeline-year {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            display: inline-block;
+            font-family: var(--font-heading) !important;
+        }
+        .timeline-item.right .timeline-year {
+            color: var(--color-accent);
+        }
+        .timeline-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--heading-color);
+        }
+        .timeline-desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* Responsive Grid & Text Styles */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .info-content h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .info-content h3::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+        .info-content.align-right h3::after {
+            left: auto;
+            right: 0;
+        }
+        .info-text {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Accent Boxes and Modern Phase Cards */
+        .modern-phase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 30px;
+        }
+        .modern-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            padding: 24px;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .modern-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-glow);
+        }
+        .modern-card-badge {
+            background: rgba(255, 30, 56, 0.08);
+            border: 1px solid rgba(255, 30, 56, 0.2);
+            color: var(--accent-color);
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            align-self: flex-start;
+            margin-bottom: 15px;
+        }
+        .modern-card h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .modern-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 0;
+            flex-grow: 1;
+        }
+
+        /* Martyr Highlight Callout */
+        .martyr-callout {
+            background: linear-gradient(135deg, rgba(255, 30, 56, 0.04) 0%, rgba(0, 0, 0, 0.2) 100%);
+            border: 1px solid rgba(255, 30, 56, 0.2);
+            border-left: 5px solid var(--accent-color);
+            border-radius: var(--border-radius-md);
+            padding: 30px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        .martyr-callout::before {
+            content: '★';
+            position: absolute;
+            right: 15px;
+            bottom: -20px;
+            font-size: 8rem;
+            color: var(--accent-color);
+            opacity: 0.04;
+            pointer-events: none;
+        }
+        .martyr-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            animation: pulse-shadow 2s infinite;
+        }
+        .martyr-text h4 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--heading-color);
+        }
+        .martyr-text p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Organizational Structure Cards */
+        .structure-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 30px;
+        }
+        .structure-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+        .structure-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-glow);
+        }
+        .structure-level {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+            font-family: var(--font-heading) !important;
+        }
+        .structure-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .structure-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        /* Media Queries for timeline and layout */
+        @media (max-width: 992px) {
+            .ideology-banner {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .modern-phase-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .structure-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .timeline-container::after {
+                left: 31px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .timeline-item.left {
+                text-align: left;
+                left: 0;
+            }
+            .timeline-item::after {
+                left: 21px;
+                right: auto;
+            }
+            .timeline-item.right::after {
+                left: 21px;
+            }
+            .timeline-item.right {
+                left: 0;
+            }
+            .martyr-callout {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+        }
+
+        @keyframes pulse-shadow {
+            0% {
+                transform: scale(1);
+                text-shadow: 0 0 0 rgba(255, 30, 56, 0.4);
+            }
+            70% {
+                transform: scale(1.05);
+                text-shadow: 0 0 15px rgba(255, 30, 56, 0.7);
+            }
+            100% {
+                transform: scale(1);
+                text-shadow: 0 0 0 rgba(255, 30, 56, 0.4);
+            }
+        }
+    </style></head>
+<body><div class="pointer-glow" id="pointerGlow"></div><div class="topbar py-1">
+<div class="container">
+<div class="row align-items-center">
+<div class="col-8 topbar-left">
+<span class="small text-white opacity-75 d-none d-md-inline"><i class="bi bi-info-circle me-1"></i> ভারতের ছাত্র ফেডারেশন (পশ্চিমবঙ্গ রাজ্য কমিটি) অফিসিয়াল ওয়েবসাইট</span>
+</div>
+<div class="col-12 col-md-4 topbar-right text-end">
+<div class="social-links d-inline-block">
+<a aria-label="Search" class="text-white opacity-75 hover-opacity-100 me-3" href="/docs/search"><i class="bi bi-search"></i></a>
+<a aria-label="Facebook" class="text-white opacity-75 hover-opacity-100 me-3" href="https://www.facebook.com/sfiwestbengalofficial/" target="_blank"><i class="bi bi-facebook"></i></a>
+<a aria-label="Twitter" class="text-white opacity-75 hover-opacity-100 me-3" href="https://twitter.com/SFI_WestBengal" target="_blank"><i class="bi bi-twitter-x"></i></a>
+<a aria-label="Instagram" class="text-white opacity-75 hover-opacity-100 me-3" href="https://www.instagram.com/sfi_west_bengal/" target="_blank"><i class="bi bi-instagram"></i></a>
+<a aria-label="YouTube" class="text-white opacity-75 hover-opacity-100" href="https://www.youtube.com/@sfiwestbengalofficial" target="_blank"><i class="bi bi-youtube"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div><header class="header d-flex align-items-center fixed-top" id="header">
+<div class="container position-relative align-items-center justify-content-between">
+<div class="row w-100 align-items-center">
+<!-- Logo Image Toggler -->
+<div class="col-10 col-xl-4">
+<a class="logo d-flex align-items-center me-auto" href="index.html">
+<img alt="SFI WB State Committee Logo" class="img-fluid logo-img" id="siteLogoImg" src="assets/SFI-WB-WEB-LOGO-DARK.png"/>
+</a>
+</div>
+<!-- Navigation menu (Cleaned, simplified, and inline theme toggler) -->
+<div class="col-2 col-xl-8 text-end p-0">
+<nav class="navmenu" id="navmenu" lang="bn">
+<ul>
+<li class="dropdown"><a href="about.html">সংগঠন <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+<ul>
+<li><a href="about.html">আমাদের কথা</a></li>
+<li><a href="polit-bureau.html">পলিট ব্যুরো সদস্যদের তালিকা</a></li>
+<li><a href="central-committee.html">কেন্দ্রীয় কমিটি সদস্যদের তালিকা</a></li>
+<li><a href="state-committee.html">পশ্চিমবঙ্গ রাজ্য কমিটি সদস্যদের তালিকা</a></li>
+<li class="dropdown"><a href="#">ডকুমেন্টস <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+<ul>
+<li><a href="programme.html">পার্টি কর্মসূচি</a></li>
+<li><a href="constitution.html">পার্টি গঠনতন্ত্র</a></li>
+<li><a href="booklets.html">পার্টি পুস্তিকা</a></li>
+</ul>
+</li>
+<li><a href="gallery.html">ফটো গ্যালারি</a></li>
+<li><a href="links.html">প্রাসঙ্গিক লিংক</a></li>
+</ul>
+</li>
+<li><a href="press.html">প্রেস বিবৃতি</a></li>
+<li class="dropdown"><a href="#">সোশ্যাল স্ট্রীম <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+<ul>
+<li><a href="https://www.youtube.com/@sfiwestbengalofficial" target="_blank">ইউটিউব চ্যানেল</a></li>
+<li><a href="https://www.facebook.com/sfiwestbengalofficial/" target="_blank">ফেসবুক পেজ</a></li>
+<li><a href="https://twitter.com/SFI_WestBengal" target="_blank">এক্স (টুইটার) হ্যান্ডেল</a></li>
+<li><a href="https://www.instagram.com/sfi_west_bengal/" target="_blank">ইনস্টাগ্রাম অ্যাকাউন্ট</a></li>
+</ul>
+</li>
+<li><a href="videos.html">ভিডিও</a></li>
+<li><a href="donate.html">অনুদান</a></li>
+<li><a href="contact.html">যোগাযোগ</a></li>
+<!-- Inline Theme Switcher inside the menu -->
+<li>
+<a aria-label="Toggle Theme" class="nav-theme-toggle" href="#" id="themeToggle">
+<i class="fas fa-sun text-warning" id="themeIcon"></i>
+</a>
+</li>
+</ul>
+<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+</nav>
+</div>
+</div>
+</div>
+</header>
+<!-- Preloader -->
+<!-- Particle Canvas -->
+<!-- Theme Toggle Floating -->
+<!-- Header / Navbar -->
+<main>
+    <!-- ABOUT HERO -->
+    <section class="about-hero" data-aos="fade-in">
+        <div class="container position-relative z-3">
+            <h1 class="glow-text">আমাদের কথা</h1>
+            <p class="lead opacity-90">ভারতের ছাত্র ফেডারেশন (এসএফআই) পশ্চিমবঙ্গ রাজ্য কমিটির গৌরবময় ইতিহাস, প্রগতিশীল আদর্শ এবং আপসহীন লড়াইয়ের চালচিত্র।</p>
+        </div>
+    </section>
+
+    <!-- IDEOLOGY, BANNER & SLOGAN -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>আদর্শ ও মূল স্লোগান</h2>
+                <div class="mt-2 text-header">স্বাধীনতা • গণতন্ত্র • সমাজতন্ত্র</div>
+            </div>
+            
+            <div class="ideology-banner">
+                <!-- Independence Card -->
+                <div class="ideology-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="ideology-icon"><i class="fas fa-dove"></i></div>
+                    <h3 class="text-header">স্বাধীনতা</h3>
+                    <p>শিক্ষা প্রতিষ্ঠান ও সমাজ থেকে সব ধরণের বৈষম্য, শোষণ ও সাম্রাজ্যবাদী শক্তির বিনাশ ঘটিয়ে দেশের প্রকৃত সার্বভৌমত্ব ও মানুষের মুক্তি অর্জন করা।</p>
+                </div>
+                
+                <!-- Democracy Card (Accent Gold) -->
+                <div class="ideology-card accent-gold" data-aos="fade-up" data-aos-delay="200">
+                    <div class="ideology-icon"><i class="fas fa-users-viewfinder"></i></div>
+                    <h3 class="text-header">গণতন্ত্র</h3>
+                    <p>শিক্ষা প্রাঙ্গণে মুক্ত চিন্তার বিকাশ, মত প্রকাশের স্বাধীনতা এবং নিয়মিত ও সুস্থ ছাত্র সংসদ নির্বাচনের মাধ্যমে শিক্ষার্থীদের অধিকার প্রতিষ্ঠা করা।</p>
+                </div>
+                
+                <!-- Socialism Card -->
+                <div class="ideology-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="ideology-icon"><i class="fas fa-hand-fist"></i></div>
+                    <h3 class="text-header">সমাজতন্ত্র</h3>
+                    <p>একটি শ্রেণিহীন, শোষণমুক্ত ও বৈষম্যহীন প্রগতিশীল সমাজতান্ত্রিক রাষ্ট্র ও সমাজ গড়ে তোলার দীর্ঘমেয়াদী সংগ্রামে অগ্রণী ভূমিকা পালন করা।</p>
+                </div>
+            </div>
+
+            <!-- Ideology Description Paragraph -->
+            <div class="glass-card p-4 mt-4 text-center" data-aos="zoom-in" data-aos-delay="100">
+                <p class="mb-0 text-body leading-relaxed fs-5">
+                    এসএফআই শিক্ষাকে কেবল ডিগ্রি লাভের মাধ্যম নয়, বরং <strong>সামাজিক রূপান্তরের প্রথম ও প্রধান হাতিয়ার</strong> হিসেবে দেখে। আমাদের দর্শন গভীরভাবে মার্কসবাদ-লেনিনবাদ, ধর্মনিরপেক্ষতা, বৈজ্ঞানিক চিন্তাভাবনা এবং যে কোনো প্রকার সাম্প্রদায়িক ও সামন্ততান্ত্রিক শক্তির বিরোধিতার ওপর প্রতিষ্ঠিত।
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HISTORICAL BACKGROUND & ORIGIN (TIMELINE) -->
+    <section class="section timeline-section" style="background-color: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>ইতিহাস ও উৎপত্তি</h2>
+                <div class="mt-2 text-header">প্রাক-স্বাধীনতা থেকে এসএফআই-এর জন্ম</div>
+            </div>
+
+            <div class="timeline-container">
+                <!-- 1828 timeline item -->
+                <div class="timeline-item left" data-aos="fade-right" data-aos-delay="100">
+                    <div class="timeline-item-content">
+                        <span class="timeline-year">১৮২৮</span>
+                        <h4 class="timeline-title text-header">অ্যাকাডেমিক অ্যাসোসিয়েশন ও ইয়ং বেঙ্গল</h4>
+                        <p class="timeline-desc">হেনরি লুই ভিভিয়ান ডিরোজিওর 'অ্যাকাডেমিক অ্যাসোসিয়েশন' এবং ইয়ং বেঙ্গল আন্দোলনের মাধ্যমে বাংলায় প্রগতিশীল ও বিপ্লবী ছাত্র আন্দোলনের প্রথম বীজ রোপিত হয়।</p>
+                    </div>
+                </div>
+
+                <!-- 1936 timeline item -->
+                <div class="timeline-item right" data-aos="fade-left" data-aos-delay="200">
+                    <div class="timeline-item-content">
+                        <span class="timeline-year">১৯৩৬</span>
+                        <h4 class="timeline-title text-header">AISF-এর প্রতিষ্ঠা</h4>
+                        <p class="timeline-desc">প্রথম সাম্রাজ্যবাদ বিরোধী ঐক্যবদ্ধ ছাত্র সংগঠন হিসেবে 'অল ইন্ডিয়া স্টুডেন্টস ফেডারেশন' (AISF) গঠিত হয়। শরৎচন্দ্র বসুর মতো বাংলার শীর্ষস্থানীয় নেতারা এর বিকাশে গুরুত্বপূর্ণ ভূমিকা রাখেন।</p>
+                    </div>
+                </div>
+
+                <!-- 1960s timeline item -->
+                <div class="timeline-item left" data-aos="fade-right" data-aos-delay="100">
+                    <div class="timeline-item-content">
+                        <span class="timeline-year">১৯৬০-এর দশক</span>
+                        <h4 class="timeline-title text-header">আদর্শগত বিভাজন</h4>
+                        <p class="timeline-desc">কমিউনিস্ট আন্দোলনের ঐতিহাসিক বিভাজন (১৯৬৪ সালে CPI(M) গঠন) এবং আপসহীন লড়াইয়ের দাবিতে ছাত্র আন্দোলনেও স্পষ্ট ফাটল ধরে, যা এক চরমপন্থী ও লড়াকু ছাত্র সংগঠন গঠনের সূচনা করে।</p>
+                    </div>
+                </div>
+
+                <!-- 1970 timeline item -->
+                <div class="timeline-item right" data-aos="fade-left" data-aos-delay="200">
+                    <div class="timeline-item-content">
+                        <span class="timeline-year">১৯৭০</span>
+                        <h4 class="timeline-title text-header">এসএফআই-এর আনুষ্ঠানিক আত্মপ্রকাশ</h4>
+                        <p class="timeline-desc">২৭-৩০ ডিসেম্বর, কেরলের তিরুবনন্তপুরমে অনুষ্ঠিত সর্বভারতীয় ছাত্র সম্মেলনে জন্ম নেয় <strong>Students' Federation of India (SFI)</strong>। ganglions-এর মতো ছড়িয়ে থাকা আন্দোলনগুলির মাঝে পশ্চিমবঙ্গের প্রবাদপ্রতিম ছাত্রনেতা কমরেড বিমান বসু প্রথম সর্বভারতীয় সাধারণ সম্পাদক নির্বাচিত হন।</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GOLDEN ERA & DOMINANCE (1977-2011) -->
+    <section class="section">
+        <div class="container">
+            <div class="info-grid">
+                <!-- SVG Visual (Left) -->
+                <div class="glass-card p-4 text-center d-flex align-items-center justify-content-center" data-aos="fade-right" style="min-height: 350px;">
+                    <div class="w-100">
+                        <svg class="img-fluid" viewBox="0 0 100 100" width="200" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" fill="rgba(255, 30, 56, 0.08)" r="45" stroke="var(--accent-color)" stroke-width="2"></circle>
+                            <polygon fill="var(--accent-color)" points="50,15 62,40 90,40 68,55 76,82 50,65 24,82 32,55 10,40 38,40"></polygon>
+                            <text fill="var(--color-accent)" font-family="'Poppins', sans-serif" font-size="8" font-weight="900" text-anchor="middle" x="50" y="92">GOLDEN ERA</text>
+                        </svg>
+                        <h4 class="mt-3 fw-bold text-header">তিন দশকের ক্যাম্পাস আধিপত্য</h4>
+                        <p class="small text-muted mb-0">স্কুল, college ও বিশ্ববিদ্যালয়গুলোর গণতান্ত্রিক ছাত্র সংসদ নির্বাচনে একচ্ছত্র জয়</p>
+                    </div>
+                </div>
+                <!-- Content (Right) -->
+                <div class="info-content" data-aos="fade-left">
+                    <span class="text-accent fw-bold text-uppercase tracking-wider small">১৯৭৭ - ২০১১</span>
+                    <h3 class="text-header mt-2">সোনালী যুগ ও প্রাতিষ্ঠানিক একাধিপত্য</h3>
+                    <p class="info-text mt-4">
+                        ১৯৭৭ সালে পশ্চিমবঙ্গে প্রথম বামফ্রন্ট সরকার গঠিত হওয়ার পর রাজ্য জুড়ে ছাত্র ফেডারেশনের এক স্বর্ণযুগ শুরু হয়। তিন দশকেরও বেশি সময় ধরে এসএফআই রাজ্যের সমস্ত শীর্ষস্থানীয় শিক্ষা প্রতিষ্ঠানের ইউনিয়নগুলোতে নিরঙ্কুশ সংখ্যাগরিষ্ঠতা বজায় রাখে।
+                    </p>
+                    <p class="info-text">
+                        <strong>মূল ঘাঁটিসমূহ:</strong> যাদবপুর বিশ্ববিদ্যালয় (JU), প্রেসিডেন্সি কলেজ, কলকাতা বিশ্ববিদ্যালয় (CU), এবং সমস্ত গুরুত্বপূর্ণ সরকারি মেডিকেল ও ইঞ্জিনিয়ারিং কলেজগুলিতে এসএফআই-এর লাল পতাকা ছিল অপরাজিত।
+                    </p>
+                    <p class="info-text">
+                        <strong>নেতৃত্ব তৈরির কারখানা:</strong> এই সোনালী জমানা থেকে বহু শীর্ষস্তরের প্রগতিশীল রাজনৈতিক ব্যক্তিত্ব উঠে এসেছেন, যাদের মধ্যে উল্লেখযোগ্য কমরেড সুভাষ চক্রবর্তী, নেপালদেব ভট্টাচার্য, সীতারাম ইয়েচুরি, শতরূপ ঘোষ এবং আরও অনেকে।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POST-2011 CHALLENGES AND DECLINE -->
+    <section class="section" style="background-color: var(--bg-secondary);">
+        <div class="container">
+            <div class="info-grid">
+                <!-- Content (Left) -->
+                <div class="info-content" data-aos="fade-right">
+                    <span class="text-accent fw-bold text-uppercase tracking-wider small">২০১১ - ২০১৮</span>
+                    <h3 class="text-header mt-2">২০১১-উত্তর প্রতিকূলতা ও তীব্র লড়াই</h3>
+                    <p class="info-text mt-4">
+                        ২০১১ সালে পশ্চিমবঙ্গে রাজনৈতিক পট পরিবর্তনের মাধ্যমে বামফ্রন্ট সরকারের বিদায় ঘটলে এসএফআই-এর ওপর নেমে আসে নজিরবিহীন দমন-পীড়ন। তৃণমূল ছাত্র পরিষদ (TMCP) এবং তৎকালীন শাসকদলের মদদে ক্যাম্পাসগুলো থেকে বামপন্থী ছাত্রদের জোরपूर्वक তাড়িয়ে দেওয়া ও রক্তাক্ত আক্রমণের প্রক্রিয়া শুরু হয়।
+                    </p>
+                    <p class="info-text">
+                        <strong>গণতন্ত্র হরণ:</strong> ক্যাম্পাসে শিক্ষার্থীদের গণতান্ত্রিক অংশগ্রহণ স্তব্ধ করতে সরকারি নির্দেশিকায় নিয়মিত ও সুষ্ঠু কলেজ ইউনিয়ন নির্বাচন অনির্দিষ্টকালের জন্য বন্ধ করে দেওয়া হয়। এর পরিবর্তে অগণতান্ত্রিক ও মনোনীত 'স্টুডেন্ট কাউন্সিল' প্রথা চাপানো হয়, যা এসএফআই আজও প্রতিরোধ করছে।
+                    </p>
+                </div>
+                <!-- Callout Card (Right) -->
+                <div class="d-flex flex-column justify-content-center" data-aos="fade-left">
+                    <div class="glass-card p-4 border border-danger border-opacity-25 h-100">
+                        <div class="martyr-callout">
+                            <div class="martyr-icon"><i class="fas fa-star-of-life"></i></div>
+                            <div class="martyr-text">
+                                <h4>কমরেড সুদীপ্ত গুপ্তের শাহাদাত (২০১৩)</h4>
+                                <p>
+                                    ২০১৩ সালের ২ এপ্রিল, কলকাতায় প্রগতিশীল শিক্ষা ও অধিকারের দাবিতে আইন অমান্য আন্দোলন চলাকালীন পুলিশ হেফাজতে বর্বরোচিত অত্যাচারে মাত্র ২২ বছর বয়সে শহীদ হন লড়াকু ছাত্রনেতা কমরেড সুদীপ্ত গুপ্ত। তাঁর এই আত্মত্যাগ ক্যাম্পাসে স্বৈরাচারের বিরুদ্ধে ছাত্র আন্দোলনের মূল উদ্দীপনা হয়ে ওঠে।
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODERN PHASE: REVIVAL & SOCIAL INITIATIVES (2018-2026) -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>আধুনিক যুগ ও জনকল্যাণ</h2>
+                <div class="mt-2 text-header">পুনরুত্থান ও সামাজিক দায়বদ্ধতা</div>
+            </div>
+
+            <div class="modern-phase-grid">
+                <!-- Initiative 1: Campuses Reclaimed -->
+                <div class="modern-card" data-aos="fade-up" data-aos-delay="100">
+                    <span class="modern-card-badge"><i class="fas fa-university me-1"></i> ক্যাম্পাস পুনরুত্থান</span>
+                    <h4 class="text-header">ক্যাম্পাস পুনরুদ্ধার</h4>
+                    <p>সৃজন ভট্টাচার্য, দেবাঞ্জন দে-দের মতো প্রগতিশীল যুব নেতৃত্বের হাত ধরে দীর্ঘ বন্ধ্যাত্ব কাটিয়ে যাদবপুর বিশ্ববিদ্যালয় ও প্রেসিডেন্সি বিশ্ববিদ্যালয়ের মতো প্রখ্যাত শিক্ষাঙ্গনের ছাত্র সংসদ নির্বাচনে লাল পতাকার বিপুল জয় ঘটে।</p>
+                </div>
+
+                <!-- Initiative 2: Red Volunteers -->
+                <div class="modern-card" data-aos="fade-up" data-aos-delay="200">
+                    <span class="modern-card-badge"><i class="fas fa-hand-holding-heart me-1"></i> কোভিড মহামারী</span>
+                    <h4 class="text-header">রেড ভলেন্টিয়ার্স (Red Volunteers)</h4>
+                    <p>করোনা অতিমারীর দুঃসময়ে জীবনের ঝুঁকি নিয়ে লক্ষাধিক মুমূর্ষু রোগীর ঘরে ঘরে অক্সিজেন সিলিন্ডার ও ওষুধ পৌঁছে দিয়েছে প্রগতিশীল ছাত্র ও যুবদের অনন্য মানবিক ফোর্স 'রেড ভলেন্টিয়ার্স', যা সারা দেশে সমাদৃত হয়।</p>
+                </div>
+
+                <!-- Initiative 3: Sramajibi Canteen -->
+                <div class="modern-card" data-aos="fade-up" data-aos-delay="300">
+                    <span class="modern-card-badge"><i class="fas fa-bowl-food me-1"></i> শ্রমজীবী মানুষের সেবা</span>
+                    <h4 class="text-header">শ্রমজীবী ক্যান্টিন (₹২০ খাবার)</h4>
+                    <p>খেটে খাওয়া অসহায় দরিদ্র মানুষের মুখে অনাহারের অন্ন তুলে দিতে প্রগতিশীল ছাত্র-যুবরা শুরু করে শ্রমজীবী ক্যান্টিন। মাত্র ২০ টাকার বিনিময়ে পুষ্টিকর আহার জোগানোর এই আন্দোলন মানুষের ঘরে বামপন্থার আবেদনকে পুনঃপ্রতিষ্ঠা করেছে।</p>
+                </div>
+            </div>
+
+            <!-- Protests / Movements Highlight -->
+            <div class="glass-card p-4 mt-4" data-aos="zoom-in" data-aos-delay="200">
+                <h4 class="text-header fw-bold border-start border-danger border-4 ps-3 mb-3">রাজপথের ঐতিহাসিক আন্দোলনসমূহ</h4>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="p-3 bg-dark bg-opacity-25 rounded border border-secondary border-opacity-10 h-100">
+                            <span class="text-accent fw-bold d-block mb-1">NEP 2020 প্রতিরোধ</span>
+                            <span class="small text-muted">শিক্ষাকে বেসরকারীকরণ ও সাম্প্রদায়িকীকরণের ষড়যন্ত্রে লিপ্ত জাতীয় শিক্ষানীতি ২০২০-এর বিরুদ্ধে রাজ্য জুড়ে কঠোর প্রতিরোধ গড়ে তোলা।</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 bg-dark bg-opacity-25 rounded border border-secondary border-opacity-10 h-100">
+                            <span class="text-accent fw-bold d-block mb-1">SSC নিয়োগ কেলেঙ্কারি</span>
+                            <span class="small text-muted">যোগ্য চাকরিপ্রার্থীদের অধিকার হরণ ও শিক্ষক নিয়োগ দুর্নীতির প্রতিবাদে লক্ষাধিক শিক্ষার্থীর ঐতিহাসিক ইনসাফ যাত্রা ও বিধানসভা অভিযান।</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 bg-dark bg-opacity-25 rounded border border-secondary border-opacity-10 h-100">
+                            <span class="text-accent fw-bold d-block mb-1">কমরেড আনিস খান হত্যাকাণ্ড</span>
+                            <span class="small text-muted">২০২২ সালে নির্ভীক ছাত্রনেতা আনিস খানের রহস্যজনক মৃত্যুর বিরুদ্ধে দীর্ঘ রাজপথ পদযাত্রা ও অপরাধীদের উপযুক্ত শাস্তির দাবিতে ঐতিহাসিক লড়াই।</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ORGANIZATIONAL STRUCTURE in West Bengal -->
+    <section class="section" style="background-color: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>সাংগঠনিক কাঠামো</h2>
+                <div class="mt-2 text-header">শৃঙ্খলাবদ্ধ ত্রি-স্তরীয় ভিত্তি</div>
+            </div>
+
+            <div class="structure-grid">
+                <!-- Level 1: State Committee -->
+                <div class="structure-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="structure-level">১</div>
+                    <h3 class="text-header">রাজ্য কমিটি ও সচিবালয়</h3>
+                    <p class="mb-3">পশ্চিমবঙ্গে ছাত্র ফেডারেশনের নীতি-নির্ধারণকারী সর্বোচ্চ শাখা। অতীতে সৃজন ভট্টাচার্যের মতো প্রগতিশীল যুবনেতারা এর নেতৃত্ব দিয়েছেন। বর্তমানে কমরেড দেবাঞ্জন দে রাজ্য সভাপতি এবং কমরেড প্রণয় কর্মকার রাজ্য সম্পাদকের দায়িত্ব সামলাচ্ছেন।</p>
+                    <a class="btn btn-neon-red btn-sm px-4" href="state-committee.html">সদস্য তালিকা দেখুন</a>
+                </div>
+
+                <!-- Level 2: District Committees -->
+                <div class="structure-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="structure-level">২</div>
+                    <h3 class="text-header">জেলা কমিটিসমূহ</h3>
+                    <p>পশ্চিমবঙ্গের সমস্ত জেলায় (কলকাতা, উত্তর ২৪ পরগনা, দক্ষিণ ২৪ পরগনা, হুগলি, হাওড়া ইত্যাদি) স্থানীয় স্তরভিত্তিক সিদ্ধান্ত ও জেলার প্রগতিশীল ছাত্র আন্দোলন পরিচালনার জন্য কর্মরত নির্দিষ্ট জেলা কমিটি।</p>
+                </div>
+
+                <!-- Level 3: Local Units -->
+                <div class="structure-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="structure-level">৩</div>
+                    <h3 class="text-header">লোকাল ও কলেজ ইউনিট</h3>
+                    <p>স্কুল, কলেজ, বিশ্ববিদ্যালয়ের প্রাথমিক শাখা ইউনিট এবং লোকাল কমিটিসমূহ, যা প্রতিনিয়ত সাধারণ শিক্ষার্থীদের পাশে দাঁড়িয়ে তাঁদের শিক্ষাগত ও আইনি অধিকার আদায়ের লড়াই ত্বরান্বিত করে।</p>
+                </div>
+            </div>
+
+            <!-- Leadership Navigation Hub -->
+            <div class="glass-card p-4 mt-5 text-center" data-aos="zoom-in" data-aos-delay="100">
+                <h4 class="text-header fw-bold mb-3"><i class="fas fa-sitemap text-danger me-2"></i>অন্যান্য সাংগঠনিক নেতৃত্ব ও কমিটি সমূহ</h4>
+                <p class="text-muted small">ভারতের ছাত্র ফেডারেশনের কেন্দ্রীয় ও রাজ্য স্তরের গুরুত্বপূর্ণ সাংগঠনিক কমিটিগুলির বিস্তারিত তালিকা দেখুন</p>
+                <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
+                    <a class="btn btn-glass px-4 text-white" href="polit-bureau.html">🚩 কেন্দ্রীয় পলিট ব্যুরো</a>
+                    <a class="btn btn-glass px-4 text-white" href="central-committee.html">🌐 কেন্দ্রীয় কমিটি</a>
+                    <a class="btn btn-glass px-4 text-white" href="state-committee.html">🤝 পশ্চিমবঙ্গ রাজ্য কমিটি</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<!-- ============================================================
+       FOOTER - পাদটীকা
+  ============================================================ -->
+<!-- Back to Top -->
+<footer class="footer light-background border-top border-secondary border-opacity-25" id="footer">
+<div class="container py-5">
+<div class="row g-4">
+<!-- Col 1: Address -->
+<div class="col-lg-3 col-md-6">
+<h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">ঠিকানা</h5>
+<p class="text-body leading-relaxed mb-0">
+<strong>ভারতের ছাত্র ফেডারেশন</strong><br/>
+                        পশ্চিমবঙ্গ রাজ্য কমিটি<br/>
+                        ৩১ আলিমুদ্দিন স্ট্রিট, মুজফ্ফর আহমদ ভবন<br/>
+                        কলকাতা - ৭০০০১৬
+                    </p>
+</div>
+<!-- Col 2: Organization & Docs -->
+<div class="col-lg-2 col-md-6">
+<h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">সংগঠন ও দস্তাবেজ</h5>
+<ul class="list-unstyled footer-links mb-0">
+<li><a class="text-body hover-text-danger small d-block py-1" href="about.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> আমাদের কথা</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="polit-bureau.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> পলিট ব্যুরো</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="central-committee.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> কেন্দ্রীয় কমিটি</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="state-committee.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> রাজ্য কমিটি</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="programme.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> পার্টি কর্মসূচি</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="constitution.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> গঠনতন্ত্র</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="booklets.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> পুস্তিকা</a></li>
+</ul>
+</div>
+<!-- Col 3: Media & Publications -->
+<div class="col-lg-2 col-md-6">
+<h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">মিডিয়া ও প্রকাশনা</h5>
+<ul class="list-unstyled footer-links mb-0">
+<li><a class="text-body hover-text-danger small d-block py-1" href="news.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> সংবাদ ও খবর</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="press.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রেস বিবৃতি</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="publications.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রকাশনা</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="videos.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> ভিডিও গ্যালারি</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="gallery.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> ফটো গ্যালারি</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="martyrs.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> শহীদ স্মরণ</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="international.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> আন্তর্জাতিক</a></li>
+</ul>
+</div>
+<!-- Col 4: Action & Support -->
+<div class="col-lg-2 col-md-6">
+<h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">যোগাযোগ ও সমর্থন</h5>
+<ul class="list-unstyled footer-links mb-0">
+<li><a class="text-body hover-text-danger small d-block py-1" href="contact.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> যোগাযোগ করুন</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="donate.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> অনুদান দিন</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="join.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> যোগ দিন</a></li>
+<li><a class="text-body hover-text-danger small d-block py-1" href="links.html"><i class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রাসঙ্গিক লিংক</a></li>
+</ul>
+</div>
+<!-- Col 5: Newsletter & Socials -->
+<div class="col-lg-3 col-md-6">
+<h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">নিউজলেটার</h5>
+<p class="text-body small leading-relaxed mb-3">নতুন পোস্টের আপডেট সরাসরি পেতে সাবস্ক্রাইব করুন।</p>
+<form action="#" class="mt-2 mb-4" method="post">
+<div class="input-group">
+<input class="form-control form-control-sm bg-dark bg-opacity-50 text-white border-secondary border-opacity-25" name="email" placeholder="আপনার ইমেল লিখুন" required="" type="email"/>
+<button class="btn btn-danger btn-sm" type="submit">সাবস্ক্রাইব</button>
+</div>
+</form>
+<div class="social-links d-flex">
+<a class="btn btn-outline-danger btn-sm rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" href="https://www.facebook.com/sfiwestbengalofficial/" style="width: 38px; height: 38px;" target="_blank"><i class="bi bi-facebook"></i></a>
+<a class="btn btn-outline-danger btn-sm rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" href="https://twitter.com/SFI_WestBengal" style="width: 38px; height: 38px;" target="_blank"><i class="bi bi-twitter-x"></i></a>
+<a class="btn btn-outline-danger btn-sm rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" href="https://www.instagram.com/sfi_west_bengal/" style="width: 38px; height: 38px;" target="_blank"><i class="bi bi-instagram"></i></a>
+<a class="btn btn-outline-danger btn-sm rounded-circle p-2 d-flex align-items-center justify-content-center" href="https://www.youtube.com/@sfiwestbengalofficial" style="width: 38px; height: 38px;" target="_blank"><i class="bi bi-youtube"></i></a>
+</div>
+</div>
+</div>
+</div>
+<!-- Copyright & Credits -->
+<div class="copyright-bar bg-dark bg-opacity-50 border-top border-secondary border-opacity-10 py-3 text-center">
+<div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+<p class="mb-0 text-body small">© ২০২৬ ভারতের ছাত্র ফেডারেশন - পশ্চিমবঙ্গ রাজ্য কমিটি। সর্বস্বত্ব সংরক্ষিত।</p>
+<p class="mb-0 text-body small mt-2 mt-md-0">★ স্বাধীনতা • গণতন্ত্র • সমাজতন্ত্র</p>
+</div>
+</div>
+</footer><a class="scroll-top d-flex align-items-center justify-content-center bg-danger rounded text-white shadow" href="#" id="scroll-top"><i class="bi bi-arrow-up-short"></i></a><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script><script src="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script><script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // AOS Init
+            AOS.init({
+                duration: 600,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false
+            });
+
+            // Mobile Nav Toggle
+            const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
+            const body = document.querySelector('body');
+            
+            if (mobileNavToggleBtn) {
+                mobileNavToggleBtn.addEventListener('click', function(e) {
+                    body.classList.toggle('mobile-nav-active');
+                    mobileNavToggleBtn.classList.toggle('bi-list');
+                    mobileNavToggleBtn.classList.toggle('bi-x');
+                });
+            }
+
+            // Toggle Dropdown menu in Mobile View
+            document.querySelectorAll('.navmenu .dropdown > a').forEach(el => {
+                el.addEventListener('click', function(e) {
+                    if (window.innerWidth < 1200) {
+                        e.preventDefault();
+                        this.parentNode.classList.toggle('active');
+                        this.nextElementSibling.classList.toggle('dropdown-active');
+                    }
+                });
+            });
+
+            // Swiper Affairs Slider
+            if (document.querySelector(".team-slider")) {
+                var swiperTeam = new Swiper(".team-slider", {
+                    loop: true,
+                    speed: 800,
+                    autoplay: {
+                        delay: 5000
+                    },
+                    slidesPerView: 1,
+                    spaceBetween: 30,
+                    pagination: {
+                        el: ".swiper-pagination",
+                        type: "bullets",
+                        clickable: true
+                    },
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev"
+                    },
+                    breakpoints: {
+                        576: { slidesPerView: 2 },
+                        992: { slidesPerView: 3 }
+                    }
+                });
+            }
+
+            // Scroll to Top Button Action
+            const scrollTop = document.querySelector('.scroll-top');
+            if (scrollTop) {
+                const toggleScrollTop = function() {
+                    window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
+                }
+                window.addEventListener('load', toggleScrollTop);
+                document.addEventListener('scroll', toggleScrollTop);
+                scrollTop.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // Mouse-following cursor spotlight in Hero Section
+            const heroSection = document.getElementById('hero');
+            const spotlight = document.getElementById('heroSpotlight');
+            if (heroSection && spotlight) {
+                heroSection.addEventListener('mousemove', (e) => {
+                    const rect = heroSection.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    spotlight.style.setProperty('--mouse-x', `${x}px`);
+                    spotlight.style.setProperty('--mouse-y', `${y}px`);
+                });
+            }
+
+            // Smooth trailing global cursor glow (Pointer Glow)
+            const glow = document.getElementById('pointerGlow');
+            let mouseX = -500, mouseY = -500;
+            let glowX = -500, glowY = -500;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            
+            function animateCursorGlow() {
+                glowX += (mouseX - glowX) * 0.08;
+                glowY += (mouseY - glowY) * 0.08;
+                
+                if (glow) {
+                    glow.style.left = `${glowX}px`;
+                    glow.style.top = `${glowY}px`;
+                }
+                requestAnimationFrame(animateCursorGlow);
+            }
+            animateCursorGlow();
+
+            // Theme Toggle Logic (dynamic swap of logo & theme icons)
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const htmlElement = document.documentElement;
+            const logoImg = document.getElementById('siteLogoImg');
+
+            function applyTheme(themeName) {
+                htmlElement.setAttribute('data-theme', themeName);
+                if (themeName === 'dark') {
+                    if (themeIcon) {
+                        themeIcon.className = 'fas fa-sun text-warning';
+                    }
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO-DARK.png';
+                } else {
+                    if (themeIcon) {
+                        themeIcon.className = 'fas fa-moon text-dark';
+                    }
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO.png';
+                }
+            }
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const currentTheme = htmlElement.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    applyTheme(newTheme);
+                    localStorage.setItem('theme', newTheme);
+                });
+            }
+
+            // Initialize theme on load
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+        });
+    </script></body>
+</html>

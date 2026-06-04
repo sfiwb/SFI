@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 200" width="100%" height="100%">
+    <defs>
+        <style>
+            .star { fill: #d31a27; }
+            .text-red { fill: #d31a27; font-family: 'Outfit', 'Inter', sans-serif; font-weight: 800; font-size: 34px; }
+            .text-black { fill: #1e293b; font-family: 'Outfit', 'Inter', sans-serif; font-weight: 700; font-size: 26px; }
+            [data-theme="dark"] .text-black { fill: #f8fafc; }
+            .flag-text { fill: #b91c1c; font-family: 'Outfit', 'Inter', sans-serif; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+        </style>
+    </defs>
+    <!-- Left Star -->
+    <polygon class="star" points="60,20 78,74 136,74 88,110 106,166 60,130 14,166 32,110 -16,74 42,74" transform="translate(10, 10) scale(0.9)"/>
+    
+    <!-- Center Text -->
+    <g transform="translate(170, 85)">
+        <text class="text-red" x="0" y="0">STUDENTS' FEDERATION OF INDIA</text>
+        <text class="text-black" x="0" y="42">WEST BENGAL STATE COMMITTEE</text>
+    </g>
+    
+    <!-- Divider -->
+    <line x1="680" y1="30" x2="680" y2="170" stroke="#cbd5e1" stroke-width="2.5" />
+    
+    <!-- Right Flag -->
+    <g transform="translate(705, 15)">
+        <!-- Flagpole -->
+        <line x1="15" y1="10" x2="15" y2="170" stroke="#78350f" stroke-width="4.5" stroke-linecap="round" />
+        <circle cx="15" cy="8" r="4.5" fill="#fbbf24" />
+        
+        <!-- Flag Cloth (blowing wave shape, cream/beige color, tattered edge) -->
+        <path d="M 17,20 
+                 C 45,10 65,30 100,20 
+                 C 125,12 135,22 150,15
+                 L 150,105
+                 C 135,112 125,102 100,110
+                 C 65,120 45,100 17,110
+                 Z" fill="#fcfcf9" stroke="#d6d3d1" stroke-width="1" filter="drop-shadow(2px 4px 6px rgba(0,0,0,0.15))" />
+        
+        <!-- Flag Content: Red Star & Text -->
+        <polygon points="35,42 39,52 49,52 41,58 44,68 35,62 26,68 29,58 21,52 31,52" fill="#d31a27" />
+        
+        <!-- Stacked Flag Text in English: INDEPENDENCE, DEMOCRACY, SOCIALISM -->
+        <g transform="translate(54, 48)">
+            <text class="flag-text" x="0" y="0">★ INDEPENDENCE</text>
+            <text class="flag-text" x="12" y="16">DEMOCRACY</text>
+            <text class="flag-text" x="12" y="32">SOCIALISM</text>
+        </g>
+    </g>
+</svg>
