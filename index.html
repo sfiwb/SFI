@@ -675,25 +675,25 @@
                                 <div class="row g-3">
                                     <div class="col-md-6 form-group">
                                         <label for="name" class="form-label text-header fw-semibold small">আপনার নাম / Your Name</label>
-                                        <input type="text" name="name" class="form-control bg-dark bg-opacity-50 text-white border-secondary border-opacity-50" id="name" placeholder="নাম লিখুন" required>
+                                        <input type="text" name="name" class="form-control" id="name" placeholder="নাম লিখুন" required>
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <label for="email" class="form-label text-header fw-semibold small">আপনার ইমেল / Your Email</label>
-                                        <input type="email" class="form-control bg-dark bg-opacity-50 text-white border-secondary border-opacity-50" name="email" id="email" placeholder="ইমেল লিখুন" required>
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="ইমেল লিখুন" required>
                                     </div>
                                     <div class="col-12 form-group">
                                         <label for="subject" class="form-label text-header fw-semibold small">বিষয় / Subject</label>
-                                        <input type="text" class="form-control bg-dark bg-opacity-50 text-white border-secondary border-opacity-50" name="subject" id="subject" placeholder="বিষয় লিখুন" required>
+                                        <input type="text" class="form-control" name="subject" id="subject" placeholder="বিষয় লিখুন" required>
                                     </div>
                                     <div class="col-12 form-group">
                                         <label for="comment" class="form-label text-header fw-semibold small">মন্তব্য / Message</label>
-                                        <textarea name="comment" rows="5" class="form-control bg-dark bg-opacity-50 text-white border-secondary border-opacity-50" id="comment" placeholder="আপনার বক্তব্য লিখুন..." required></textarea>
+                                        <textarea name="comment" rows="5" class="form-control" id="comment" placeholder="আপনার বক্তব্য লিখুন..." required></textarea>
                                     </div>
                                     <div class="col-12 mt-4 d-flex justify-content-between align-items-center">
                                         <div class="captcha-placeholder border border-secondary border-opacity-25 p-2 bg-dark bg-opacity-50 rounded d-flex align-items-center gap-2">
                                             <span class="badge bg-secondary p-2">CAPTCHA</span>
                                             <span class="fw-bold tracking-widest text-muted select-none">R7P9</span>
-                                            <input type="text" class="form-control form-control-sm bg-dark bg-opacity-50 text-white border-secondary border-opacity-25" style="width: 80px;" placeholder="কোড লিখুন" required>
+                                            <input type="text" class="form-control form-control-sm" style="width: 80px;" placeholder="কোড লিখুন" required>
                                         </div>
                                         <button type="submit" class="btn btn-neon-red px-4 py-2 fw-semibold"><i class="bi bi-send me-1"></i> বার্তা পাঠান</button>
                                     </div>
@@ -948,5 +948,9 @@
             applyTheme(savedTheme);
         });
     </script>
+    <!-- Firebase SDKs and Forms Handler -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="forms_handler.js"></script>
 </body>
 </html>

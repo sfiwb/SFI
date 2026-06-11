@@ -227,19 +227,7 @@
        FOOTER - পাদটীকা
   ============================================================ -->
 <!-- Back to Top -->
-<script>
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('.submit-btn');
-            btn.textContent = '✅ বার্তা পাঠানো হয়েছে!';
-            btn.style.background = '#16a34a';
-            setTimeout(() => {
-                btn.textContent = 'বার্তা পাঠান ➤';
-                btn.style.background = '';
-                this.reset();
-            }, 3500);
-        });
-    </script>
+
 <footer class="footer light-background border-top border-secondary border-opacity-25" id="footer">
 <div class="container py-5">
 <div class="row g-4">
@@ -458,5 +446,9 @@
             const savedTheme = localStorage.getItem('theme') || 'dark';
             applyTheme(savedTheme);
         });
-    </script></body>
+    </script>    <!-- Firebase SDKs and Forms Handler -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="forms_handler.js"></script>
+</body>
 </html>
