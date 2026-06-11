@@ -319,7 +319,7 @@
             <div class="container" data-aos="fade-up" data-aos-delay="100">
                 <div class="row align-items-stretch">
                     <!-- Featured Press Release (Left) -->
-                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200" id="featured-press-container">
                         <div class="steps-content glass-card p-4 h-100 d-flex flex-column justify-content-between">
                             <div>
                                 <span class="badge bg-danger mb-3 px-3 py-1 text-uppercase">Featured Statement</span>
@@ -343,7 +343,7 @@
                     
                     <!-- Vertical List of Recent Press Statements (Right) -->
                     <div class="col-lg-6 mt-4 mt-lg-0 d-flex flex-column justify-content-between" data-aos="zoom-out" data-aos-delay="300">
-                        <div class="press-list-container glass-card p-3 h-100 d-flex flex-column justify-content-between">
+                        <div class="press-list-container glass-card p-3 h-100 d-flex flex-column justify-content-between" id="recent-press-list">
                             
                             <!-- Press Item 02 -->
                             <div class="step-item d-flex align-items-start border-bottom border-secondary border-opacity-25 pb-3 mb-3">
@@ -798,6 +798,10 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+    <!-- Press Release Data & Handler -->
+    <script src="press_data.js"></script>
+    <script src="press_handler.js"></script>
 
     <!-- Swiper and Navigation initialization -->
     <script>

@@ -119,13 +119,17 @@
   --font-bengali-sans: "Noto Serif Bengali", "Roboto", sans-serif !important;
 }
 
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+}
+
 body {
   color: var(--default-color) !important;
   background-color: var(--background-color) !important;
   font-family: "Noto Serif Bengali", "Roboto", system-ui, -apple-system, sans-serif !important;
   font-size: 1rem;
   line-height: 1.65;
-  overflow-x: hidden;
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
