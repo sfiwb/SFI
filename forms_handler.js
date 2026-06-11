@@ -175,7 +175,7 @@ const initCaptchaForForm = (form) => {
             // Generate structured form-row captcha matching local styling
             captchaContainer.innerHTML = `
                 <label class="form-label text-header fw-semibold small" style="margin-bottom: 6px; display: block; color: var(--color-text);">ক্যাপচা (CAPTCHA) <span style="color:var(--color-primary)">*</span></label>
-                <div class="captcha-placeholder p-2 bg-dark bg-opacity-50 rounded d-flex align-items-center gap-2 border border-secondary border-opacity-25" style="max-width: 320px;">
+                <div class="captcha-placeholder p-2 bg-dark bg-opacity-50 rounded d-flex align-items-center gap-2 flex-wrap border border-secondary border-opacity-25" style="max-width: 100%; width: fit-content;">
                     <span class="badge bg-secondary p-2" style="font-size:0.75rem; border-radius: 4px;">CAPTCHA</span>
                     <canvas class="captcha-canvas" width="90" height="32" style="border-radius: 4px; border: 1px solid rgba(255,255,255,0.15); cursor: pointer;" title="নতুন কোড পেতে ক্লিক করুন"></canvas>
                     <button type="button" class="btn btn-sm p-1 text-muted hover-text-danger captcha-refresh-btn" style="background: transparent; border: none; font-size: 0.95rem; cursor: pointer; color: #888;" title="কোড রিফ্রেশ করুন"><i class="fas fa-sync-alt"></i></button>
@@ -187,6 +187,9 @@ const initCaptchaForForm = (form) => {
         }
     } else {
         // Replace static index.html CAPTCHA markup
+        captchaWrapper.classList.add('flex-wrap');
+        captchaWrapper.style.setProperty('max-width', '100%', 'important');
+        captchaWrapper.style.setProperty('width', 'fit-content', 'important');
         captchaWrapper.innerHTML = `
             <span class="badge bg-secondary p-2">CAPTCHA</span>
             <canvas class="captcha-canvas" width="90" height="32" style="border-radius: 4px; border: 1px solid var(--border-color); cursor: pointer;" title="নতুন কোড পেতে ক্লিক করুন"></canvas>
