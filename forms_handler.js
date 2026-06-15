@@ -249,7 +249,7 @@ const validateCaptcha = (form) => {
     return true;
 };
 
-document.addEventListener("DOMContentLoaded", function() {
+const initAllForms = () => {
     // Initialize dynamic forms CAPTCHAs
     const feedbackForm = document.getElementById('feedback-form');
     if (feedbackForm) initCaptchaForForm(feedbackForm);
@@ -259,6 +259,9 @@ document.addEventListener("DOMContentLoaded", function() {
     
     const membershipForm = document.getElementById('membership-form');
     if (membershipForm) initCaptchaForForm(membershipForm);
+
+    const helpdeskForm = document.getElementById('helpdesk-inquiry-form');
+    if (helpdeskForm) initCaptchaForForm(helpdeskForm);
 
     // ==========================================
     // 1. Unified Newsletter Forms (Footer)
@@ -578,7 +581,92 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-});
+
+    // ==========================================
+    // 5. Helpdesk Inquiry Form (admission-helpdesk.html)
+    // ==========================================
+    if (helpdeskForm) {
+        helpdeskForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const nameInput = document.getElementById('helpdesk-name');
+            const phoneInput = document.getElementById('helpdesk-phone');
+            const districtInput = document.getElementById('helpdesk-district');
+            const institutionInput = document.getElementById('helpdesk-institution');
+            const messageInput = document.getElementById('helpdesk-message');
+            const submitBtn = helpdeskForm.querySelector('button[type="submit"]');
+
+            if (!nameInput || !phoneInput || !districtInput || !messageInput || !submitBtn) return;
+
+            // Validate Dynamic CAPTCHA
+            if (!validateCaptcha(helpdeskForm)) return;
+
+            const originalHtml = submitBtn.innerHTML;
+            const originalStyles = captureStyles(submitBtn);
+
+            setButtonLoading(submitBtn, originalHtml, "আবেদনপত্র পাঠানো হচ্ছে...");
+
+            if (isConfigPlaceholder()) {
+                console.warn("Using demo mode. Fill in Firebase and Apps Script details to connect live sheets/db.");
+                setTimeout(() => {
+                    setButtonSuccess(submitBtn, "সফলভাবে সাবমিট হয়েছে!");
+                    helpdeskForm.reset();
+                    refreshCaptchaForForm(helpdeskForm);
+                    setTimeout(() => resetButtonState(submitBtn, originalHtml, originalStyles), 3500);
+                }, 1000);
+                return;
+            }
+
+            const payload = {
+                name: nameInput.value.trim(),
+                phone: phoneInput.value.trim(),
+                district: districtInput.value.trim(),
+                institution: institutionInput ? institutionInput.value.trim() : "",
+                message: messageInput.value.trim()
+            };
+
+            try {
+                // Write to Firestore
+                if (db) {
+                    await db.collection('helpdesk').add({
+                        ...payload,
+                        submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                }
+
+                // Send to Google Sheets via Apps Script Web App
+                await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: JSON.stringify({
+                        formType: 'helpdesk',
+                        data: payload
+                    })
+                });
+
+                // UI Success state
+                setButtonSuccess(submitBtn, "সফলভাবে সাবমিট হয়েছে!");
+                helpdeskForm.reset();
+                refreshCaptchaForForm(helpdeskForm);
+                setTimeout(() => resetButtonState(submitBtn, originalHtml, originalStyles), 3500);
+
+            } catch (error) {
+                console.error("Helpdesk submission failed:", error);
+                setButtonError(submitBtn);
+                setTimeout(() => resetButtonState(submitBtn, originalHtml, originalStyles), 3500);
+            }
+        });
+    }
+};
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAllForms);
+} else {
+    initAllForms();
+}
 
 // CAPTCHA Shake Animation CSS Injection
 const captchaShakeStyle = document.createElement('style');
