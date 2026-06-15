@@ -495,12 +495,32 @@ header, .header {
     overflow-y: auto;
     box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3) !important;
     transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    visibility: hidden;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s linear !important;
     display: block !important;
     list-style: none;
   }
   .navmenu ul {
     display: none !important;
+  }
+  .navmenu > ul {
+    display: block !important;
+  }
+}
+
+@media (max-width: 1199px) {
+  header::before,
+  .header::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    z-index: 9997 !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
   }
 }
 
@@ -510,19 +530,8 @@ header, .header {
 
 .mobile-nav-active header::before,
 .mobile-nav-active .header::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  z-index: 9997 !important;
-  animation: mobileNavFadeIn 0.35s ease forwards;
-}
-
-@keyframes mobileNavFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .mobile-nav-active header,
@@ -541,90 +550,94 @@ header, .header {
 
 .mobile-nav-active #navmenu > ul {
   transform: translateX(0) !important;
+  visibility: visible !important;
 }
 
-.mobile-nav-active .navmenu > ul > li {
-  padding: 4px 0;
-}
+@media (max-width: 1199px) {
+  .navmenu > ul > li {
+    padding: 4px 0;
+  }
 
-.mobile-nav-active .navmenu a {
-  color: var(--nav-color) !important;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 12px 16px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: all 0.25s ease;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-}
+  .navmenu a {
+    color: var(--nav-color) !important;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, padding-left 0.25s ease !important;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+  }
 
-[data-theme="light"] .mobile-nav-active .navmenu a {
-  background: rgba(0, 0, 0, 0.01);
-  border: 1px solid rgba(0, 0, 0, 0.02);
-}
+  [data-theme="light"] .navmenu a {
+    background: rgba(0, 0, 0, 0.01);
+    border: 1px solid rgba(0, 0, 0, 0.02);
+  }
 
-.mobile-nav-active .navmenu a:hover,
-.mobile-nav-active .navmenu .active > a,
-.mobile-nav-active .navmenu a.active {
-  color: var(--accent-color) !important;
-  background: rgba(255, 30, 56, 0.08) !important;
-  border-color: rgba(255, 30, 56, 0.15) !important;
-  padding-left: 20px;
-}
+  .navmenu a:hover,
+  .navmenu .active > a,
+  .navmenu a.active {
+    color: var(--accent-color) !important;
+    background: rgba(255, 30, 56, 0.08) !important;
+    border-color: rgba(255, 30, 56, 0.15) !important;
+    padding-left: 20px;
+  }
 
-.mobile-nav-active .navmenu .dropdown.active > a {
-  color: var(--accent-color) !important;
-  background: rgba(255, 30, 56, 0.08) !important;
-  border-color: rgba(255, 30, 56, 0.15) !important;
-}
+  .navmenu .dropdown.active > a {
+    color: var(--accent-color) !important;
+    background: rgba(255, 30, 56, 0.08) !important;
+    border-color: rgba(255, 30, 56, 0.15) !important;
+  }
 
-/* Rotate chevron when dropdown is active */
-.mobile-nav-active .navmenu .dropdown.active > a i {
-  transform: rotate(180deg) !important;
-  color: var(--accent-color) !important;
-}
+  /* Rotate chevron when dropdown is active */
+  .navmenu .dropdown.active > a i {
+    transform: rotate(180deg) !important;
+    color: var(--accent-color) !important;
+  }
 
-.mobile-nav-active .navmenu .dropdown ul {
-  position: static;
-  display: none;
-  opacity: 1;
-  visibility: visible;
-  box-shadow: none;
-  border: none;
-  margin: 8px 0 4px 12px;
-  padding: 6px 0 6px 12px;
-  border-left: 2px solid rgba(255, 30, 56, 0.3) !important;
-  background: rgba(0, 0, 0, 0.15) !important;
-  border-radius: 0 8px 8px 0;
-}
+  .navmenu .dropdown ul {
+    position: static;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+    box-shadow: none;
+    border: none;
+    margin: 8px 0 4px 12px;
+    padding: 6px 0 6px 12px;
+    border-left: 2px solid rgba(255, 30, 56, 0.3) !important;
+    background: rgba(0, 0, 0, 0.15) !important;
+    border-radius: 0 8px 8px 0;
+  }
 
-[data-theme="light"] .mobile-nav-active .navmenu .dropdown ul {
-  background: rgba(0, 0, 0, 0.03) !important;
-  border-left: 2px solid rgba(214, 0, 28, 0.3) !important;
-}
+  [data-theme="light"] .navmenu .dropdown ul {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border-left: 2px solid rgba(214, 0, 28, 0.3) !important;
+  }
 
-.mobile-nav-active .navmenu .dropdown ul li {
-  padding: 2px 0;
-}
+  .navmenu .dropdown ul li {
+    padding: 2px 0;
+  }
 
-.mobile-nav-active .navmenu .dropdown ul a {
-  color: var(--nav-dropdown-color) !important;
-  font-size: 14px;
-  padding: 8px 12px;
-  background: transparent !important;
-  border: none !important;
-}
+  .navmenu .dropdown ul a {
+    color: var(--nav-dropdown-color) !important;
+    font-size: 14px;
+    padding: 8px 12px;
+    background: transparent !important;
+    border: none !important;
+    transition: color 0.25s ease, padding-left 0.25s ease !important;
+  }
 
-.mobile-nav-active .navmenu .dropdown ul a:hover {
-  color: var(--accent-color) !important;
-  padding-left: 16px;
-}
+  .navmenu .dropdown ul a:hover {
+    color: var(--accent-color) !important;
+    padding-left: 16px;
+  }
 
-.mobile-nav-active .navmenu .dropdown.active > ul {
-  display: block !important;
+  .navmenu .dropdown.active > ul {
+    display: block !important;
+  }
 }
 
 /* --- HERO SECTION --- */
