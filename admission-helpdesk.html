@@ -7,13 +7,13 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     
     <!-- SEO Meta Tags -->
-    <title>Support Our Struggle | Donate to SFI West Bengal | Official Website</title>
-    <meta name="title" content="Donate - Students' Federation of India - SFI West Bengal Fund">
+    <title>Important Links & Resources | SFI West Bengal | Official Website</title>
+    <meta name="title" content="Important Links - Students' Federation of India - SFI West Bengal">
     <meta
-        content="Support the student movement in West Bengal. Your financial contribution empowers our struggle for independent, democratic, and accessible education for all. এসএফআই পশ্চিমবঙ্গ ছাত্র আন্দোলনকে সমর্থন করুন — আপনার অনুদান আমাদের সংগ্রামকে আরও শক্তিশালী করবে।"
+        content="Access important web resources, related student portals, sister organizations, and useful education department links curated by SFI West Bengal. এসএফআই পশ্চিমবঙ্গ সংশ্লিষ্ট সহযোগী সংগঠন ও সরকারি শিক্ষা পোর্টালের গুরুত্বপূর্ণ লিঙ্কসমূহ।"
         name="description" />
     <meta 
-        content="Donate to SFI, SFI West Bengal Fund, Support Student Movement Bengal, Leftist Crowd Funding India, এসএফআই অনুদান, ছাত্র ফেডারেশন তহবিল, লড়াইয়ের তহবিল, SFI WB contribution, political donation West Bengal" 
+        content="SFI Useful Links, West Bengal Education Portals, Fraternal Left Organizations, Student Resources Bengal, প্রাসঙ্গিক লিঙ্ক, এসএফআই পশ্চিমবঙ্গ লিঙ্ক, গুরুত্বপূর্ণ ওয়েবসাইট, DYFI WB website, CPI M Bengal links" 
         name="keywords" />
     
     <!-- Author Credit -->
@@ -23,15 +23,15 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://sfiwb.org/donate.html" />
-    <meta property="og:title" content="Support Our Struggle | Donate to SFI West Bengal" />
-    <meta property="og:description" content="Contribute to the SFI West Bengal struggle fund. Help us build a stronger democratic front for students' rights." />
+    <meta property="og:url" content="https://sfiwb.org/admission-helpdesk.html" />
+    <meta property="og:title" content="Important Links & Resources | SFI West Bengal" />
+    <meta property="og:description" content="Useful web resources, student portals, and official links curated by the SFI West Bengal State Committee." />
     <meta property="og:image" content="assets/images/protest.png" />
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Support Our Struggle | Donate to SFI West Bengal" />
-    <meta name="twitter:description" content="Contribute to the SFI West Bengal struggle fund. Help us build a stronger democratic front for students' rights." />
+    <meta name="twitter:title" content="Important Links & Resources | SFI West Bengal" />
+    <meta name="twitter:description" content="Useful web resources, student portals, and official links curated by the SFI West Bengal State Committee." />
     <meta name="twitter:image" content="assets/images/protest.png" />
 
     <!-- Global Favicon Settings (Consistent across all pages) -->
@@ -60,308 +60,124 @@
     <link href="style.css" rel="stylesheet" />
     <link href="home.css" rel="stylesheet" />
     <style>
-        .donate-hero {
+        .links-hero {
             background: linear-gradient(135deg, #0c0d10 0%, #1a0a0a 100%);
             padding: 100px 0 60px;
             text-align: center;
             border-bottom: 1px solid var(--border-color);
         }
 
-        .donate-hero h1 {
+        .links-hero h1 {
             font-size: clamp(2rem, 5vw, 3rem);
             color: var(--color-primary);
             margin-bottom: 12px;
         }
 
-        .donate-hero p {
+        .links-hero p {
             color: var(--text-muted);
             font-size: 1.1rem;
-            max-width: 640px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
-        .donate-section {
-            padding: 70px 0;
+        .links-section {
+            padding: 60px 0;
         }
 
-        .donate-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
+        .links-category {
+            margin-bottom: 50px;
         }
 
-        @media (max-width: 768px) {
-            .donate-layout {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        y
-
-        /* Amount selector */
-        .donate-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-md);
-            padding: 32px;
-        }
-
-        .donate-box h2 {
-            font-size: 1.3rem;
-            color: var(--text-primary);
-            font-family: var(--font-body);
-            margin-bottom: 8px;
-        }
-
-        .donate-box .sub {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            font-family: var(--font-body);
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
             margin-bottom: 24px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid var(--color-primary);
         }
 
-        .amount-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .amount-btn {
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            border-radius: var(--border-radius-sm);
-            padding: 14px 10px;
-            text-align: center;
-            cursor: pointer;
-            font-family: var(--font-body);
-            font-size: 1rem;
-            color: var(--text-primary);
-            transition: var(--transition-smooth);
-        }
-
-        .amount-btn:hover,
-        .amount-btn.selected {
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
             background: var(--color-primary);
-            border-color: var(--color-primary);
-            color: #fff;
-        }
-
-        .amount-btn span {
-            display: block;
-            font-size: 0.75rem;
-            color: inherit;
-            opacity: 0.8;
-            margin-top: 2px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .custom-amount-wrap {
-            margin-bottom: 24px;
-        }
-
-        .custom-amount-wrap label {
-            display: block;
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            font-family: var(--font-body);
-            margin-bottom: 8px;
-        }
-
-        .custom-input {
-            width: 100%;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-sm);
-            padding: 12px 16px;
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            transition: var(--transition-smooth);
-            box-sizing: border-box;
-        }
-
-        .custom-input:focus {
-            outline: none;
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 3px rgba(211, 26, 39, 0.1);
-        }
-
-        .btn-donate-now {
-            display: block;
-            width: 100%;
-            background: var(--color-primary);
-            color: #fff;
-            font-family: var(--font-body);
-            font-weight: 700;
-            font-size: 1.05rem;
-            padding: 15px;
-            border-radius: var(--border-radius-sm);
-            border: none;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-            text-align: center;
-        }
-
-        .btn-donate-now:hover {
-            background: #b91c1c;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(211, 26, 39, 0.4);
-        }
-
-        .secure-note {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            margin-top: 12px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-family: var(--font-body);
-        }
-
-        /* Bank transfer */
-        .bank-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-md);
-            padding: 32px;
-        }
-
-        .bank-box h2 {
-            font-size: 1.3rem;
-            color: var(--text-primary);
-            font-family: var(--font-body);
-            margin-bottom: 20px;
-        }
-
-        .bank-detail {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-            gap: 12px;
-        }
-
-        .bank-detail:last-of-type {
-            border-bottom: none;
-        }
-
-        .bank-detail-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-family: var(--font-body);
+            font-size: 1.4rem;
             flex-shrink: 0;
         }
 
-        .bank-detail-value {
-            font-size: 0.9rem;
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            text-align: right;
-        }
-
-        .qr-section {
-            margin-top: 24px;
-            text-align: center;
-        }
-
-        .qr-section h3 {
-            font-size: 1rem;
+        .category-header h2 {
+            font-size: 1.5rem;
             color: var(--text-primary);
             font-family: var(--font-body);
-            margin-bottom: 14px;
+            margin: 0;
         }
 
-        .qr-placeholder {
-            width: 160px;
-            height: 160px;
-            background: #fff;
-            border-radius: 12px;
-            margin: 0 auto 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed var(--border-color);
-        }
-
-        .qr-placeholder svg {
-            width: 80px;
-            height: 80px;
-            opacity: 0.3;
-        }
-
-        .qr-placeholder small {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            font-family: var(--font-body);
-            margin-top: 6px;
-            display: block;
-        }
-
-        .qr-upi-id {
-            font-size: 0.85rem;
-            color: var(--color-primary);
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-        }
-
-        /* Why donate */
-        .why-section {
-            padding: 0 0 70px;
-        }
-
-        .why-section h2 {
-            font-size: 1.6rem;
-            color: var(--text-primary);
-            font-family: var(--font-body);
-            text-align: center;
-            margin-bottom: 36px;
-        }
-
-        .why-grid {
+        .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 18px;
         }
 
-        .why-card {
+        .link-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius-md);
-            padding: 28px 24px;
-            text-align: center;
+            padding: 24px;
             transition: var(--transition-smooth);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            text-decoration: none;
         }
 
-        .why-card:hover {
+        .link-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-glow);
             border-color: var(--border-hover);
         }
 
-        .why-icon {
-            font-size: 2.5rem;
-            margin-bottom: 14px;
-            display: block;
+        .link-card-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
         }
 
-        .why-card h3 {
+        .link-card-body h3 {
             font-size: 1rem;
             color: var(--text-primary);
             font-family: var(--font-body);
-            margin-bottom: 10px;
+            margin: 0 0 6px;
         }
 
-        .why-card p {
+        .link-card-body span {
+            font-size: 0.82rem;
+            color: var(--color-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .link-card-body p {
             font-size: 0.88rem;
             color: var(--text-muted);
+            margin: 8px 0 0;
             font-family: var(--font-body);
-            line-height: 1.6;
+            line-height: 1.5;
+        }
+
+        .link-arrow {
+            margin-left: auto;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            align-self: center;
+            flex-shrink: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .link-card:hover .link-arrow {
+            color: var(--color-primary);
+            transform: translateX(4px);
         }
     </style>
 </head>
@@ -465,124 +281,153 @@
     <!-- Particle Canvas -->
     <!-- Theme Toggle Floating -->
     <!-- Header / Navbar -->
-    <main>
-        <section class="donate-hero">
+        <main>
+        <section class="links-hero" style="background: linear-gradient(135deg, #0f1016 0%, #0d1f11 100%);">
             <div class="container">
-                <h1>❤️ আন্দোলনে অনুদান করুন</h1>
-                <p>আপনার অনুদান আমাদের ছাত্র আন্দোলনকে আরও শক্তিশালী করবে</p>
+                <h1>🎓 ভর্তি হেল্পডেস্ক (Admission Helpdesk)</h1>
+                <p>কলেজ ও বিশ্ববিদ্যালয় স্তরে ভর্তি সংক্রান্ত সাহায্যের জন্য এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটির হেল্পডেস্ক।</p>
             </div>
         </section>
-        <section class="donate-section">
+        
+        <section class="links-section">
             <div class="container">
-                <div class="donate-layout">
-                    <!-- Left: Amount Selector -->
-                    <div class="donate-box">
-                        <h2>অনুদানের পরিমাণ বেছে নিন</h2>
-                        <p class="sub">আপনার সাধ্য অনুযায়ী যেকোনো পরিমাণ অনুদান করুন</p>
-                        <div class="amount-grid">
-                            <button class="amount-btn" onclick="selectAmount(this, 100)">
-                                ১০০ টাকা
-                                <span>সাধারণ সমর্থন</span>
-                            </button>
-                            <button class="amount-btn selected" onclick="selectAmount(this, 500)">
-                                ৫০০ টাকা
-                                <span>সক্রিয় সমর্থন</span>
-                            </button>
-                            <button class="amount-btn" onclick="selectAmount(this, 1000)">
-                                ১০০০ টাকা
-                                <span>বিশেষ সমর্থন</span>
-                            </button>
-                            <button class="amount-btn" onclick="selectAmount(this, 5000)" style="grid-column: span 2;">
-                                ৫০০০ টাকা
-                                <span>প্রধান অবদানকারী</span>
-                            </button>
-                            <button class="amount-btn" onclick="selectCustom(this)">
-                                কাস্টম
-                                <span>নিজে লিখুন</span>
-                            </button>
-                        </div>
-                        <div class="custom-amount-wrap" id="custom-wrap" style="display:none;">
-                            <label for="custom-amount">কাস্টম পরিমাণ লিখুন (টাকায়)</label>
-                            <input class="custom-input" id="custom-amount" min="10" placeholder="যেমন: ২৫০"
-                                type="number" />
-                        </div>
-                        <button class="btn-donate-now" onclick="handleDonate()">🏴 এখনই অনুদান করুন</button>
-                        <div class="secure-note">🔒 নিরাপদ ও সুরক্ষিত পেমেন্ট</div>
-                    </div>
-                    <!-- Right: Bank Transfer & UPI -->
-                    <div class="bank-box">
-                        <h2>ব্যাংক ট্রান্সফার বা UPI</h2>
-                        <div class="bank-detail">
-                            <span class="bank-detail-label">অ্যাকাউন্টের নাম</span>
-                            <span class="bank-detail-value">SFI West Bengal State Committee</span>
-                        </div>
-                        <div class="bank-detail">
-                            <span class="bank-detail-label">ব্যাংকের নাম</span>
-                            <span class="bank-detail-value">State Bank of India</span>
-                        </div>
-                        <div class="bank-detail">
-                            <span class="bank-detail-label">অ্যাকাউন্ট নম্বর</span>
-                            <span class="bank-detail-value">XXXX XXXX XXXX</span>
-                        </div>
-                        <div class="bank-detail">
-                            <span class="bank-detail-label">IFSC কোড</span>
-                            <span class="bank-detail-value">SBIN00XXXXX</span>
-                        </div>
-                        <div class="bank-detail">
-                            <span class="bank-detail-label">শাখা</span>
-                            <span class="bank-detail-value">কলকাতা মেইন ব্রাঞ্চ</span>
-                        </div>
-                        <div class="qr-section">
-                            <h3>UPI দিয়ে স্ক্যান করুন</h3>
-                            <div class="qr-placeholder">
-                                <svg fill="currentColor" style="color:#333;" viewbox="0 0 100 100">
-                                    <rect fill="none" height="30" rx="3" stroke="currentColor" stroke-width="6"
-                                        width="30" x="10" y="10"></rect>
-                                    <rect height="14" rx="1" width="14" x="18" y="18"></rect>
-                                    <rect fill="none" height="30" rx="3" stroke="currentColor" stroke-width="6"
-                                        width="30" x="60" y="10"></rect>
-                                    <rect height="14" rx="1" width="14" x="68" y="18"></rect>
-                                    <rect fill="none" height="30" rx="3" stroke="currentColor" stroke-width="6"
-                                        width="30" x="10" y="60"></rect>
-                                    <rect height="14" rx="1" width="14" x="18" y="68"></rect>
-                                    <rect height="8" rx="1" width="8" x="60" y="60"></rect>
-                                    <rect height="8" rx="1" width="8" x="72" y="60"></rect>
-                                    <rect height="8" rx="1" width="6" x="84" y="60"></rect>
-                                    <rect height="8" rx="1" width="8" x="60" y="72"></rect>
-                                    <rect height="18" rx="2" width="18" x="72" y="72"></rect>
-                                </svg>
-                                <small>QR কোড শীঘ্রই</small>
+                
+                <!-- Welcome Section -->
+                <div class="glass-card p-4 mb-5" data-aos="fade-up">
+                    <h3 class="text-danger fw-bold mb-3">প্রিয় ছাত্র-ছাত্রী বন্ধুরা,</h3>
+                    <p class="leading-relaxed text-body fs-6">
+                        কলেজ ও বিশ্ববিদ্যালয়ে নতুন শিক্ষাবর্ষে তোমাদের স্বাগত! ভর্তি সংক্রান্ত যে কোনো সমস্যায় (ফর্ম ফিল-আপ, নথি যাচাইকরণ, ফি প্রদান, মেধা তালিকা সংক্রান্ত সমস্যা বা হোস্টেল সংক্রান্ত সমস্যা) তোমাদের সাহায্য করতে ভারতের ছাত্র ফেডারেশন (SFI) সর্বদা প্রস্তুত। 
+                    </p>
+                    <p class="leading-relaxed text-body fs-6 mb-0">
+                        নিচে দেওয়া হেল্পডেস্ক নম্বরে যোগাযোগ করতে পারো অথবা সরাসরি আমাদের অনুসন্ধান ফর্মে তোমার প্রশ্ন জানাতে পারো। আমাদের প্রতিনিধিরা খুব শীঘ্রই তোমার সাথে যোগাযোগ করবেন।
+                    </p>
+                </div>
+
+                <div class="row g-4 mb-5">
+                    <!-- Helpline Contact List -->
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <div class="glass-card p-4 h-100">
+                            <h4 class="fw-bold text-header mb-4 border-bottom border-danger border-2 pb-2"><i class="bi bi-telephone-inbound me-2 text-danger"></i>রাজ্য স্তরের হেল্পলাইন নম্বর</h4>
+                            <div class="d-flex flex-column gap-3">
+                                <div class="d-flex align-items-center justify-content-between p-2 rounded bg-dark bg-opacity-25 border border-secondary border-opacity-10">
+                                    <div>
+                                        <h6 class="fw-bold text-header mb-0">কলকাতা ও সংলগ্ন জেলা</h6>
+                                        <span class="small text-muted">সাধারণ ভর্তি সহায়তা</span>
+                                    </div>
+                                    <a href="tel:+918017001616" class="btn btn-outline-danger btn-sm"><i class="bi bi-telephone me-1"></i> ৮Ax৭-xxx-xxx</a>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between p-2 rounded bg-dark bg-opacity-25 border border-secondary border-opacity-10">
+                                    <div>
+                                        <h6 class="fw-bold text-header mb-0">উত্তরবঙ্গ অঞ্চল</h6>
+                                        <span class="small text-muted">উত্তরবঙ্গ বিশ্ববিদ্যালয়ের অধীনে সমস্ত college</span>
+                                    </div>
+                                    <a href="tel:+918017001617" class="btn btn-outline-danger btn-sm"><i class="bi bi-telephone me-1"></i> ৮Ax৭-xxx-xxx</a>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between p-2 rounded bg-dark bg-opacity-25 border border-secondary border-opacity-10">
+                                    <div>
+                                        <h6 class="fw-bold text-header mb-0">পশ্চিম ও দক্ষিণবঙ্গ অঞ্চল</h6>
+                                        <span class="small text-muted">মেদিনীপুর, বর্ধমান ও বাঁকুড়া জেলা</span>
+                                    </div>
+                                    <a href="tel:+918017001618" class="btn btn-outline-danger btn-sm"><i class="bi bi-telephone me-1"></i> ৮Ax৭-xxx-xxx</a>
+                                </div>
                             </div>
-                            <div class="qr-upi-id">UPI: sfiwb@sbi</div>
+                            <p class="small text-muted mt-4"><i class="bi bi-info-circle me-1 text-danger"></i> অনুগ্রহ করে সকাল ১০ টা থেকে সন্ধ্যা ৮ টার মধ্যে যোগাযোগ করার চেষ্টা করুন।</p>
+                        </div>
+                    </div>
+
+                    <!-- Admission Inquiry Form -->
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <div class="glass-card p-4 h-100">
+                            <h4 class="fw-bold text-header mb-4 border-bottom border-danger border-2 pb-2"><i class="bi bi-envelope-open me-2 text-danger"></i>অনলাইন অনুসন্ধান ফর্ম (Inquiry Form)</h4>
+                            <form id="helpdesk-inquiry-form">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label small text-muted">নাম (Full Name) *</label>
+                                        <input type="text" class="form-control form-control-sm bg-dark bg-opacity-50 text-white border-secondary border-opacity-25" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label small text-muted">ফোন নম্বর (Phone Number) *</label>
+                                        <input type="tel" class="form-control form-control-sm bg-dark bg-opacity-50 text-white border-secondary border-opacity-25" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label small text-muted">জেলা (District) *</label>
+                                        <input type="text" class="form-control form-control-sm bg-dark bg-opacity-50 text-white border-secondary border-opacity-25" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label small text-muted">কলেজ/বিশ্ববিদ্যালয় (College/Uni)</label>
+                                        <input type="text" class="form-control form-control-sm bg-dark bg-opacity-50 text-white border-secondary border-opacity-25">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label small text-muted">আপনার জিজ্ঞাসা (Your Query/Problem) *</label>
+                                        <textarea class="form-control form-control-sm bg-dark bg-opacity-50 text-white border-secondary border-opacity-25" rows="3" required></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-danger w-100 btn-sm"><i class="bi bi-send me-1"></i> সাবমিট করুন (Submit Request)</button>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                            <!-- JavaScript to handle submission feedback -->
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const form = document.getElementById('helpdesk-inquiry-form');
+                                    if(form) {
+                                        form.addEventListener('submit', function(e) {
+                                            e.preventDefault();
+                                            const btn = form.querySelector('button[type="submit"]');
+                                            const originalText = btn.innerHTML;
+                                            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> পাঠানো হচ্ছে...';
+                                            btn.disabled = true;
+                                            
+                                            setTimeout(function() {
+                                                btn.innerHTML = '<i class="bi bi-check-circle-fill"></i> সফলভাবে সাবমিট হয়েছে!';
+                                                btn.style.background = '#28a745';
+                                                btn.style.borderColor = '#28a745';
+                                                
+                                                setTimeout(function() {
+                                                    btn.innerHTML = originalText;
+                                                    btn.disabled = false;
+                                                    btn.style.background = '';
+                                                    btn.style.borderColor = '';
+                                                    form.reset();
+                                                }, 3000);
+                                            }, 1200);
+                                        });
+                                    }
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- Why Donate -->
-        <section class="why-section">
-            <div class="container">
-                <h2>আপনার অনুদান কীভাবে কাজে লাগে?</h2>
-                <div class="why-grid">
-                    <div class="why-card">
-                        <span class="why-icon">📣</span>
-                        <h3>আন্দোলন পরিচালনা</h3>
-                        <p>আপনার অনুদান রাজ্যজুড়ে ছাত্র আন্দোলন, প্রতিবাদ সমাবেশ ও সাংগঠনিক কার্যক্রম পরিচালনায়
-                            সাহায্য করে।</p>
+
+                <!-- Category 3: Important portals -->
+                <div class="links-category" data-aos="fade-up">
+                    <div class="category-header">
+                        <div class="category-icon">🔗</div>
+                        <h2>গুরুত্বপূর্ণ ভর্তি লিঙ্কসমূহ (Useful Links)</h2>
                     </div>
-                    <div class="why-card">
-                        <span class="why-icon">📚</span>
-                        <h3>শিক্ষামূলক প্রকাশনা</h3>
-                        <p>পুস্তিকা, মুখপত্র ও রাজনৈতিক সাহিত্য প্রকাশ করতে এবং ছাত্রদের মধ্যে বিনামূল্যে বিতরণ করতে।
-                        </p>
-                    </div>
-                    <div class="why-card">
-                        <span class="why-icon">🤝</span>
-                        <h3>ত্রাণ ও সামাজিক কাজ</h3>
-                        <p>প্রাকৃতিক দুর্যোগে ত্রাণ বিতরণ, বিনামূল্যে স্বাস্থ্য শিবির ও দরিদ্র ছাত্রদের সহায়তা
-                            কার্যক্রমে।</p>
+                    <div class="links-grid">
+                        <a class="link-card" href="https://banglaruchchhashiksha.wb.gov.in/" rel="noopener noreferrer" target="_blank">
+                            <div class="link-card-icon">🏛️</div>
+                            <div class="link-card-body">
+                                <h3>বাংলার উচ্চশিক্ষা পোর্টাল</h3>
+                                <span>banglaruchchhashiksha.wb.gov.in</span>
+                                <p>পশ্চিমবঙ্গ সরকারের কেন্দ্রীয় কলেজ ভর্তি পোর্টাল।</p>
+                            </div>
+                            <span class="link-arrow">→</span>
+                        </a>
+                        <a class="link-card" href="https://wbmdfc.org/scholarship.html" rel="noopener noreferrer" target="_blank">
+                            <div class="link-card-icon">🎓</div>
+                            <div class="link-card-body">
+                                <h3>ঐক্যশ্রী স্কলারশিপ পোর্টাল</h3>
+                                <span>wbmdfc.org</span>
+                                <p>পশ্চিমবঙ্গ সংখ্যালঘু ছাত্র-ছাত্রীদের স্কলারশিপ আবেদন পোর্টাল।</p>
+                            </div>
+                            <span class="link-arrow">→</span>
+                        </a>
                     </div>
                 </div>
+
             </div>
         </section>
     </main>
@@ -590,34 +435,6 @@
        FOOTER - পাদটীকা
   ============================================================ -->
     <!-- Back to Top -->
-    <script>
-        let selectedAmount = 500;
-
-        function selectAmount(btn, amount) {
-            document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            selectedAmount = amount;
-            document.getElementById('custom-wrap').style.display = 'none';
-        }
-
-        function selectCustom(btn) {
-            document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            selectedAmount = null;
-            document.getElementById('custom-wrap').style.display = 'block';
-            document.getElementById('custom-amount').focus();
-        }
-
-        function handleDonate() {
-            const customVal = document.getElementById('custom-amount').value;
-            const amount = selectedAmount || parseInt(customVal) || 0;
-            if (!amount || amount < 10) {
-                alert('অনুগ্রহ করে সর্বনিম্ন ১০ টাকা অনুদানের পরিমাণ লিখুন।');
-                return;
-            }
-            alert('ধন্যবাদ! ' + amount + ' টাকা অনুদানের জন্য আপনাকে স্বাগতম। পেমেন্ট গেটওয়ে শীঘ্রই যুক্ত হবে।');
-        }
-    </script>
     <footer id="footer" class="footer light-background border-top border-secondary border-opacity-25">
         <div class="container py-5">
             <div class="row g-4">
