@@ -4568,6 +4568,12 @@ textarea.form-control {
   .hero-slide.active { min-height: 70vh; }
   .hero-title { font-size: 1.5rem; }
   .hero-btns { flex-direction: row; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .carousel,
+  .carousel-inner,
+  .carousel-item,
+  .carousel-item .card {
+    width: 100% !important;
+  }
 
   .qa-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 
