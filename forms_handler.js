@@ -21,7 +21,7 @@ const firebaseConfig = {
 
 
 // Google Apps Script Web App URL
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxc4SAltTS0zz2e3_BfOQKfIRbxsgWohAf2F3gJZI3qxQB1tDrmVXh8EbfO0DBUx4f8gg/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzblHce0_tmRuUq2fqQ6eEZJcvlDGZOUNaVrybary_bFx1dz234KW_IZdyhmYCJyqtmVg/exec";
 
 
 // Initialize Firebase if it has loaded and is not already initialized
@@ -303,20 +303,24 @@ const initAllForms = () => {
             try {
                 // Duplicate check & write to Firestore
                 if (db) {
-                    const docRef = db.collection('newsletter').doc(email.toLowerCase());
-                    const docSnap = await docRef.get();
-                    
-                    if (docSnap.exists) {
-                        setButtonError(submitBtn, "ইতিমধ্যেই সাবস্ক্রাইবড!");
-                        setTimeout(() => resetButtonState(submitBtn, originalHtml, originalStyles), 3500);
-                        return;
+                    try {
+                        const docRef = db.collection('newsletter').doc(email.toLowerCase());
+                        const docSnap = await docRef.get();
+                        
+                        if (docSnap.exists) {
+                            setButtonError(submitBtn, "ইতিমধ্যেই সাবস্ক্রাইবড!");
+                            setTimeout(() => resetButtonState(submitBtn, originalHtml, originalStyles), 3500);
+                            return;
+                        }
+                        
+                        // Not a duplicate in Firestore, let's write
+                        await docRef.set({
+                            email: email,
+                            subscribedAt: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                    } catch (dbError) {
+                        console.warn("Firestore newsletter duplicate check/write failed (proceeding with Google Sheets):", dbError);
                     }
-                    
-                    // Not a duplicate in Firestore, let's write
-                    await docRef.set({
-                        email: email,
-                        subscribedAt: firebase.firestore.FieldValue.serverTimestamp()
-                    });
                 }
 
                 // Send to Google Sheets via Apps Script Web App
@@ -389,10 +393,14 @@ const initAllForms = () => {
             try {
                 // Write to Firestore
                 if (db) {
-                    await db.collection('feedback').add({
-                        ...payload,
-                        submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-                    });
+                    try {
+                        await db.collection('feedback').add({
+                            ...payload,
+                            submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                    } catch (dbError) {
+                        console.warn("Firestore feedback write failed (proceeding with Google Sheets):", dbError);
+                    }
                 }
 
                 // Send to Google Sheets via Apps Script Web App
@@ -468,10 +476,14 @@ const initAllForms = () => {
             try {
                 // Write to Firestore (save in feedback collection for consistent backend structure)
                 if (db) {
-                    await db.collection('feedback').add({
-                        ...payload,
-                        submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-                    });
+                    try {
+                        await db.collection('feedback').add({
+                            ...payload,
+                            submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                    } catch (dbError) {
+                        console.warn("Firestore contact write failed (proceeding with Google Sheets):", dbError);
+                    }
                 }
 
                 // Send to Google Sheets via Apps Script Web App
@@ -549,10 +561,14 @@ const initAllForms = () => {
             try {
                 // Write to Firestore
                 if (db) {
-                    await db.collection('membership').add({
-                        ...payload,
-                        submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-                    });
+                    try {
+                        await db.collection('membership').add({
+                            ...payload,
+                            submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                    } catch (dbError) {
+                        console.warn("Firestore membership write failed (proceeding with Google Sheets):", dbError);
+                    }
                 }
 
                 // Send to Google Sheets via Apps Script Web App
@@ -628,10 +644,14 @@ const initAllForms = () => {
             try {
                 // Write to Firestore
                 if (db) {
-                    await db.collection('helpdesk').add({
-                        ...payload,
-                        submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-                    });
+                    try {
+                        await db.collection('helpdesk').add({
+                            ...payload,
+                            submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                    } catch (dbError) {
+                        console.warn("Firestore helpdesk write failed (proceeding with Google Sheets):", dbError);
+                    }
                 }
 
                 // Send to Google Sheets via Apps Script Web App
