@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+
+<html data-theme="dark" lang="bn">
+
+<head>
+<meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    
+    <!-- SEO Meta Tags -->
+    <title>Video Archive & Media Library | SFI West Bengal | Official Website</title>
+    <meta name="title" content="Video Archive - Students' Federation of India - SFI West Bengal">
+    <meta
+        content="Watch official videos, student leadership speeches, movement documentaries, and protest coverage from the Students' Federation of India (SFI) West Bengal. ভারতের ছাত্র ফেডারেশন (এসএফআই) পশ্চিমবঙ্গের কার্যক্রম, ভাষণ ও আন্দোলনের ভিডিও সংগ্রহ।"
+        name="description" />
+    <meta 
+        content="SFI Video Archive, SFI Protest Videos, Leftist Student Speeches Bengal, SFI WB Media Library, ভিডিও আর্কাইভ, এসএফআই ভিডিও সংগ্রহ, ছাত্র আন্দোলন ভিডিও, বক্তৃতা, SFI documentary West Bengal, student struggle streaming" 
+        name="keywords" />
+    
+    <!-- Author Credit -->
+    <meta name="author" content="Pabitra Banerjee" />
+    <meta name="publisher" content="SFI West Bengal State Committee" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sfiwb.org/videos.html" />
+    <meta property="og:title" content="Video Archive & Media Library | SFI West Bengal" />
+    <meta property="og:description" content="Stream the video history of progressive student movements, public meetings, and leadership speeches in West Bengal." />
+    <meta property="og:image" content="assets/images/protest.png" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Video Archive & Media Library | SFI West Bengal" />
+    <meta name="twitter:description" content="Stream the video history of progressive student movements, public meetings, and leadership speeches in West Bengal." />
+    <meta name="twitter:image" content="assets/images/protest.png" />
+
+    <!-- Global Favicon Settings (Consistent across all pages) -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%23ff2d3c%22/><polygon points=%2250,18 58,40 82,40 62,54 70,78 50,62 30,78 38,54 18,40 42,40%22 fill=%22%23ffffff%22/></svg>">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png" default-fallback="true" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+
+    <!-- Vendor CSS Files (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+    <!-- Main Stylesheets -->
+    <link href="style.css" rel="stylesheet" />
+    <link href="home.css" rel="stylesheet" />
+    <style>
+        /* ── Video Hero ── */
+        .video-hero {
+            background: linear-gradient(135deg, #0c0d10 0%, #1a0a0a 50%, #0d0a1a 100%);
+            padding: 100px 0 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 120%, rgba(211, 26, 39, 0.12) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .video-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--color-primary);
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .video-hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 640px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* ── Filter Bar ── */
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 40px 0 20px;
+        }
+
+        .filter-btn {
+            padding: 8px 22px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-muted);
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            transition: var(--transition-smooth);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--color-primary);
+            color: #fff;
+            border-color: var(--color-primary);
+        }
+
+        /* ── Video Grid ── */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            padding: 20px 0 60px;
+        }
+
+        /* ── Video Card ── */
+        .video-card {
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--border-hover);
+        }
+
+        /* ── Thumbnail / Play Button ── */
+        .video-thumb {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .video-thumb-bg {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Individual gradient themes per card */
+        .grad-speech {
+            background: linear-gradient(135deg, #1a0000 0%, #3d0a0a 40%, #1a0a24 100%);
+        }
+
+        .grad-protest {
+            background: linear-gradient(135deg, #0a1a00 0%, #1a2d0a 40%, #0d1a0d 100%);
+        }
+
+        .grad-interview {
+            background: linear-gradient(135deg, #00101a 0%, #0a1e33 40%, #0d0d1a 100%);
+        }
+
+        .grad-conference {
+            background: linear-gradient(135deg, #1a100a 0%, #2d1a00 40%, #1a0a10 100%);
+        }
+
+        .grad-protest2 {
+            background: linear-gradient(135deg, #120012 0%, #2a0029 40%, #0d0010 100%);
+        }
+
+        .grad-speech2 {
+            background: linear-gradient(135deg, #001a10 0%, #003320 40%, #00100a 100%);
+        }
+
+        /* Decorative pattern overlay */
+        .video-thumb-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 1px, transparent 1px, transparent 12px),
+                repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 1px, transparent 1px, transparent 12px);
+        }
+
+        /* SFI logo watermark in thumbnail */
+        .thumb-watermark {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(211, 26, 39, 0.85);
+            color: #fff;
+            font-size: 0.65rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Duration badge */
+        .thumb-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.82);
+            color: #fff;
+            font-size: 0.72rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            padding: 2px 7px;
+            border-radius: 4px;
+        }
+
+        /* YouTube-style red play button */
+        .play-btn {
+            position: relative;
+            z-index: 2;
+            width: 64px;
+            height: 44px;
+            background: #ff0000;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, background 0.2s ease;
+            box-shadow: 0 4px 24px rgba(255, 0, 0, 0.45);
+        }
+
+        .video-thumb:hover .play-btn {
+            transform: scale(1.12);
+            background: #cc0000;
+        }
+
+        .play-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+            margin-left: 4px;
+        }
+
+        /* ── Card Info ── */
+        .video-info {
+            padding: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .video-category-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            background: rgba(211, 26, 39, 0.15);
+            color: var(--color-primary);
+            font-size: 0.72rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            border: 1px solid rgba(211, 26, 39, 0.25);
+            align-self: flex-start;
+        }
+
+        .video-info h3 {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .video-meta {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-top: auto;
+        }
+
+        .video-meta span {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .video-meta .dot-sep {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        /* ── Section heading accent ── */
+        .section-accent-line {
+            width: 48px;
+            height: 4px;
+            background: var(--color-primary);
+            border-radius: 2px;
+            margin: 0 auto 24px;
+        }
+
+        /* ── Load more button ── */
+        .load-more-wrap {
+            text-align: center;
+            padding: 10px 0 60px;
+        }
+
+        .btn-load-more {
+            padding: 12px 36px;
+            border-radius: 30px;
+            border: 1px solid var(--color-primary);
+            background: transparent;
+            color: var(--color-primary);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-load-more:hover {
+            background: var(--color-primary);
+            color: #fff;
+        }
+
+        /* ── CTA Banner ── */
+        .video-cta {
+            background: linear-gradient(135deg, rgba(211, 26, 39, 0.1) 0%, rgba(255, 189, 9, 0.06) 100%);
+            border: 1px solid rgba(211, 26, 39, 0.2);
+            border-radius: var(--border-radius-md);
+            padding: 40px 32px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .video-cta h3 {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .video-cta p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pointer-glow" id="pointerGlow"></div>
+    <div class="topbar py-1">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-8 topbar-left">
+                    <span class="small text-white opacity-75 d-none d-md-inline"><i class="bi bi-info-circle me-1"></i>
+                        ভারতের ছাত্র ফেডারেশন (পশ্চিমবঙ্গ রাজ্য কমিটি) অফিসিয়াল ওয়েবসাইট</span>
+                </div>
+                <div class="col-12 col-md-4 topbar-right text-end">
+                    <div class="social-links d-inline-block">
+                        <a aria-label="Search" class="text-white opacity-75 hover-opacity-100 me-3"
+                            href="/docs/search"><i class="bi bi-search"></i></a>
+                        <a aria-label="Facebook" class="text-white opacity-75 hover-opacity-100 me-3"
+                            href="https://www.facebook.com/sfiwestbengalofficial/" target="_blank"><i
+                                class="bi bi-facebook"></i></a>
+                        <a aria-label="Twitter" class="text-white opacity-75 hover-opacity-100 me-3"
+                            href="https://twitter.com/SFI_WestBengal" target="_blank"><i
+                                class="bi bi-twitter-x"></i></a>
+                        <a aria-label="Instagram" class="text-white opacity-75 hover-opacity-100 me-3"
+                            href="https://www.instagram.com/sfi_west_bengal/" target="_blank"><i
+                                class="bi bi-instagram"></i></a>
+                        <a aria-label="YouTube" class="text-white opacity-75 hover-opacity-100"
+                            href="https://www.youtube.com/@sfiwestbengalofficial" target="_blank"><i
+                                class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header class="header d-flex align-items-center fixed-top" id="header">
+        <div class="container position-relative align-items-center justify-content-between">
+            <div class="row w-100 align-items-center">
+                <!-- Logo Image Toggler -->
+                <div class="col-10 col-xl-4">
+                    <a class="logo d-flex align-items-center me-auto" href="index.html">
+                        <img alt="SFI WB State Committee Logo" class="img-fluid logo-img" id="siteLogoImg"
+                            src="assets/SFI-WB-WEB-LOGO-DARK.png" />
+                    </a>
+                </div>
+                <!-- Navigation menu (Cleaned, simplified, and inline theme toggler) -->
+                <div class="col-2 col-xl-8 text-end p-0">
+                    <nav id="navmenu" class="navmenu" lang="bn">
+                        <ul>
+                            <li class="dropdown"><a href="about.html">সংগঠন <i
+                                        class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <ul>
+                                    <li><a href="about.html">আমাদের কথা</a></li>
+                                    <li><a href="state-secretariat.html">রাজ্য সম্পাদকমণ্ডলী</a></li>
+                                    <li><a href="state-committee.html">পশ্চিমবঙ্গ রাজ্য কমিটি সদস্যদের তালিকা</a></li>
+                                    <li class="dropdown"><a href="#">ডকুমেন্টস <i
+                                                class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                        <ul>
+                                            <li><a href="programme.html">সংগঠনের কর্মসূচি</a></li>
+                                            <li><a href="constitution.html">সংগঠনের গঠনতন্ত্র</a></li>
+                                            <li><a href="booklets.html">সংগঠনের পুস্তিকা</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="gallery.html">ফটো গ্যালারি</a></li>
+                                    <li><a href="links.html">প্রাসঙ্গিক লিংক</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="press.html">প্রেস বিবৃতি</a></li>
+                            <li class="dropdown"><a href="#">সোশ্যাল স্ট্রীম <i
+                                        class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <ul>
+                                    <li><a href="https://www.youtube.com/@sfiwestbengalofficial" target="_blank">ইউটিউব
+                                            চ্যানেল</a></li>
+                                    <li><a href="https://www.facebook.com/sfiwestbengalofficial/" target="_blank">ফেসবুক
+                                            পেজ</a></li>
+                                    <li><a href="https://twitter.com/SFI_WestBengal" target="_blank">এক্স (টুইটার)
+                                            হ্যান্ডেল</a></li>
+                                    <li><a href="https://www.instagram.com/sfi_west_bengal/" target="_blank">ইনস্টাগ্রাম
+                                            অ্যাকাউন্ট</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="videos.html">ভিডিও</a></li>
+                            <li><a href="donate.html">অনুদান</a></li>
+                            <li><a href="contact.html">যোগাযোগ</a></li>
+                            <li><a href="https://chhatrasangram.org/" target="_blank" class="nav-highlight-cs">ছাত্রসংগ্রাম</a></li>
+                            <li><a href="admission-helpdesk.html" class="nav-highlight-helpdesk">ভর্তি হেল্পডেস্ক</a></li>
+
+                            <!-- Inline Theme Switcher inside the menu -->
+                            <li>
+                                <a href="#" id="themeToggle" class="nav-theme-toggle" aria-label="Toggle Theme">
+                                    <i class="fas fa-sun text-warning" id="themeIcon"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Preloader -->
+    <!-- Particle Canvas -->
+    <!-- Theme Toggle Floating -->
+    <!-- Header / Navbar -->
+    <main>
+        <!-- Hero -->
+        <section class="video-hero">
+            <div class="container">
+                <h1>📹 ভিডিও আর্কাইভ</h1>
+                <p>এসএফআই পশ্চিমবঙ্গের কার্যক্রম, ভাষণ ও আন্দোলনের ভিডিও সংগ্রহ</p>
+            </div>
+        </section>
+        <!-- Filter + Grid -->
+        <section class="section">
+            <div class="container">
+                <!-- Filter Buttons -->
+                <div class="filter-bar" id="video-filter-bar">
+                    <button class="filter-btn active" data-filter="all">সকল</button>
+                    <button class="filter-btn" data-filter="speech">ভাষণ</button>
+                    <button class="filter-btn" data-filter="protest">আন্দোলন</button>
+                    <button class="filter-btn" data-filter="interview">সাক্ষাৎকার</button>
+                    <button class="filter-btn" data-filter="conference">সম্মেলন</button>
+                </div>
+                <!-- Video Grid -->
+                <div class="video-grid" id="video-grid">
+                    <!-- Card 1 – Speech -->
+                    <div class="video-card" data-category="speech">
+                        <div class="video-thumb">
+                            <div class="video-thumb-bg grad-speech">
+                                <div class="thumb-watermark">SFI WB</div>
+                                <div aria-label="ভিডিও চালান" class="play-btn">
+                                    <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5v14l11-7z"></path>
+                                    </svg>
+                                </div>
+                                <div class="thumb-duration">৪৫:১২</div>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-category-tag">ভাষণ</span>
+                            <h3>রাজ্য সম্পাদকের ঐতিহাসিক ভাষণ — শিক্ষার বাণিজ্যিকীকরণের বিরুদ্ধে</h3>
+                            <div class="video-meta">
+                                <span>
+                                    <svg fill="none" height="13" stroke="currentColor" stroke-width="2"
+                                        viewbox="0 0 24 24" width="13">
+                                        <rect height="18" rx="2" width="18" x="3" y="4"></rect>
+                                        <line x1="16" x2="16" y1="2" y2="6"></line>
+                                        <line x1="8" x2="8" y1="2" y2="6"></line>
+                                        <line x1="3" x2="21" y1="10" y2="10"></line>
+                                    </svg>
+                                    ১৫ মে, ২০২৬
+                                </span>
+                                <div class="dot-sep"></div>
+                                <span>
+                                    <svg fill="none" height="13" stroke="currentColor" stroke-width="2"
+                                        viewbox="0 0 24 24" width="13">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    ১২,৪৩৫ বার দেখা হয়েছে
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 – Protest -->
+                    <div class="video-card" data-category="protest">
+                        <div class="video-thumb">
+                            <div class="video-thumb-bg grad-protest">
+                                <div class="thumb-watermark">SFI WB</div>
+                                <div aria-label="ভিডিও চালান" class="play-btn">
+                                    <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5v14l11-7z"></path>
+                                    </svg>
+                                </div>
+                                <div class="thumb-duration">১৮:৩৭</div>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-category-tag">আন্দোলন</span>
+                            <h3>কলকাতায় ছাত্র অধিকার মার্চ — হাজার হাজার ছাত্রের মিছিল</h3>
+                            <div class="video-meta">
+                                <span>
+                                    <svg fill="none" height="13" stroke="currentColor" stroke-width="2"
+                                        viewbox="0 0 24 24" width="13">
+                                        <rect height="18" rx="2" width="18" x="3" y="4"></rect>
+                                        <line x1="16" x2="16" y1="2" y2="6"></line>
+                                        <line x1="8" x2="8" y1="2" y2="6"></line>
+                                        <line x1="3" x2="21" y1="10" y2="10"></line>
+                                    </svg>
+                                    ২২ এপ্রিল, ২০২৬
+                                </span>
+                                <div class="dot-sep"></div>
+                                <span>
+                                    <svg fill="none" height="13" stroke="currentColor" stroke-width="2"
+                                        viewbox="0 0 24 24" width="13">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    ৮,৭২০ বার দেখা হয়েছে
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 – Interview -->
+                    <div class="video-card" data-category="interview">
+                        <div class="video-thumb">
+                            <div class="video-thumb-bg grad-interview">
+                                <div class="thumb-watermark">SFI WB</div>
+                                <div aria-label="ভিডিও চালান" class="play-btn">
+                                    <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5v14l11-7z"></path>
+                                    </svg>
+                                </div>
+                                <div class="thumb-duration">২৮:০৫</div>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-category-tag">সাক্ষাৎকার</span>
+                            <h3>এসএফআই রাজ্য সভাপতির একান্ত সাক্ষাৎকার — শিক্ষানীতি ও যুব রাজনীতি প্রসঙ্গে</h3>
+                            <div class="video-meta">
+                                <span>
+                                    <svg fill="none" height="13" stroke="currentColor" stroke-width="2"
+                                        viewbox="0 0 24 24" width="13">
+                                        <rect height="18" rx="2" width="18" x="3" y="4"></rect>
+                                        <line x1="16" x2="16" y1="2" y2="6"></line>
+                                        <line x1="8" x2="8" y1="2" y2="6"></line>
+                                        <line x1="3" x2="21" y1="10" y2="10"></line>
+                                    </svg>
+                                    ৮ মার্চ, ২০২৬
+                                </span>
+                                <div class="dot-sep"></div>
+                                <span>
+                                    <svg fill="none" height="13" stroke="currentColor" stroke-width="2"
+                                        viewbox="0 0 24 24" width="13">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    ৬,১৮০ বার দেখা হয়েছে
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 4 – Conference -->
+                    <div class="video-card" data-category="conference">
+                        <div class="video-thumb">
+                            <div class="video-thumb-bg grad-conference">
+                                <div class="thumb-watermark">SFI WB</div>
+                                <div aria-label="ভিডিও চালান" class="play-btn">
+                                    <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5v14l11-7z"></path>
+                                    </svg>
+                                </div>
+                                <div class="thumb-duration">১:২২:৪৮</div>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-category-tag">সম্মেলন</span>
+                            <h3>এসএফআই পশ্চিমবঙ্গ রাজ্য সম্মেলন ২০২৫ — উদ্বোধনী অধিবেশন সম্পূর্ণ ভিডিও</h3>
+                            <div class="video-meta">
+                                <span>
+                                    <svg fill="none" height="13" stroke="currentColor" stroke-width="2"
+                                        viewbox="0 0 24 24" width="13">
+                                        <rect height="18" rx="2" width="18" x="3" y="4"></rect>
+                                        <line x1="16" x2="16" y1="2" y2="6"></line>
+                                        <line x1="8" x2="8" y1="2" y2="6"></line>
+                                        <line x1="3" x2="21" y1="10" y2="10"></line>
+                                    </svg>
+                                    ১৪ ডিসেম্বর, ২০২৫
+                                </span>
+                                <div class="dot-sep"></div>
+                                <span>
+                                    <svg fill="none" height="13" stroke="currentColor" stroke-width="2"
+                                        viewbox="0 0 24 24" width="13">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    ২৩,৫৯৮ বার দেখা হয়েছে
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 5 – Protest -->
+                    <div class="video-card" data-category="protest">
+                        <div class="video-thumb">
+                            <div class="video-thumb-bg grad-protest2">
+                                <div class="thumb-watermark">SFI WB</div>
+                                <div aria-label="ভিডিও চালান" class="play-btn">
+                                    <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5v14l11-7z"></path>
+                                    </svg>
+                                </div>
+                                <div class="thumb-duration">৩৫:২২</div>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-category-tag">আন্দোলন</span>
+                            <h3>বেসরকারিকরণ বিরোধী রাজ্যব্যাপী ধর্মঘট — এসএফআই-এর নেতৃত্বে সফল বনধ</h3>
+                            <div class="video-meta">
+                                <span>
+                                    <svg fill="none" height="13" stroke="currentColor" stroke-width="2"
+                                        viewbox="0 0 24 24" width="13">
+                                        <rect height="18" rx="2" width="18" x="3" y="4"></rect>
+                                        <line x1="16" x2="16" y1="2" y2="6"></line>
+                                        <line x1="8" x2="8" y1="2" y2="6"></line>
+                                        <line x1="3" x2="21" y1="10" y2="10"></line>
+                                    </svg>
+                                    ৩ ফেব্রুয়ারি, ২০২৬
+                                </span>
+                                <div class="dot-sep"></div>
+                                <span>
+                                    <svg fill="none" height="13" stroke="currentColor" stroke-width="2"
+                                        viewbox="0 0 24 24" width="13">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    ১৫,২৬৩ বার দেখা হয়েছে
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 6 – Speech -->
+                    <div class="video-card" data-category="speech">
+                        <div class="video-thumb">
+                            <div class="video-thumb-bg grad-speech2">
+                                <div class="thumb-watermark">SFI WB</div>
+                                <div aria-label="ভিডিও চালান" class="play-btn">
+                                    <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5v14l11-7z"></path>
+                                    </svg>
+                                </div>
+                                <div class="thumb-duration">৫২:৩০</div>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-category-tag">ভাষণ</span>
+                            <h3>জাতীয় শিক্ষানীতি ২০২০ বাতিলের দাবিতে কেন্দ্রীয় জনসভায় বক্তৃতা</h3>
+                            <div class="video-meta">
+                                <span>
+                                    <svg fill="none" height="13" stroke="currentColor" stroke-width="2"
+                                        viewbox="0 0 24 24" width="13">
+                                        <rect height="18" rx="2" width="18" x="3" y="4"></rect>
+                                        <line x1="16" x2="16" y1="2" y2="6"></line>
+                                        <line x1="8" x2="8" y1="2" y2="6"></line>
+                                        <line x1="3" x2="21" y1="10" y2="10"></line>
+                                    </svg>
+                                    ১০ জানুয়ারি, ২০২৬
+                                </span>
+                                <div class="dot-sep"></div>
+                                <span>
+                                    <svg fill="none" height="13" stroke="currentColor" stroke-width="2"
+                                        viewbox="0 0 24 24" width="13">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    ৯,৮৪১ বার দেখা হয়েছে
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /#video-grid -->
+                <!-- Load More -->
+                <div class="load-more-wrap">
+                    <button class="btn-load-more" id="load-more-btn">আরও ভিডিও দেখুন</button>
+                </div>
+                <!-- YouTube CTA -->
+                <div class="video-cta">
+                    <h3>🎬 আমাদের ইউটিউব চ্যানেল সাবস্ক্রাইব করুন</h3>
+                    <p>সর্বশেষ ভিডিও, লাইভ স্ট্রিম ও সম্মেলনের আপডেট পেতে আমাদের অফিশিয়াল ইউটিউব চ্যানেল ফলো করুন।</p>
+                    <a class="btn btn-primary" href="https://www.youtube.com/"
+                        style="display:inline-block; text-decoration:none; padding:12px 32px; border-radius:30px; font-family:var(--font-body);"
+                        target="_blank">
+                        ▶ ইউটিউবে যান
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- ============================================================
+       FOOTER - পাদটীকা
+  ============================================================ -->
+    <!-- Back to Top -->
+    <script>
+        // ── Filter logic ──
+        document.querySelectorAll('.filter-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.filter-btn').forEach(function (b) {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+                var filter = this.dataset.filter;
+                document.querySelectorAll('.video-card').forEach(function (card) {
+                    card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'flex' : 'none';
+                });
+            });
+        });
+
+        // ── Load more placeholder ──
+        document.getElementById('load-more-btn').addEventListener('click', function () {
+            this.textContent = 'শীঘ্রই আরও ভিডিও আসছে…';
+            this.disabled = true;
+            this.style.opacity = '0.5';
+        });
+    </script>
+    <footer id="footer" class="footer light-background border-top border-secondary border-opacity-25">
+        <div class="container py-5">
+            <div class="row g-4">
+                <!-- Col 1: Address -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">ঠিকানা</h5>
+                    <p class="text-body leading-relaxed mb-0">
+                        <strong>ভারতের ছাত্র ফেডারেশন</strong><br>
+                        পশ্চিমবঙ্গ রাজ্য কমিটি<br>
+                        ৩১ আলিমুদ্দিন স্ট্রিট, মুজফ্ফর আহমদ ভবন<br>
+                        কলকাতা - ৭০০০১৬
+                    </p>
+                </div>
+
+                <!-- Col 2: Organization & Docs -->
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">সংগঠন ও দস্তাবেজ</h5>
+                    <ul class="list-unstyled footer-links mb-0">
+                        <li><a href="about.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> আমাদের কথা</a></li>
+                        <li><a href="state-secretariat.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> রাজ্য
+                                সম্পাদকমণ্ডলী</a></li>
+                        <li><a href="state-committee.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> রাজ্য কমিটি</a></li>
+                        <li><a href="programme.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> সংগঠনের কর্মসূচি</a>
+                        </li>
+                        <li><a href="constitution.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> গঠনতন্ত্র</a></li>
+                        <li><a href="booklets.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> পুস্তিকা</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Media & Publications -->
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">মিডিয়া ও প্রকাশনা
+                    </h5>
+                    <ul class="list-unstyled footer-links mb-0">
+                        <li><a href="news.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> সংবাদ ও খবর</a></li>
+                        <li><a href="press.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রেস বিবৃতি</a></li>
+                        <li><a href="publications.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রকাশনা</a></li>
+                        <li><a href="https://chhatrasangram.org/" target="_blank" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> ছাত্রসংগ্রাম (Chhatra Sangram) ↗</a></li>
+                        <li><a href="videos.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> ভিডিও গ্যালারি</a>
+                        </li>
+                        <li><a href="gallery.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> ফটো গ্যালারি</a></li>
+                        <li><a href="martyrs.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> শহীদ স্মরণ</a></li>
+                        <li><a href="international.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> আন্তর্জাতিক</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Action & Support -->
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">যোগাযোগ ও সমর্থন</h5>
+                    <ul class="list-unstyled footer-links mb-0">
+                        <li><a href="contact.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> যোগাযোগ করুন</a></li>
+                        <li><a href="admission-helpdesk.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> ভর্তি হেল্পডেস্ক (Admission Helpdesk)</a></li>
+                        <li><a href="donate.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> অনুদান দিন</a></li>
+                        <li><a href="join.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> যোগ দিন</a></li>
+                        <li><a href="links.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রাসঙ্গিক লিংক</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 5: Newsletter & Socials -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">নিউজলেটার</h5>
+                    <p class="text-body small leading-relaxed mb-3">নতুন পোস্টের আপডেট সরাসরি পেতে সাবস্ক্রাইব করুন।</p>
+                    <form action="#" method="post" class="mt-2 mb-4">
+                        <div class="input-group">
+                            <input type="email" name="email"
+                                class="form-control form-control-sm bg-dark bg-opacity-50 text-white border-secondary border-opacity-25"
+                                placeholder="আপনার ইমেল লিখুন" required>
+                            <button type="submit" class="btn btn-danger btn-sm">সাবস্ক্রাইব</button>
+                        </div>
+                    </form>
+                    <div class="social-links d-flex">
+                        <a href="https://www.facebook.com/sfiwestbengalofficial/" target="_blank"
+                            class="btn btn-outline-danger btn-sm rounded-circle p-2 me-2 d-flex align-items-center justify-content-center"
+                            style="width: 38px; height: 38px;"><i class="bi bi-facebook"></i></a>
+                        <a href="https://twitter.com/SFI_WestBengal" target="_blank"
+                            class="btn btn-outline-danger btn-sm rounded-circle p-2 me-2 d-flex align-items-center justify-content-center"
+                            style="width: 38px; height: 38px;"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://www.instagram.com/sfi_west_bengal/" target="_blank"
+                            class="btn btn-outline-danger btn-sm rounded-circle p-2 me-2 d-flex align-items-center justify-content-center"
+                            style="width: 38px; height: 38px;"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/@sfiwestbengalofficial" target="_blank"
+                            class="btn btn-outline-danger btn-sm rounded-circle p-2 d-flex align-items-center justify-content-center"
+                            style="width: 38px; height: 38px;"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright & Credits -->
+        <div class="copyright-bar bg-dark bg-opacity-50 border-top border-secondary border-opacity-10 py-3 text-center">
+            <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <p class="mb-0 text-body small">&copy; ২০২৬ ভারতের ছাত্র ফেডারেশন - পশ্চিমবঙ্গ রাজ্য কমিটি। সর্বস্বত্ব
+                    সংরক্ষিত।</p>
+                <p class="mb-0 text-body small mt-2 mt-md-0">★ স্বাধীনতা • গণতন্ত্র • সমাজতন্ত্র</p>
+            </div>
+        </div>
+    </footer><a class="scroll-top d-flex align-items-center justify-content-center bg-danger rounded text-white shadow"
+        href="#" id="scroll-top"><i class="bi bi-arrow-up-short"></i></a>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // AOS Init
+            AOS.init({
+                duration: 600,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false
+            });
+
+            // Mobile Nav Toggle
+            const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
+            const body = document.querySelector('body');
+
+            if (mobileNavToggleBtn) {
+                mobileNavToggleBtn.addEventListener('click', function (e) {
+                    body.classList.toggle('mobile-nav-active');
+                    mobileNavToggleBtn.classList.toggle('bi-list');
+                    mobileNavToggleBtn.classList.toggle('bi-x');
+                });
+            }
+
+            // Toggle Dropdown menu in Mobile View
+            document.querySelectorAll('.navmenu .dropdown > a').forEach(el => {
+                el.addEventListener('click', function (e) {
+                    if (window.innerWidth < 1200) {
+                        e.preventDefault();
+                        this.parentNode.classList.toggle('active');
+                        this.nextElementSibling.classList.toggle('dropdown-active');
+                    }
+                });
+            });
+
+            // Swiper Affairs Slider
+            if (document.querySelector(".team-slider")) {
+                var swiperTeam = new Swiper(".team-slider", {
+                    loop: true,
+                    speed: 800,
+                    autoplay: {
+                        delay: 5000
+                    },
+                    slidesPerView: 1,
+                    spaceBetween: 30,
+                    pagination: {
+                        el: ".swiper-pagination",
+                        type: "bullets",
+                        clickable: true
+                    },
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev"
+                    },
+                    breakpoints: {
+                        576: { slidesPerView: 2 },
+                        992: { slidesPerView: 3 }
+                    }
+                });
+            }
+
+            // Scroll to Top Button Action
+            const scrollTop = document.querySelector('.scroll-top');
+            if (scrollTop) {
+                const toggleScrollTop = function () {
+                    window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
+                }
+                window.addEventListener('load', toggleScrollTop);
+                document.addEventListener('scroll', toggleScrollTop);
+                scrollTop.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // Mouse-following cursor spotlight in Hero Section
+            const heroSection = document.getElementById('hero');
+            const spotlight = document.getElementById('heroSpotlight');
+            if (heroSection && spotlight) {
+                heroSection.addEventListener('mousemove', (e) => {
+                    const rect = heroSection.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    spotlight.style.setProperty('--mouse-x', `${x}px`);
+                    spotlight.style.setProperty('--mouse-y', `${y}px`);
+                });
+            }
+
+            // Smooth trailing global cursor glow (Pointer Glow)
+            const glow = document.getElementById('pointerGlow');
+            let mouseX = -500, mouseY = -500;
+            let glowX = -500, glowY = -500;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateCursorGlow() {
+                glowX += (mouseX - glowX) * 0.08;
+                glowY += (mouseY - glowY) * 0.08;
+
+                if (glow) {
+                    glow.style.left = `${glowX}px`;
+                    glow.style.top = `${glowY}px`;
+                }
+                requestAnimationFrame(animateCursorGlow);
+            }
+            animateCursorGlow();
+
+            // Theme Toggle Logic (dynamic swap of logo & theme icons)
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const htmlElement = document.documentElement;
+            const logoImg = document.getElementById('siteLogoImg');
+
+            function applyTheme(themeName) {
+                htmlElement.setAttribute('data-theme', themeName);
+                if (themeName === 'dark') {
+                    if (themeIcon) {
+                        themeIcon.className = 'fas fa-sun text-warning';
+                    }
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO-DARK.png';
+                } else {
+                    if (themeIcon) {
+                        themeIcon.className = 'fas fa-moon text-dark';
+                    }
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO.png';
+                }
+            }
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const currentTheme = htmlElement.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    applyTheme(newTheme);
+                    localStorage.setItem('theme', newTheme);
+                });
+            }
+
+            // Initialize theme on load
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+        });
+    </script> <!-- Firebase SDKs and Forms Handler -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="forms_handler.js"></script>
+</body>
+
+</html>
