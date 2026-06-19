@@ -702,3 +702,58 @@ captchaShakeStyle.innerHTML = `
 }
 `;
 document.head.appendChild(captchaShakeStyle);
+
+// ==========================================
+// SOURCE CODE PROTECTION (Disable Right-Click and Developer Keyboard Shortcuts)
+// ==========================================
+(function() {
+    // Disable Right-Click context menu
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    // Disable common developer tools keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        // Disable F12 (Inspect Element)
+        if (e.key === 'F12' || e.keyCode === 123) {
+            e.preventDefault();
+            return false;
+        }
+
+        // Disable Ctrl+Shift+I (Windows Inspect), Ctrl+Shift+J (Windows Console), Ctrl+Shift+C (Windows Inspect Element)
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c' || e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+            e.preventDefault();
+            return false;
+        }
+
+        // Disable Cmd+Opt+I (macOS Inspect), Cmd+Opt+J (macOS Console), Cmd+Opt+C (macOS Inspect Element)
+        if (e.metaKey && e.altKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c' || e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+            e.preventDefault();
+            return false;
+        }
+
+        // Disable Ctrl+U (Windows View Source)
+        if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.keyCode === 85)) {
+            e.preventDefault();
+            return false;
+        }
+
+        // Disable Cmd+U (macOS View Source)
+        if (e.metaKey && (e.key === 'U' || e.key === 'u' || e.keyCode === 85)) {
+            e.preventDefault();
+            return false;
+        }
+
+        // Disable Ctrl+S (Windows Save Page)
+        if (e.ctrlKey && (e.key === 'S' || e.key === 's' || e.keyCode === 83)) {
+            e.preventDefault();
+            return false;
+        }
+
+        // Disable Cmd+S (macOS Save Page)
+        if (e.metaKey && (e.key === 'S' || e.key === 's' || e.keyCode === 83)) {
+            e.preventDefault();
+            return false;
+        }
+    });
+})();
