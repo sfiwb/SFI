@@ -363,9 +363,61 @@
             margin-right: auto;
         }
     </style>
+    <!-- Theme Flash Prevention -->
+    <script id="theme-flash-prevention">
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
 </head>
 
 <body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-logo-wrap">
+                <div class="preloader-ring"></div>
+                <svg class="preloader-star" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="50,18 58,40 82,40 62,54 70,78 50,62 30,78 38,54 18,40 42,40" />
+                </svg>
+            </div>
+            <div class="preloader-text">SFI</div>
+            <div class="preloader-subtext">West Bengal</div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const preloader = document.getElementById('preloader');
+            if (!preloader) return;
+            
+            function hidePreloader() {
+                setTimeout(function() {
+                    preloader.classList.add('hidden');
+                    setTimeout(function() {
+                        preloader.remove();
+                    }, 600);
+                }, 800);
+            }
+            
+            if (document.readyState === 'complete') {
+                hidePreloader();
+            } else {
+                window.addEventListener('load', hidePreloader);
+            }
+            
+            // Fallback safety timeout
+            setTimeout(function() {
+                if (preloader && !preloader.classList.contains('hidden')) {
+                    preloader.classList.add('hidden');
+                    setTimeout(function() {
+                        preloader.remove();
+                    }, 600);
+                }
+            }, 5000);
+        })();
+    </script>
+
     <div class="pointer-glow" id="pointerGlow"></div>
     <div class="topbar py-1">
         <div class="container">
@@ -441,7 +493,7 @@
                                             অ্যাকাউন্ট</a></li>
                                 </ul>
                             </li>
-                            <li><a href="videos.html">ভিডিও</a></li>
+                            
                             <li><a href="donate.html">অনুদান</a></li>
                             <li><a href="contact.html">যোগাযোগ</a></li>
                             <li><a href="https://chhatrasangram.org/" target="_blank" class="nav-highlight-cs">ছাত্রসংগ্রাম</a></li>
@@ -460,7 +512,6 @@
             </div>
         </div>
     </header>
-    <!-- Preloader -->
     <!-- Particle Canvas -->
     <!-- Theme Toggle Floating -->
     <!-- Header / Navbar -->
