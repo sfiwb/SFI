@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="bn">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    
+    <!-- SEO Meta Tags -->
+    <title>Search | SFI West Bengal State Committee | Official Website</title>
+    <meta name="title" content="Search - Students' Federation of India - SFI West Bengal State Committee">
+    <meta content="Official search engine of SFI West Bengal State Committee. Search any article, press statement, leadership details or booklets in Bengali and English." name="description" />
+    <meta content="SFI Search, search sfi, এসএফআই অনুসন্ধান, এসএফআই সার্চ, SFI West Bengal search" name="keywords" />
+    
+    <!-- Author Credit -->
+    <meta name="author" content="Pabitra Banerjee" />
+    <meta name="publisher" content="SFI West Bengal State Committee" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Global Favicon Settings -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%23ff2d3c%22/><polygon points=%2250,18 58,40 82,40 62,54 70,78 50,62 30,78 38,54 18,40 42,40%22 fill=%22%23ffffff%22/></svg>">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png" default-fallback="true" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+
+    <!-- Vendor CSS Files (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+    <!-- Main Stylesheets -->
+    <link href="style.css" rel="stylesheet" />
+    <link href="home.css" rel="stylesheet" />
+    
+    <style>
+        .search-hero {
+            background: linear-gradient(135deg, var(--background-color) 0%, color-mix(in srgb, var(--accent-color), transparent 94%) 100%) !important;
+            padding: 120px 0 60px !important;
+            border-bottom: 1px solid var(--surface-border) !important;
+            position: relative;
+            overflow: visible !important; /* Fix clipping of absolute suggestions list */
+            z-index: 1050;
+        }
+        .search-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--accent-color) !important;
+            font-family: var(--font-heading) !important;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px var(--accent-glow) !important;
+        }
+        .search-input-wrap {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1060;
+            overflow: visible !important;
+        }
+        .search-bar {
+            width: 100%;
+            padding: 16px 50px 16px 24px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(var(--accent-color-rgb), 0.15), 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+        .search-icon-inside {
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+        /* Autocomplete Suggestions styling */
+        .search-suggestions-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(21, 22, 28, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color, rgba(255,255,255,0.1));
+            border-radius: 16px;
+            margin-top: 10px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.5);
+            z-index: 9999 !important;
+            max-height: 350px;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+        .suggestion-item {
+            padding: 14px 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+        .suggestion-item:hover, .suggestion-item.active {
+            background: rgba(255, 45, 60, 0.1);
+            color: #ff2d3c;
+            padding-left: 30px;
+        }
+        .suggestion-item .suggestion-label-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+        }
+        .suggestion-item .suggestion-label-wrap i {
+            color: var(--text-muted);
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .suggestion-item:hover .suggestion-label-wrap i, 
+        .suggestion-item.active .suggestion-label-wrap i {
+            color: #ff2d3c;
+        }
+        .suggestion-item .suggestion-type {
+            font-size: 0.72rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .type-page {
+            background: rgba(13, 110, 253, 0.15);
+            color: #0d6efd;
+            border: 1px solid rgba(13, 110, 253, 0.25);
+        }
+        .type-section {
+            background: rgba(102, 16, 242, 0.15);
+            color: #6610f2;
+            border: 1px solid rgba(102, 16, 242, 0.25);
+        }
+        .type-keyword {
+            background: rgba(108, 117, 125, 0.15);
+            color: #6c757d;
+            border: 1px solid rgba(108, 117, 125, 0.25);
+        }
+        .type-martyr {
+            background: rgba(220, 53, 69, 0.15);
+            color: #dc3545;
+            border: 1px solid rgba(220, 53, 69, 0.25);
+        }
+        .type-press {
+            background: rgba(255, 193, 7, 0.15);
+            color: #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.25);
+        }
+        .type-faq {
+            background: rgba(25, 135, 84, 0.15);
+            color: #198754;
+            border: 1px solid rgba(25, 135, 84, 0.25);
+        }
+        .search-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+        }
+        .search-badge-page {
+            background: rgba(13, 110, 253, 0.1);
+            color: #0d6efd;
+            border-color: rgba(13, 110, 253, 0.2);
+        }
+        .search-badge-martyr {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border-color: rgba(220, 53, 69, 0.2);
+        }
+        .search-badge-press {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+            border-color: rgba(255, 193, 7, 0.2);
+        }
+        .search-badge-faq {
+            background: rgba(25, 135, 84, 0.1);
+            color: #198754;
+            border-color: rgba(25, 135, 84, 0.2);
+        }
+        .search-badge-news {
+            background: rgba(13, 202, 240, 0.1);
+            color: #0dcaf0;
+            border-color: rgba(13, 202, 240, 0.2);
+        }
+        .search-badge-org {
+            background: rgba(111, 66, 193, 0.1);
+            color: #6f42c1;
+            border-color: rgba(111, 66, 193, 0.2);
+        }
+        .search-badge-docs {
+            background: rgba(253, 126, 20, 0.1);
+            color: #fd7e14;
+            border-color: rgba(253, 126, 20, 0.2);
+        }
+        .search-badge-media {
+            background: rgba(102, 16, 242, 0.1);
+            color: #6610f2;
+            border-color: rgba(102, 16, 242, 0.2);
+        }
+        .results-container {
+            max-width: 800px;
+            margin: 40px auto 80px;
+            padding: 0 15px;
+        }
+        .result-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: var(--transition-smooth);
+        }
+        .result-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-glow);
+        }
+        .result-item h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+        .result-item h3 a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .result-item h3 a:hover {
+            color: #ff5260;
+            text-decoration: underline;
+        }
+        .result-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .result-meta span i {
+            color: var(--accent-color);
+            margin-right: 4px;
+        }
+        .result-snippet {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            text-align: left;
+        }
+        .result-snippet mark, .suggestion-item mark {
+            background-color: rgba(255, 234, 0, 0.25) !important;
+            color: #fff !important;
+            font-weight: 600;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+        .result-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--bg-card);
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-color);
+        }
+        .no-results i {
+            font-size: 3rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        .search-stats {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .search-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            background: rgba(var(--accent-color-rgb), 0.08);
+            border: 1px solid rgba(var(--accent-color-rgb), 0.2);
+            color: var(--accent-color);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+    </style>
+    <!-- Theme Flash Prevention -->
+    <script id="theme-flash-prevention">
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+
+<body class="search-page">
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-logo-wrap">
+                <div class="preloader-ring"></div>
+                <svg class="preloader-star" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="50,18 58,40 82,40 62,54 70,78 50,62 30,78 38,54 18,40 42,40" />
+                </svg>
+            </div>
+            <div class="preloader-text">SFI</div>
+            <div class="preloader-subtext">West Bengal</div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const preloader = document.getElementById('preloader');
+            if (!preloader) return;
+            
+            function hidePreloader() {
+                setTimeout(function() {
+                    preloader.classList.add('hidden');
+                    setTimeout(function() {
+                        preloader.remove();
+                    }, 600);
+                }, 800);
+            }
+            
+            if (document.readyState === 'complete') {
+                hidePreloader();
+            } else {
+                window.addEventListener('load', hidePreloader);
+            }
+            
+            setTimeout(function() {
+                if (preloader && !preloader.classList.contains('hidden')) {
+                    preloader.classList.add('hidden');
+                    setTimeout(function() {
+                        preloader.remove();
+                    }, 600);
+                }
+            }, 5000);
+        })();
+    </script>
+
+    <div class="pointer-glow" id="pointerGlow"></div>
+    
+    <div class="topbar py-1">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-8 topbar-left">
+                    <span class="small text-white opacity-75 d-none d-md-inline"><i class="bi bi-info-circle me-1"></i>
+                        ভারতের ছাত্র ফেডারেশন (পশ্চিমবঙ্গ রাজ্য কমিটি) অফিসিয়াল ওয়েবসাইট</span>
+                </div>
+                <div class="col-12 col-md-4 topbar-right text-end">
+                    <div class="social-links d-inline-block">
+                        <a aria-label="Search" class="text-white opacity-75 hover-opacity-100 me-3"
+                            href="search.html"><i class="bi bi-search"></i></a>
+                        <a aria-label="Facebook" class="text-white opacity-75 hover-opacity-100 me-3"
+                            href="https://www.facebook.com/sfiwb/" target="_blank"><i
+                                class="bi bi-facebook"></i></a>
+                        <a aria-label="Twitter" class="text-white opacity-75 hover-opacity-100 me-3"
+                            href="https://x.com/sfi_westbengal" target="_blank"><i
+                                class="bi bi-twitter-x"></i></a>
+                        <a aria-label="Instagram" class="text-white opacity-75 hover-opacity-100 me-3"
+                            href="https://www.instagram.com/sfiwb/" target="_blank"><i
+                                class="bi bi-instagram"></i></a>
+                        <a aria-label="YouTube" class="text-white opacity-75 hover-opacity-100"
+                            href="https://www.youtube.com/@sfiwestbengal" target="_blank"><i
+                                class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <header class="header d-flex align-items-center fixed-top" id="header">
+        <div class="container position-relative align-items-center justify-content-between">
+            <div class="row w-100 align-items-center">
+                <div class="col-10 col-xl-4">
+                    <a class="logo d-flex align-items-center me-auto" href="index.html">
+                        <img alt="SFI WB State Committee Logo" class="img-fluid logo-img" id="siteLogoImg"
+                            src="assets/SFI-WB-WEB-LOGO-DARK.png" />
+                    </a>
+                </div>
+                <div class="col-2 col-xl-8 text-end p-0">
+                    <nav id="navmenu" class="navmenu" lang="bn">
+                        <ul>
+                            <li class="dropdown"><a href="about.html">সংগঠন <i
+                                        class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <ul>
+                                    <li><a href="about.html">আমাদের কথা</a></li>
+                                    <li><a href="state-secretariat.html">রাজ্য সম্পাদকমণ্ডলী</a></li>
+                                    <li><a href="state-committee.html">পশ্চিমবঙ্গ রাজ্য কমিটি সদস্যদের তালিকা</a></li>
+                                    <li class="dropdown"><a href="#">ডকুমেন্টস <i
+                                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                        <ul>
+                                            <li><a href="programme.html">সংগঠনের কর্মসূচি</a></li>
+                                            <li><a href="constitution.html">সংগঠনের গঠনতন্ত্র</a></li>
+                                            <li><a href="booklets.html">সংগঠনের পুস্তিকা</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="gallery.html">ফটো গ্যালারি</a></li>
+                                    <li><a href="links.html">প্রাসঙ্গিক লিংক</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="press.html">প্রেস বিবৃতি</a></li>
+                            <li class="dropdown"><a href="#">সোশ্যাল স্ট্রীম <i
+                                        class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <ul>
+                                    <li><a href="https://www.youtube.com/@sfiwestbengal" target="_blank">ইউটিউব
+                                            চ্যানেল</a></li>
+                                    <li><a href="https://www.facebook.com/sfiwb/" target="_blank">ফেসবুক
+                                            পেজ</a></li>
+                                    <li><a href="https://x.com/sfi_westbengal" target="_blank">এক্স (টুইটার)
+                                            হ্যান্ডেল</a></li>
+                                    <li><a href="https://www.instagram.com/sfiwb/" target="_blank">ইনস্টাগ্রাম
+                                            অ্যাকাউন্ট</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="donate.html">অনুদান</a></li>
+                            <li><a href="contact.html">যোগাযোগ</a></li>
+                            <li><a href="https://chhatrasangram.org/" target="_blank" class="nav-highlight-cs">ছাত্রসংগ্রাম</a></li>
+                            <li><a href="admission-helpdesk.html" class="nav-highlight-helpdesk">ভর্তি হেল্পডেস্ক</a></li>
+                            <li>
+                                <a href="#" id="themeToggle" class="nav-theme-toggle" aria-label="Toggle Theme">
+                                    <i class="fas fa-sun text-warning" id="themeIcon"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="search-hero text-center">
+            <div class="container">
+                <h1>অনুসন্ধান করুন (Search)</h1>
+                <p class="mb-4 text-light-body">সমগ্র ওয়েবসাইটের সমস্ত তথ্য বাংলা অথবা ইংরেজিতে সার্চ করুন</p>
+                <div class="search-input-wrap">
+                    <input type="text" id="searchInput" class="search-bar" placeholder="যা খুঁজছেন তা লিখুন... (Type keywords here...)" autocomplete="off">
+                    <div class="search-icon-inside"><i class="bi bi-search"></i></div>
+                    <div id="searchSuggestions" class="search-suggestions-dropdown" style="display: none;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="results-section">
+            <div class="container">
+                <div class="results-container">
+                    <div id="searchStats" class="search-stats"></div>
+                    <div id="searchResults">
+                        <!-- Search results will appear here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="footer" class="footer light-background border-top border-secondary border-opacity-25">
+        <div class="container py-5">
+            <div class="row g-4">
+                <!-- Col 1: Address -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">ঠিকানা</h5>
+                    <p class="text-body leading-relaxed mb-0">
+                        <strong>ভারতের ছাত্র ফেডারেশন</strong><br>
+                        পশ্চিমবঙ্গ রাজ্য কমিটি<br>
+                        দীনেশ মজুমদার ভবন, ৭৯/৩এ, এ. জে. সি. বোস রোড, কলকাতা, পশ্চিমবঙ্গ, ভারত — পিনকোড: ৭০০০১৪<br>
+                        <span class="small d-block mt-2">
+                            <strong>ফোন:</strong> +৯১-৮৯১০০৪৪১৩৮ (সম্পাদক) &amp;<br>+৯১-৯৯৩৩৬৪৬৫৫৬ (সভাপতি)<br>
+                            <strong>ইমেল:</strong> state.committee.sfi.wb@gmail.com
+                        </span>
+                        <a href="https://maps.app.goo.gl/MaNQfj5qRgNooBDEA" target="_blank" class="text-danger hover-underline small d-inline-block mt-2"><i class="fas fa-map-marker-alt me-1"></i>গুগল ম্যাপে দেখুন ↗</a>
+                    </p>
+                </div>
+
+                <!-- Col 2: Organization & Docs -->
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">সংগঠন ও দস্তাবেজ</h5>
+                    <ul class="list-unstyled footer-links mb-0">
+                        <li><a href="about.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> আমাদের কথা</a></li>
+                        <li><a href="state-secretariat.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> রাজ্য
+                                সম্পাদকমণ্ডলী</a></li>
+                        <li><a href="state-committee.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> রাজ্য কমিটি</a></li>
+                        <li><a href="programme.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> সংগঠনের কর্মসূচি</a>
+                        </li>
+                        <li><a href="constitution.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> গঠনতন্ত্র</a></li>
+                        <li><a href="booklets.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> পুস্তিকা</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Media & Publications -->
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">মিডিয়া ও প্রকাশনা</h5>
+                    <ul class="list-unstyled footer-links mb-0">
+                        <li><a href="news.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> সংবাদ ও খবর</a></li>
+                        <li><a href="press.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রেস বিবৃতি</a></li>
+                        <li><a href="publications.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রকাশনা</a></li>
+                        <li><a href="https://chhatrasangram.org/" target="_blank" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> ছাত্রসংগ্রাম (Chhatra Sangram) ↗</a></li>
+                        <li><a href="videos.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> ভিডিও গ্যালারি</a></li>
+                        <li><a href="gallery.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> ফটো গ্যালারি</a></li>
+                        <li><a href="martyrs.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> শহীদ স্মরণ</a></li>
+                        <li><a href="international.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> আন্তর্জাতিক</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Action & Support -->
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">যোগাযোগ ও সমর্থন</h5>
+                    <ul class="list-unstyled footer-links mb-0">
+                        <li><a href="contact.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> যোগাযোগ করুন</a></li>
+                        <li><a href="admission-helpdesk.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> ভর্তি হেল্পডেস্ক (Admission Helpdesk)</a></li>
+                        <li><a href="donate.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> অনুদান দিন</a></li>
+                        <li><a href="join.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> যোগ দিন</a></li>
+                        <li><a href="links.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রাসঙ্গিক লিংক</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 5: Newsletter & Socials -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">নিউজলেটার</h5>
+                    <p class="text-body small leading-relaxed mb-3">নতুন পোস্টের আপডেট সরাসরি পেতে সাবস্ক্রাইব করুন।</p>
+                    <form action="#" method="post" class="mt-2 mb-4">
+                        <div class="input-group">
+                            <input type="email" name="email"
+                                class="form-control form-control-sm bg-dark bg-opacity-50 text-white border-secondary border-opacity-25"
+                                placeholder="আপনার ইমেল লিখুন" required>
+                            <button type="submit" class="btn btn-danger btn-sm">সাবস্ক্রাইব</button>
+                        </div>
+                    </form>
+                    <div class="social-links d-flex">
+                        <a href="https://www.facebook.com/sfiwb/" target="_blank"
+                            class="btn btn-outline-danger btn-sm rounded-circle p-2 me-2 d-flex align-items-center justify-content-center"
+                            style="width: 38px; height: 38px;"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/sfi_westbengal" target="_blank"
+                            class="btn btn-outline-danger btn-sm rounded-circle p-2 me-2 d-flex align-items-center justify-content-center"
+                            style="width: 38px; height: 38px;"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://www.instagram.com/sfiwb/" target="_blank"
+                            class="btn btn-outline-danger btn-sm rounded-circle p-2 me-2 d-flex align-items-center justify-content-center"
+                            style="width: 38px; height: 38px;"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/@sfiwestbengal" target="_blank"
+                            class="btn btn-outline-danger btn-sm rounded-circle p-2 d-flex align-items-center justify-content-center"
+                            style="width: 38px; height: 38px;"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright & Credits -->
+        <div class="copyright-bar bg-dark bg-opacity-50 border-top border-secondary border-opacity-10 py-3 text-center">
+            <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <p class="mb-0 text-body small">&copy; ২০২৬ ভারতের ছাত্র ফেডারেশন - পশ্চিমবঙ্গ রাজ্য কমিটি। সর্বস্বত্ব সংরক্ষিত।</p>
+                <p class="mb-0 text-body small mt-2 mt-md-0">★ স্বাধীনতা • গণতন্ত্র • সমাজতন্ত্র</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll Top Button -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center bg-danger rounded text-white shadow"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- JS Files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <!-- Include the generated search index -->
+    <script src="search_data.js"></script>
+    
+    <!-- Search Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // AOS Init
+            AOS.init({
+                duration: 600,
+                once: true,
+                mirror: false
+            });
+
+            // Mobile Nav Toggle
+            const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
+            const body = document.querySelector('body');
+
+            if (mobileNavToggleBtn) {
+                mobileNavToggleBtn.addEventListener('click', function (e) {
+                    body.classList.toggle('mobile-nav-active');
+                    mobileNavToggleBtn.classList.toggle('bi-list');
+                    mobileNavToggleBtn.classList.toggle('bi-x');
+                });
+            }
+
+            // Toggle Dropdown menu in Mobile View
+            document.querySelectorAll('.navmenu .dropdown > a').forEach(el => {
+                el.addEventListener('click', function (e) {
+                    if (window.innerWidth < 1200) {
+                        e.preventDefault();
+                        this.parentNode.classList.toggle('active');
+                        this.nextElementSibling.classList.toggle('dropdown-active');
+                    }
+                });
+            });
+
+            // Scroll to Top Button Action
+            const scrollTop = document.querySelector('.scroll-top');
+            if (scrollTop) {
+                const toggleScrollTop = function () {
+                    window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
+                }
+                window.addEventListener('load', toggleScrollTop);
+                document.addEventListener('scroll', toggleScrollTop);
+                scrollTop.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // Pointer Glow
+            const glow = document.getElementById('pointerGlow');
+            let mouseX = -500, mouseY = -500;
+            let glowX = -500, glowY = -500;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateCursorGlow() {
+                glowX += (mouseX - glowX) * 0.08;
+                glowY += (mouseY - glowY) * 0.08;
+                if (glow) {
+                    glow.style.left = `${glowX}px`;
+                    glow.style.top = `${glowY}px`;
+                }
+                requestAnimationFrame(animateCursorGlow);
+            }
+            animateCursorGlow();
+
+            // Theme Toggle Logic
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const htmlElement = document.documentElement;
+            const logoImg = document.getElementById('siteLogoImg');
+
+            function applyTheme(themeName) {
+                htmlElement.setAttribute('data-theme', themeName);
+                if (themeName === 'dark') {
+                    if (themeIcon) themeIcon.className = 'fas fa-sun text-warning';
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO-DARK.png';
+                } else {
+                    if (themeIcon) themeIcon.className = 'fas fa-moon text-dark';
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO.png';
+                }
+            }
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const currentTheme = htmlElement.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    applyTheme(newTheme);
+                    localStorage.setItem('theme', newTheme);
+                });
+            }
+
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+
+            // SEARCH ENGINE LOGIC
+            const searchInput = document.getElementById("searchInput");
+            const searchResults = document.getElementById("searchResults");
+            const searchStats = document.getElementById("searchStats");
+            const suggestionsDropdown = document.getElementById("searchSuggestions");
+            
+            let activeSuggestionIndex = -1;
+            let currentSuggestions = [];
+
+            // Extract query from URL (?q=term)
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialQuery = urlParams.get('q');
+            if (initialQuery) {
+                searchInput.value = initialQuery;
+                performSearch(initialQuery);
+            }
+
+            searchInput.addEventListener("input", function() {
+                const val = this.value;
+                performSearch(val);
+                showSuggestions(val);
+            });
+
+            // Keyboard navigation for suggestions
+            searchInput.addEventListener("keydown", function(e) {
+                if (e.key === "Enter") {
+                    if (activeSuggestionIndex > -1 && suggestionsDropdown.style.display !== "none") {
+                        e.preventDefault();
+                        const items = suggestionsDropdown.getElementsByClassName("suggestion-item");
+                        if (items.length > 0) {
+                            items[activeSuggestionIndex].click();
+                        }
+                    } else {
+                        // Regular Enter submits and hides suggestions
+                        performSearch(this.value);
+                        hideSuggestions();
+                    }
+                    return;
+                }
+
+                if (suggestionsDropdown.style.display === "none") return;
+
+                const items = suggestionsDropdown.getElementsByClassName("suggestion-item");
+                if (items.length === 0) return;
+
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    activeSuggestionIndex++;
+                    if (activeSuggestionIndex >= items.length) activeSuggestionIndex = 0;
+                    highlightSuggestion(items);
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    activeSuggestionIndex--;
+                    if (activeSuggestionIndex < 0) activeSuggestionIndex = items.length - 1;
+                    highlightSuggestion(items);
+                } else if (e.key === "Escape") {
+                    hideSuggestions();
+                }
+            });
+
+            function highlightSuggestion(items) {
+                for (let i = 0; i < items.length; i++) {
+                    items[i].classList.remove("active");
+                }
+                if (activeSuggestionIndex > -1) {
+                    items[activeSuggestionIndex].classList.add("active");
+                    const suggestionText = currentSuggestions[activeSuggestionIndex].searchText;
+                    if (suggestionText) {
+                        searchInput.value = suggestionText;
+                    }
+                }
+            }
+
+            function showSuggestions(val) {
+                const trimmedVal = val.trim();
+                if (!trimmedVal) {
+                    hideSuggestions();
+                    return;
+                }
+
+                const query = trimmedVal.toLowerCase();
+                const matchedPages = [];
+                const matchedHeadings = [];
+                const matchedKeywords = new Set();
+
+                // Find matches
+                SEARCH_INDEX.forEach(page => {
+                    // Determine type and icon of this page
+                    let pageType = "Page";
+                    let pageIcon = "bi-file-earmark-text";
+                    if (page.url.includes("martyrs.html")) {
+                        pageType = "Martyr";
+                        pageIcon = "bi-heart-fill text-danger";
+                    } else if (page.url.includes("press.html")) {
+                        pageType = "Press";
+                        pageIcon = "bi-file-earmark-pdf-fill text-warning";
+                    } else if (page.url.includes("#history") || page.url.includes("#slogan") || page.url.includes("#flag") || page.url.includes("#leadership")) {
+                        pageType = "FAQ";
+                        pageIcon = "bi-question-circle-fill text-success";
+                    }
+
+                    // Match page title
+                    if (page.title.toLowerCase().includes(query)) {
+                        matchedPages.push({
+                            title: page.title,
+                            url: page.url,
+                            type: pageType,
+                            icon: pageIcon
+                        });
+                    }
+
+                    // Match headings
+                    page.headings.forEach(heading => {
+                        if (heading.toLowerCase().includes(query)) {
+                            let headingIcon = pageIcon;
+                            if (pageType === "Page") {
+                                headingIcon = "bi-hash";
+                            }
+                            matchedHeadings.push({
+                                title: heading,
+                                url: page.url,
+                                type: pageType === "Page" ? "Section" : pageType,
+                                icon: headingIcon
+                            });
+                        }
+                    });
+
+                    // Match keywords starting with the query
+                    const words = page.content.split(/\s+/);
+                    words.forEach(word => {
+                        const cleaned = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'’]/g,"").toLowerCase();
+                        if (cleaned.startsWith(query) && cleaned !== query && cleaned.length > query.length) {
+                            matchedKeywords.add(word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'’]/g,""));
+                        }
+                    });
+                });
+
+                currentSuggestions = [];
+                
+                // Add page matches
+                matchedPages.slice(0, 3).forEach(p => {
+                    currentSuggestions.push({
+                        text: p.title,
+                        searchText: p.title,
+                        action: () => { window.location.href = p.url; },
+                        type: p.type,
+                        icon: p.icon
+                    });
+                });
+
+                // Add heading matches
+                matchedHeadings.slice(0, 3).forEach(h => {
+                    currentSuggestions.push({
+                        text: h.title,
+                        searchText: h.title,
+                        action: () => { 
+                            if (h.type === "Martyr" || h.type === "Press" || h.type === "FAQ") {
+                                window.location.href = h.url;
+                            } else {
+                                searchInput.value = h.title;
+                                performSearch(h.title);
+                                hideSuggestions();
+                            }
+                        },
+                        type: h.type,
+                        icon: h.icon
+                    });
+                });
+
+                // Add keyword matches
+                Array.from(matchedKeywords).slice(0, 4).forEach(k => {
+                    currentSuggestions.push({
+                        text: k,
+                        searchText: k,
+                        action: () => {
+                            searchInput.value = k;
+                            performSearch(k);
+                            hideSuggestions();
+                        },
+                        type: "Keyword",
+                        icon: "bi-search"
+                    });
+                });
+
+                currentSuggestions = currentSuggestions.slice(0, 6);
+
+                if (currentSuggestions.length === 0) {
+                    hideSuggestions();
+                    return;
+                }
+
+                // Render Suggestions HTML
+                let html = "";
+                currentSuggestions.forEach((s, idx) => {
+                    let typeLabel = "শব্দ";
+                    let badgeClass = "type-keyword";
+                    
+                    if (s.type === 'Page') {
+                        typeLabel = "পৃষ্ঠা";
+                        badgeClass = "type-page";
+                    } else if (s.type === 'Section') {
+                        typeLabel = "বিভাগ";
+                        badgeClass = "type-section";
+                    } else if (s.type === 'Martyr') {
+                        typeLabel = "শহীদ";
+                        badgeClass = "type-martyr";
+                    } else if (s.type === 'Press') {
+                        typeLabel = "প্রেস";
+                        badgeClass = "type-press";
+                    } else if (s.type === 'FAQ') {
+                        typeLabel = "জিজ্ঞাসা";
+                        badgeClass = "type-faq";
+                    }
+
+                    html += `
+                        <div class="suggestion-item" data-index="${idx}">
+                            <div class="suggestion-label-wrap">
+                                <i class="bi ${s.icon}"></i>
+                                <span>${highlightText(s.text, [query])}</span>
+                            </div>
+                            <span class="suggestion-type ${badgeClass}">${typeLabel}</span>
+                        </div>`;
+                });
+
+                suggestionsDropdown.innerHTML = html;
+                suggestionsDropdown.style.display = "block";
+                activeSuggestionIndex = -1;
+
+                // Add click event listeners to suggestion items
+                const items = suggestionsDropdown.getElementsByClassName("suggestion-item");
+                for (let i = 0; i < items.length; i++) {
+                    items[i].addEventListener("click", function() {
+                        const idx = parseInt(this.getAttribute("data-index"));
+                        currentSuggestions[idx].action();
+                    });
+                }
+            }
+
+            function hideSuggestions() {
+                suggestionsDropdown.style.display = "none";
+                suggestionsDropdown.innerHTML = "";
+                activeSuggestionIndex = -1;
+            }
+
+            // Close suggestions when clicking elsewhere
+            document.addEventListener("click", function(e) {
+                if (e.target !== searchInput && e.target !== suggestionsDropdown && !suggestionsDropdown.contains(e.target)) {
+                    hideSuggestions();
+                }
+            });
+
+            function performSearch(query) {
+                query = query.trim();
+                if (!query) {
+                    searchResults.innerHTML = "";
+                    searchStats.innerHTML = "";
+                    return;
+                }
+
+                const keywords = query.split(/\s+/).map(k => k.toLowerCase()).filter(k => k.length > 0);
+                if (keywords.length === 0) {
+                    searchResults.innerHTML = "";
+                    searchStats.innerHTML = "";
+                    return;
+                }
+
+                const results = [];
+
+                SEARCH_INDEX.forEach(page => {
+                    let score = 0;
+                    let matchesCount = 0;
+                    let headingMatches = 0;
+
+                    const normTitle = page.title.toLowerCase();
+                    const normFullTitle = page.fullTitle.toLowerCase();
+                    const normDesc = page.description.toLowerCase();
+                    const normContent = page.content.toLowerCase();
+
+                    keywords.forEach(keyword => {
+                        if (normTitle.includes(keyword)) {
+                            score += 150;
+                            matchesCount++;
+                        } else if (normFullTitle.includes(keyword)) {
+                            score += 100;
+                            matchesCount++;
+                        }
+
+                        if (normDesc.includes(keyword)) {
+                            score += 50;
+                            matchesCount++;
+                        }
+
+                        page.headings.forEach(heading => {
+                            if (heading.toLowerCase().includes(keyword)) {
+                                score += 30;
+                                headingMatches++;
+                                matchesCount++;
+                            }
+                        });
+
+                        if (normContent.includes(keyword)) {
+                            const regex = new RegExp(escapeRegExp(keyword), "gi");
+                            const count = (normContent.match(regex) || []).length;
+                            score += Math.min(count * 8, 80);
+                            matchesCount += count;
+                        }
+                    });
+
+                    if (score > 0) {
+                        results.push({
+                            page: page,
+                            score: score,
+                            matchesCount: matchesCount
+                        });
+                    }
+                });
+
+                results.sort((a, b) => b.score - a.score);
+
+                const count = results.length;
+                searchStats.innerHTML = `<strong>${count}</strong> ${count === 1 ? 'টি ফলাফল পাওয়া গেছে' : 'টি ফলাফল পাওয়া গেছে'} (${count === 1 ? 'result' : 'results'} found)`;
+
+                if (count === 0) {
+                    searchResults.innerHTML = `
+                        <div class="no-results">
+                            <i class="bi bi-search-heart"></i>
+                            <h3 class="fw-bold">কোনো ফলাফল পাওয়া যায়নি</h3>
+                            <p class="text-muted">দয়া করে অন্য কোনো শব্দ ব্যবহার করে আবার চেষ্টা করুন।</p>
+                            <p class="small text-muted mt-2">No results found. Please check spelling or try other keywords.</p>
+                        </div>`;
+                    return;
+                }
+
+                let html = "";
+                results.forEach(res => {
+                    const page = res.page;
+                    const snippet = getHighlightSnippet(page.content, keywords);
+
+                    let sectionName = "পৃষ্ঠা (Page)";
+                    let badgeClass = "search-badge-page";
+                    
+                    if (page.url.includes("martyrs.html")) {
+                        sectionName = "শহীদ স্মরণ (Martyr)";
+                        badgeClass = "search-badge-martyr";
+                    } else if (page.url.includes("press.html")) {
+                        sectionName = "প্রেস বিবৃতি (Press)";
+                        badgeClass = "search-badge-press";
+                    } else if (page.url.includes("#history") || page.url.includes("#slogan") || page.url.includes("#flag") || page.url.includes("#leadership")) {
+                        sectionName = "সাধারণ তথ্য (FAQ)";
+                        badgeClass = "search-badge-faq";
+                    } else if (page.url.includes("news")) {
+                        sectionName = "সংবাদ (News)";
+                        badgeClass = "search-badge-news";
+                    } else if (page.url.includes("committee") || page.url.includes("secretariat")) {
+                        sectionName = "সংগঠন (Org)";
+                        badgeClass = "search-badge-org";
+                    } else if (page.url.includes("booklet") || page.url.includes("constitution") || page.url.includes("programme")) {
+                        sectionName = "দস্তাবেজ (Docs)";
+                        badgeClass = "search-badge-docs";
+                    } else if (page.url.includes("gallery") || page.url.includes("video")) {
+                        sectionName = "মিডিয়া (Media)";
+                        badgeClass = "search-badge-media";
+                    }
+
+                    html += `
+                        <div class="result-item" data-aos="fade-up">
+                            <div class="result-meta">
+                                <span class="search-badge ${badgeClass}">${sectionName}</span>
+                                <span><i class="bi bi-link-45deg"></i> ${page.url}</span>
+                            </div>
+                            <h3><a href="${page.url}">${highlightText(page.title, keywords)}</a></h3>
+                            ${page.description ? `<div class="result-desc">${highlightText(page.description, keywords)}</div>` : ''}
+                            <div class="result-snippet">${snippet}</div>
+                        </div>`;
+                });
+                searchResults.innerHTML = html;
+            }
+
+            function escapeRegExp(string) {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+
+            function highlightText(text, keywords) {
+                if (!text) return "";
+                let highlighted = text;
+                keywords.forEach(keyword => {
+                    const regex = new RegExp(`(${escapeRegExp(keyword)})`, "gi");
+                    highlighted = highlighted.replace(regex, "<mark>$1</mark>");
+                });
+                return highlighted;
+            }
+
+            function getHighlightSnippet(content, keywords) {
+                if (!content) return "";
+                
+                let firstIndex = -1;
+                let matchedKeyword = "";
+                for (let keyword of keywords) {
+                    let index = content.toLowerCase().indexOf(keyword);
+                    if (index !== -1 && (firstIndex === -1 || index < firstIndex)) {
+                        firstIndex = index;
+                        matchedKeyword = keyword;
+                    }
+                }
+
+                if (firstIndex === -1) {
+                    return content.substring(0, 160) + "...";
+                }
+
+                const start = Math.max(0, firstIndex - 60);
+                const end = Math.min(content.length, firstIndex + matchedKeyword.length + 100);
+                let snippet = content.substring(start, end);
+
+                if (start > 0) snippet = "..." + snippet;
+                if (end < content.length) snippet = snippet + "...";
+
+                return highlightText(snippet, keywords);
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -535,4 +535,48 @@ document.addEventListener('DOMContentLoaded', () => {
     setupModal();
     populateFilters();
     filterMartyrs();
+
+    // Check URL parameters to automatically open a specific martyr modal
+    const urlParams = new URLSearchParams(window.location.search);
+    const martyrId = urlParams.get('id');
+    const martyrName = urlParams.get('name');
+    
+    if (martyrId || martyrName) {
+        let martyr = null;
+        if (martyrId) {
+            martyr = martyrsData.find(m => m.page && m.page.toString() === martyrId);
+        }
+        if (!martyr && martyrName) {
+            const nameLower = martyrName.toLowerCase();
+            martyr = martyrsData.find(m => (m.name_en && m.name_en.toLowerCase() === nameLower) || (m.name_bn && m.name_bn.includes(martyrName)));
+        }
+        if (martyr) {
+            setTimeout(() => {
+                const modal = document.getElementById('martyrModal');
+                if (!modal) return;
+                
+                const imgContainer = modal.querySelector('.martyr-modal-img-container');
+                if (martyr.photo) {
+                    imgContainer.innerHTML = `<img class="martyr-modal-img" src="${martyr.photo}" alt="${martyr.name_bn}">`;
+                } else {
+                    imgContainer.innerHTML = `<div style="width: 250px; height: 250px; max-width: 100%;">${getMockupSVG(martyr.name_en)}</div>`;
+                }
+                
+                modal.querySelector('.martyr-modal-meta').textContent = `${martyr.state_bn} • ${toBengaliNumerals(martyr.year)}`;
+                modal.querySelector('.martyr-modal-title').textContent = `কমরেড ${martyr.name_bn}`;
+                modal.querySelector('.martyr-modal-desc-bn').textContent = martyr.desc_bn;
+                
+                const descEn = modal.querySelector('.martyr-modal-desc-en');
+                if (martyr.desc_en) {
+                    descEn.textContent = martyr.desc_en;
+                    descEn.style.display = 'block';
+                } else {
+                    descEn.style.display = 'none';
+                }
+                
+                modal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }, 100);
+        }
+    }
 });

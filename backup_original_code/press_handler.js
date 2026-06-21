@@ -646,4 +646,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize grid rendering
         updateView();
     }
+
+    // Check URL parameters to automatically open a specific press release modal
+    const urlParams = new URLSearchParams(window.location.search);
+    const pressId = urlParams.get('id');
+    if (pressId) {
+        setTimeout(() => {
+            openModal(pressId);
+        }, 100);
+    }
 });
