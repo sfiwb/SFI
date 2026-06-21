@@ -45,7 +45,7 @@
             border-bottom: 1px solid var(--surface-border) !important;
             position: relative;
             overflow: visible !important; /* Fix clipping of absolute suggestions list */
-            z-index: 1050;
+            z-index: 1; /* Must stay BELOW nav overlay (9997-9999) */
         }
         .search-hero h1 {
             font-size: clamp(2rem, 5vw, 3rem);
@@ -59,7 +59,7 @@
             max-width: 700px;
             margin: 0 auto;
             position: relative;
-            z-index: 1060;
+            z-index: 100; /* Above hero bg for dropdown, below nav overlay */
             overflow: visible !important;
         }
         .search-bar {
