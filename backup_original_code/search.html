@@ -45,7 +45,7 @@
             border-bottom: 1px solid var(--surface-border) !important;
             position: relative;
             overflow: visible !important; /* Fix clipping of absolute suggestions list */
-            z-index: 1; /* Must stay BELOW nav overlay (9997-9999) */
+            z-index: 10; /* Above results section (auto), below nav overlay (1000+) */
         }
         .search-hero h1 {
             font-size: clamp(2rem, 5vw, 3rem);
@@ -59,7 +59,7 @@
             max-width: 700px;
             margin: 0 auto;
             position: relative;
-            z-index: 100; /* Above hero bg for dropdown, below nav overlay */
+            z-index: 110; /* Highest within hero stacking context, for dropdown */
             overflow: visible !important;
         }
         .search-bar {
@@ -318,6 +318,12 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             font-weight: 600;
+        }
+        /* Keep results section below the search-hero stacking context (z-index:10)
+           so the suggestion dropdown always renders on top */
+        .results-section {
+            position: relative;
+            z-index: 0;
         }
     </style>
     <!-- Theme Flash Prevention -->

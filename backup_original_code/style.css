@@ -872,11 +872,12 @@ header, .header {
     position: fixed !important;
     inset: 0 !important;
     background: rgba(0, 0, 0, 0.6) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
+    /* backdrop-filter intentionally NOT here — browsers composite blur even on visibility:hidden,
+       which darkens the entire page. Only apply filter in the active state below. */
     z-index: 9997 !important;
     opacity: 0 !important;
     visibility: hidden !important;
+    pointer-events: none !important; /* Fully inert when closed */
     transition: opacity 0.35s ease, visibility 0.35s ease !important;
   }
 
@@ -890,6 +891,9 @@ header, .header {
   .mobile-nav-active .header::before {
     opacity: 1 !important;
     visibility: visible !important;
+    pointer-events: auto !important;
+    backdrop-filter: blur(10px) !important;       /* Only blur when menu is open */
+    -webkit-backdrop-filter: blur(10px) !important;
   }
 
   .mobile-nav-active header,
