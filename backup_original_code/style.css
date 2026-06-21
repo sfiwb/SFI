@@ -407,7 +407,11 @@ header, .header {
   visibility: visible;
 }
 
-/* Mobile Nav Toggle */
+/* ============================================================
+   CONSOLIDATED MOBILE NAVIGATION MENU & TOGGLER
+   ============================================================ */
+
+/* Mobile Nav Toggle Icon Container */
 .mobile-nav-toggle {
   color: var(--nav-color) !important;
   cursor: pointer !important;
@@ -418,67 +422,80 @@ header, .header {
   position: relative !important;
 }
 
-/* Pure CSS Hamburger Menu (eliminates dependency on Bootstrap Icon font loading) */
-.mobile-nav-toggle.bi-list::before {
-  content: "" !important;
-  font-family: inherit !important;
-  display: block !important;
-  position: absolute !important;
-  left: 50% !important;
-  top: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  width: 24px !important;
-  height: 2px !important;
-  background-color: var(--nav-color) !important;
-  box-shadow: 0 -8px 0 var(--nav-color), 0 8px 0 var(--nav-color) !important;
-  transition: all 0.3s ease !important;
-}
-.mobile-nav-toggle.bi-list::after {
-  content: none !important;
-}
-
-/* Pure CSS Close Button (X) */
-.mobile-nav-toggle.bi-x::before {
-  content: "" !important;
-  font-family: inherit !important;
-  display: block !important;
-  position: absolute !important;
-  left: 50% !important;
-  top: 50% !important;
-  transform: translate(-50%, -50%) rotate(45deg) !important;
-  width: 24px !important;
-  height: 2px !important;
-  background-color: var(--nav-color) !important;
-  box-shadow: none !important;
-  transition: all 0.3s ease !important;
-}
-.mobile-nav-toggle.bi-x::after {
-  content: "" !important;
-  font-family: inherit !important;
-  display: block !important;
-  position: absolute !important;
-  left: 50% !important;
-  top: 50% !important;
-  transform: translate(-50%, -50%) rotate(-45deg) !important;
-  width: 24px !important;
-  height: 2px !important;
-  background-color: var(--nav-color) !important;
-  transition: all 0.3s ease !important;
-}
-
 @media (max-width: 1199px) {
+  /* Classic, Ultra-Smooth 3-Bar Morphing Hamburger Menu Toggle Button */
   .mobile-nav-toggle {
     display: flex !important;
     align-items: center;
     justify-content: center;
+    width: 44px !important;
+    height: 44px !important;
     position: absolute !important;
     right: 20px !important;
-    top: 50% !important;
+    top: 50% !important; /* Perfect vertical center in header */
     transform: translateY(-50%) !important;
-    background: none;
-    border: none;
+    background: transparent !important;
+    border: none !important;
     z-index: 9999 !important;
+    cursor: pointer;
+    transition: opacity 0.3s ease, color 0.3s ease !important;
   }
+
+  /* Reset default bootstrap icon font rendering */
+  .mobile-nav-toggle::before,
+  .mobile-nav-toggle::after,
+  .mobile-nav-toggle.bi-list::before,
+  .mobile-nav-toggle.bi-list::after,
+  .mobile-nav-toggle.bi-x::before,
+  .mobile-nav-toggle.bi-x::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* Three-bar structure styling */
+  .mobile-nav-toggle span {
+    display: block !important;
+    position: absolute !important;
+    height: 2px !important;
+    width: 24px !important;
+    background-color: var(--nav-color, #ffffff) !important;
+    border-radius: 9px !important;
+    opacity: 1 !important;
+    left: 10px !important;
+    transform: rotate(0deg) !important;
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  }
+
+  /* Spacing the three bars in idle state */
+  .mobile-nav-toggle span:nth-child(1) { top: 15px !important; }
+  .mobile-nav-toggle span:nth-child(2) { top: 21px !important; }
+  .mobile-nav-toggle span:nth-child(3) { top: 27px !important; }
+
+  /* Active state transitions (Open menu) -> Morphing symmetrically to a clean X */
+  .mobile-nav-active .mobile-nav-toggle span:nth-child(1) {
+    top: 21px !important;
+    transform: rotate(135deg) !important;
+    background-color: #ffffff !important;
+  }
+  .mobile-nav-active .mobile-nav-toggle span:nth-child(2) {
+    opacity: 0 !important;
+    left: -20px !important;
+  }
+  .mobile-nav-active .mobile-nav-toggle span:nth-child(3) {
+    top: 21px !important;
+    transform: rotate(-135deg) !important;
+    background-color: #ffffff !important;
+  }
+
+  /* Fix fixed position when active, keeping vertical center */
+  .mobile-nav-active .mobile-nav-toggle {
+    position: fixed !important;
+    top: 28px !important; /* ~half of 72px header — stays visually centered */
+    right: 20px !important;
+    transform: translateY(-50%) !important;
+  }
+
+  /* Hardware accelerated smooth 3D transitions for mobile menu container */
   #navmenu > ul {
     position: fixed;
     top: 0;
@@ -486,157 +503,399 @@ header, .header {
     bottom: 0;
     width: 320px;
     max-width: 85%;
-    background: var(--nav-mobile-background-color) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    border-left: 1px solid var(--surface-border) !important;
+    background: rgba(10, 10, 20, 0.97) !important; /* Dark glassmorphism */
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
     z-index: 9998;
-    padding: 80px 20px 40px 20px !important;
-    overflow-y: auto;
-    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3) !important;
-    transform: translateX(100%);
+    padding: 80px 24px 60px 24px !important; /* scroll margin bottom */
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    box-shadow: -15px 0 50px rgba(0, 0, 0, 0.4) !important;
+    transform: translate3d(100%, 0, 0) !important; /* Start fully off-screen right */
+    opacity: 0 !important; /* Fade on close */
     visibility: hidden;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s linear !important;
-    display: block !important;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease, visibility 0.4s linear !important; /* Premium cubic bezier exit */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* Fix inherited flex-end layout scroll cutoff bug */
+    align-items: stretch !important; /* Stretch menu contents to full width */
     list-style: none;
   }
+
+  /* Light theme: clean white drawer with dark readable text */
+  [data-theme="light"] #navmenu > ul {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-left: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: -15px 0 50px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  /* Light theme: hamburger bars become dark so they show on white header */
+  [data-theme="light"] .mobile-nav-toggle span {
+    background-color: #1a1a2e !important;
+  }
+  [data-theme="light"] .mobile-nav-active .mobile-nav-toggle span:nth-child(1),
+  [data-theme="light"] .mobile-nav-active .mobile-nav-toggle span:nth-child(3) {
+    background-color: #dc2626 !important; /* Red X on active in light mode */
+  }
+
+  .mobile-nav-active #navmenu > ul {
+    transform: translate3d(0, 0, 0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, visibility 0.5s linear !important; /* Smooth elastic entry curve */
+  }
+
   .navmenu ul {
     display: none !important;
   }
   .navmenu > ul {
-    display: block !important;
-  }
-}
-
-@media (max-width: 1199px) {
-  header::before,
-  .header::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    z-index: 9997 !important;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.35s ease, visibility 0.35s ease;
-  }
-}
-
-.mobile-nav-active {
-  overflow: hidden;
-}
-
-.mobile-nav-active header::before,
-.mobile-nav-active .header::before {
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
-.mobile-nav-active header,
-.mobile-nav-active .header {
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-.mobile-nav-active .mobile-nav-toggle {
-  color: var(--nav-color) !important;
-  position: fixed !important;
-  top: 15px !important;
-  right: 15px !important;
-  z-index: 9999 !important;
-}
-
-.mobile-nav-active #navmenu > ul {
-  transform: translateX(0) !important;
-  visibility: visible !important;
-}
-
-@media (max-width: 1199px) {
-  .navmenu > ul > li {
-    padding: 4px 0;
+    display: flex !important;
+    align-items: stretch !important;
   }
 
+  /* Closing state: slide down and fade out list items smoothly */
+  #navmenu > ul > li {
+    opacity: 0 !important;
+    transform: translate3d(0, 15px, 0) !important;
+    transition: transform 0.25s ease-in, opacity 0.25s ease-in !important;
+    margin-bottom: 8px;
+    width: 100% !important; /* Stretch width */
+  }
+
+  /* Opening state: slide up and fade in with stagger */
+  .mobile-nav-active #navmenu > ul > li {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out !important;
+    transition-delay: 0s !important; /* Reset close delay */
+  }
+
+  /* Tightened stagger opening delays to prevent empty-menu lag feel */
+  .mobile-nav-active #navmenu > ul > li:nth-child(1) { transition-delay: 0.02s !important; }
+  .mobile-nav-active #navmenu > ul > li:nth-child(2) { transition-delay: 0.04s !important; }
+  .mobile-nav-active #navmenu > ul > li:nth-child(3) { transition-delay: 0.06s !important; }
+  .mobile-nav-active #navmenu > ul > li:nth-child(4) { transition-delay: 0.08s !important; }
+  .mobile-nav-active #navmenu > ul > li:nth-child(5) { transition-delay: 0.10s !important; }
+  .mobile-nav-active #navmenu > ul > li:nth-child(6) { transition-delay: 0.12s !important; }
+  .mobile-nav-active #navmenu > ul > li:nth-child(7) { transition-delay: 0.14s !important; }
+  .mobile-nav-active #navmenu > ul > li:nth-child(8) { transition-delay: 0.16s !important; }
+  .mobile-nav-active #navmenu > ul > li:nth-child(9) { transition-delay: 0.18s !important; }
+  .mobile-nav-active #navmenu > ul > li:nth-child(10) { transition-delay: 0.20s !important; }
+  .mobile-nav-active #navmenu > ul > li:nth-child(11) { transition-delay: 0.22s !important; }
+  .mobile-nav-active #navmenu > ul > li:nth-child(12) { transition-delay: 0.24s !important; }
+  .mobile-nav-active #navmenu > ul > li:nth-child(13) { transition-delay: 0.26s !important; }
+  .mobile-nav-active #navmenu > ul > li:nth-child(14) { transition-delay: 0.28s !important; }
+  .mobile-nav-active #navmenu > ul > li:nth-child(15) { transition-delay: 0.30s !important; }
+
+  /* Beautiful card-like menu links */
   .navmenu a {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px !important;
+    padding: 12px 18px !important;
+    font-size: 15px !important;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     color: var(--nav-color) !important;
-    font-size: 16px;
     font-weight: 600;
-    padding: 12px 16px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex !important;
+    width: 100% !important; /* Force take full width */
+    box-sizing: border-box !important;
+    align-items: center !important;
+    justify-content: space-between !important;
     transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, padding-left 0.25s ease !important;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.03);
   }
-
   [data-theme="light"] .navmenu a {
-    background: rgba(0, 0, 0, 0.01);
-    border: 1px solid rgba(0, 0, 0, 0.02);
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    color: #333333 !important;
   }
 
-  .navmenu a:hover,
+  .navmenu a:hover, 
   .navmenu .active > a,
   .navmenu a.active {
-    color: var(--accent-color) !important;
-    background: rgba(255, 30, 56, 0.08) !important;
-    border-color: rgba(255, 30, 56, 0.15) !important;
-    padding-left: 20px;
+    background: rgba(220, 38, 38, 0.15) !important;
+    border-color: rgba(220, 38, 38, 0.3) !important;
+    color: #ff4d4d !important;
+    padding-left: 24px !important; /* Premium slide-in hover effect */
+  }
+  [data-theme="light"] .navmenu a:hover, 
+  [data-theme="light"] .navmenu .active > a,
+  [data-theme="light"] .navmenu a.active {
+    background: rgba(220, 38, 38, 0.08) !important;
+    border-color: rgba(220, 38, 38, 0.15) !important;
+    color: #dc2626 !important;
+  }
+
+  /* Overrides to make highlighted buttons full-width and consistent on mobile */
+  .navmenu .nav-highlight-cs,
+  .navmenu .nav-highlight-helpdesk {
+    display: flex !important;
+    width: 100% !important;
+    margin: 0 0 8px 0 !important;
+    border-radius: 10px !important;
+    padding: 12px 18px !important;
+    justify-content: space-between !important;
+    font-size: 15px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    box-sizing: border-box !important;
+    align-items: center !important;
   }
 
   .navmenu .dropdown.active > a {
-    color: var(--accent-color) !important;
-    background: rgba(255, 30, 56, 0.08) !important;
-    border-color: rgba(255, 30, 56, 0.15) !important;
+    color: #ff4d4d !important;
+    background: rgba(220, 38, 38, 0.15) !important;
+    border-color: rgba(220, 38, 38, 0.3) !important;
+  }
+  [data-theme="light"] .navmenu .dropdown.active > a {
+    color: #dc2626 !important;
+    background: rgba(220, 38, 38, 0.08) !important;
+    border-color: rgba(220, 38, 38, 0.15) !important;
   }
 
   /* Rotate chevron when dropdown is active */
   .navmenu .dropdown.active > a i {
     transform: rotate(180deg) !important;
-    color: var(--accent-color) !important;
+    color: #ff4d4d !important;
+  }
+  [data-theme="light"] .navmenu .dropdown.active > a i {
+    color: #dc2626 !important;
   }
 
+  /* Reset dropdown submenu list for mobile to render statically below parent */
   .navmenu .dropdown ul {
-    position: static;
-    display: none;
-    opacity: 1;
-    visibility: visible;
-    box-shadow: none;
-    border: none;
-    margin: 8px 0 4px 12px;
-    padding: 6px 0 6px 12px;
-    border-left: 2px solid rgba(255, 30, 56, 0.3) !important;
+    position: static !important;
+    display: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 8px 0 4px 12px !important;
+    padding: 6px 0 6px 12px !important;
+    border-left: 2px solid rgba(220, 38, 38, 0.3) !important;
     background: rgba(0, 0, 0, 0.15) !important;
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 8px 8px 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
   }
-
   [data-theme="light"] .navmenu .dropdown ul {
     background: rgba(0, 0, 0, 0.03) !important;
-    border-left: 2px solid rgba(214, 0, 28, 0.3) !important;
+    border-left: 2px solid rgba(220, 38, 38, 0.2) !important;
   }
 
   .navmenu .dropdown ul li {
-    padding: 2px 0;
+    padding: 2px 0 !important;
+    width: 100% !important;
   }
 
   .navmenu .dropdown ul a {
     color: var(--nav-dropdown-color) !important;
-    font-size: 14px;
-    padding: 8px 12px;
+    font-size: 14px !important;
+    padding: 8px 12px !important;
     background: transparent !important;
     border: none !important;
+    box-shadow: none !important;
+    border-radius: 0px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
     transition: color 0.25s ease, padding-left 0.25s ease !important;
+  }
+  [data-theme="light"] .navmenu .dropdown ul a {
+    color: #475569 !important;
   }
 
   .navmenu .dropdown ul a:hover {
-    color: var(--accent-color) !important;
-    padding-left: 16px;
+    color: #ff4d4d !important;
+    padding-left: 16px !important;
+  }
+  [data-theme="light"] .navmenu .dropdown ul a:hover {
+    color: #dc2626 !important;
+    padding-left: 16px !important;
   }
 
   .navmenu .dropdown.active > ul {
     display: block !important;
+  }
+
+  /* Theme Switcher custom styling in mobile menu */
+  .nav-theme-toggle {
+    justify-content: space-between !important;
+    background: rgba(255, 189, 9, 0.08) !important;
+    border-color: rgba(255, 189, 9, 0.25) !important;
+    padding: 12px 18px !important;
+  }
+
+  /* Label text next to the theme icon */
+  .theme-toggle-label {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    font-family: "Noto Serif Bengali", "Poppins", sans-serif !important;
+    color: rgba(255, 220, 80, 0.9) !important;
+    letter-spacing: 0.3px !important;
+    flex: 1 !important;
+    text-align: right !important;
+    padding-left: 10px !important;
+    transition: color 0.25s ease !important;
+  }
+  [data-theme="light"] .theme-toggle-label {
+    color: rgba(180, 120, 0, 0.9) !important;
+  }
+  .nav-theme-toggle:hover .theme-toggle-label {
+    color: #ffd700 !important;
+  }
+  [data-theme="light"] .nav-theme-toggle:hover .theme-toggle-label {
+    color: #a86000 !important;
+  }
+
+  /* Spread social links across the full width of the mobile menu container */
+  .mobile-menu-footer {
+    margin-top: auto !important; /* Push menu footer to bottom */
+    padding-top: 24px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    width: 100% !important;
+  }
+  [data-theme="light"] .mobile-menu-footer {
+    border-top-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .mobile-social-links {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    margin-bottom: 16px !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  }
+  [data-theme="light"] .mobile-social-links {
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Segmented control buttons that fill the row exactly */
+  .navmenu .mobile-social-links a.mobile-social-icon {
+    flex: 1 1 0% !important;
+    height: 46px !important;
+    border-radius: 0px !important;
+    box-sizing: border-box !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: none !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: rgba(255, 255, 255, 0.75) !important;
+    font-size: 1.25rem !important;
+    transition: all 0.2s ease !important;
+    text-decoration: none !important;
+  }
+  .navmenu .mobile-social-links a.mobile-social-icon:last-child {
+    border-right: none !important;
+  }
+
+  [data-theme="light"] .navmenu .mobile-social-links a.mobile-social-icon {
+    background: rgba(0, 0, 0, 0.02) !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+    color: rgba(0, 0, 0, 0.7) !important;
+  }
+
+  .navmenu .mobile-social-links a.mobile-social-icon:hover {
+    padding-left: 0 !important;
+    transform: none !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  .navmenu .mobile-social-links a.mobile-social-icon.facebook:hover { background: #1877f2 !important; }
+  .navmenu .mobile-social-links a.mobile-social-icon.twitter:hover { background: #111111 !important; }
+  .navmenu .mobile-social-links a.mobile-social-icon.instagram:hover { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important; }
+  .navmenu .mobile-social-links a.mobile-social-icon.youtube:hover { background: #ff0000 !important; }
+
+  /* Reset credit links inside mobile menu footer to look like normal clean links */
+  .mobile-credits {
+    font-size: 0.78rem !important;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.45) !important;
+    margin-top: 12px;
+    text-align: center !important;
+  }
+  [data-theme="light"] .mobile-credits {
+    color: rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .navmenu .mobile-credits a {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    display: inline !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-weight: normal !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+    font-size: inherit !important;
+    letter-spacing: normal !important;
+  }
+  .navmenu .mobile-credits a:hover {
+    background: none !important;
+    border-color: transparent !important;
+    color: #ff4d4d !important;
+    text-decoration: underline !important;
+    padding-left: 0 !important;
+  }
+
+  [data-theme="light"] .navmenu .mobile-credits a {
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
+  [data-theme="light"] .navmenu .mobile-credits a:hover {
+    color: #dc2626 !important;
+  }
+}
+
+/* Backdrop Overlay styling when mobile nav is active */
+.mobile-nav-active {
+  overflow: hidden !important;
+}
+
+@media (max-width: 1199px) {
+  header::before,
+  .header::before {
+    content: "" !important;
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    z-index: 9997 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: opacity 0.35s ease, visibility 0.35s ease !important;
+  }
+
+  /* Light theme: softer tinted overlay */
+  [data-theme="light"] header::before,
+  [data-theme="light"] .header::before {
+    background: rgba(200, 210, 230, 0.55) !important;
+  }
+
+  .mobile-nav-active header::before,
+  .mobile-nav-active .header::before {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .mobile-nav-active header,
+  .mobile-nav-active .header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 }
 
@@ -5256,282 +5515,4 @@ html[data-theme="light"] .navmenu .nav-highlight-helpdesk {
 html[data-theme="light"] .navmenu .nav-highlight-helpdesk:hover {
     background: #28a745 !important;
     color: #ffffff !important;
-}
-
-
-
-/* ============================================================
-   PREMIUM MOBILE MENU STYLING & ANIMATIONS
-   ============================================================ */
-@media (max-width: 1199px) {
-  #navmenu > ul {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 320px;
-    max-width: 85%;
-    background: rgba(15, 15, 25, 0.92) !important; /* Premium dark glassmorphism */
-    backdrop-filter: blur(25px) !important;
-    -webkit-backdrop-filter: blur(25px) !important;
-    border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
-    z-index: 9998;
-    padding: 80px 24px 40px 24px !important;
-    overflow-y: auto;
-    box-shadow: -15px 0 50px rgba(0, 0, 0, 0.5) !important;
-    transform: translateX(100%);
-    visibility: hidden;
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s linear !important;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* Staggered list items animation on open */
-  #navmenu > ul > li {
-    opacity: 0;
-    transform: translateX(30px);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
-    margin-bottom: 8px;
-  }
-
-  .mobile-nav-active #navmenu > ul > li {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  /* Stagger opening delay for first 12 items */
-  .mobile-nav-active #navmenu > ul > li:nth-child(1) { transition-delay: 0.04s; }
-  .mobile-nav-active #navmenu > ul > li:nth-child(2) { transition-delay: 0.08s; }
-  .mobile-nav-active #navmenu > ul > li:nth-child(3) { transition-delay: 0.12s; }
-  .mobile-nav-active #navmenu > ul > li:nth-child(4) { transition-delay: 0.16s; }
-  .mobile-nav-active #navmenu > ul > li:nth-child(5) { transition-delay: 0.20s; }
-  .mobile-nav-active #navmenu > ul > li:nth-child(6) { transition-delay: 0.24s; }
-  .mobile-nav-active #navmenu > ul > li:nth-child(7) { transition-delay: 0.28s; }
-  .mobile-nav-active #navmenu > ul > li:nth-child(8) { transition-delay: 0.32s; }
-  .mobile-nav-active #navmenu > ul > li:nth-child(9) { transition-delay: 0.36s; }
-  .mobile-nav-active #navmenu > ul > li:nth-child(10) { transition-delay: 0.40s; }
-  .mobile-nav-active #navmenu > ul > li:nth-child(11) { transition-delay: 0.44s; }
-  .mobile-nav-active #navmenu > ul > li:nth-child(12) { transition-delay: 0.48s; }
-
-  /* Beautiful card-like menu links */
-  .navmenu a {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 10px !important;
-    padding: 12px 18px !important;
-    font-size: 15px !important;
-    letter-spacing: 0.3px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  .navmenu a:hover, 
-  .navmenu .active > a,
-  .navmenu .dropdown > a.active {
-    background: rgba(220, 38, 38, 0.15) !important;
-    border-color: rgba(220, 38, 38, 0.3) !important;
-    color: #ff4d4d !important;
-    padding-left: 24px !important; /* Premium slide-in hover effect */
-  }
-
-  /* Theme Switcher custom styling in mobile menu */
-  .nav-theme-toggle {
-    justify-content: center !important;
-    background: rgba(255, 189, 9, 0.08) !important;
-    border-color: rgba(255, 189, 9, 0.2) !important;
-    padding: 10px !important;
-  }
-
-  /* Social Icons & Credits in the mobile menu */
-  .mobile-menu-footer {
-    margin-top: auto !important; /* Push menu footer to bottom */
-    padding-top: 24px !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-  }
-
-  .mobile-social-links {
-    display: flex !important;
-    justify-content: center;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-
-  .mobile-social-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.04) !important;
-    border: 1px solid rgba(255, 255, 255, 0.06) !important;
-    color: rgba(255, 255, 255, 0.8) !important;
-    font-size: 1.15rem;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    padding: 0 !important;
-  }
-
-  .mobile-social-icon:hover {
-    transform: scale(1.15) translateY(-3px);
-    color: #ffffff !important;
-  }
-
-  .mobile-social-icon.facebook:hover { background: #1877f2 !important; border-color: #1877f2 !important; }
-  .mobile-social-icon.twitter:hover { background: #000000 !important; border-color: #333333 !important; }
-  .mobile-social-icon.instagram:hover { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important; border-color: #e6683c !important; }
-  .mobile-social-icon.youtube:hover { background: #ff0000 !important; border-color: #ff0000 !important; }
-
-  .mobile-credits {
-    font-size: 0.78rem !important;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.4) !important;
-    margin-top: 12px;
-  }
-}
-
-/* Light theme overrides for premium mobile menu */
-[data-theme="light"] #navmenu > ul {
-  background: rgba(245, 245, 250, 0.95) !important;
-  border-left: 1px solid rgba(0, 0, 0, 0.08) !important;
-  box-shadow: -15px 0 50px rgba(0, 0, 0, 0.1) !important;
-}
-
-[data-theme="light"] .navmenu a {
-  background: rgba(0, 0, 0, 0.02);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  color: #333333 !important;
-}
-
-[data-theme="light"] .navmenu a:hover, 
-[data-theme="light"] .navmenu .active > a,
-[data-theme="light"] .navmenu .dropdown > a.active {
-  background: rgba(220, 38, 38, 0.08) !important;
-  border-color: rgba(220, 38, 38, 0.15) !important;
-  color: #dc2626 !important;
-}
-
-[data-theme="light"] .mobile-social-icon {
-  background: rgba(0, 0, 0, 0.03) !important;
-  border: 1px solid rgba(0, 0, 0, 0.06) !important;
-  color: #555555 !important;
-}
-
-[data-theme="light"] .mobile-credits {
-  color: rgba(0, 0, 0, 0.5) !important;
-}
-
-/* ============================================================
-   PREMIUM MOBILE MENU TOGGLER & CREDITS STYLE RESET
-   ============================================================ */
-@media (max-width: 1199px) {
-  /* Animated 2-Bar Mobile Nav Toggle */
-  .mobile-nav-toggle {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    width: 44px !important;
-    height: 44px !important;
-    position: absolute !important;
-    right: 20px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    background: transparent !important;
-    border: none !important;
-    z-index: 9999 !important;
-    cursor: pointer;
-    transition: all 0.3s ease !important;
-  }
-
-  /* Reset default bootstrap icon font rendering */
-  .mobile-nav-toggle::before,
-  .mobile-nav-toggle::after {
-    content: "" !important;
-    font-family: inherit !important;
-    display: block !important;
-    position: absolute !important;
-    left: 10px !important;
-    height: 2px !important;
-    background-color: var(--nav-color) !important;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), top 0.3s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease !important;
-    box-shadow: none !important;
-  }
-
-  /* Top bar */
-  .mobile-nav-toggle::before {
-    width: 24px !important;
-    top: 16px !important;
-  }
-
-  /* Bottom bar */
-  .mobile-nav-toggle::after {
-    width: 16px !important;
-    top: 24px !important;
-  }
-
-  /* Active state transitions (Open menu) */
-  .mobile-nav-active .mobile-nav-toggle::before {
-    top: 21px !important;
-    width: 24px !important;
-    transform: rotate(45deg) !important;
-    background-color: #ffffff !important;
-  }
-
-  .mobile-nav-active .mobile-nav-toggle::after {
-    top: 21px !important;
-    width: 24px !important;
-    transform: rotate(-45deg) !important;
-    background-color: #ffffff !important;
-  }
-
-  /* Fix fixed position when active */
-  .mobile-nav-active .mobile-nav-toggle {
-    position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
-    transform: none !important;
-  }
-
-  /* Reset credit links inside mobile menu footer to look like normal clean links */
-  .mobile-credits a {
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    display: inline-block !important;
-    color: #ff4d4d !important; /* Accent color */
-    font-weight: 700 !important;
-    text-decoration: none !important;
-    transition: color 0.25s ease !important;
-    font-size: 0.8rem !important;
-    letter-spacing: normal !important;
-  }
-
-  .mobile-credits a:hover {
-    background: none !important;
-    border-color: transparent !important;
-    color: #ff7373 !important;
-    text-decoration: underline !important;
-    padding-left: 0 !important; /* Disable parent hover padding-left shift */
-  }
-
-  [data-theme="light"] .mobile-credits a {
-    color: #dc2626 !important;
-  }
-  [data-theme="light"] .mobile-credits a:hover {
-    color: #ef4444 !important;
-  }
-
-  /* Social Icons reset to disable inherit link styling */
-  .mobile-social-icon {
-    background: rgba(255, 255, 255, 0.05) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 50% !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
-    padding: 0 !important;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-  }
-
-  .mobile-social-icon:hover {
-    padding-left: 0 !important; /* Disable parent hover padding-left shift */
-    transform: scale(1.15) translateY(-3px) !important;
-  }
 }

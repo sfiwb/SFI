@@ -668,11 +668,6 @@ const initAllForms = () => {
                 });
 
                 // UI Success state
-                setButtonSuccess(submitBtn, "সফলভাবে সাবমিট হয়েছে!");
-                helpdeskForm.reset();
-                refreshCaptchaForForm(helpdeskForm);
-                setTimeout(() => resetButtonState(submitBtn, originalHtml, originalStyles), 3500);
-
             } catch (error) {
                 console.error("Helpdesk submission failed:", error);
                 setButtonError(submitBtn);
@@ -756,4 +751,78 @@ document.head.appendChild(captchaShakeStyle);
             return false;
         }
     });
+})();
+
+// ============================================================
+// DYNAMIC MOBILE MENU STYLING OVERRIDES (FORCE FULL-WIDTH & LAYOUT)
+// ============================================================
+(function() {
+    function applyMobileMenuTuning() {
+        // 1. Inject three spans to the mobile-nav-toggle if not already present
+        const toggleBtns = document.querySelectorAll('.mobile-nav-toggle');
+        toggleBtns.forEach(btn => {
+            if (!btn.querySelector('span')) {
+                btn.innerHTML = '<span></span><span></span><span></span>';
+            }
+        });
+
+        if (window.innerWidth >= 1200) return;
+
+        // 2. Reset credit links inside the mobile menu to prevent card border shapes
+        const creditLinks = document.querySelectorAll('.mobile-credits a');
+        creditLinks.forEach(link => {
+            link.style.setProperty('background', 'none', 'important');
+            link.style.setProperty('border', 'none', 'important');
+            link.style.setProperty('box-shadow', 'none', 'important');
+            link.style.setProperty('padding', '0px', 'important');
+            link.style.setProperty('display', 'inline', 'important');
+            link.style.setProperty('font-size', 'inherit', 'important');
+            link.style.setProperty('letter-spacing', 'normal', 'important');
+            link.style.setProperty('text-decoration', 'none', 'important');
+        });
+    }
+
+    // Initialize listeners
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyMobileMenuTuning);
+    } else {
+        applyMobileMenuTuning();
+    }
+    window.addEventListener('resize', applyMobileMenuTuning);
+})();
+
+// ============================================================
+// THEME TOGGLE LABEL SYNC
+// Updates the mobile menu theme label text when theme changes
+// ============================================================
+(function() {
+    var DARK_LABEL  = '\u09b2\u09be\u0987\u099f \u09ae\u09cb\u09a1\u09c7 \u09af\u09be\u09a8'; // লাইট মোডে যান
+    var LIGHT_LABEL = '\u09a1\u09be\u09b0\u09cd\u0995 \u09ae\u09cb\u09a1\u09c7 \u09af\u09be\u09a8'; // ডার্ক মোডে যান
+
+    function updateThemeLabel() {
+        var label = document.getElementById('themeLabel');
+        if (!label) return;
+        var theme = document.documentElement.getAttribute('data-theme') || 'dark';
+        label.textContent = theme === 'dark' ? DARK_LABEL : LIGHT_LABEL;
+    }
+
+    // Watch for data-theme attribute changes on <html>
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+            if (m.attributeName === 'data-theme') {
+                updateThemeLabel();
+            }
+        });
+    });
+
+    function initThemeLabelSync() {
+        updateThemeLabel();
+        observer.observe(document.documentElement, { attributes: true });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initThemeLabelSync);
+    } else {
+        initThemeLabelSync();
+    }
 })();
