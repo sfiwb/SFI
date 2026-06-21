@@ -5418,3 +5418,120 @@ html[data-theme="light"] .navmenu .nav-highlight-helpdesk:hover {
 [data-theme="light"] .mobile-credits {
   color: rgba(0, 0, 0, 0.5) !important;
 }
+
+/* ============================================================
+   PREMIUM MOBILE MENU TOGGLER & CREDITS STYLE RESET
+   ============================================================ */
+@media (max-width: 1199px) {
+  /* Animated 2-Bar Mobile Nav Toggle */
+  .mobile-nav-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 44px !important;
+    height: 44px !important;
+    position: absolute !important;
+    right: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: transparent !important;
+    border: none !important;
+    z-index: 9999 !important;
+    cursor: pointer;
+    transition: all 0.3s ease !important;
+  }
+
+  /* Reset default bootstrap icon font rendering */
+  .mobile-nav-toggle::before,
+  .mobile-nav-toggle::after {
+    content: "" !important;
+    font-family: inherit !important;
+    display: block !important;
+    position: absolute !important;
+    left: 10px !important;
+    height: 2px !important;
+    background-color: var(--nav-color) !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), top 0.3s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease !important;
+    box-shadow: none !important;
+  }
+
+  /* Top bar */
+  .mobile-nav-toggle::before {
+    width: 24px !important;
+    top: 16px !important;
+  }
+
+  /* Bottom bar */
+  .mobile-nav-toggle::after {
+    width: 16px !important;
+    top: 24px !important;
+  }
+
+  /* Active state transitions (Open menu) */
+  .mobile-nav-active .mobile-nav-toggle::before {
+    top: 21px !important;
+    width: 24px !important;
+    transform: rotate(45deg) !important;
+    background-color: #ffffff !important;
+  }
+
+  .mobile-nav-active .mobile-nav-toggle::after {
+    top: 21px !important;
+    width: 24px !important;
+    transform: rotate(-45deg) !important;
+    background-color: #ffffff !important;
+  }
+
+  /* Fix fixed position when active */
+  .mobile-nav-active .mobile-nav-toggle {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    transform: none !important;
+  }
+
+  /* Reset credit links inside mobile menu footer to look like normal clean links */
+  .mobile-credits a {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    display: inline-block !important;
+    color: #ff4d4d !important; /* Accent color */
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    transition: color 0.25s ease !important;
+    font-size: 0.8rem !important;
+    letter-spacing: normal !important;
+  }
+
+  .mobile-credits a:hover {
+    background: none !important;
+    border-color: transparent !important;
+    color: #ff7373 !important;
+    text-decoration: underline !important;
+    padding-left: 0 !important; /* Disable parent hover padding-left shift */
+  }
+
+  [data-theme="light"] .mobile-credits a {
+    color: #dc2626 !important;
+  }
+  [data-theme="light"] .mobile-credits a:hover {
+    color: #ef4444 !important;
+  }
+
+  /* Social Icons reset to disable inherit link styling */
+  .mobile-social-icon {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 50% !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
+    padding: 0 !important;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  }
+
+  .mobile-social-icon:hover {
+    padding-left: 0 !important; /* Disable parent hover padding-left shift */
+    transform: scale(1.15) translateY(-3px) !important;
+  }
+}
