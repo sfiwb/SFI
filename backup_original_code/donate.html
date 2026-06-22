@@ -311,7 +311,8 @@
             opacity: 0.92 !important;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            /* Custom styles for gateway selector pills */
+        }
+        /* Custom styles for gateway selector pills */
         .nav-pills .nav-link {
             color: var(--text-muted);
             background: var(--bg-card);
@@ -741,17 +742,46 @@
                 });
 
                 const result = await response.json();
-                if (result.success && result.redirectUrl) {
-                    // Redirect user to official PhonePe Pay Page
-                    window.location.href = result.redirectUrl;
+                if (result.success && result.txnId) {
+                    // Reset donate button loading state
+                    payBtn.disabled = false;
+                    payBtn.innerHTML = originalHtml;
+                    
+                    // Clear inputs
+                    document.getElementById('donor-name').value = '';
+                    document.getElementById('donor-phone').value = '';
+                    document.getElementById('donor-email').value = '';
+                    if (document.getElementById('custom-amount')) {
+                        document.getElementById('custom-amount').value = '';
+                    }
+
+                    // Construct UPI Url & QR Url
+                    const upiUrl = `upi://pay?pa=9064485906@okbizaxis&pn=SFI%20West%20Bengal%20State%20Committee&am=${amount}&tr=${result.txnId}&cu=INR&tn=SFIDON%20${result.txnId}`;
+                    const qrUrl = `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${encodeURIComponent(upiUrl)}`;
+                    
+                    // Populate UPI Modal details
+                    const qrImage = document.getElementById('upiQrImage');
+                    qrImage.onerror = function() {
+                        // Fallback to QuickChart if Google Charts is blocked
+                        this.src = `https://quickchart.io/qr?size=250&text=${encodeURIComponent(upiUrl)}`;
+                        this.onerror = null; // Prevent infinite loop
+                    };
+                    qrImage.src = qrUrl;
+                    document.getElementById('upiModalAmount').textContent = amount;
+                    document.getElementById('upiModalTxnId').textContent = result.txnId;
+                    document.getElementById('upiIntentLink').href = upiUrl;
+                    
+                    // Show Modal
+                    const upiModal = new bootstrap.Modal(document.getElementById('upiModal'));
+                    upiModal.show();
                 } else {
-                    alert('পেমেন্ট গেটওয়ে শুরু করতে ব্যর্থ হয়েছে: ' + (result.error || 'Unknown Error'));
+                    alert('পেমেন্ট শুরু করতে ব্যর্থ হয়েছে: ' + (result.error || 'Unknown Error'));
                     payBtn.disabled = false;
                     payBtn.innerHTML = originalHtml;
                 }
             } catch (error) {
-                console.error("PhonePe integration error:", error);
-                alert('পেমেন্ট গেটওয়ে কানেক্ট করতে সমস্যা হচ্ছে। অনুগ্রহ করে পরে চেষ্টা করুন।');
+                console.error("Payment integration error:", error);
+                alert('পেমেন্ট সার্ভার কানেক্ট করতে সমস্যা হচ্ছে। অনুগ্রহ করে পরে চেষ্টা করুন।');
                 payBtn.disabled = false;
                 payBtn.innerHTML = originalHtml;
             }
@@ -1050,6 +1080,52 @@
             applyTheme(savedTheme);
         });
     </script>
+
+    <!-- UPI Payment Modal -->
+    <div class="modal fade" id="upiModal" tabindex="-1" aria-labelledby="upiModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); color: var(--text-main);">
+                <div class="modal-header border-bottom-0 pb-0" style="border: none;">
+                    <h5 class="modal-title fw-bold" id="upiModalLabel" style="color: var(--color-primary); font-family: var(--font-body);">UPI স্ক্যান ও পে</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: var(--close-btn-filter, invert(1));"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <p class="mb-3 text-muted" style="font-size: 0.9rem; line-height: 1.5;">
+                        নিচের QR কোডটি যেকোনো UPI অ্যাপ (GPay, PhonePe, Paytm, BHIM) দিয়ে স্ক্যান করে পেমেন্ট সম্পন্ন করুন।
+                    </p>
+                    
+                    <!-- QR Code Image -->
+                    <div class="d-flex justify-content-center align-items-center mb-4 p-3 bg-white rounded shadow-sm mx-auto" style="width: 270px; height: 270px;">
+                        <img id="upiQrImage" src="" alt="UPI QR Code" style="width: 240px; height: 240px;" />
+                    </div>
+                    
+                    <!-- Transaction Info -->
+                    <div class="mb-4">
+                        <div class="small text-muted mb-1">প্রাপক: <strong style="color: var(--text-main);">SFI West Bengal State Committee</strong></div>
+                        <div class="small text-muted mb-1">পরিমাণ: <strong style="color: var(--color-primary); font-size: 1.1rem;">₹<span id="upiModalAmount"></span></strong></div>
+                        <div class="small text-muted" style="font-family: 'Inter', sans-serif;">ট্রানজেকশন আইডি: <span id="upiModalTxnId"></span></div>
+                    </div>
+                    
+                    <!-- Mobile Intent Direct UPI Pay Button -->
+                    <div class="mb-3 d-grid gap-2">
+                        <a id="upiIntentLink" href="#" class="btn btn-primary py-2.5" style="background: var(--color-primary); border: none; border-radius: var(--border-radius-sm); font-weight: 600; font-family: var(--font-body); color: #fff; text-decoration: none; text-align: center; display: block;">
+                            <i class="fas fa-mobile-alt me-2"></i> সরাসরি UPI অ্যাপ দিয়ে পে করুন
+                        </a>
+                    </div>
+                    <div class="small text-muted mb-1">
+                        অথবা সরাসরি ব্যাংক ট্রান্সফার করতে পারেন:
+                    </div>
+                    <div class="p-2 border rounded text-start mb-3 mx-auto" style="max-width: 320px; font-size: 0.85rem; border-color: var(--border-color) !important; background: var(--bg-body); color: var(--text-main);">
+                        <div><strong>Bank:</strong> State Bank of India (SBI)</div>
+                        <div><strong>A/C No:</strong> 41429557914</div>
+                        <div><strong>IFSC:</strong> SBIN0002085</div>
+                        <div><strong>UPI ID:</strong> 9064485906@okbizaxis</div>
+                    </div>
+                    <button type="button" class="btn btn-secondary px-5 py-2" data-bs-dismiss="modal" style="font-weight: 600; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); background: transparent; color: var(--text-main);">পেমেন্ট করা হয়েছে</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Success Modal -->
     <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
