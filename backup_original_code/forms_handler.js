@@ -668,6 +668,11 @@ const initAllForms = () => {
                 });
 
                 // UI Success state
+                setButtonSuccess(submitBtn, "সফলভাবে সাবমিট হয়েছে!");
+                helpdeskForm.reset();
+                refreshCaptchaForForm(helpdeskForm);
+                setTimeout(() => resetButtonState(submitBtn, originalHtml, originalStyles), 3500);
+
             } catch (error) {
                 console.error("Helpdesk submission failed:", error);
                 setButtonError(submitBtn);
