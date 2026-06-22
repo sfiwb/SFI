@@ -306,6 +306,49 @@
             filter: none;
         }
 
+        .copy-btn-icon {
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            padding: 2px 6px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+        .copy-btn-icon:hover {
+            color: var(--color-primary);
+            transform: scale(1.15);
+            background: rgba(211, 26, 39, 0.08);
+        }
+        .btn-upi-pay {
+            background: var(--color-primary) !important;
+            border: 1px solid var(--color-primary) !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            transition: var(--transition-smooth) !important;
+            text-decoration: none;
+        }
+        .btn-upi-pay:hover {
+            background: transparent !important;
+            color: var(--color-primary) !important;
+            border-color: var(--color-primary) !important;
+        }
+        .btn-payment-done {
+            border: 1px solid var(--border-color) !important;
+            background: transparent !important;
+            color: var(--text-main) !important;
+            font-weight: 600 !important;
+            transition: var(--transition-smooth) !important;
+        }
+        .btn-payment-done:hover {
+            background: var(--bg-body) !important;
+            color: var(--color-primary) !important;
+            border-color: var(--color-primary) !important;
+        }
+
         /* Completely hide text behind popup with blur and background color overlay */
         .modal-backdrop.show {
             opacity: 0.92 !important;
@@ -755,22 +798,35 @@
                         document.getElementById('custom-amount').value = '';
                     }
 
-                    // Construct UPI Url & QR Url
+                    // Construct UPI Url
                     const upiUrl = `upi://pay?pa=9064485906@okbizaxis&pn=SFI%20West%20Bengal%20State%20Committee&am=${amount}&tr=${result.txnId}&cu=INR&tn=SFIDON%20${result.txnId}`;
-                    const qrUrl = `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${encodeURIComponent(upiUrl)}`;
                     
                     // Populate UPI Modal details
-                    const qrImage = document.getElementById('upiQrImage');
-                    qrImage.onerror = function() {
-                        // Fallback to QuickChart if Google Charts is blocked
-                        this.src = `https://quickchart.io/qr?size=250&text=${encodeURIComponent(upiUrl)}`;
-                        this.onerror = null; // Prevent infinite loop
-                    };
-                    qrImage.src = qrUrl;
                     document.getElementById('upiModalAmount').textContent = amount;
                     document.getElementById('upiModalTxnId').textContent = result.txnId;
                     document.getElementById('upiIntentLink').href = upiUrl;
-                    
+
+                    // Generate QR code client-side using QRious
+                    const canvas = document.getElementById('upiQrCanvas');
+                    if (canvas && typeof QRious !== 'undefined') {
+                        new QRious({
+                            element: canvas,
+                            size: 240,
+                            value: upiUrl,
+                            level: 'H'
+                        });
+                    } else if (canvas) {
+                        // Fallback: draw Google Charts QR to canvas (requires CORS toDataURL to work, best effort)
+                        const ctx = canvas.getContext('2d');
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        const img = new Image();
+                        img.crossOrigin = "anonymous";
+                        img.onload = function() {
+                            ctx.drawImage(img, 0, 0, 240, 240);
+                        };
+                        img.src = `https://chart.googleapis.com/chart?chs=240x240&cht=qr&chl=${encodeURIComponent(upiUrl)}`;
+                    }
+
                     // Show Modal
                     const upiModal = new bootstrap.Modal(document.getElementById('upiModal'));
                     upiModal.show();
@@ -785,6 +841,90 @@
                 payBtn.disabled = false;
                 payBtn.innerHTML = originalHtml;
             }
+        }
+
+        // Download QR Code image client-side without CORS issues
+        function downloadQrCode() {
+            const canvas = document.getElementById('upiQrCanvas');
+            if (!canvas) return;
+            const txnId = document.getElementById('upiModalTxnId').textContent || 'txn';
+            try {
+                const url = canvas.toDataURL("image/png");
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `SFI_Donation_QR_${txnId}.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } catch (err) {
+                console.error("Local canvas download failed, using fallback URL:", err);
+                const upiModalTxnId = document.getElementById('upiModalTxnId').textContent || 'txn';
+                const upiModalAmount = document.getElementById('upiModalAmount').textContent || '0';
+                const upiUrl = `upi://pay?pa=9064485906@okbizaxis&pn=SFI%20West%20Bengal%20State%20Committee&am=${upiModalAmount}&tr=${upiModalTxnId}&cu=INR&tn=SFIDON%20${upiModalTxnId}`;
+                const fallbackUrl = `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${encodeURIComponent(upiUrl)}`;
+                window.open(fallbackUrl, '_blank');
+            }
+        }
+
+        // Copy Text utility function with robust fallback for all environments (mobile webviews, etc.)
+        function copyText(text, btn) {
+            if (!text) {
+                text = document.getElementById('upiModalTxnId').textContent;
+            }
+            if (!text) return;
+            
+            function showSuccess() {
+                const icon = btn.querySelector('i');
+                if (icon) {
+                    const originalClass = icon.className;
+                    icon.className = 'fas fa-check text-success';
+                    setTimeout(() => {
+                        icon.className = originalClass;
+                    }, 2000);
+                } else {
+                    const originalText = btn.textContent;
+                    btn.textContent = 'কপিড!';
+                    btn.style.color = '#28a745';
+                    btn.style.borderColor = '#28a745';
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.color = '';
+                        btn.style.borderColor = '';
+                    }, 2000);
+                }
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(showSuccess).catch(err => {
+                    console.error('Clipboard API copy failed, trying fallback...', err);
+                    fallbackCopyText(text, showSuccess);
+                });
+            } else {
+                fallbackCopyText(text, showSuccess);
+            }
+        }
+
+        function fallbackCopyText(text, callback) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    callback();
+                } else {
+                    console.error('Fallback copy command was unsuccessful');
+                }
+            } catch (err) {
+                console.error('Fallback copy failed: ', err);
+            }
+            document.body.removeChild(textArea);
         }
 
         // Check payment success status on page load
@@ -1094,34 +1234,82 @@
                         নিচের QR কোডটি যেকোনো UPI অ্যাপ (GPay, PhonePe, Paytm, BHIM) দিয়ে স্ক্যান করে পেমেন্ট সম্পন্ন করুন।
                     </p>
                     
-                    <!-- QR Code Image -->
-                    <div class="d-flex justify-content-center align-items-center mb-4 p-3 bg-white rounded shadow-sm mx-auto" style="width: 270px; height: 270px;">
-                        <img id="upiQrImage" src="" alt="UPI QR Code" style="width: 240px; height: 240px;" />
+                    <!-- QR Code Canvas & Download Button -->
+                    <div class="d-flex flex-column align-items-center mb-4">
+                        <div class="d-flex justify-content-center align-items-center p-3 bg-white rounded shadow-sm" style="width: 270px; height: 270px;">
+                            <canvas id="upiQrCanvas" style="width: 240px; height: 240px;"></canvas>
+                        </div>
+                        <button type="button" class="btn btn-outline-danger btn-sm mt-2 fw-bold" onclick="downloadQrCode()" style="font-size: 0.82rem; border-radius: var(--border-radius-sm); border-color: var(--color-primary); color: var(--color-primary); transition: var(--transition-smooth);">
+                            <i class="fas fa-download me-1"></i> QR কোড ডাউনলোড করুন (Download QR)
+                        </button>
                     </div>
                     
-                    <!-- Transaction Info -->
-                    <div class="mb-4">
-                        <div class="small text-muted mb-1">প্রাপক: <strong style="color: var(--text-main);">SFI West Bengal State Committee</strong></div>
-                        <div class="small text-muted mb-1">পরিমাণ: <strong style="color: var(--color-primary); font-size: 1.1rem;">₹<span id="upiModalAmount"></span></strong></div>
-                        <div class="small text-muted" style="font-family: 'Inter', sans-serif;">ট্রানজেকশন আইডি: <span id="upiModalTxnId"></span></div>
+                    <!-- Transaction Info with Copy icons -->
+                    <div class="mb-4 text-start mx-auto" style="max-width: 320px; font-size: 0.88rem; line-height: 1.5; color: var(--text-muted);">
+                        <div class="mb-2 d-flex justify-content-between align-items-center">
+                            <span>প্রাপক (Payee): <strong style="color: var(--text-main);">SFI West Bengal State Committee</strong></span>
+                        </div>
+                        <div class="mb-2 d-flex justify-content-between align-items-center">
+                            <span>UPI ID: <strong style="color: var(--text-main);">9064485906@okbizaxis</strong></span>
+                            <button class="copy-btn-icon" onclick="copyText('9064485906@okbizaxis', this)" title="কপি করুন"><i class="far fa-copy"></i></button>
+                        </div>
+                        <div class="mb-2 d-flex justify-content-between align-items-center">
+                            <span>পরিমাণ (Amount): <strong style="color: var(--color-primary); font-size: 1.05rem;">₹<span id="upiModalAmount"></span></strong></span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>ট্যাক্স আইডি (Txn ID): <strong style="font-family: 'Inter', sans-serif; color: var(--text-main);" id="upiModalTxnId"></strong></span>
+                            <button class="copy-btn-icon" onclick="copyText(document.getElementById('upiModalTxnId').textContent, this)" title="কপি করুন"><i class="far fa-copy"></i></button>
+                        </div>
                     </div>
                     
+                    <!-- Redesigned Advisory Box (Crimson border, matches dark/light themes cleanly) -->
+                    <div class="p-3 mb-3 mx-auto text-start" style="max-width: 320px; border-radius: var(--border-radius-sm); border-left: 4px solid #dc3545; background: var(--bg-body); color: var(--text-main); font-size: 0.82rem; line-height: 1.5; font-family: var(--font-body); box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                        <div class="d-flex align-items-center mb-2" style="color: #dc3545;">
+                            <i class="fas fa-exclamation-triangle me-2" style="font-size: 1.1rem;"></i>
+                            <strong style="font-size: 0.88rem; font-weight: 700;">গুরুত্বपूर्ण সতর্কবার্তা (Advisory)</strong>
+                        </div>
+                        <p class="mb-2" style="font-weight: 600; color: #dc3545;">
+                            সরাসরি পেমেন্ট অ্যাপে কোনো সমস্যা বা সিকিউরিটি সতর্কতা (Security Warning) এড়াতে সরাসরি পেমেন্ট অ্যাপ দিয়ে পে করবেন না।
+                        </p>
+                        <p class="mb-0">
+                            <strong>সবচেয়ে নিরাপদ পদ্ধতি:</strong> দয়া করে প্রথমে <strong>"QR কোড ডাউনলোড করুন"</strong> বোতামে ক্লিক করে QR কোডটি আপনার ফোনে সেভ করে নিন। এরপর আপনার পেমেন্ট অ্যাপ (যেমন GPay, PhonePe, Paytm, BHIM) খুলে <strong>স্ক্যানার (Scanner)</strong> অপশনে যান এবং <strong>গ্যালারি (Gallery)</strong> আইকনটি সিলেক্ট করে ডাউনলোড করা QR কোডটি দিয়ে পেমেন্ট সম্পন্ন করুন। এটি সম্পূর্ণ সুরক্ষিত ও নির্ভরযোগ্য।
+                        </p>
+                    </div>
+
                     <!-- Mobile Intent Direct UPI Pay Button -->
                     <div class="mb-3 d-grid gap-2">
-                        <a id="upiIntentLink" href="#" class="btn btn-primary py-2.5" style="background: var(--color-primary); border: none; border-radius: var(--border-radius-sm); font-weight: 600; font-family: var(--font-body); color: #fff; text-decoration: none; text-align: center; display: block;">
+                        <a id="upiIntentLink" href="#" class="btn btn-upi-pay py-2.5" style="border-radius: var(--border-radius-sm); font-weight: 600; font-family: var(--font-body); text-align: center; display: block;">
                             <i class="fas fa-mobile-alt me-2"></i> সরাসরি UPI অ্যাপ দিয়ে পে করুন
                         </a>
                     </div>
+                    
                     <div class="small text-muted mb-1">
                         অথবা সরাসরি ব্যাংক ট্রান্সফার করতে পারেন:
                     </div>
-                    <div class="p-2 border rounded text-start mb-3 mx-auto" style="max-width: 320px; font-size: 0.85rem; border-color: var(--border-color) !important; background: var(--bg-body); color: var(--text-main);">
-                        <div><strong>Bank:</strong> State Bank of India (SBI)</div>
-                        <div><strong>A/C No:</strong> 41429557914</div>
-                        <div><strong>IFSC:</strong> SBIN0002085</div>
-                        <div><strong>UPI ID:</strong> 9064485906@okbizaxis</div>
+                    
+                    <!-- Bank details card with Copy icons -->
+                    <div class="p-3 border rounded text-start mb-3 mx-auto" style="max-width: 320px; font-size: 0.82rem; border-color: var(--border-color) !important; background: var(--bg-body); color: var(--text-main); line-height: 1.5;">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span><strong>Bank:</strong> State Bank of India (SBI)</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span><strong>A/C No:</strong> 41429557914</span>
+                            <button class="copy-btn-icon" onclick="copyText('41429557914', this)" title="কপি করুন"><i class="far fa-copy"></i></button>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span><strong>IFSC:</strong> SBIN0002085</span>
+                            <button class="copy-btn-icon" onclick="copyText('SBIN0002085', this)" title="কপি করুন"><i class="far fa-copy"></i></button>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span><strong>UPI ID:</strong> 9064485906@okbizaxis</span>
+                            <button class="copy-btn-icon" onclick="copyText('9064485906@okbizaxis', this)" title="কপি করুন"><i class="far fa-copy"></i></button>
+                        </div>
+                        <button type="button" class="btn btn-outline-secondary btn-sm w-100 fw-bold animate-btn" onclick="copyText('Bank: SBI, Account No: 41429557914, IFSC: SBIN0002085, UPI ID: 9064485906@okbizaxis', this)" style="font-size: 0.78rem; border-radius: var(--border-radius-sm); transition: var(--transition-smooth);">
+                            <i class="far fa-copy me-1"></i> সব ব্যাংক বিবরণ কপি করুন
+                        </button>
                     </div>
-                    <button type="button" class="btn btn-secondary px-5 py-2" data-bs-dismiss="modal" style="font-weight: 600; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); background: transparent; color: var(--text-main);">পেমেন্ট করা হয়েছে</button>
+                    
+                    <button type="button" class="btn btn-payment-done px-5 py-2" data-bs-dismiss="modal" style="border-radius: var(--border-radius-sm);">পেমেন্ট করা হয়েছে</button>
                 </div>
             </div>
         </div>
