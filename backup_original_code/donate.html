@@ -664,7 +664,7 @@
 
         // UPI Configuration
         const UPI_ID = "9064485906@okbizaxis";
-        const PAYEE_NAME = "SFI West Bengal State Committee";
+        const PAYEE_NAME = "Mr Pabitra Banerjee";
         const TRANSACTION_NOTE = "Donation to SFI WB";
 
         function generateTxnRefId() {
@@ -676,8 +676,8 @@
             if (!currentTxnId) {
                 currentTxnId = generateTxnRefId();
             }
-            // mc=8398 (Charitable & Social Service MCC), mode=02 (web redirection), purpose=00 (general txn)
-            return `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&mc=8398&tr=${currentTxnId}&am=${amount.toFixed(2)}&cu=INR&tn=${encodeURIComponent(TRANSACTION_NOTE)}&mode=02&purpose=00`;
+            // mode=01 indicates a static QR code format to bypass signed web intent restrictions
+            return `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&tr=${currentTxnId}&am=${amount.toFixed(2)}&cu=INR&tn=${encodeURIComponent(TRANSACTION_NOTE)}&mode=01&orgid=000000&mc=0000`;
         }
 
         function generateQRCodes(amount) {
