@@ -73,9 +73,10 @@
         }
 
         .contact-info-icon {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             color: var(--color-primary);
             background: rgba(255, 45, 60, 0.08);
+            border: 1px solid rgba(255, 45, 60, 0.15);
             width: 44px;
             height: 44px;
             border-radius: 50%;
@@ -83,6 +84,14 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .contact-info-item:hover .contact-info-icon {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-color: var(--color-primary);
+            transform: scale(1.05);
         }
 
         .contact-info-title {
@@ -96,16 +105,75 @@
             color: var(--text-muted);
         }
 
-        .map-container {
-            margin-top: 30px;
-            border-radius: var(--border-radius-md);
+        .contact-info-text a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+
+        .contact-info-text a:hover {
+            color: var(--color-primary);
+            text-decoration: underline;
+        }
+
+        #office {
+            background: rgba(20, 15, 16, 0.6) !important;
+            border-color: rgba(211, 26, 39, 0.15) !important;
+            box-shadow: var(--shadow-glow), var(--shadow-main);
+        }
+
+        [data-theme="light"] #office {
+            background: rgba(255, 255, 255, 0.75) !important;
+            border-color: rgba(0, 0, 0, 0.06) !important;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .right-info-column {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            margin: 0;
+            padding: 0;
+        }
+
+        @media (min-width: 992px) {
+            .right-info-column {
+                height: 100%;
+            }
+            .right-info-column .card {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                margin: 0 !important;
+            }
+        }
+
+        .map-wrapper {
+            width: 100%;
+            flex: 1;
+            min-height: 280px;
+            border-radius: var(--border-radius-sm);
             overflow: hidden;
             border: 1px solid var(--border-color);
-            background: var(--bg-card);
-            backdrop-filter: blur(25px);
-            padding: 30px;
-            text-align: center;
-            box-shadow: var(--shadow-main);
+            margin-top: 24px;
+            position: relative;
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            filter: grayscale(1) invert(0.9) contrast(1.2);
+            transition: var(--transition-smooth);
+        }
+
+        [data-theme="light"] .map-wrapper iframe {
+            filter: none;
+        }
+
+        .map-wrapper iframe:hover {
+            filter: none;
         }
 
         .form-select {
@@ -376,51 +444,52 @@
                         </form>
                     </div>
                     <!-- Right: Info -->
-                    <div>
+                    <div class="right-info-column">
                         <div class="card" id="office">
-                            <h3 class="card-title"
-                                style="font-size: 1.3rem; border-bottom: 2px solid var(--color-primary); padding-bottom: 8px; margin-bottom: 20px; color: var(--color-primary);">
-                                রাজ্য দপ্তর (State Office)</h3>
-                            <div class="contact-info-list">
-                                <div class="contact-info-item">
-                                    <div class="contact-info-icon">📍</div>
-                                    <div>
-                                        <div class="contact-info-title">ঠিকানা (Address)</div>
-                                        <div class="contact-info-text">
-                                            দীনেশ মজুমদার ভবন, ৭৯/৩এ এ.জে.সি. বোস রোড,<br />কলকাতা, পশ্চিমবঙ্গ - ৭০০০১৪
+                            <div class="office-info-content">
+                                <h3 class="card-title"
+                                    style="font-size: 1.3rem; border-bottom: 2px solid var(--color-primary); padding-bottom: 8px; margin-bottom: 20px; color: var(--color-primary);">
+                                    রাজ্য দপ্তর (State Office)</h3>
+                                <div class="contact-info-list">
+                                    <div class="contact-info-item">
+                                        <div class="contact-info-icon">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </div>
+                                        <div>
+                                            <div class="contact-info-title">ঠিকানা (Address)</div>
+                                            <div class="contact-info-text">
+                                                দীনেশ মজুমদার ভবন, ৭৯/৩এ, এ. জে. সি. বোস রোড,<br />কলকাতা, পশ্চিমবঙ্গ, ভারত — পিনকোড: ৭০০০১৪
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="contact-info-item">
+                                        <div class="contact-info-icon">
+                                            <i class="fas fa-envelope"></i>
+                                        </div>
+                                        <div>
+                                            <div class="contact-info-title">ইমেল (Email)</div>
+                                            <div class="contact-info-text">
+                                                <a href="mailto:state.committee.sfi.wb@gmail.com">state.committee.sfi.wb@gmail.com</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="contact-info-item">
+                                        <div class="contact-info-icon">
+                                            <i class="fas fa-phone-alt"></i>
+                                        </div>
+                                        <div>
+                                            <div class="contact-info-title">ফোন নম্বর (Phone)</div>
+                                            <div class="contact-info-text">
+                                                <a href="tel:+918910044138">+৯১-৮৯১০০৪৪১৩৮</a> (সম্পাদক)<br />
+                                                <a href="tel:+919933646556">+৯১-৯৯৩৩৬৪৬৫৫৬</a> (সভাপতি)
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="contact-info-item">
-                                    <div class="contact-info-icon">✉️</div>
-                                    <div>
-                                        <div class="contact-info-title">ইমেল (Email)</div>
-                                        <div class="contact-info-text">contact@sfiwb.org</div>
-                                    </div>
-                                </div>
-                                <div class="contact-info-item">
-                                    <div class="contact-info-icon">📞</div>
-                                    <div>
-                                        <div class="contact-info-title">ফোন নম্বর (Phone)</div>
-                                        <div class="contact-info-text">+৯১ ৩৩ ২২১৭৬৬৩৩</div>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                        <!-- Map Mockup -->
-                        <div class="map-container" id="donate">
-                            <div class="map-placeholder-text">
-                                <span style="font-size: 2.2rem; display: block; margin-bottom: 10px;">🚩</span>
-                                <h3 style="font-size: 1.25rem; margin-bottom: 6px; color: var(--color-accent);">তহবিলে
-                                    সাহায্য ও অনুদান</h3>
-                                <p class="text-muted" style="font-size: 0.85rem; line-height: 1.4;">
-                                    আমাদের আন্দোলন পরিচালনা ও দরিদ্র শিক্ষার্থীদের শিক্ষা সামগ্রী বিতরণের তহবিলে আপনার
-                                    সাধ্যমত আর্থিক সাহায্য করুন।
-                                    <br />ব্যাঙ্ক অ্যাকাউন্ট ডিটেলস বা কিউআর কোডের জন্য আমাদের দপ্তরে যোগাযোগ করুন।
-                                </p>
-                                <a class="btn btn-secondary" href="mailto:donate@sfiwb.org"
-                                    style="margin-top: 15px; font-size: 0.85rem; padding: 8px 16px;">অনুদান দিতে মেইল
-                                    করুন</a>
+                            <!-- Map Embed -->
+                            <div class="map-wrapper">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d97488.33093198197!2d88.2209873!3d22.5567144!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a027768172f80cf%3A0x72f128412759501e!2sStudents&#39;%20Federation%20of%20India!5e1!3m2!1sen!2sin!4v1782096802508!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                     </div>
