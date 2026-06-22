@@ -660,15 +660,24 @@
         let selectedAmount = 500;
         let staticQrCode = null;
         let modalQrCode = null;
+        let currentTxnId = "";
 
         // UPI Configuration
         const UPI_ID = "9064485906@okbizaxis";
         const PAYEE_NAME = "SFI West Bengal State Committee";
         const TRANSACTION_NOTE = "Donation to SFI WB";
 
+        function generateTxnRefId() {
+            // Generate a unique transaction reference ID (NPCI requires alphanumeric, max 35 chars)
+            return 'SFIDON' + Date.now() + Math.floor(1000 + Math.random() * 9000);
+        }
+
         function getUpiUri(amount) {
-            // mode=02 tells apps this is an online transaction to reduce suspicious warnings
-            return `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${amount.toFixed(2)}&cu=INR&tn=${encodeURIComponent(TRANSACTION_NOTE)}&mode=02&purpose=00`;
+            if (!currentTxnId) {
+                currentTxnId = generateTxnRefId();
+            }
+            // mc=8398 (Charitable & Social Service MCC), mode=02 (web redirection), purpose=00 (general txn)
+            return `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&mc=8398&tr=${currentTxnId}&am=${amount.toFixed(2)}&cu=INR&tn=${encodeURIComponent(TRANSACTION_NOTE)}&mode=02&purpose=00`;
         }
 
         function generateQRCodes(amount) {
@@ -708,6 +717,7 @@
             btn.classList.add('selected');
             selectedAmount = amount;
             document.getElementById('custom-wrap').style.display = 'none';
+            currentTxnId = generateTxnRefId(); // Fresh unique txn ID for new selection
             generateQRCodes(amount);
         }
 
@@ -723,6 +733,7 @@
             customInput.oninput = function() {
                 const val = parseInt(customInput.value) || 0;
                 if (val >= 10) {
+                    currentTxnId = generateTxnRefId(); // Fresh unique txn ID for custom value
                     generateQRCodes(val);
                 }
             };
@@ -779,6 +790,7 @@
                 return;
             }
 
+            currentTxnId = generateTxnRefId(); // Fresh unique txn ID for this click event
             const upiUri = getUpiUri(amount);
 
             // Set modal values
@@ -813,6 +825,7 @@
 
         // Initialize QR code on page load
         window.addEventListener('DOMContentLoaded', () => {
+            currentTxnId = generateTxnRefId(); // Initial txn ID
             // Check if QRCode library is loaded, retry if not
             function initQRCodes() {
                 if (typeof QRCode !== 'undefined') {
