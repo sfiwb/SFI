@@ -808,23 +808,31 @@
 
                     // Generate QR code client-side using QRious
                     const canvas = document.getElementById('upiQrCanvas');
+                    const qrImg = document.getElementById('upiQrImage');
+                    
                     if (canvas && typeof QRious !== 'undefined') {
+                        // Show canvas, hide fallback image
+                        canvas.style.display = 'block';
+                        if (qrImg) qrImg.style.display = 'none';
+                        
                         new QRious({
                             element: canvas,
                             size: 240,
                             value: upiUrl,
                             level: 'H'
                         });
-                    } else if (canvas) {
-                        // Fallback: draw Google Charts QR to canvas (requires CORS toDataURL to work, best effort)
-                        const ctx = canvas.getContext('2d');
-                        ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        const img = new Image();
-                        img.crossOrigin = "anonymous";
-                        img.onload = function() {
-                            ctx.drawImage(img, 0, 0, 240, 240);
-                        };
-                        img.src = `https://chart.googleapis.com/chart?chs=240x240&cht=qr&chl=${encodeURIComponent(upiUrl)}`;
+                    } else {
+                        // Fallback: Show image tag, hide canvas (safest fallback that never displays blank)
+                        if (canvas) canvas.style.display = 'none';
+                        if (qrImg) {
+                            qrImg.style.display = 'block';
+                            qrImg.onerror = function() {
+                                // Double fallback in case Google Charts is blocked
+                                this.src = `https://quickchart.io/qr?size=250&text=${encodeURIComponent(upiUrl)}`;
+                                this.onerror = null; // Prevent infinite loop
+                            };
+                            qrImg.src = `https://chart.googleapis.com/chart?chs=240x240&cht=qr&chl=${encodeURIComponent(upiUrl)}`;
+                        }
                     }
 
                     // Show Modal
@@ -846,23 +854,35 @@
         // Download QR Code image client-side without CORS issues
         function downloadQrCode() {
             const canvas = document.getElementById('upiQrCanvas');
-            if (!canvas) return;
+            const qrImg = document.getElementById('upiQrImage');
             const txnId = document.getElementById('upiModalTxnId').textContent || 'txn';
-            try {
-                const url = canvas.toDataURL("image/png");
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `SFI_Donation_QR_${txnId}.png`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            } catch (err) {
-                console.error("Local canvas download failed, using fallback URL:", err);
+            
+            // If canvas is visible (QRious generated successfully)
+            if (canvas && canvas.style.display !== 'none') {
+                try {
+                    const url = canvas.toDataURL("image/png");
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `SFI_Donation_QR_${txnId}.png`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    return;
+                } catch (err) {
+                    console.error("Local canvas download failed, using fallback:", err);
+                }
+            }
+            
+            // Fallback for image-based QR code download
+            const fallbackSrc = (qrImg && qrImg.src) ? qrImg.src : "";
+            if (fallbackSrc) {
+                window.open(fallbackSrc, '_blank');
+            } else {
                 const upiModalTxnId = document.getElementById('upiModalTxnId').textContent || 'txn';
                 const upiModalAmount = document.getElementById('upiModalAmount').textContent || '0';
                 const upiUrl = `upi://pay?pa=9064485906@okbizaxis&pn=SFI%20West%20Bengal%20State%20Committee&am=${upiModalAmount}&tr=${upiModalTxnId}&cu=INR&tn=SFIDON%20${upiModalTxnId}`;
-                const fallbackUrl = `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${encodeURIComponent(upiUrl)}`;
-                window.open(fallbackUrl, '_blank');
+                const chartUrl = `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${encodeURIComponent(upiUrl)}`;
+                window.open(chartUrl, '_blank');
             }
         }
 
@@ -1072,6 +1092,7 @@
         </div>
     </footer><a class="scroll-top d-flex align-items-center justify-content-center bg-danger rounded text-white shadow"
         href="#" id="scroll-top"><i class="bi bi-arrow-up-short"></i></a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.js"></script>
@@ -1238,6 +1259,7 @@
                     <div class="d-flex flex-column align-items-center mb-4">
                         <div class="d-flex justify-content-center align-items-center p-3 bg-white rounded shadow-sm" style="width: 270px; height: 270px;">
                             <canvas id="upiQrCanvas" style="width: 240px; height: 240px;"></canvas>
+                            <img id="upiQrImage" src="" alt="UPI QR Code" style="width: 240px; height: 240px; display: none;" />
                         </div>
                         <button type="button" class="btn btn-outline-danger btn-sm mt-2 fw-bold" onclick="downloadQrCode()" style="font-size: 0.82rem; border-radius: var(--border-radius-sm); border-color: var(--color-primary); color: var(--color-primary); transition: var(--transition-smooth);">
                             <i class="fas fa-download me-1"></i> QR কোড ডাউনলোড করুন (Download QR)
