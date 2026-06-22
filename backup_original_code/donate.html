@@ -592,11 +592,28 @@
                                 <span>নিজে লিখুন</span>
                             </button>
                         </div>
-                        <div class="custom-amount-wrap" id="custom-wrap" style="display:none;">
+                        <div class="custom-amount-wrap" id="custom-wrap" style="display:none; margin-bottom: 15px;">
                             <label for="custom-amount">কাস্টম পরিমাণ লিখুন (টাকায়)</label>
                             <input class="custom-input" id="custom-amount" min="10" placeholder="যেমন: ২৫০"
                                 type="number" />
                         </div>
+                        
+                        <!-- Donor Details -->
+                        <div class="donor-details-wrap" style="margin-top: 20px; margin-bottom: 20px; text-align: left;">
+                            <div style="margin-bottom: 12px;">
+                                <label for="donor-name" style="display: block; font-size: 0.88rem; color: var(--text-muted); margin-bottom: 6px; font-family: var(--font-body);">আপনার নাম (Name) *</label>
+                                <input class="custom-input" id="donor-name" placeholder="যেমন: রাহুল সেন" type="text" required />
+                            </div>
+                            <div style="margin-bottom: 12px;">
+                                <label for="donor-phone" style="display: block; font-size: 0.88rem; color: var(--text-muted); margin-bottom: 6px; font-family: var(--font-body);">মোবাইল নম্বর (Phone Number) *</label>
+                                <input class="custom-input" id="donor-phone" placeholder="যেমন: ৯৮৭৬৫৪৩২১০" type="tel" required />
+                            </div>
+                            <div style="margin-bottom: 12px;">
+                                <label for="donor-email" style="display: block; font-size: 0.88rem; color: var(--text-muted); margin-bottom: 6px; font-family: var(--font-body);">ইমেল আইডি (Email ID)</label>
+                                <input class="custom-input" id="donor-email" placeholder="যেমন: name@example.com" type="email" />
+                            </div>
+                        </div>
+
                         <button class="btn-donate-now" onclick="handleDonate()">🏴 এখনই অনুদান করুন</button>
                         <div class="secure-note">🔒 নিরাপদ ও সুরক্ষিত পেমেন্ট</div>
                     </div>
@@ -660,7 +677,7 @@
     <!-- Back to Top -->
     <script>
         let selectedAmount = 500;
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw9TSmJdsRDbuWoFP4EQnJC8qMipIf9rjX6HVsFmFlrP3bGbLt61lJQwbhONHOXLO1Olg/exec";
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynylDoj5mlVnYf7kFpu31oIGSrOVEiW-Z-k3cOoaBXfiJmoqKGT5rBrYhs6wvPwUZceA/exec";
 
         function selectAmount(btn, amount) {
             document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
@@ -678,6 +695,19 @@
         }
 
         async function handleDonate() {
+            const donorName = document.getElementById('donor-name').value.trim();
+            const donorPhone = document.getElementById('donor-phone').value.trim();
+            const donorEmail = document.getElementById('donor-email').value.trim();
+
+            if (!donorName) {
+                alert('অনুগ্রহ করে আপনার নাম লিখুন।');
+                return;
+            }
+            if (!donorPhone || donorPhone.length < 10) {
+                alert('অনুগ্রহ করে একটি সঠিক ১০ সংখ্যার মোবাইল নম্বর লিখুন।');
+                return;
+            }
+
             const customVal = document.getElementById('custom-amount').value;
             const amount = selectedAmount || parseInt(customVal) || 0;
             if (!amount || amount < 10) {
@@ -703,8 +733,9 @@
                         formType: 'payment',
                         data: {
                             amount: amount,
-                            phone: "", 
-                            email: ""
+                            name: donorName,
+                            phone: donorPhone, 
+                            email: donorEmail
                         }
                     })
                 });

@@ -21,7 +21,7 @@ const firebaseConfig = {
 
 
 // Google Apps Script Web App URL
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw9TSmJdsRDbuWoFP4EQnJC8qMipIf9rjX6HVsFmFlrP3bGbLt61lJQwbhONHOXLO1Olg/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynylDoj5mlVnYf7kFpu31oIGSrOVEiW-Z-k3cOoaBXfiJmoqKGT5rBrYhs6wvPwUZceA/exec";
 
 
 // Initialize Firebase if it has loaded and is not already initialized
