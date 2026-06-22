@@ -311,7 +311,21 @@
             opacity: 0.92 !important;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            background-color: var(--bg-main) !important;
+            /* Custom styles for gateway selector pills */
+        .nav-pills .nav-link {
+            color: var(--text-muted);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            transition: var(--transition-smooth);
+        }
+        .nav-pills .nav-link:hover {
+            color: var(--color-primary);
+        }
+        .nav-pills .nav-link.active,
+        .nav-pills .nav-link.active:hover {
+            background-color: var(--color-primary) !important;
+            color: #ffffff !important;
+            border-color: var(--color-primary) !important;
         }
 
         .qr-upi-id {
@@ -609,18 +623,6 @@
                             <span class="bank-detail-label">শাখা</span>
                             <span class="bank-detail-value">Manbazar Branch</span>
                         </div>
-                        <div class="qr-section">
-                            <h3>UPI দিয়ে স্ক্যান করুন</h3>
-                            <div class="qr-wrapper-static">
-                                <div id="static-qr-container"></div>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center gap-2">
-                                <span class="qr-upi-id" style="font-size: 0.85rem; font-weight: 600; color: var(--color-primary);">UPI: 9064485906@okbizaxis</span>
-                                <button class="btn btn-sm btn-outline-secondary p-1 border-0" onclick="copyStaticUpi(this)" title="UPI ID কপি করুন" style="color: var(--text-muted); font-size: 0.8rem; background: transparent;">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -658,67 +660,13 @@
     <!-- Back to Top -->
     <script>
         let selectedAmount = 500;
-        let staticQrCode = null;
-        let modalQrCode = null;
-        let currentTxnId = "";
-
-        // UPI Configuration
-        const UPI_ID = "9064485906@okbizaxis";
-        const PAYEE_NAME = "Mr Pabitra Banerjee";
-        const TRANSACTION_NOTE = "Donation to SFI WB";
-
-        function generateTxnRefId() {
-            // Generate a unique transaction reference ID (NPCI requires alphanumeric, max 35 chars)
-            return 'SFIDON' + Date.now() + Math.floor(1000 + Math.random() * 9000);
-        }
-
-        function getUpiUri(amount) {
-            if (!currentTxnId) {
-                currentTxnId = generateTxnRefId();
-            }
-            // mode=01 indicates a static QR code format to bypass signed web intent restrictions
-            return `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&tr=${currentTxnId}&am=${amount.toFixed(2)}&cu=INR&tn=${encodeURIComponent(TRANSACTION_NOTE)}&mode=01&orgid=000000&mc=0000`;
-        }
-
-        function generateQRCodes(amount) {
-            const upiUri = getUpiUri(amount);
-            
-            // Generate Static QR code on the right panel
-            const staticContainer = document.getElementById("static-qr-container");
-            if (staticContainer) {
-                staticContainer.innerHTML = "";
-                new QRCode(staticContainer, {
-                    text: upiUri,
-                    width: 154,
-                    height: 154,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.M
-                });
-            }
-
-            // Generate Modal QR code
-            const modalContainer = document.getElementById("modal-qr-container");
-            if (modalContainer) {
-                modalContainer.innerHTML = "";
-                new QRCode(modalContainer, {
-                    text: upiUri,
-                    width: 200,
-                    height: 200,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.M
-                });
-            }
-        }
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw9TSmJdsRDbuWoFP4EQnJC8qMipIf9rjX6HVsFmFlrP3bGbLt61lJQwbhONHOXLO1Olg/exec";
 
         function selectAmount(btn, amount) {
             document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
             selectedAmount = amount;
             document.getElementById('custom-wrap').style.display = 'none';
-            currentTxnId = generateTxnRefId(); // Fresh unique txn ID for new selection
-            generateQRCodes(amount);
         }
 
         function selectCustom(btn) {
@@ -727,62 +675,9 @@
             selectedAmount = null;
             document.getElementById('custom-wrap').style.display = 'block';
             document.getElementById('custom-amount').focus();
-            
-            // Listen for custom amount input changes to dynamically update static QR code
-            const customInput = document.getElementById('custom-amount');
-            customInput.oninput = function() {
-                const val = parseInt(customInput.value) || 0;
-                if (val >= 10) {
-                    currentTxnId = generateTxnRefId(); // Fresh unique txn ID for custom value
-                    generateQRCodes(val);
-                }
-            };
         }
 
-        function isMobileDevice() {
-            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        }
-
-        function copyUpiId() {
-            const upiIdField = document.getElementById("upiIdField");
-            const copyBtn = document.getElementById("copyUpiBtn");
-            
-            if (upiIdField) {
-                upiIdField.select();
-                upiIdField.setSelectionRange(0, 99999);
-                navigator.clipboard.writeText(upiIdField.value).then(() => {
-                    if (copyBtn) {
-                        copyBtn.innerHTML = '<i class="fas fa-check me-1"></i> কপিড!';
-                        copyBtn.classList.remove('btn-outline-danger');
-                        copyBtn.classList.add('btn-success');
-                        
-                        setTimeout(() => {
-                            copyBtn.innerHTML = '<i class="fas fa-copy me-1"></i> কপি করুন';
-                            copyBtn.classList.remove('btn-success');
-                            copyBtn.classList.add('btn-outline-danger');
-                        }, 2000);
-                    }
-                }).catch(err => {
-                    alert('কপি করতে ব্যর্থ হয়েছে, অনুগ্রহ করে ম্যানুয়ালি কপি করুন।');
-                });
-            }
-        }
-
-        function copyStaticUpi(btn) {
-            navigator.clipboard.writeText("9064485906@okbizaxis").then(() => {
-                const icon = btn.querySelector('i');
-                if (icon) {
-                    icon.className = 'fas fa-check text-success';
-                    setTimeout(() => {
-                        icon.className = 'fas fa-copy';
-                    }, 2000);
-                }
-            }).catch(err => {
-                alert('কপি করতে ব্যর্থ হয়েছে।');
-            });
-        }
-
-        function handleDonate() {
+        async function handleDonate() {
             const customVal = document.getElementById('custom-amount').value;
             const amount = selectedAmount || parseInt(customVal) || 0;
             if (!amount || amount < 10) {
@@ -790,51 +685,67 @@
                 return;
             }
 
-            currentTxnId = generateTxnRefId(); // Fresh unique txn ID for this click event
-            const upiUri = getUpiUri(amount);
+            const payBtn = document.querySelector(".btn-donate-now");
+            const originalHtml = payBtn.innerHTML;
+            
+            // Set loading state
+            payBtn.disabled = true;
+            payBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> পেমেন্ট গেটওয়ে লোড হচ্ছে...';
 
-            // Set modal values
-            document.getElementById("modal-pay-amount").innerText = amount;
-            generateQRCodes(amount);
+            try {
+                // Call Google Apps Script Web App
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: JSON.stringify({
+                        formType: 'payment',
+                        data: {
+                            amount: amount,
+                            phone: "", 
+                            email: ""
+                        }
+                    })
+                });
 
-            const mobileActions = document.querySelector(".mobile-actions");
-            const directPayLink = document.getElementById("directPayLink");
-            const instructionText = document.querySelector(".instruction-text");
-
-            if (isMobileDevice()) {
-                // Show mobile specific options in the modal
-                if (mobileActions) mobileActions.classList.remove("d-none");
-                if (directPayLink) directPayLink.href = upiUri;
-                if (instructionText) {
-                    instructionText.innerText = "QR কোডটির স্ক্রিনশট নিয়ে আপনার UPI অ্যাপে স্ক্যান করুন অথবা নিচে দেওয়া UPI ID-টি কপি করে সরাসরি পেমেন্ট করুন।";
+                const result = await response.json();
+                if (result.success && result.redirectUrl) {
+                    // Redirect user to official PhonePe Pay Page
+                    window.location.href = result.redirectUrl;
+                } else {
+                    alert('পেমেন্ট গেটওয়ে শুরু করতে ব্যর্থ হয়েছে: ' + (result.error || 'Unknown Error'));
+                    payBtn.disabled = false;
+                    payBtn.innerHTML = originalHtml;
                 }
-            } else {
-                // Hide mobile specific actions on desktop
-                if (mobileActions) mobileActions.classList.add("d-none");
-                if (directPayLink) directPayLink.href = "#";
-                if (instructionText) {
-                    instructionText.innerText = "আপনার মোবাইল ফোন থেকে যেকোনো UPI অ্যাপ (GPay, PhonePe, Paytm, BHIM ইত্যাদি) খুলে উপরের QR কোডটি স্ক্যান করে পেমেন্ট সম্পন্ন করুন।";
-                }
+            } catch (error) {
+                console.error("PhonePe integration error:", error);
+                alert('পেমেন্ট গেটওয়ে কানেক্ট করতে সমস্যা হচ্ছে। অনুগ্রহ করে পরে চেষ্টা করুন।');
+                payBtn.disabled = false;
+                payBtn.innerHTML = originalHtml;
             }
-
-            // Always show popup modal on both mobile and desktop to prevent browser redirection issues
-            const upiModalElement = document.getElementById('upiModal');
-            const upiModal = new bootstrap.Modal(upiModalElement);
-            upiModal.show();
         }
 
-        // Initialize QR code on page load
+        // Check payment success status on page load
         window.addEventListener('DOMContentLoaded', () => {
-            currentTxnId = generateTxnRefId(); // Initial txn ID
-            // Check if QRCode library is loaded, retry if not
-            function initQRCodes() {
-                if (typeof QRCode !== 'undefined') {
-                    generateQRCodes(selectedAmount);
-                } else {
-                    setTimeout(initQRCodes, 100);
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('status');
+            const txnId = urlParams.get('txn');
+            
+            if (status === 'success') {
+                const successTxnId = document.getElementById("successTxnId");
+                const successTxnIdContainer = document.getElementById("successTxnIdContainer");
+                if (txnId && successTxnId && successTxnIdContainer) {
+                    successTxnId.innerText = txnId;
+                    successTxnIdContainer.style.display = "block";
                 }
+                const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+                
+                // Clean the URL query parameters without reloading the page
+                const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
             }
-            initQRCodes();
         });
     </script>
     <footer id="footer" class="footer light-background border-top border-secondary border-opacity-25">
@@ -1108,59 +1019,28 @@
             applyTheme(savedTheme);
         });
     </script>
-    <!-- UPI Payment Modal -->
-    <div class="modal fade" id="upiModal" tabindex="-1" aria-labelledby="upiModalLabel" aria-hidden="true">
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); color: var(--text-main);">
-                <div class="modal-header border-bottom border-secondary border-opacity-25">
-                    <h5 class="modal-title" id="upiModalLabel" style="color: var(--color-primary); font-weight: 700;">
-                        <i class="fas fa-qrcode me-2"></i>UPI অনুদান পেমেন্ট
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center py-4">
-                    <h4 class="mb-3" style="font-weight: 700;">পরিমাণ: <span id="modal-pay-amount" style="color: var(--color-accent);">০</span> টাকা</h4>
-                    
-                    <!-- QR Code Container -->
-                    <div id="modal-qr-container" class="d-inline-block p-3 bg-white rounded-3 mb-3 shadow" style="width: 232px; height: 232px;">
-                        <!-- QR Code Canvas goes here -->
+                <div class="modal-body text-center py-5">
+                    <div class="mb-4 text-success" style="font-size: 4rem;">
+                        <i class="fas fa-check-circle"></i>
                     </div>
-                    
-                    <!-- Copy UPI Section -->
-                    <div class="input-group mx-auto mb-3" style="max-width: 290px;">
-                        <input type="text" class="form-control text-center bg-dark bg-opacity-10 border-secondary border-opacity-25" id="upiIdField" value="9064485906@okbizaxis" readonly style="color: var(--text-main); font-weight: 600; font-size: 0.9rem;">
-                        <button class="btn btn-outline-danger" type="button" id="copyUpiBtn" onclick="copyUpiId()" style="font-size: 0.85rem; font-weight: 600;">
-                            <i class="fas fa-copy me-1"></i> কপি করুন
-                        </button>
-                    </div>
-                    
-                    <!-- Mobile Action Buttons (Visible only on Mobile) -->
-                    <div class="mobile-actions d-none mb-3">
-                        <a href="#" id="directPayLink" class="btn btn-danger w-100 py-2.5 mb-2" style="font-weight: 700; border-radius: var(--border-radius-sm);">
-                            <i class="fas fa-external-link-alt me-2"></i>সরাসরি UPI অ্যাপ দিয়ে পে করুন
-                        </a>
-                        <p class="small text-muted mb-0" style="font-size: 0.78rem;">
-                            (অথবা QR কোডের স্ক্রিনশট নিয়ে আপনার UPI অ্যাপের Gallery আপলোড অপশন দিয়ে পে করুন)
-                        </p>
-                    </div>
-                    
-                    <p class="small text-muted px-2 mb-3 instruction-text" style="line-height: 1.5; font-size: 0.85rem;">
-                        আপনার মোবাইল ফোন থেকে যেকোনো UPI অ্যাপ (GPay, PhonePe, Paytm, BHIM ইত্যাদি) খুলে উপরের QR কোডটি স্ক্যান করে পেমেন্ট সম্পন্ন করুন।
+                    <h3 class="fw-bold mb-3" style="color: var(--color-primary);">অনুদানের জন্য ধন্যবাদ! ❤️</h3>
+                    <p class="mb-4 text-muted" style="font-size: 0.95rem; line-height: 1.6;">
+                        আপনার অনুদান সফলভাবে সম্পন্ন হয়েছে। ছাত্র আন্দোলনকে শক্তিশালী করার জন্য আমরা আপনার কাছে কৃতজ্ঞ।
                     </p>
-                    
-                    <div class="alert alert-success bg-success bg-opacity-10 border border-success border-opacity-20 text-success small py-2 mb-0" role="alert">
-                        <i class="fas fa-lock me-1"></i> এটি একটি সরাসরি ও নিরাপদ UPI ব্যাংক ট্রান্সফার।
+                    <div class="bg-dark bg-opacity-10 p-2 rounded small mb-4 mx-auto" id="successTxnIdContainer" style="display:none; color: var(--text-muted); font-family: 'Inter', sans-serif; max-width: 320px;">
+                        ট্রানজেকশন আইডি: <span id="successTxnId" class="fw-bold"></span>
                     </div>
-                </div>
-                <div class="modal-footer border-top border-secondary border-opacity-25 justify-content-center">
-                    <button type="button" class="btn btn-secondary px-4 py-2" data-bs-dismiss="modal">বন্ধ করুন</button>
+                    <button type="button" class="btn btn-danger px-5 py-2.5" data-bs-dismiss="modal" style="font-weight: 600; border-radius: var(--border-radius-sm); border: none; background: var(--color-primary); color: #fff;">ঠিক আছে</button>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- QRCode CDN & Firebase SDKs -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="forms_handler.js"></script>
