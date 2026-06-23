@@ -25,11 +25,6 @@
     const isAuthorized = !isOffline && (allowedHosts.includes(hostname) || (isLocalhost && isDevMode));
     
     if (!isAuthorized) {
-        let msg = "This website copy is protected. Running offline or on unauthorized mirrors is prohibited.";
-        if (isLocalhost) {
-            msg = "Local development detected. To enable developer mode, open DevTools Console and run:<br><code style='background:#181824; padding:4px 8px; border-radius:4px; color:#ffb86c; font-family:monospace; display:inline-block; margin-top:8px;'>localStorage.setItem(\"sfi_dev_mode\", \"active\")</code><br>then reload the page.";
-        }
-        
         document.documentElement.innerHTML = `
             <html data-theme="dark">
                 <head>
@@ -42,7 +37,7 @@
                 </head>
                 <body>
                     <h2>Access Denied</h2>
-                    <p>${msg}</p>
+                    <p>This website copy is protected. Running offline or on unauthorized mirrors is prohibited.</p>
                 </body>
             </html>
         `;
