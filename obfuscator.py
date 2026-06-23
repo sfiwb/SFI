@@ -73,10 +73,10 @@ def xor_encrypt(content, key):
 def inline_local_js(html_content):
     """Inline all local script tags into the HTML content to protect them inside the encrypted body."""
     # Matches <script src="script.js"></script> including tolerant end tags like </script > or </script foo="bar">
-    script_pattern = r'<script[^>]*src=["\']([^"\']+)["\'][^>]*>\s*</script\b[^>]*>'
+    script_pattern = r'<script\b[^>]*\bsrc\s*=\s*([\'"])([^\'"]+)\1[^>]*>\s*</\s*script(?:\s+[^>]*)?>'
     
     def replace_script(match):
-        src = match.group(1)
+        src = match.group(2)
         # Skip absolute/CDN links
         if src.startswith("http://") or src.startswith("https://") or src.startswith("//"):
             return match.group(0)
