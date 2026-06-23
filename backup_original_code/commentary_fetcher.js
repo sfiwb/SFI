@@ -271,6 +271,13 @@
                 // Clear the container
                 container.innerHTML = '';
 
+                const escapeHtml = (value) => String(value)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+
                 posts.forEach((post, index) => {
                     const title = post.title && post.title.rendered ? post.title.rendered : 'নিবন্ধ';
                     const link = post.link || 'https://chhatrasangram.org';
@@ -279,6 +286,14 @@
                     const authorAvatar = getAuthorAvatar(post);
                     const excerpt = getExcerpt(post);
                     const dateFormatted = formatDate(post.date);
+
+                    const safeTitle = escapeHtml(title);
+                    const safeLink = escapeHtml(link);
+                    const safeImageUrl = escapeHtml(imageUrl);
+                    const safeAuthor = escapeHtml(author);
+                    const safeAuthorAvatar = escapeHtml(authorAvatar);
+                    const safeExcerpt = escapeHtml(excerpt);
+                    const safeDateFormatted = escapeHtml(dateFormatted);
 
                     // Create the article card element
                     const cardCol = document.createElement('div');
@@ -289,24 +304,24 @@
                     cardCol.innerHTML = `
                         <div class="testimonial-item glass-card p-3 h-100 d-flex flex-column justify-content-between">
                             <div>
-                                <a href="${link}" class="d-block mb-3 article-trigger">
+                                <a href="${safeLink}" class="d-block mb-3 article-trigger">
                                     <div class="ratio ratio-16x9 rounded overflow-hidden border border-secondary border-opacity-25">
-                                        <img src="${imageUrl}" alt="${title}" class="img-fluid object-fit-cover w-100 h-100">
+                                        <img src="${safeImageUrl}" alt="${safeTitle}" class="img-fluid object-fit-cover w-100 h-100">
                                     </div>
                                 </a>
                                 <h5 class="fw-bold text-header mb-2">
-                                    <a href="${link}" class="text-header hover-text-danger decoration-none article-trigger">${title}</a>
+                                    <a href="${safeLink}" class="text-header hover-text-danger decoration-none article-trigger">${safeTitle}</a>
                                 </h5>
-                                <p class="text-body small mb-3">${excerpt}</p>
+                                <p class="text-body small mb-3">${safeExcerpt}</p>
                             </div>
                             <div class="testimonial-footer border-top border-secondary border-opacity-25 pt-2">
                                 <div class="testimonial-author d-flex align-items-center">
-                                    <img src="${authorAvatar}" alt="${author}"
+                                    <img src="${safeAuthorAvatar}" alt="${safeAuthor}"
                                          class="img-fluid rounded-circle me-2 border border-2 border-danger"
                                          style="width: 40px; height: 40px; object-fit: cover;">
                                     <div>
-                                        <h6 class="fw-bold text-header mb-0 fs-6">${author}</h6>
-                                        <span class="small text-muted">${dateFormatted}</span>
+                                        <h6 class="fw-bold text-header mb-0 fs-6">${safeAuthor}</h6>
+                                        <span class="small text-muted">${safeDateFormatted}</span>
                                     </div>
                                 </div>
                             </div>
