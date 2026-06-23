@@ -14,9 +14,15 @@
     // 1. Strict Domain Lock
     // Allow only official domains, localhost, and local IP loops for development.
     // Blocks offline viewing (file://) and unauthorized clone sites.
-    const allowedHosts = ["sfiwb.org", "www.sfiwb.org", "sfiwb.github.io", "localhost", "127.0.0.1", "::1"];
+    const allowedHosts = ["sfiwb.org", "www.sfiwb.org", "sfiwb.github.io"];
+    const localHosts = ["localhost", "127.0.0.1", "::1"];
     const hostname = window.location.hostname;
-    if (window.location.protocol === "file:" || (hostname && !allowedHosts.includes(hostname))) {
+    
+    const isLocalhost = localHosts.includes(hostname);
+    const isDevMode = localStorage.getItem("sfi_dev_mode") === "active";
+    
+    if (window.location.protocol === "file:" || 
+        (!allowedHosts.includes(hostname) && !(isLocalhost && isDevMode))) {
         document.documentElement.innerHTML = `
             <html data-theme="dark">
                 <head>
@@ -36,13 +42,46 @@
         throw new Error("Security Lock: Unauthorized execution domain.");
     }
 
-    // 2. Anti-Debugging / DevTools Freeze
-    // Continually triggers debugger breakpoint, freezing DevTools if opened.
-    setInterval(function() {
-        (function() {
-            return false;
-        }['constructor']('debugger')(['call']()));
-    }, 100);
+    // 2. Anti-Frame / Frame Busting
+    // Prevent the website from being loaded inside an iframe (common in phishing/mirroring templates)
+    if (window.self !== window.top) {
+        window.top.location = window.self.location;
+    }
+
+    // 3. Anti-Debugging / DevTools Freeze & Console Blocker
+    // Continually triggers debugger breakpoint, disables developer console messages, 
+    // and redirects the browser window to about:blank if DevTools is opened.
+    (function() {
+        const noop = () => {};
+        const originalLog = console.log;
+        
+        // Disable Console standard outputs
+        window.console.log = noop;
+        window.console.warn = noop;
+        window.console.error = noop;
+        window.console.info = noop;
+        window.console.debug = noop;
+        window.console.clear = noop;
+
+        // DevTools detection via regular expression evaluation trigger
+        const devtoolsDetector = /./;
+        devtoolsDetector.toString = function() {
+            window.location.replace("about:blank");
+            return "";
+        };
+
+        // Continually inspect if console is opened
+        setInterval(function() {
+            originalLog(devtoolsDetector);
+        }, 500);
+
+        // Infinite Debugger Trap
+        setInterval(function() {
+            (function() {
+                return false;
+            }['constructor']('debugger')(['call']()));
+        }, 100);
+    })();
 })();
 
 // Firebase Configuration
