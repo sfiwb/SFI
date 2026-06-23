@@ -721,7 +721,7 @@
     <!-- Back to Top -->
     <script>
         let selectedAmount = 500;
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynylDoj5mlVnYf7kFpu31oIGSrOVEiW-Z-k3cOoaBXfiJmoqKGT5rBrYhs6wvPwUZceA/exec";
+        const DONATE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynylDoj5mlVnYf7kFpu31oIGSrOVEiW-Z-k3cOoaBXfiJmoqKGT5rBrYhs6wvPwUZceA/exec";
 
         function selectAmount(btn, amount) {
             document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
@@ -768,7 +768,7 @@
 
             try {
                 // Call Google Apps Script Web App
-                const response = await fetch(APPS_SCRIPT_URL, {
+                const response = await fetch(DONATE_APPS_SCRIPT_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'text/plain'
