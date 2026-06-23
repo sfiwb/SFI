@@ -848,10 +848,31 @@ const VideoGallery = {
 
     if (!player) return;
 
+    const getSafeVideoUrl = rawUrl => {
+      if (!rawUrl) return null;
+      try {
+        const parsed = new URL(rawUrl, window.location.origin);
+        const allowedHosts = new Set([
+          'www.youtube.com',
+          'youtube.com',
+          'youtu.be',
+          'www.youtube-nocookie.com'
+        ]);
+        if (parsed.protocol !== 'https:') return null;
+        if (!allowedHosts.has(parsed.hostname)) return null;
+        return parsed.toString();
+      } catch (e) {
+        return null;
+      }
+    };
+
     const playVideo = (url, title) => {
+      const safeUrl = getSafeVideoUrl(url);
+      if (!safeUrl) return;
+
       player.textContent = '';
       const iframe = document.createElement('iframe');
-      iframe.setAttribute('src', `${url}?autoplay=1`);
+      iframe.setAttribute('src', `${safeUrl}?autoplay=1`);
       iframe.setAttribute('title', title);
       iframe.setAttribute('frameborder', '0');
       iframe.setAttribute(
@@ -867,9 +888,9 @@ const VideoGallery = {
 
     if (iframeMock) {
       iframeMock.addEventListener('click', () => {
-        const url = iframeMock.getAttribute('data-current-url');
+        const rawUrl = iframeMock.getAttribute('data-current-url');
         const title = iframeMock.getAttribute('data-current-title') || 'Video';
-        playVideo(url, title);
+        playVideo(rawUrl, title);
       });
     }
 
@@ -878,9 +899,9 @@ const VideoGallery = {
         playlistItems.forEach(i => i.classList.remove('active-item'));
         item.classList.add('active-item');
 
-        const url = item.getAttribute('data-video-url');
+        const rawUrl = item.getAttribute('data-video-url');
         const title = item.querySelector('.playlist-title')?.textContent || 'Video';
-        playVideo(url, title);
+        playVideo(rawUrl, title);
       });
     });
   }
