@@ -1848,82 +1848,173 @@ textarea.form-input {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #0c0d10;
+    background: radial-gradient(circle at center, #0e0f12 0%, #040507 100%);
     z-index: 9999;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.6s cubic-bezier(0.77, 0, 0.175, 1), visibility 0.6s ease;
+    opacity: 1;
+    visibility: visible;
+    transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.6s cubic-bezier(0.85, 0, 0.15, 1), visibility 0.6s ease;
 }
 
 [data-theme="light"] #preloader {
-    background-color: #f8fafc;
+    background: radial-gradient(circle at center, #ffffff 0%, #edf2f7 100%);
+}
+
+#preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.05);
+}
+
+.preloader-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    transition: transform 0.5s ease;
+}
+
+[data-theme="light"] .preloader-inner {
+    background: rgba(0, 0, 0, 0.01);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
 }
 
 .preloader-logo-wrap {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
+/* Futuristic Gyroscopic Rings (Atomic Model) */
 .preloader-ring {
     position: absolute;
-    width: 140px;
-    height: 140px;
-    border: 3px dashed var(--color-primary);
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    animation: preloader-spin 4s linear infinite;
+    border: 2px solid transparent;
+    border-top-color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+    animation: preloader-orbit-one 2.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+    opacity: 0.85;
+}
+
+.preloader-logo-wrap::before {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-left-color: #ff5252;
+    border-right-color: #ff5252;
+    animation: preloader-orbit-two 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+    opacity: 0.75;
+}
+
+.preloader-logo-wrap::after {
+    content: "";
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    border: 1.5px dashed var(--text-muted);
+    animation: preloader-spin-reverse 6s linear infinite;
+    opacity: 0.35;
 }
 
 .preloader-star {
-    width: 80px;
-    height: 80px;
+    width: 64px;
+    height: 64px;
     fill: var(--color-primary);
-    filter: drop-shadow(0 0 15px rgba(211, 26, 39, 0.5));
-    animation: preloader-pulse 1.8s infinite ease-in-out;
+    filter: drop-shadow(0 0 25px rgba(211, 26, 39, 0.75));
+    animation: preloader-pulse-glow 1.5s infinite ease-in-out;
     z-index: 2;
+    transform-origin: center;
 }
 
 .preloader-text {
     font-family: var(--font-heading);
-    font-size: 2rem;
-    font-weight: 800;
+    font-size: 2.2rem;
+    font-weight: 900;
     color: var(--text-main);
-    letter-spacing: 0.5px;
-    margin-bottom: 10px;
+    letter-spacing: 6px;
+    margin-bottom: 8px;
     opacity: 0;
     transform: translateY(15px);
-    animation: preloader-fade-in 0.8s forwards 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    animation: preloader-fade-in 0.8s forwards 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    text-shadow: 0 0 20px rgba(255,255,255,0.05);
+}
+
+[data-theme="light"] .preloader-text {
+    color: #0f172a;
 }
 
 .preloader-subtext {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     color: var(--color-primary);
-    font-weight: 700;
-    letter-spacing: 3px;
+    font-weight: 800;
+    letter-spacing: 4px;
     text-transform: uppercase;
     opacity: 0;
     transform: translateY(15px);
-    animation: preloader-fade-in 0.8s forwards 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: preloader-fade-in 0.8s forwards 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes preloader-pulse {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(211, 26, 39, 0.5)); }
-    50% { transform: scale(1.12); filter: drop-shadow(0 0 30px rgba(211, 26, 39, 0.8)); }
+/* Glowing progress line simulation */
+.preloader-inner::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    animation: preloader-bar-slide 2s infinite ease-in-out;
+    opacity: 0.8;
 }
 
-@keyframes preloader-spin {
-    100% { transform: rotate(360deg); }
+@keyframes preloader-orbit-one {
+    0% { transform: rotate3d(1, 1, 1, 0deg); }
+    100% { transform: rotate3d(1, 1, 1, 360deg); }
+}
+
+@keyframes preloader-orbit-two {
+    0% { transform: rotate3d(1, -1, 1, 360deg); }
+    100% { transform: rotate3d(1, -1, 1, 0deg); }
+}
+
+@keyframes preloader-spin-reverse {
+    100% { transform: rotate(-360deg); }
+}
+
+@keyframes preloader-pulse-glow {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(211, 26, 39, 0.75)); }
+    50% { transform: scale(1.15); filter: drop-shadow(0 0 35px rgba(211, 26, 39, 1)); }
 }
 
 @keyframes preloader-fade-in {
     to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes preloader-bar-slide {
+    0% { transform: scaleX(0); opacity: 0.2; }
+    50% { transform: scaleX(1); opacity: 1; }
+    100% { transform: scaleX(0); opacity: 0.2; }
 }
 
 /* --- DROPDOWN MENUS --- */
@@ -2859,69 +2950,7 @@ input, textarea { font-family: inherit; outline: none; }
 /* ==============================
    PRELOADER
    ============================== */
-.preloader {
-  position: fixed;
-  inset: 0;
-  background: #050508;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
-}
-
-.preloader.hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.preloader-inner {
-  text-align: center;
-}
-
-.preloader-star {
-  font-size: 80px;
-  color: var(--brand-red);
-  animation: starpulse 2s ease-in-out infinite;
-  display: block;
-  margin-bottom: 20px;
-  text-shadow: 0 0 40px rgba(204,0,0,0.8);
-  font-family: Arial, sans-serif;
-}
-
-@keyframes starpulse {
-  0%, 100% { transform: scale(1) rotate(0deg); text-shadow: 0 0 40px rgba(204,0,0,0.8); }
-  50% { transform: scale(1.2) rotate(180deg); text-shadow: 0 0 60px rgba(204,0,0,1); }
-}
-
-.preloader-text {
-  font-family: var(--font-bengali);
-  font-size: 1.2rem;
-  color: var(--text-primary);
-  margin-bottom: 20px;
-  opacity: 0.9;
-}
-
-.preloader-bar {
-  width: 200px;
-  height: 3px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 3px;
-  overflow: hidden;
-  margin: 0 auto;
-}
-
-.preloader-fill {
-  height: 100%;
-  background: var(--gradient-brand);
-  border-radius: 3px;
-  animation: preload-fill 1.8s ease-in-out forwards;
-}
-
-@keyframes preload-fill {
-  0% { width: 0; }
-  100% { width: 100%; }
-}
+/* Redundant preloader styling rules removed. The primary modern gyroscopic rules are defined above. */
 
 /* ==============================
    THEME FAB
