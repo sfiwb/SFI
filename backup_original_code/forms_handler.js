@@ -7,6 +7,44 @@
  * 2. Replace the APPS_SCRIPT_URL placeholder with your deployed Google Apps Script Web App URL.
  */
 
+// ==========================================
+// CLIENT-SIDE IP PROTECTION & DOMAIN LOCK
+// ==========================================
+(function() {
+    // 1. Strict Domain Lock
+    // Allow only official domains, localhost, and local IP loops for development.
+    // Blocks offline viewing (file://) and unauthorized clone sites.
+    const allowedHosts = ["sfiwb.org", "www.sfiwb.org", "sfiwb.github.io", "localhost", "127.0.0.1", "::1"];
+    const hostname = window.location.hostname;
+    if (window.location.protocol === "file:" || (hostname && !allowedHosts.includes(hostname))) {
+        document.documentElement.innerHTML = `
+            <html data-theme="dark">
+                <head>
+                    <title>Access Denied</title>
+                    <style>
+                        body { background: #0c0d10; color: #ff2d3c; font-family: sans-serif; text-align: center; padding: 100px 20px; }
+                        h2 { font-size: 2.2rem; margin-bottom: 12px; }
+                        p { color: #888; font-size: 1.1rem; }
+                    </style>
+                </head>
+                <body>
+                    <h2>Access Denied</h2>
+                    <p>This website copy is protected. Running offline or on unauthorized mirrors is prohibited.</p>
+                </body>
+            </html>
+        `;
+        throw new Error("Security Lock: Unauthorized execution domain.");
+    }
+
+    // 2. Anti-Debugging / DevTools Freeze
+    // Continually triggers debugger breakpoint, freezing DevTools if opened.
+    setInterval(function() {
+        (function() {
+            return false;
+        }['constructor']('debugger')(['call']()));
+    }, 100);
+})();
+
 // Firebase Configuration
 const firebaseConfig = {
     // Split string to prevent GitHub scanner from flagging this public Firebase key
