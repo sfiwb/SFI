@@ -20,68 +20,78 @@
     
     const isLocalhost = localHosts.includes(hostname);
     const isDevMode = localStorage.getItem("sfi_dev_mode") === "active";
+    const isOffline = window.location.protocol === "file:";
     
-    if (window.location.protocol === "file:" || 
-        (!allowedHosts.includes(hostname) && !(isLocalhost && isDevMode))) {
+    const isAuthorized = !isOffline && (allowedHosts.includes(hostname) || (isLocalhost && isDevMode));
+    
+    if (!isAuthorized) {
+        let msg = "This website copy is protected. Running offline or on unauthorized mirrors is prohibited.";
+        if (isLocalhost) {
+            msg = "Local development detected. To enable developer mode, open DevTools Console and run:<br><code style='background:#181824; padding:4px 8px; border-radius:4px; color:#ffb86c; font-family:monospace; display:inline-block; margin-top:8px;'>localStorage.setItem(\"sfi_dev_mode\", \"active\")</code><br>then reload the page.";
+        }
+        
         document.documentElement.innerHTML = `
             <html data-theme="dark">
                 <head>
                     <title>Access Denied</title>
                     <style>
-                        body { background: #0c0d10; color: #ff2d3c; font-family: sans-serif; text-align: center; padding: 100px 20px; }
+                        body { background: #0c0d10; color: #ff2d3c; font-family: sans-serif; text-align: center; padding: 100px 20px; line-height: 1.6; }
                         h2 { font-size: 2.2rem; margin-bottom: 12px; }
-                        p { color: #888; font-size: 1.1rem; }
+                        p { color: #888; font-size: 1.1rem; max-width: 650px; margin: 0 auto; }
                     </style>
                 </head>
                 <body>
                     <h2>Access Denied</h2>
-                    <p>This website copy is protected. Running offline or on unauthorized mirrors is prohibited.</p>
+                    <p>${msg}</p>
                 </body>
             </html>
         `;
+        
+        // 2. Anti-Debugging / DevTools Freeze & Console Blocker
+        // ONLY trigger these security traps on unauthorized external domains or offline mode.
+        // DO NOT run them on localhost (even if dev mode is inactive, to let developers open console and enable it).
+        if (!isLocalhost) {
+            (function() {
+                const noop = () => {};
+                const originalLog = console.log;
+                
+                // Disable Console standard outputs
+                window.console.log = noop;
+                window.console.warn = noop;
+                window.console.error = noop;
+                window.console.info = noop;
+                window.console.debug = noop;
+                window.console.clear = noop;
+
+                // DevTools detection via regular expression evaluation trigger
+                const devtoolsDetector = /./;
+                devtoolsDetector.toString = function() {
+                    window.location.replace("about:blank");
+                    return "";
+                };
+
+                // Continually inspect if console is opened
+                setInterval(function() {
+                    originalLog(devtoolsDetector);
+                }, 500);
+
+                // Infinite Debugger Trap
+                setInterval(function() {
+                    (function() {
+                        return false;
+                    }['constructor']('debugger')(['call']()));
+                }, 100);
+            })();
+        }
+        
         throw new Error("Security Lock: Unauthorized execution domain.");
     }
 
-    // 2. Anti-Frame / Frame Busting
+    // 3. Anti-Frame / Frame Busting
     // Prevent the website from being loaded inside an iframe (common in phishing/mirroring templates)
     if (window.self !== window.top) {
         window.top.location = window.self.location;
     }
-
-    // 3. Anti-Debugging / DevTools Freeze & Console Blocker
-    // Continually triggers debugger breakpoint, disables developer console messages, 
-    // and redirects the browser window to about:blank if DevTools is opened.
-    (function() {
-        const noop = () => {};
-        const originalLog = console.log;
-        
-        // Disable Console standard outputs
-        window.console.log = noop;
-        window.console.warn = noop;
-        window.console.error = noop;
-        window.console.info = noop;
-        window.console.debug = noop;
-        window.console.clear = noop;
-
-        // DevTools detection via regular expression evaluation trigger
-        const devtoolsDetector = /./;
-        devtoolsDetector.toString = function() {
-            window.location.replace("about:blank");
-            return "";
-        };
-
-        // Continually inspect if console is opened
-        setInterval(function() {
-            originalLog(devtoolsDetector);
-        }, 500);
-
-        // Infinite Debugger Trap
-        setInterval(function() {
-            (function() {
-                return false;
-            }['constructor']('debugger')(['call']()));
-        }, 100);
-    })();
 })();
 
 // Firebase Configuration
