@@ -248,6 +248,7 @@
         <!-- Hero Section -->
         <section class="page-hero">
             <div class="container">
+                <div id="mainGeneratorArea">
                 <div class="row gy-4 align-items-stretch">
                     <!-- Left: Form -->
                     <div class="col-lg-6" data-aos="fade-right">
@@ -406,6 +407,81 @@
                         </button>
                     </div>
                 </div>
+                </div> <!-- Ends mainGeneratorArea -->
+
+                <!-- ======================================================= -->
+                <!-- VERIFICATION LOADING STATE                               -->
+                <!-- ======================================================= -->
+                <div id="verificationLoader" class="d-none text-center py-5">
+                    <div class="spinner-border text-danger mb-4" role="status" style="width:3.5rem;height:3.5rem;border-width:4px;">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <h4 class="text-white fw-bold" style="font-family:'Noto Serif Bengali',serif;">সমর্থক বিবরণী যাচাই করা হচ্ছে...</h4>
+                    <p class="text-white-50 small">দয়া করে একটু অপেক্ষা করুন</p>
+                </div>
+
+                <!-- ======================================================= -->
+                <!-- VERIFICATION DISPLAY VIEW                                -->
+                <!-- ======================================================= -->
+                <div id="verificationViewRow" class="d-none row justify-content-center py-4">
+                    <div class="col-lg-9 col-xl-8">
+                        <div class="generator-card p-4 p-md-5 text-center" style="background:rgba(12,13,16,0.9);border:2px solid rgba(255,45,60,0.25);border-radius:20px;backdrop-filter:blur(16px);box-shadow:0 0 40px rgba(255,45,60,0.1);">
+
+                            <!-- Verified Badge -->
+                            <div class="d-flex align-items-center justify-content-center mb-3">
+                                <div class="badge bg-success-subtle text-success border border-success px-3 py-2 rounded-pill fs-6">
+                                    <i class="fas fa-shield-alt me-1"></i> SFI Digital Supporter — Verified
+                                </div>
+                            </div>
+
+                            <h2 class="text-white fw-bold mb-1" style="font-family:'Noto Serif Bengali',serif;">সমর্থক যাচাইকরণ</h2>
+                            <p class="text-white-50 mb-4" style="font-size:0.92rem;">এই কমরেড SFI পশ্চিমবঙ্গ রাজ্য কমিটির ডিজিটাল সমর্থক হিসেবে নিবন্ধিত।</p>
+
+                            <!-- Rendered Card Image -->
+                            <div class="mx-auto mb-4" style="max-width:680px;border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.6);">
+                                <img id="verificationCardImage" src="" alt="SFI Supporter Card" style="width:100%;height:auto;display:block;">
+                            </div>
+
+                            <!-- Info Grid -->
+                            <div class="text-start px-md-3 mb-4">
+                                <h5 class="text-danger fw-bold mb-3 border-bottom border-secondary pb-2" style="font-family:'Noto Serif Bengali',serif;">
+                                    <i class="fas fa-info-circle me-1"></i>নিবন্ধিত তথ্য (Registered Info)
+                                </h5>
+                                <div class="row g-3 small">
+                                    <div class="col-sm-6 text-white-50"><strong class="text-white">নাম (Name):</strong><br><span id="viewName" class="text-white fs-6 fw-bold"></span></div>
+                                    <div class="col-sm-6 text-white-50"><strong class="text-white">আইডি (ID):</strong><br><span id="viewId" class="text-danger fs-6 fw-bold"></span></div>
+                                    <div class="col-sm-6 text-white-50"><strong class="text-white">জেলা (District):</strong><br><span id="viewDistrict" class="text-white"></span></div>
+                                    <div class="col-sm-6 text-white-50"><strong class="text-white">ভূমিকা (Role):</strong><br><span id="viewRole" class="text-white"></span></div>
+                                    <div class="col-sm-6 text-white-50"><strong class="text-white">ফোন (Phone):</strong><br><span id="viewPhone" class="text-white"></span></div>
+                                    <div class="col-sm-6 text-white-50"><strong class="text-white">ইমেল (Email):</strong><br><span id="viewEmail" class="text-white"></span></div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="d-flex flex-wrap justify-content-center gap-3">
+                                <button type="button" id="viewDownloadBtn" class="btn text-white fw-bold px-4 py-2" style="background:linear-gradient(135deg,#ff2d3c 0%,#c81e2b 100%);border-radius:50px;border:none;box-shadow:0 4px 15px rgba(255,45,60,0.4);">
+                                    <i class="fas fa-download me-1"></i>ডাউনলোড করুন (Download Card)
+                                </button>
+                                <a href="card-generator.html" class="btn btn-outline-light px-4 py-2 rounded-pill fw-bold">
+                                    <i class="fas fa-plus me-1"></i>নতুন কার্ড তৈরি করুন
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ======================================================= -->
+                <!-- VERIFICATION ERROR STATE                                 -->
+                <!-- ======================================================= -->
+                <div id="verificationError" class="d-none text-center py-5">
+                    <div class="text-danger mb-3"><i class="fas fa-exclamation-triangle fa-3x"></i></div>
+                    <h4 class="text-white fw-bold" style="font-family:'Noto Serif Bengali',serif;">সমর্থক বিবরণী খুঁজে পাওয়া যায়নি!</h4>
+                    <p class="text-white-50 mb-4" id="verificationErrorMsg">আইডিটি সঠিক কিনা নিশ্চিত করুন।</p>
+                    <a href="card-generator.html" class="btn btn-outline-danger px-4 py-2 rounded-pill fw-bold">
+                        <i class="fas fa-arrow-left me-1"></i>কার্ড জেনারেটরে ফিরে যান
+                    </a>
+                </div>
+
             </div> <!-- Ends container -->
         </section> <!-- Ends section -->
     </main>
@@ -1538,12 +1614,43 @@
                             }
 
                             if (existingDoc) {
-                                // Supporter already exists! Reuse old ID
+                                // Supporter already exists! Load ALL old data from DB — do NOT overwrite anything
                                 const data = existingDoc.data();
                                 supporterId = data.supporterId;
-                                
-                                formSuccess.innerHTML = `<i class="fas fa-check-circle me-1"></i>আপনার তথ্য ডেটাবেসে আগে থেকেই নিবন্ধিত আছে। আইডি: <strong>${supporterId}</strong>`;
-                                formSuccess.classList.remove('d-none');
+                                currentId = supporterId;
+
+                                // Use old data for rendering (ignore form values completely)
+                                const oldDistrictBengali = districtBengaliNames[data.district || 'wb-kolkata'] || data.districtName || data.district || '';
+
+                                const renderWithOldData = () => {
+                                    drawCard(
+                                        data.name || '',
+                                        supporterId,
+                                        oldDistrictBengali,
+                                        data.role || '',
+                                        data.slogan || '',
+                                        data.style || 'supporter-card',
+                                        true,
+                                        data.phone || '',
+                                        data.email || ''
+                                    );
+                                    formSuccess.innerHTML = `<i class="fas fa-check-circle me-1"></i>আপনার তথ্য আগে থেকেই নিবন্ধিত। আইডি: <strong>${supporterId}</strong>`;
+                                    formSuccess.classList.remove('d-none');
+                                    shareSection.classList.remove('d-none');
+                                    if (bottomDownloadCardBtn) bottomDownloadCardBtn.classList.remove('d-none');
+                                    showVerificationModal(data, supporterId);
+                                };
+
+                                if (data.photo) {
+                                    const oldImg = new Image();
+                                    oldImg.onload = () => { userPhoto = oldImg; renderWithOldData(); };
+                                    oldImg.onerror = () => { userPhoto = null; renderWithOldData(); };
+                                    oldImg.src = data.photo;
+                                } else {
+                                    userPhoto = null;
+                                    renderWithOldData();
+                                }
+
                                 dbSuccess = true;
                             } else {
                                 // Reuse the currentId generated on-the-fly, or fallback if empty
@@ -1607,8 +1714,39 @@
 
                         if (match) {
                             supporterId = match.supporterId;
-                            formSuccess.innerHTML = `<i class="fas fa-info-circle me-1"></i>অফলাইন মোড: পূর্বের সংরক্ষিত আইডি উদ্ধার করা হলো: <strong>${supporterId}</strong>`;
-                            formSuccess.classList.remove('d-none');
+                            currentId = supporterId;
+
+                            // Use old locally-stored data and photo — do not overwrite
+                            const oldLocalDistrictBengali = districtBengaliNames[match.district || 'wb-kolkata'] || match.district || '';
+
+                            const renderWithLocalOldData = () => {
+                                drawCard(
+                                    match.name || '',
+                                    supporterId,
+                                    oldLocalDistrictBengali,
+                                    match.role || '',
+                                    match.slogan || '',
+                                    match.style || 'supporter-card',
+                                    true,
+                                    match.phone || '',
+                                    match.email || ''
+                                );
+                                formSuccess.innerHTML = `<i class="fas fa-info-circle me-1"></i>অফলাইন মোড: পূর্বের সংরক্ষিত আইডি: <strong>${supporterId}</strong>`;
+                                formSuccess.classList.remove('d-none');
+                                shareSection.classList.remove('d-none');
+                                if (bottomDownloadCardBtn) bottomDownloadCardBtn.classList.remove('d-none');
+                                showVerificationModal(match, supporterId);
+                            };
+
+                            if (match.photo) {
+                                const localImg = new Image();
+                                localImg.onload = () => { userPhoto = localImg; renderWithLocalOldData(); };
+                                localImg.onerror = () => { userPhoto = null; renderWithLocalOldData(); };
+                                localImg.src = match.photo;
+                            } else {
+                                userPhoto = null;
+                                renderWithLocalOldData();
+                            }
                         } else {
                             supporterId = currentId;
                             if (!supporterId || !supporterId.startsWith(`SFI-WB-${districtCode}-`)) {
@@ -1695,173 +1833,186 @@
                 }
             });
 
-            // Check if there is an ID query parameter in the URL (e.g. ?id=SFI-WB-KOL-95793)
+            // ─────────────────────────────────────────────────────────────────
+            // VERIFICATION URL HANDLER
+            // When ?id=... is in the URL, the page switches to read-only
+            // "Display Mode": form is hidden, a spinner appears while the
+            // supporter record is loaded from Firestore / localStorage, then
+            // the in-page view panel and the verification modal both pop up,
+            // rendering the card with the ORIGINAL stored data and photo.
+            // ─────────────────────────────────────────────────────────────────
             async function loadSupporterFromUrl() {
                 const urlParams = new URLSearchParams(window.location.search);
                 const urlId = urlParams.get('id');
-                if (!urlId) return;
+                if (!urlId) return;   // Normal generator mode — nothing to do
 
-                console.log("Found Supporter ID in URL query parameter:", urlId);
-                
+                console.log("[VerificationMode] Detected ?id =", urlId);
+
+                // ── Switch UI immediately ─────────────────────────────────────
+                const mainArea = document.getElementById('mainGeneratorArea');
+                const loader   = document.getElementById('verificationLoader');
+                const viewRow  = document.getElementById('verificationViewRow');
+                const errBox   = document.getElementById('verificationError');
+
+                if (mainArea) mainArea.classList.add('d-none');
+                if (loader)   loader.classList.remove('d-none');
+
                 let supporterData = null;
 
-                // 1. Try Firestore
+                // ── 1. Firestore ───────────────────────────────────────────────
                 if (typeof db !== 'undefined' && db !== null) {
                     try {
-                        const snap = await db.collection("supporters").where("supporterId", "==", urlId).get();
+                        const snap = await db.collection("supporters")
+                            .where("supporterId", "==", urlId).get();
                         if (!snap.empty) {
                             supporterData = snap.docs[0].data();
-                            console.log("Loaded supporter data from Firestore.");
+                            console.log("[VerificationMode] Loaded from Firestore.");
                         }
                     } catch (dbError) {
-                        console.error("Firestore fetch from URL query failed:", dbError);
+                        console.error("[VerificationMode] Firestore error:", dbError);
                     }
                 }
 
-                // 2. Try Google Sheets Apps Script query fallback
+                // ── 2. LocalStorage fallback ───────────────────────────────────
                 if (!supporterData) {
                     try {
-                        const response = await fetch(`${APPS_SCRIPT_URL}?action=getSupporter&id=${urlId}`);
-                        if (response.ok) {
-                            const result = await response.json();
-                            if (result && result.status === 'success' && result.data) {
-                                supporterData = result.data;
-                                console.log("Loaded supporter data from Google Sheets fallback successfully.");
-                            }
+                        const localRecords = JSON.parse(localStorage.getItem('sfi_supporters') || '[]');
+                        const m = localRecords.find(r => r.supporterId === urlId);
+                        if (m) {
+                            supporterData = {
+                                supporterId: m.supporterId,
+                                phone:  m.phone  || '',
+                                email:  m.email  || '',
+                                name:   m.name   || 'কমরেড',
+                                district: m.district || 'wb-kolkata',
+                                role:   m.role   || 'সমর্থক',
+                                slogan: m.slogan || 'স্বাধীনতা, গণতন্ত্র, সমাজতন্ত্র—নিপাত যাক সাম্রাজ্যবাদ!',
+                                style:  m.style  || 'supporter-card',
+                                photo:  m.photo  || ''
+                            };
+                            console.log("[VerificationMode] Loaded from localStorage.");
                         }
-                    } catch (err) {
-                        console.error("Apps Script fetch fallback failed:", err);
+                    } catch (lsErr) {
+                        console.error("[VerificationMode] localStorage error:", lsErr);
                     }
                 }
 
-                // 3. Try local storage fallback
-                if (!supporterData) {
-                    const localRecords = JSON.parse(localStorage.getItem('sfi_supporters') || '[]');
-                    const match = localRecords.find(r => r.supporterId === urlId);
-                    if (match) {
-                        supporterData = {
-                            supporterId: match.supporterId,
-                            phone: match.phone,
-                            email: match.email,
-                            name: match.name || "কমরেড (সংরক্ষিত)",
-                            district: match.district || "wb-kolkata",
-                            role: match.role || "সমর্থক",
-                            slogan: match.slogan || "স্বাধীনতা, গণতন্ত্র, সমাজতন্ত্র—নিপাত যাক সাম্রাজ্যবাদ!",
-                            style: match.style || "supporter-card",
-                            photo: match.photo || ""
-                        };
-                        console.log("Loaded supporter data from local storage fallback.");
-                    }
-                }
+                // ── Hide loader ────────────────────────────────────────────────
+                if (loader) loader.classList.add('d-none');
 
                 if (supporterData) {
-                    // Pre-fill form fields
-                    document.getElementById('studentName').value = supporterData.name || '';
-                    document.getElementById('studentPhone').value = supporterData.phone || '';
-                    document.getElementById('studentEmail').value = supporterData.email || '';
-                    document.getElementById('studentDistrict').value = supporterData.district || 'wb-kolkata';
-                    document.getElementById('studentRole').value = supporterData.role || 'সমর্থক';
-                    document.getElementById('studentSlogan').value = supporterData.slogan || 'স্বাধীনতা, গণতন্ত্র, সমাজতন্ত্র—নিপাত যাক সাম্রাজ্যবাদ!';
-                    
-                    if (supporterData.style) {
-                        document.getElementById('templateStyle').value = supporterData.style;
-                    }
-                    
                     currentId = supporterData.supporterId;
-                    
-                    // Load photo if available before rendering card
+
+                    // Pre-fill hidden form fields so canvas helpers resolve correctly
+                    const districtId = supporterData.district || 'wb-kolkata';
+                    document.getElementById('studentDistrict').value = districtId;
+                    if (supporterData.style)
+                        document.getElementById('templateStyle').value = supporterData.style;
+
+                    // Inner render function — called once photo is loaded (or not)
+                    const doRender = () => {
+                        const districtBengali = districtBengaliNames[districtId] ||
+                            document.getElementById('studentDistrict')
+                                .options[document.getElementById('studentDistrict').selectedIndex].text;
+
+                        // Draw the card with ALL original data
+                        drawCard(
+                            supporterData.name   || '',
+                            currentId,
+                            districtBengali,
+                            supporterData.role   || '',
+                            supporterData.slogan || '',
+                            supporterData.style  || 'supporter-card',
+                            true,
+                            supporterData.phone  || '',
+                            supporterData.email  || ''
+                        );
+
+                        // ── Populate the in-page verification view ────────────
+                        const imgData = canvas.toDataURL("image/png");
+                        const el = id => document.getElementById(id);
+                        el('verificationCardImage').src = imgData;
+                        el('viewName').textContent      = supporterData.name  || '';
+                        el('viewId').textContent        = currentId;
+                        el('viewDistrict').textContent  = districtBengali;
+                        el('viewRole').textContent      = supporterData.role  || '';
+                        el('viewPhone').textContent     = supporterData.phone || '';
+                        el('viewEmail').textContent     = supporterData.email || '';
+
+                        // Wire view-row download button
+                        const viewDlBtn = el('viewDownloadBtn');
+                        if (viewDlBtn) {
+                            viewDlBtn.onclick = () => {
+                                const link = document.createElement('a');
+                                link.download = `${(supporterData.name || 'SFI_Supporter').replace(/\s+/g,'_')}_sfi_card.png`;
+                                link.href = imgData;
+                                link.click();
+                            };
+                        }
+
+                        // Show the in-page view panel
+                        if (viewRow) viewRow.classList.remove('d-none');
+
+                        // Then pop up the verification modal on top
+                        showVerificationModal(supporterData, currentId);
+                    };
+
+                    // Load original photo first if it exists
                     if (supporterData.photo) {
                         const img = new Image();
-                        img.onload = function() {
-                            userPhoto = img;
-                            renderLoadedSupporter(supporterData);
-                        };
-                        img.onerror = function() {
-                            userPhoto = null;
-                            renderLoadedSupporter(supporterData);
-                        };
+                        img.onload  = () => { userPhoto = img;  doRender(); };
+                        img.onerror = () => { userPhoto = null; doRender(); };
                         img.src = supporterData.photo;
                     } else {
                         userPhoto = null;
-                        renderLoadedSupporter(supporterData);
+                        doRender();
                     }
+
                 } else {
-                    formError.innerHTML = `<i class="fas fa-exclamation-circle me-1"></i>আইডি <strong>${urlId}</strong> খুঁজে পাওয়া যায়নি।`;
-                    formError.classList.remove('d-none');
+                    // ID not found anywhere
+                    const errMsg = document.getElementById('verificationErrorMsg');
+                    if (errMsg)
+                        errMsg.textContent = `আইডি "${urlId}" ডেটাবেসে খুঁজে পাওয়া যায়নি। QR কোডটি নতুনভাবে স্ক্যান করুন।`;
+                    if (errBox) errBox.classList.remove('d-none');
                 }
             }
 
-            function renderLoadedSupporter(supporterData) {
-                // Trigger redraw
-                const districtSelect = document.getElementById('studentDistrict');
-                const districtId = districtSelect.value;
-                const districtBengali = districtBengaliNames[districtId] || districtSelect.options[districtSelect.selectedIndex].text;
-                const style = document.getElementById('templateStyle').value;
-                
-                drawCard(
-                    supporterData.name || '',
-                    currentId,
-                    districtBengali,
-                    supporterData.role || '',
-                    supporterData.slogan || '',
-                    style,
-                    true,
-                    supporterData.phone || '',
-                    supporterData.email || ''
-                );
-
-                // Show download/share area and set up sharing links
-                shareSection.classList.remove('d-none');
-                if (bottomDownloadCardBtn) {
-                    bottomDownloadCardBtn.classList.remove('d-none');
-                }
-                
-                const shareUrl = "https://sfiwb.github.io/SFI/";
-                const encodedText = encodeURIComponent(`আমি SFI-এর ডিজিটাল সমর্থক কার্ড ডাউনলোড করেছি। আমার আইডি: ${currentId}। আপনিও যোগ দিন এবং আপনার কার্ড ডাউনলোড করুন: ${shareUrl}`);
-                shareWa.href = `https://api.whatsapp.com/send?text=${encodedText}`;
-                shareFb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
-                shareTw.href = `https://twitter.com/intent/tweet?text=${encodedText}`;
-
-                formSuccess.innerHTML = `<i class="fas fa-check-circle me-1"></i>সমর্থক আইডি লোড করা হয়েছে: <strong>${currentId}</strong>`;
-                formSuccess.classList.remove('d-none');
-                formError.classList.add('d-none');
-
-                // Pop up the verification display modal
-                showVerificationModal(supporterData, currentId);
-            }
-
+            // ─────────────────────────────────────────────────────────────────
+            // VERIFICATION MODAL — shared by URL loads AND duplicate-match path
+            // Always renders from the data object passed in; never reads the form.
+            // ─────────────────────────────────────────────────────────────────
             function showVerificationModal(supporterData, id) {
-                // Populate text details
-                document.getElementById('modalName').textContent = supporterData.name || '';
-                document.getElementById('modalId').textContent = id;
-                
-                const districtId = supporterData.district || 'wb-kolkata';
+                const districtId      = supporterData.district || 'wb-kolkata';
                 const districtBengali = districtBengaliNames[districtId] || districtId;
-                document.getElementById('modalDistrict').textContent = districtBengali;
-                
-                document.getElementById('modalRole').textContent = supporterData.role || 'সমর্থক';
-                document.getElementById('modalPhone').textContent = supporterData.phone || '';
-                document.getElementById('modalEmail').textContent = supporterData.email || '';
-                
-                // Export canvas to image src
-                const imgData = canvas.toDataURL("image/png");
-                document.getElementById('modalCardImage').src = imgData;
-                
-                // Set download button handler
-                const modalDownloadBtn = document.getElementById('modalDownloadBtn');
-                modalDownloadBtn.onclick = function() {
-                    const link = document.createElement('a');
-                    const cleanName = (supporterData.name || 'SFI_Supporter').replace(/\s+/g, '_');
-                    link.download = `${cleanName}_sfi_card.png`;
-                    link.href = imgData;
-                    link.click();
-                };
-                
-                // Show modal
-                const myModal = new bootstrap.Modal(document.getElementById('verificationModal'));
-                myModal.show();
-            }
+                const imgData         = canvas.toDataURL("image/png");
 
+                // Populate modal fields
+                document.getElementById('modalName').textContent     = supporterData.name  || '';
+                document.getElementById('modalId').textContent       = id;
+                document.getElementById('modalDistrict').textContent = districtBengali;
+                document.getElementById('modalRole').textContent     = supporterData.role  || 'সমর্থক';
+                document.getElementById('modalPhone').textContent    = supporterData.phone || '';
+                document.getElementById('modalEmail').textContent    = supporterData.email || '';
+                document.getElementById('modalCardImage').src        = imgData;
+
+                // Download button inside modal
+                const modalDownloadBtn = document.getElementById('modalDownloadBtn');
+                if (modalDownloadBtn) {
+                    modalDownloadBtn.onclick = () => {
+                        const link = document.createElement('a');
+                        link.download = `${(supporterData.name || 'SFI_Supporter').replace(/\s+/g,'_')}_sfi_card.png`;
+                        link.href = imgData;
+                        link.click();
+                    };
+                }
+
+                // Show Bootstrap modal
+                const modalEl = document.getElementById('verificationModal');
+                if (modalEl) {
+                    const myModal = new bootstrap.Modal(modalEl);
+                    myModal.show();
+                }
+            }
             // Helper for downloading card image
             function triggerCardDownload() {
                 const name = document.getElementById('studentName').value.trim() || 'SFI_Supporter';
