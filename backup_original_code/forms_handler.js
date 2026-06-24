@@ -25,22 +25,50 @@
     const isAuthorized = !isOffline && (allowedHosts.includes(hostname) || (isLocalhost && isDevMode));
     
     if (!isAuthorized) {
-        document.documentElement.innerHTML = `
-            <html data-theme="dark">
-                <head>
-                    <title>Access Denied</title>
-                    <style>
-                        body { background: #0c0d10; color: #ff2d3c; font-family: sans-serif; text-align: center; padding: 100px 20px; line-height: 1.6; }
-                        h2 { font-size: 2.2rem; margin-bottom: 12px; }
-                        p { color: #888; font-size: 1.1rem; max-width: 650px; margin: 0 auto; }
-                    </style>
-                </head>
-                <body>
-                    <h2>Access Denied</h2>
-                    <p>This website copy is protected. Running offline or on unauthorized mirrors is prohibited.</p>
-                </body>
-            </html>
-        `;
+        if (isLocalhost) {
+            document.documentElement.innerHTML = `
+                <html data-theme="dark">
+                    <head>
+                        <title>Developer Access Needed | SFI WB</title>
+                        <style>
+                            body { background: #0c0d10; color: #ff2d3c; font-family: sans-serif; text-align: center; padding: 100px 20px; line-height: 1.6; }
+                            h2 { font-size: 2.2rem; margin-bottom: 12px; }
+                            p { color: #888; font-size: 1.1rem; max-width: 650px; margin: 0 auto; margin-bottom: 25px; }
+                            .btn-dev { background: #ff2d3c; color: #fff; border: none; padding: 12px 28px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+                            .btn-dev:hover { background: #e31b23; }
+                        </style>
+                        <script>
+                            window.activateDevMode = function() {
+                                localStorage.setItem("sfi_dev_mode", "active");
+                                window.location.reload();
+                            }
+                        </script>
+                    </head>
+                    <body>
+                        <h2>Developer Access Needed</h2>
+                        <p>You are running SFI West Bengal website locally. Please activate developer mode to enable editing and previewing pages.</p>
+                        <button class="btn-dev" onclick="window.activateDevMode()">Activate Developer Mode</button>
+                    </body>
+                </html>
+            `;
+        } else {
+            document.documentElement.innerHTML = `
+                <html data-theme="dark">
+                    <head>
+                        <title>Access Denied</title>
+                        <style>
+                            body { background: #0c0d10; color: #ff2d3c; font-family: sans-serif; text-align: center; padding: 100px 20px; line-height: 1.6; }
+                            h2 { font-size: 2.2rem; margin-bottom: 12px; }
+                            p { color: #888; font-size: 1.1rem; max-width: 650px; margin: 0 auto; }
+                        </style>
+                    </head>
+                    <body>
+                        <h2>Access Denied</h2>
+                        <p>This website copy is protected. Running offline or on unauthorized mirrors is prohibited.</p>
+                    </body>
+                </html>
+            `;
+        }
         
         // 2. Anti-Debugging / DevTools Freeze & Console Blocker
         // ONLY trigger these security traps on unauthorized external domains or offline mode.

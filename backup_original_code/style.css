@@ -5545,8 +5545,172 @@ html[data-theme="light"] .navmenu .nav-highlight-helpdesk {
     color: #1e7e34 !important;
     border-color: rgba(40, 167, 69, 0.3);
 }
+
 html[data-theme="light"] .navmenu .nav-highlight-helpdesk:hover {
     background: #28a745 !important;
     color: #ffffff !important;
 }
+
+
+/* --- SHAREABLE CARD GENERATOR --- */
+.generator-workspace {
+    padding: 60px 0;
+}
+.generator-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    height: 100%;
+    transition: all 0.3s ease;
+}
+.upload-drop-zone {
+    border: 2px dashed rgba(255, 45, 60, 0.3);
+    border-radius: var(--border-radius-sm);
+    padding: 25px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.01);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+.upload-drop-zone:hover, .upload-drop-zone.dragover {
+    border-color: var(--color-primary);
+    background: rgba(255, 45, 60, 0.05);
+}
+.upload-icon {
+    font-size: 2.2rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    transition: color 0.3s ease;
+}
+.upload-drop-zone:hover .upload-icon {
+    color: var(--color-primary);
+}
+.upload-preview-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+.upload-preview-thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--color-primary);
+}
+.preview-canvas-wrap {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 25px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+}
+#cardCanvas {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    display: block;
+}
+.generator-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.share-links-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+.share-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff !important;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+}
+.share-btn.whatsapp { background: #25d366; }
+.share-btn.facebook { background: #1877f2; }
+.share-btn.twitter { background: #1da1f2; }
+
+/* Refined Generator Inputs */
+.generator-card label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.5px;
+}
+.generator-card .form-control,
+.generator-card .form-select,
+.generator-card input,
+.generator-card select {
+    background: rgba(20, 10, 12, 0.55) !important;
+    border: 1px solid rgba(255, 45, 60, 0.22) !important;
+    color: #ffffff !important;
+    border-radius: 8px;
+    padding: 12px 15px !important;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.generator-card .form-control::placeholder,
+.generator-card input::placeholder {
+    color: rgba(255, 255, 255, 0.35) !important;
+}
+.generator-card .form-control:focus,
+.generator-card .form-select:focus,
+.generator-card input:focus,
+.generator-card select:focus {
+    outline: none !important;
+    border-color: #ff2d3c !important;
+    box-shadow: 0 0 12px rgba(255, 45, 60, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+    background: rgba(30, 15, 18, 0.75) !important;
+    color: #ffffff !important;
+}
+.generator-card select option {
+    background: #121318;
+    color: #ffffff;
+}
+html[data-theme="light"] .generator-card .form-control,
+html[data-theme="light"] .generator-card .form-select,
+html[data-theme="light"] .generator-card input,
+html[data-theme="light"] .generator-card select {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    color: #0c0d10 !important;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+html[data-theme="light"] .generator-card .form-control:focus,
+html[data-theme="light"] .generator-card .form-select:focus,
+html[data-theme="light"] .generator-card input:focus,
+html[data-theme="light"] .generator-card select:focus {
+    border-color: #e31b23 !important;
+    box-shadow: 0 0 10px rgba(227, 27, 35, 0.15) !important;
+    background: #ffffff !important;
+    color: #0c0d10 !important;
+}
+html[data-theme="light"] .generator-card select option {
+    background: #ffffff;
+    color: #0c0d10;
+}
+
 

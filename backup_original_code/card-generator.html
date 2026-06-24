@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="bn">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <!-- SEO Meta Tags -->
+    <title>Card Generator | SFI West Bengal State Committee | Official Website</title>
+    <meta name="title" content="Card Generator - Students' Federation of India - SFI West Bengal">
+    <meta content="Generate your personalized SFI Supporter Card or Campaign Poster. Enter your details, upload your profile photo, and share your SFI support online. এসএফআই সমর্থক কার্ড ও পোস্টার জেনারেটর।" name="description" />
+    <meta content="SFI Card Generator, SFI Supporter Card, SFI Poster Maker, SFI Campaign Poster, এসএফআই কার্ড জেনারেটর, সমর্থক কার্ড, এসএফআই পোস্টার" name="keywords" />
+
+    <!-- Author Credit -->
+    <meta name="author" content="Pabitra Banerjee" />
+    <meta name="publisher" content="SFI West Bengal State Committee" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sfiwb.org/card-generator.html" />
+    <meta property="og:title" content="Card Generator | SFI West Bengal State Committee | Official Website" />
+    <meta property="og:description" content="Generate and download your SFI Supporter Card or Campaign Poster to share on social media." />
+    <meta property="og:image" content="assets/images/protest.png" />
+
+    <!-- Global Favicon Settings -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%23ff2d3c%22/><polygon points=%2250,18 58,40 82,40 62,54 70,78 50,62 30,78 38,54 18,40 42,40%22 fill=%22%23ffffff%22/></svg>">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png" default-fallback="true" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Vendor CSS Files (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+    <!-- Main Stylesheets -->
+    <link href="style.css" rel="stylesheet" />
+    <link href="home.css" rel="stylesheet" />
+
+    <style>
+        .page-hero {
+            background: linear-gradient(135deg, #0c0d10 0%, #1a0a0a 100%);
+            padding: 100px 0 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .page-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--color-primary);
+            margin-bottom: 12px;
+            font-family: 'Noto Serif Bengali', serif;
+            font-weight: 800;
+        }
+        .page-hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Premium Glow and Glassmorphism */
+        .generator-card {
+            background: rgba(20, 15, 16, 0.6) !important;
+            border: 1px solid rgba(255, 45, 60, 0.15) !important;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 45, 60, 0.05);
+        }
+        
+        [data-theme="light"] .generator-card {
+            background: rgba(255, 255, 255, 0.85) !important;
+            border: 1px solid rgba(0, 0, 0, 0.06) !important;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+        }
+        
+        .preview-canvas-wrap {
+            border: 1px solid rgba(255, 45, 60, 0.25) !important;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 45, 60, 0.1) !important;
+            background: rgba(0, 0, 0, 0.4) !important;
+            transition: all 0.5s ease;
+        }
+        
+        .preview-canvas-wrap.generated-shine {
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 45, 60, 0.3) !important;
+            border-color: rgba(255, 45, 60, 0.5) !important;
+            transform: scale(1.01);
+        }
+
+        /* High-visibility Premium Buttons */
+        .submit-btn, #downloadCardBtn, #bottomDownloadCardBtn {
+            background: linear-gradient(135deg, #ff2d3c 0%, #c81e2b 100%) !important;
+            color: #ffffff !important;
+            border: 2px solid rgba(255, 255, 255, 0.15) !important;
+            padding: 14px 28px !important;
+            border-radius: 50px !important;
+            font-weight: 700 !important;
+            font-size: 1.05rem !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 4px 15px rgba(255, 45, 60, 0.4) !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .submit-btn:hover, #downloadCardBtn:hover, #bottomDownloadCardBtn:hover {
+            background: linear-gradient(135deg, #ff4c5a 0%, #ff2d3c 100%) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(255, 45, 60, 0.6) !important;
+            border-color: rgba(255, 255, 255, 0.3) !important;
+            color: #ffffff !important;
+        }
+
+        .submit-btn:active, #downloadCardBtn:active, #bottomDownloadCardBtn:active {
+            transform: translateY(0) !important;
+        }
+    </style>
+
+    <!-- Theme Flash Prevention -->
+    <script id="theme-flash-prevention">
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+
+<body class="generator-page">
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-logo-wrap">
+                <div class="preloader-ring"></div>
+                <svg class="preloader-star" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="50,18 58,40 82,40 62,54 70,78 50,62 30,78 38,54 18,40 42,40" />
+                </svg>
+            </div>
+            <div class="preloader-text">SFI</div>
+            <div class="preloader-subtext">West Bengal</div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const preloader = document.getElementById('preloader');
+            if (!preloader) return;
+            function hidePreloader() {
+                setTimeout(function() {
+                    preloader.classList.add('hidden');
+                    setTimeout(function() { preloader.remove(); }, 600);
+                }, 800);
+            }
+            if (document.readyState === 'complete') {
+                hidePreloader();
+            } else {
+                window.addEventListener('load', hidePreloader);
+            }
+        })();
+    </script>
+
+    <!-- Custom Cursor Glow Element -->
+    <div class="pointer-glow" id="pointerGlow"></div>
+
+    <!-- TOP UTILITY BAR -->
+    <div class="topbar py-1">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-8 topbar-left">
+                    <span class="small text-white opacity-75 d-none d-md-inline"><i class="bi bi-info-circle me-1"></i>
+                        ভারতের ছাত্র ফেডারেশন (পশ্চিমবঙ্গ রাজ্য কমিটি) অফিশিয়াল ওয়েবসাইট</span>
+                </div>
+                <div class="col-12 col-md-4 topbar-right text-end">
+                    <div class="social-links d-inline-block">
+                        <a href="search.html" class="text-white opacity-75 hover-opacity-100 me-3" aria-label="Search"><i class="bi bi-search"></i></a>
+                        <a href="https://www.facebook.com/sfiwb/" target="_blank" class="text-white opacity-75 hover-opacity-100 me-3" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/sfi_westbengal" target="_blank" class="text-white opacity-75 hover-opacity-100 me-3" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://www.instagram.com/sfiwb/" target="_blank" class="text-white opacity-75 hover-opacity-100 me-3" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/@sfiwestbengal" target="_blank" class="text-white opacity-75 hover-opacity-100" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container position-relative align-items-center justify-content-between">
+            <div class="row w-100 align-items-center">
+                <div class="col-10 col-xl-4">
+                    <a href="index.html" class="logo d-flex align-items-center me-auto">
+                        <img id="siteLogoImg" src="assets/SFI-WB-WEB-LOGO-DARK.png" alt="SFI WB State Committee Logo" class="img-fluid logo-img">
+                    </a>
+                </div>
+                <div class="col-2 col-xl-8 text-end p-0">
+                    <nav id="navmenu" class="navmenu" lang="bn">
+                        <ul>
+                            <li class="dropdown"><a href="about.html">সংগঠন <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <ul>
+                                    <li><a href="about.html">আমাদের কথা</a></li>
+                                    <li><a href="state-secretariat.html">রাজ্য সম্পাদকমণ্ডলী</a></li>
+                                    <li><a href="state-committee.html">পশ্চিমবঙ্গ রাজ্য কমিটি সদস্যদের তালিকা</a></li>
+                                    <li class="dropdown"><a href="#">ডকুমেন্টস <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                        <ul>
+                                            <li><a href="programme.html">সংগঠনের কর্মসূচি</a></li>
+                                            <li><a href="constitution.html">সংগঠনের গঠনতন্ত্র</a></li>
+                                            <li><a href="booklets.html">সংগঠনের পুস্তিকা</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="gallery.html">ফটো গ্যালারি</a></li>
+                                    <li><a href="links.html">প্রাসঙ্গিক লিংক</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="press.html">প্রেস বিবৃতি</a></li>
+                            <li class="dropdown"><a href="#">সোশ্যাল স্ট্রীম <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <ul>
+                                    <li><a href="https://www.youtube.com/@sfiwestbengal" target="_blank">ইউটিউব চ্যানেল</a></li>
+                                    <li><a href="https://www.facebook.com/sfiwb/" target="_blank">ফেসবুক পেজ</a></li>
+                                    <li><a href="https://x.com/sfi_westbengal" target="_blank">এক্স (টুইটার) হ্যান্ডেল</a></li>
+                                    <li><a href="https://www.instagram.com/sfiwb/" target="_blank">ইনস্টাগ্রাম অ্যাকাউন্ট</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="donate.html">অনুদান</a></li>
+                            <li><a href="contact.html">যোগাযোগ</a></li>
+                            <li><a href="https://chhatrasangram.org/" target="_blank" class="nav-highlight-cs">ছাত্রসংগ্রাম</a></li>
+                            <li><a href="admission-helpdesk.html" class="nav-highlight-helpdesk">ভর্তি হেল্পডেস্ক</a></li>
+                            <li>
+                                <a href="#" id="themeToggle" class="nav-theme-toggle" aria-label="Toggle Theme">
+                                    <i class="fas fa-sun text-warning" id="themeIcon"></i>
+                                    <span class="theme-toggle-label d-xl-none" id="themeLabel">থিম পরিবর্তন করুন</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <div class="container">
+                <div class="row gy-4 align-items-stretch">
+                    <!-- Left: Form -->
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <div class="generator-card p-4 h-100">
+                            <h3 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-4" style="font-family:'Noto Serif Bengali';"><i class="fas fa-id-card me-2 text-danger"></i>তথ্য প্রদান করুন (Enter Details)</h3>
+                            <form id="generatorForm">
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="studentName" class="form-label"><i class="fas fa-user me-1 text-danger"></i> নাম (Name) *</label>
+                                            <input type="text" class="form-control" id="studentName" placeholder="আপনার নাম লিখুন" required maxlength="25">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="studentRole" class="form-label"><i class="fas fa-user-tag me-1 text-danger"></i> ভূমিকা (Role) *</label>
+                                            <select class="form-select" id="studentRole">
+                                                <option value="সমর্থক">সমর্থক (Supporter)</option>
+                                                <option value="সদস্য">সদস্য (Member)</option>
+                                                <option value="কর্মী">কর্মী (Worker)</option>
+                                                <option value="প্রতিনিধি">প্রতিনিধি (Representative)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="studentPhone" class="form-label"><i class="fas fa-phone me-1 text-danger"></i> ফোন নম্বর (Phone) *</label>
+                                            <input type="tel" class="form-control" id="studentPhone" placeholder="১০ সংখ্যার মোবাইল নম্বর" required pattern="[0-9]{10}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="studentEmail" class="form-label"><i class="fas fa-envelope me-1 text-danger"></i> ইমেল (Email) *</label>
+                                            <input type="email" class="form-control" id="studentEmail" placeholder="আপনার ইমেল আইডি" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="studentDistrict" class="form-label"><i class="fas fa-map-marker-alt me-1 text-danger"></i> জেলা (District) *</label>
+                                            <select class="form-select" id="studentDistrict">
+                                                <option value="wb-kolkata" data-code="KOL">Kolkata</option>
+                                                <option value="wb-north-24-parganas" data-code="N24">North 24 Parganas</option>
+                                                <option value="wb-south-24-parganas" data-code="S24">South 24 Parganas</option>
+                                                <option value="wb-howrah" data-code="HWR">Howrah</option>
+                                                <option value="wb-hooghly" data-code="HGL">Hooghly</option>
+                                                <option value="wb-purba-bardhaman" data-code="PUB">Purba Bardhaman</option>
+                                                <option value="wb-paschim-bardhaman" data-code="PAB">Paschim Bardhaman</option>
+                                                <option value="wb-birbhum" data-code="BHM">Birbhum</option>
+                                                <option value="wb-bankura" data-code="BNK">Bankura</option>
+                                                <option value="wb-purulia" data-code="PRL">Purulia</option>
+                                                <option value="wb-paschim-medinipur" data-code="PWM">Paschim Medinipur</option>
+                                                <option value="wb-purba-medinipur" data-code="PEM">Purba Medinipur</option>
+                                                <option value="wb-jhargram" data-code="JHR">Jhargram</option>
+                                                <option value="wb-nadia" data-code="NDA">Nadia</option>
+                                                <option value="wb-murshidabad" data-code="MSD">Murshidabad</option>
+                                                <option value="wb-malda" data-code="MLD">Malda</option>
+                                                <option value="wb-uttar-dinajpur" data-code="UDJ">Uttar Dinajpur</option>
+                                                <option value="wb-dakshin-dinajpur" data-code="DDJ">Dakshin Dinajpur</option>
+                                                <option value="wb-darjeeling" data-code="DJL">Darjeeling</option>
+                                                <option value="wb-kalimpong" data-code="KLP">Kalimpong</option>
+                                                <option value="wb-jalpaiguri" data-code="JPG">Jalpaiguri</option>
+                                                <option value="wb-alipurduar" data-code="APD">Alipurduar</option>
+                                                <option value="wb-cooch-behar" data-code="COB">Cooch Behar</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="templateStyle" class="form-label"><i class="fas fa-palette me-1 text-danger"></i> টেমপ্লেট স্টাইল (Style) *</label>
+                                            <select class="form-select" id="templateStyle">
+                                                <option value="supporter-card">ডিজিটাল সমর্থক কার্ড (Supporter Card)</option>
+                                                <option value="campaign-poster">ক্যাম্পেইন পোস্টার (Campaign Poster)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="studentSlogan" class="form-label"><i class="fas fa-quote-left me-1 text-danger"></i> স্লোগান / বার্তা (Slogan/Quote) *</label>
+                                    <select class="form-select" id="studentSlogan">
+                                        <option value="স্বাধীনতা, গণতন্ত্র, সমাজতন্ত্র—নিপাত যাক সাম্রাজ্যবাদ!">স্বাধীনতা, গণতন্ত্র, সমাজতন্ত্র—নিপাত যাক সাম্রাজ্যবাদ!</option>
+                                        <option value="শিক্ষা, সংস্কৃতি, প্রগতি—এই আমাদের সংহতি।">শিক্ষা, সংস্কৃতি, প্রগতি—এই আমাদের সংহতি।</option>
+                                        <option value="সবার জন্য শিক্ষা, সবার জন্য কাজ।">সবার জন্য শিক্ষা, সবার জন্য কাজ।</option>
+                                        <option value="শিক্ষা আমাদের অধিকার, কোনো পণ্য নয়।">শিক্ষা আমাদের অধিকার, কোনো পণ্য নয়।</option>
+                                        <option value="শিক্ষা ও লড়াইয়ের ময়দানে আমরাই অগ্রগামী!">শিক্ষা ও লড়াইয়ের ময়দানে আমরাই অগ্রগামী!</option>
+                                    </select>
+                                </div>
+
+                                <!-- Photo Upload Dropzone -->
+                                <div class="form-group mb-4">
+                                    <label class="form-label"><i class="fas fa-image me-1 text-danger"></i> আপনার ছবি আপলোড করুন (Photo) *</label>
+                                    <div class="upload-drop-zone" id="dropZone">
+                                        <input type="file" id="photoInput" accept="image/*" style="display: none;">
+                                        <div class="upload-placeholder" id="uploadPlaceholder">
+                                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                            <p class="mb-1 text-light-body small">ছবি এখানে ড্র্যাগ করুন অথবা ক্লিক করে নির্বাচন করুন</p>
+                                            <span class="text-muted small" style="font-size:0.75rem;">JPG/PNG, সর্বাধিক 2MB</span>
+                                        </div>
+                                        <div class="upload-preview-container d-none" id="previewContainer">
+                                            <img src="" class="upload-preview-thumb" id="previewThumb" alt="Preview">
+                                            <span class="text-success small" style="font-size:0.85rem;"><i class="fas fa-check-circle me-1"></i>ছবি আপলোড করা হয়েছে</span>
+                                            <button type="button" class="btn btn-sm btn-outline-danger ms-auto" id="removePhotoBtn"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Generate & Download Button (Unified Step) -->
+                                <button type="submit" class="submit-btn w-100" id="generateBtn">
+                                    <span class="spinner-border spinner-border-sm d-none me-2" role="status" id="btnSpinner"></span>
+                                    <i class="fas fa-download me-2"></i>কার্ড তৈরি এবং ডাউনলোড করুন (Download Image)
+                                </button>
+                                
+                                <div class="alert alert-danger mt-3 d-none" id="formError"></div>
+                                <div class="alert alert-success mt-3 d-none" id="formSuccess"></div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Right: Live Preview & Downloads -->
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <div class="generator-card p-4 d-flex flex-column justify-content-between h-100">
+                            <div>
+                                <h3 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-4" style="font-family:'Noto Serif Bengali';"><i class="fas fa-eye me-2 text-danger"></i>লাইভ প্রিভিউ (Live Preview)</h3>
+                                <div class="preview-canvas-wrap" id="canvasWrap">
+                                    <canvas id="cardCanvas" width="800" height="500"></canvas>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-center mt-3 d-none" id="shareSection">
+                                    <button type="button" class="btn w-100 mb-3" id="downloadCardBtn">
+                                        <i class="fas fa-download me-2"></i>ডাউনলোড করুন (Download Card)
+                                    </button>
+                                    <p class="small text-muted mb-2"><i class="fas fa-share-alt me-1 text-danger"></i> বন্ধুদের সাথে শেয়ার করুন</p>
+                                    <div class="share-links-container">
+                                        <a href="#" target="_blank" class="share-btn whatsapp" id="shareWa" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                                        <a href="#" target="_blank" class="share-btn facebook" id="shareFb" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="#" target="_blank" class="share-btn twitter" id="shareTw" title="Share on Twitter"><i class="fab fa-x-twitter"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Ends the two columns row -->
+                
+                <!-- Bottom Center: Download Button -->
+                <div class="row mt-4 justify-content-center">
+                    <div class="col-md-6 text-center">
+                        <button type="button" class="btn d-none" id="bottomDownloadCardBtn">
+                            <i class="fas fa-download me-2"></i>ডাউনলোড করুন (Download Card)
+                        </button>
+                    </div>
+                </div>
+            </div> <!-- Ends container -->
+        </section> <!-- Ends section -->
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer position-relative light-background">
+        <div class="container footer-top py-5">
+            <div class="row gy-4">
+                <!-- Col 1: Address -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">ঠিকানা</h5>
+                    <p class="text-body leading-relaxed mb-0">
+                        <strong>ভারতের ছাত্র ফেডারেশন</strong><br>
+                        পশ্চিমবঙ্গ রাজ্য কমিটি<br>
+                        দীনেশ মজুমদার ভবন, ৭৯/৩এ, এ. জে. সি. বোস রোড, কলকাতা, পশ্চিমবঙ্গ, ভারত — পিনকোড: ৭০০০১৪<br>
+                        <span class="small d-block mt-2">
+                            <strong>ফোন:</strong> +৯১-৮৯১০০৪৪১৩৮ (সম্পাদক) &amp;<br>+৯১-৯৯৩৩৬৪৬৫৫৬ (সভাপতি)<br>
+                            <strong>ইমেল:</strong> state.committee.sfi.wb@gmail.com
+                        </span>
+                        <a href="https://maps.app.goo.gl/MaNQfj5qRgNooBDEA" target="_blank" class="text-danger hover-underline small d-inline-block mt-2"><i class="fas fa-map-marker-alt me-1"></i>গুগল ম্যাপে দেখুন ↗</a>
+                    </p>
+                </div>
+
+                <!-- Col 2: Organization & Docs -->
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">সংগঠন ও দস্তাবেজ</h5>
+                    <ul class="list-unstyled footer-links mb-0">
+                        <li><a href="about.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> আমাদের কথা</a></li>
+                        <li><a href="state-secretariat.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> রাজ্য
+                                সম্পাদকমণ্ডলী</a></li>
+                        <li><a href="state-committee.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> রাজ্য কমিটি</a></li>
+                        <li><a href="programme.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> সংগঠনের কর্মসূচি</a>
+                        </li>
+                        <li><a href="constitution.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> গঠনতন্ত্র</a></li>
+                        <li><a href="booklets.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> পুস্তিকা</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Media & Publications -->
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">মিডিয়া ও প্রকাশনা
+                    </h5>
+                    <ul class="list-unstyled footer-links mb-0">
+                        <li><a href="news.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> সংবাদ ও খবর</a></li>
+                        <li><a href="press.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রেস বিবৃতি</a></li>
+                        <li><a href="publications.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রকাশনা</a></li>
+                        <li><a href="https://chhatrasangram.org/" target="_blank" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> ছাত্রসংগ্রাম (Chhatra Sangram) ↗</a></li>
+                        <li><a href="videos.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> ভিডিও গ্যালারি</a>
+                        </li>
+                        <li><a href="gallery.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> ফটো গ্যালারি</a></li>
+                        <li><a href="martyrs.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> শহীদ স্মরণ</a></li>
+                        <li><a href="international.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> আন্তর্জাতিক</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Action & Support -->
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">যোগাযোগ ও সমর্থন</h5>
+                    <ul class="list-unstyled footer-links mb-0">
+                        <li><a href="contact.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> যোগাযোগ করুন</a></li>
+                        <li><a href="admission-helpdesk.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> ভর্তি হেল্পডেস্ক (Admission Helpdesk)</a></li>
+                        <li><a href="donate.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> অনুদান দিন</a></li>
+                        <li><a href="join.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> যোগ দিন</a></li>
+                        <li><a href="card-generator.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i>  কার্ড জেনারেটর (Card Generator)</a></li>
+                        <li><a href="links.html" class="text-body hover-text-danger small d-block py-1"><i
+                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রাসঙ্গিক লিংক</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 5: Newsletter & Socials -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold text-header border-bottom border-danger border-2 pb-2 mb-3">নিউজলেটার</h5>
+                    <p class="text-body small leading-relaxed mb-3">নতুন পোস্টের আপডেট সরাসরি পেতে সাবস্ক্রাইব করুন।</p>
+                    <form action="#" method="post" class="mt-2 mb-4">
+                        <div class="input-group">
+                            <input type="email" name="email"
+                                class="form-control form-control-sm bg-dark bg-opacity-50 text-white border-secondary border-opacity-25"
+                                placeholder="আপনার ইমেল লিখুন" required>
+                            <button type="submit" class="btn btn-danger btn-sm">সাবস্ক্রাইব</button>
+                        </div>
+                    </form>
+                    <div class="social-links d-flex">
+                        <a href="https://www.facebook.com/sfiwb/" target="_blank"
+                            class="btn btn-outline-danger btn-sm rounded-circle p-2 me-2 d-flex align-items-center justify-content-center"
+                            style="width: 38px; height: 38px;"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/sfi_westbengal" target="_blank"
+                            class="btn btn-outline-danger btn-sm rounded-circle p-2 me-2 d-flex align-items-center justify-content-center"
+                            style="width: 38px; height: 38px;"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://www.instagram.com/sfiwb/" target="_blank"
+                            class="btn btn-outline-danger btn-sm rounded-circle p-2 me-2 d-flex align-items-center justify-content-center"
+                            style="width: 38px; height: 38px;"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/@sfiwestbengal" target="_blank"
+                            class="btn btn-outline-danger btn-sm rounded-circle p-2 d-flex align-items-center justify-content-center"
+                            style="width: 38px; height: 38px;"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright & Credits -->
+        <div class="copyright-bar bg-dark bg-opacity-50 border-top border-secondary border-opacity-10 py-3 text-center">
+            <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <p class="mb-0 text-body small">&copy; ২০২৬ ভারতের ছাত্র ফেডারেশন - পশ্চিমবঙ্গ রাজ্য কমিটি। সর্বস্বত্ব
+                    সংরক্ষিত।</p>
+                <p class="mb-0 text-body small mt-2 mt-md-0">Made with ❤️ by <a href="https://sdepabitra.me" target="_blank" class="text-danger hover-underline">Pabitra Banerjee</a> &amp; <a href="https://mbwebbers.dev" target="_blank" class="text-danger hover-underline">MB WEBBER'S</a></p>
+                <p class="mb-0 text-body small mt-2 mt-md-0">★ স্বাধীনতা • গণতন্ত্র • সমাজতন্ত্র</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vendor JS Files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <!-- Firebase SDKs and Forms Handler -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="forms_handler.js"></script>
+
+    <!-- Global Theme Switcher and Mouse Glow script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            AOS.init({ duration: 800, once: true });
+
+            const pointerGlow = document.getElementById('pointerGlow');
+            document.addEventListener('mousemove', function (e) {
+                if (pointerGlow) {
+                    pointerGlow.style.left = e.clientX + 'px';
+                    pointerGlow.style.top = e.clientY + 'px';
+                }
+            });
+
+            // Mobile Nav Toggle
+            const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
+            if (mobileNavToggleBtn) {
+                mobileNavToggleBtn.addEventListener('click', function() {
+                    document.body.classList.toggle('mobile-nav-active');
+                    this.classList.toggle('bi-list');
+                    this.classList.toggle('bi-x');
+                });
+            }
+
+            // Dropdowns
+            document.querySelectorAll('.navmenu .toggle-dropdown').forEach(function(el) {
+                el.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    this.parentNode.classList.toggle('active');
+                    this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
+                    e.stopPropagation();
+                });
+            });
+
+            // Theme Toggle Setup
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const htmlElement = document.documentElement;
+            const logoImg = document.getElementById('siteLogoImg');
+
+            function applyTheme(themeName) {
+                htmlElement.setAttribute('data-theme', themeName);
+                if (themeName === 'dark') {
+                    if (themeIcon) themeIcon.className = 'fas fa-sun text-warning';
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO-DARK.png';
+                } else {
+                    if (themeIcon) themeIcon.className = 'fas fa-moon text-dark';
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO.png';
+                }
+            }
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const currentTheme = htmlElement.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    applyTheme(newTheme);
+                    localStorage.setItem('theme', newTheme);
+                });
+            }
+            applyTheme(localStorage.getItem('theme') || 'dark');
+        });
+    </script>
+
+    <!-- CARD GENERATOR CORE SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('generatorForm');
+            const canvas = document.getElementById('cardCanvas');
+            const ctx = canvas.getContext('2d');
+            const canvasWrap = document.getElementById('canvasWrap');
+            const dropZone = document.getElementById('dropZone');
+            const photoInput = document.getElementById('photoInput');
+            const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+            const previewContainer = document.getElementById('previewContainer');
+            const previewThumb = document.getElementById('previewThumb');
+            const removePhotoBtn = document.getElementById('removePhotoBtn');
+
+            const generateBtn = document.getElementById('generateBtn');
+            const btnSpinner = document.getElementById('btnSpinner');
+            const shareSection = document.getElementById('shareSection');
+            
+            const formError = document.getElementById('formError');
+            const formSuccess = document.getElementById('formSuccess');
+
+            const shareWa = document.getElementById('shareWa');
+            const shareFb = document.getElementById('shareFb');
+            const shareTw = document.getElementById('shareTw');
+            const downloadCardBtn = document.getElementById('downloadCardBtn');
+            const bottomDownloadCardBtn = document.getElementById('bottomDownloadCardBtn');
+
+            let userPhoto = null;
+            let currentId = null;
+
+            // Preload SFI State Committee Logo Image
+            const scLogoImg = new Image();
+            scLogoImg.src = 'assets/sfi-wb-sc-logo.jpg';
+            scLogoImg.onload = function() {
+                drawCardPlaceholder();
+            };
+
+            // Trigger click on file input
+            dropZone.addEventListener('click', function(e) {
+                if (e.target !== removePhotoBtn && !removePhotoBtn.contains(e.target)) {
+                    photoInput.click();
+                }
+            });
+
+            // Drag and Drop events
+            dropZone.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            });
+
+            dropZone.addEventListener('dragleave', function() {
+                dropZone.classList.remove('dragover');
+            });
+
+            dropZone.addEventListener('drop', function(e) {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+                if (e.dataTransfer.files.length > 0) {
+                    handlePhotoSelect(e.dataTransfer.files[0]);
+                }
+            });
+
+            photoInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    handlePhotoSelect(this.files[0]);
+                }
+            });
+
+            removePhotoBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                userPhoto = null;
+                photoInput.value = '';
+                previewContainer.classList.add('d-none');
+                uploadPlaceholder.classList.remove('d-none');
+                drawCardPlaceholder();
+            });
+
+            function handlePhotoSelect(file) {
+                if (!file.type.startsWith('image/')) {
+                    alert('দয়া করে একটি সঠিক ইমেজ ফাইল নির্বাচন করুন।');
+                    return;
+                }
+                if (file.size > 2 * 1024 * 1024) {
+                    alert('ফাইলের সাইজ ২ মেগাবাইটের কম হতে হবে।');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        userPhoto = img;
+                        previewThumb.src = e.target.result;
+                        uploadPlaceholder.classList.add('d-none');
+                        previewContainer.classList.remove('d-none');
+                        drawCardPlaceholder();
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+
+            // Canvas Drawing Helpers
+            function drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius, fillStyle) {
+                let rot = Math.PI / 2 * 3;
+                let x = cx;
+                let y = cy;
+                let step = Math.PI / spikes;
+
+                ctx.beginPath();
+                ctx.moveTo(cx, cy - outerRadius);
+                for (let i = 0; i < spikes; i++) {
+                    x = cx + Math.cos(rot) * outerRadius;
+                    y = cy + Math.sin(rot) * outerRadius;
+                    ctx.lineTo(x, y);
+                    rot += step;
+
+                    x = cx + Math.cos(rot) * innerRadius;
+                    y = cy + Math.sin(rot) * innerRadius;
+                    ctx.lineTo(x, y);
+                    rot += step;
+                }
+                ctx.lineTo(cx, cy - outerRadius);
+                ctx.closePath();
+                ctx.fillStyle = fillStyle;
+                ctx.fill();
+            }
+
+            function drawRoundedRect(ctx, x, y, width, height, rx) {
+                ctx.beginPath();
+                ctx.moveTo(x + rx, y);
+                ctx.lineTo(x + width - rx, y);
+                ctx.quadraticCurveTo(x + width, y, x + width, y + rx);
+                ctx.lineTo(x + width, y + height - rx);
+                ctx.quadraticCurveTo(x + width, y + height, x + width - rx, y + height);
+                ctx.lineTo(x + rx, y + height);
+                ctx.quadraticCurveTo(x, y + height, x, y + height - rx);
+                ctx.lineTo(x, y + rx);
+                ctx.quadraticCurveTo(x, y, x + rx, y);
+                ctx.closePath();
+            }
+
+            function drawSfiFlag(ctx, x, y, w, h) {
+                ctx.save();
+                
+                // Align to pixel grid to avoid sub-pixel blurring
+                x = Math.round(x);
+                y = Math.round(y);
+                w = Math.round(w);
+                h = Math.round(h);
+                
+                // Draw white background with a very slight border radius to prevent sub-pixel jagged edges
+                ctx.beginPath();
+                drawRoundedRect(ctx, x, y, w, h, 3);
+                ctx.fillStyle = "#ffffff";
+                ctx.fill();
+                
+                // Draw red border with the same rounded rect path
+                ctx.strokeStyle = "#ff2d3c";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Star on left
+                const starCx = x + w * 0.35;
+                const starCy = y + h * 0.5;
+                const starR = h * 0.28;
+                drawStar(ctx, starCx, starCy, 5, starR, starR * 0.38, "#ff2d3c");
+
+                // Text on right
+                ctx.fillStyle = "#ff2d3c";
+                ctx.font = `900 ${h * 0.32}px 'Poppins', sans-serif`;
+                ctx.textAlign = "left";
+                ctx.textBaseline = "middle";
+                ctx.fillText("S.F.I.", x + w * 0.65, y + h * 0.5);
+                ctx.restore();
+            }
+
+            // District ID to Bengali translation mapping
+            const districtBengaliNames = {
+                "wb-kolkata": "কলকাতা",
+                "wb-north-24-parganas": "উত্তর ২৪ পরগনা",
+                "wb-south-24-parganas": "দক্ষিণ ২৪ পরগনা",
+                "wb-howrah": "হাওড়া",
+                "wb-hooghly": "হুগলি",
+                "wb-purba-bardhaman": "পূর্ব বর্ধমান",
+                "wb-paschim-bardhaman": "पश्चिम বর্ধমান",
+                "wb-birbhum": "বীরভূম",
+                "wb-bankura": "বাঁকুড়া",
+                "wb-purulia": "পুরুলিয়া",
+                "wb-paschim-medinipur": "পশ্চিম মেদিনীপুর",
+                "wb-purba-medinipur": "পূর্ব মেদিনীপুর",
+                "wb-jhargram": "ঝাড়গ্রাম",
+                "wb-nadia": "নদীয়া",
+                "wb-murshidabad": "মুর্শিদাবাদ",
+                "wb-malda": "মালদা",
+                "wb-uttar-dinajpur": "উত্তর দিনাজপুর",
+                "wb-dakshin-dinajpur": "দক্ষিণ দিনাজপুর",
+                "wb-darjeeling": "দার্জিলিং",
+                "wb-kalimpong": "কালিম্পং",
+                "wb-jalpaiguri": "জলপাইগুড়ি",
+                "wb-alipurduar": "আলিপুরদুয়ার",
+                "wb-cooch-behar": "কোচবিহার"
+            };
+
+            function drawBarcode(ctx, x, y, width, height, codeString) {
+                ctx.save();
+                // Barcode box background is removed for clean transparency and background blending
+
+                let hash = 0;
+                for (let i = 0; i < codeString.length; i++) {
+                    hash = codeString.charCodeAt(i) + ((hash << 5) - hash);
+                }
+                
+                let seed = Math.abs(hash);
+                const lcg = () => {
+                    seed = (seed * 1664525 + 1013904223) % 4294967296;
+                    return seed / 4294967296;
+                };
+
+                ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
+                let currentX = x;
+                const endX = x + width;
+
+                while (currentX < endX) {
+                    const barWidth = Math.floor(lcg() * 3) + 1;
+                    const spacing = Math.floor(lcg() * 4) + 1;
+
+                    if (currentX + barWidth <= endX) {
+                        ctx.fillRect(currentX, y, barWidth, height);
+                    }
+                    currentX += barWidth + spacing;
+                }
+                ctx.restore();
+            }
+
+            function drawCardPlaceholder() {
+                const style = document.getElementById('templateStyle').value;
+                const name = document.getElementById('studentName').value || "কমরেড [নাম]";
+                const districtSelect = document.getElementById('studentDistrict');
+                const districtId = districtSelect.value;
+                const districtBengali = districtBengaliNames[districtId] || districtSelect.options[districtSelect.selectedIndex].text;
+                const districtCode = districtSelect.options[districtSelect.selectedIndex].getAttribute('data-code') || "KOL";
+                const role = document.getElementById('studentRole').value;
+                const slogan = document.getElementById('studentSlogan').value;
+                
+                const phone = document.getElementById('studentPhone').value.trim() || "[ফোন নম্বর]";
+                const email = document.getElementById('studentEmail').value.trim() || "[ইমেল আইডি]";
+                
+                const placeholderId = currentId || `SFI-WB-${districtCode}-XXXXX`;
+                
+                drawCard(name, placeholderId, districtBengali, role, slogan, style, false, phone, email);
+            }
+
+            // Trigger redraw on field changes
+            ['studentName', 'studentRole', 'studentDistrict', 'templateStyle', 'studentSlogan', 'studentPhone', 'studentEmail'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.addEventListener('change', drawCardPlaceholder);
+                    el.addEventListener('input', drawCardPlaceholder);
+                }
+            });
+
+            // On-the-fly Supporter ID Generation and Duplicate Prevention
+            let checkedPhone = '';
+            let checkedEmail = '';
+
+            async function checkOrGenerateId() {
+                const phone = document.getElementById('studentPhone').value.trim();
+                const email = document.getElementById('studentEmail').value.trim().toLowerCase();
+                const districtSelect = document.getElementById('studentDistrict');
+                const districtCode = districtSelect.options[districtSelect.selectedIndex].getAttribute('data-code') || "KOL";
+
+                // Validate phone (10 digits) and email syntax
+                const isPhoneValid = /^[0-9]{10}$/.test(phone);
+                const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+                if (!isPhoneValid || !isEmailValid) {
+                    if (currentId) {
+                        currentId = null;
+                        drawCardPlaceholder();
+                    }
+                    // Reset cache so that correction behaves properly
+                    checkedPhone = '';
+                    checkedEmail = '';
+                    return;
+                }
+
+                // Avoid duplicate check calls if already checking/checked
+                if (phone === checkedPhone && email === checkedEmail) {
+                    return;
+                }
+
+                checkedPhone = phone;
+                checkedEmail = email;
+
+                let supporterId = null;
+                let dbSuccess = false;
+                let existingData = null;
+
+                if (typeof db !== 'undefined' && db !== null) {
+                    try {
+                        // Check if a supporter exists with EITHER matching phone OR email
+                        const [phoneSnap, emailSnap] = await Promise.all([
+                            db.collection("supporters").where("phone", "==", phone).get(),
+                            db.collection("supporters").where("email", "==", email).get()
+                        ]);
+
+                        let supporterDoc = null;
+                        if (!phoneSnap.empty) {
+                            supporterDoc = phoneSnap.docs[0];
+                        } else if (!emailSnap.empty) {
+                            supporterDoc = emailSnap.docs[0];
+                        }
+
+                        if (supporterDoc) {
+                            existingData = supporterDoc.data();
+                            supporterId = existingData.supporterId;
+                            dbSuccess = true;
+                        }
+                    } catch (dbError) {
+                        console.error("Database query failed, trying local fallback:", dbError);
+                    }
+                }
+
+                if (!dbSuccess) {
+                    // Check offline localStorage (EITHER matches)
+                    const localRecords = JSON.parse(localStorage.getItem('sfi_supporters') || '[]');
+                    const match = localRecords.find(r => r.phone === phone || r.email === email);
+                    if (match) {
+                        supporterId = match.supporterId;
+                        existingData = match;
+                    }
+                }
+
+                // Discard query if inputs changed in the meantime
+                const latestPhone = document.getElementById('studentPhone').value.trim();
+                const latestEmail = document.getElementById('studentEmail').value.trim().toLowerCase();
+                if (latestPhone !== phone || latestEmail !== email) {
+                    return;
+                }
+
+                // Deterministic formula generation if new supporter
+                if (!supporterId) {
+                    const combined = (phone + email).toLowerCase().replace(/[^a-z0-9]/g, '');
+                    let hash = 0;
+                    for (let i = 0; i < combined.length; i++) {
+                        hash = combined.charCodeAt(i) + ((hash << 5) - hash);
+                    }
+                    const hashNum = 10000 + (Math.abs(hash) % 90000);
+                    supporterId = `SFI-WB-${districtCode}-${hashNum}`;
+                }
+
+                currentId = supporterId;
+
+                // Auto-fill registered fields if we found existing data
+                if (existingData) {
+                    if (existingData.name && !document.getElementById('studentName').value.trim()) {
+                        document.getElementById('studentName').value = existingData.name;
+                    }
+                    if (existingData.district) {
+                        document.getElementById('studentDistrict').value = existingData.district;
+                    }
+                    if (existingData.role) {
+                        document.getElementById('studentRole').value = existingData.role;
+                    }
+                    if (existingData.slogan) {
+                        document.getElementById('studentSlogan').value = existingData.slogan;
+                    }
+                }
+
+                drawCardPlaceholder();
+            }
+
+            // Hook input and change listeners for Phone, Email, and District
+            ['studentPhone', 'studentEmail'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.addEventListener('input', checkOrGenerateId);
+                    el.addEventListener('change', checkOrGenerateId);
+                }
+            });
+            document.getElementById('studentDistrict').addEventListener('change', checkOrGenerateId);
+
+            function drawCard(name, supporterId, districtName, role, slogan, style, isGenerated = false, phone = "", email = "") {
+                // Reset shadow configs to prevent leakage
+                ctx.shadowColor = 'transparent';
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+
+                // Set canvas dimensions
+                if (style === 'campaign-poster') {
+                    canvas.width = 800;
+                    canvas.height = 800;
+                } else {
+                    canvas.width = 800;
+                    canvas.height = 500;
+                }
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                if (style === 'campaign-poster') {
+                    // Campaign Poster Template (800x800) - Premium Red Theme with angled stripes
+                    // 1. Base Gradient Background
+                    let bgGrad = ctx.createRadialGradient(400, 400, 100, 400, 400, 600);
+                    bgGrad.addColorStop(0, "#e31b23");
+                    bgGrad.addColorStop(1, "#54060b");
+                    ctx.fillStyle = bgGrad;
+                    ctx.fillRect(0, 0, 800, 800);
+
+                    // 2. Energetic Diagonal Stripe slashes
+                    ctx.fillStyle = "rgba(0, 0, 0, 0.06)";
+                    for(let i=-200; i<1000; i+=100) {
+                        ctx.beginPath();
+                        ctx.moveTo(i, 0);
+                        ctx.lineTo(i+150, 0);
+                        ctx.lineTo(i-150, 800);
+                        ctx.lineTo(i-300, 800);
+                        ctx.closePath();
+                        ctx.fill();
+                    }
+
+                    // 3. Faded White Star backdrop
+                    drawStar(ctx, 400, 400, 5, 340, 135, "rgba(255, 255, 255, 0.025)");
+
+                    // 4. Header Slogans
+                    ctx.fillStyle = "#ffffff";
+                    ctx.font = "800 42px 'Noto Serif Bengali', serif";
+                    ctx.textAlign = "center";
+                    ctx.fillText("★ স্বাধীনতা • গণতন্ত্র • সমাজতন্ত্র ★", 400, 80);
+
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+                    ctx.font = "500 20px 'Noto Serif Bengali', 'Poppins', sans-serif";
+                    ctx.fillText("ভারতের ছাত্র ফেডারেশন (SFI) পশ্চিমবঙ্গ রাজ্য কমিটি", 400, 125);
+
+                    // 5. Polaroid-style photo container with drop shadow
+                    const imgX = 100, imgY = 200, imgW = 220, imgH = 220;
+                    ctx.save();
+                    
+                    // Shadow configurations
+                    ctx.shadowColor = "rgba(0, 0, 0, 0.45)";
+                    ctx.shadowBlur = 18;
+                    ctx.shadowOffsetX = 4;
+                    ctx.shadowOffsetY = 8;
+                    
+                    drawRoundedRect(ctx, imgX, imgY, imgW, imgH, 16);
+                    ctx.fillStyle = "#ffffff";
+                    ctx.fill();
+                    ctx.restore(); // Restore to remove shadow from drawing photo inside clip
+
+                    ctx.save();
+                    drawRoundedRect(ctx, imgX + 8, imgY + 8, imgW - 16, imgH - 16, 10);
+                    ctx.clip();
+
+                    if (userPhoto) {
+                        const aspect = userPhoto.width / userPhoto.height;
+                        let sw, sh, sx, sy;
+                        if (aspect > 1) {
+                            sh = userPhoto.height;
+                            sw = sh;
+                            sx = (userPhoto.width - sw) / 2;
+                            sy = 0;
+                        } else {
+                            sw = userPhoto.width;
+                            sh = sw;
+                            sx = 0;
+                            sy = (userPhoto.height - sh) / 2;
+                        }
+                        ctx.drawImage(userPhoto, sx, sy, sw, sh, imgX + 8, imgY + 8, imgW - 16, imgH - 16);
+                    } else {
+                        // Vector Profile Outline Placeholder (no font dependencies)
+                        ctx.fillStyle = "rgba(227, 27, 35, 0.08)";
+                        ctx.fillRect(imgX + 8, imgY + 8, imgW - 16, imgH - 16);
+                        
+                        ctx.fillStyle = "rgba(227, 27, 35, 0.35)";
+                        const cx = imgX + imgW / 2;
+                        const cy = imgY + imgH / 2;
+                        
+                        // Head
+                        ctx.beginPath();
+                        ctx.arc(cx, cy - 18, 32, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        // Shoulders
+                        ctx.beginPath();
+                        ctx.arc(cx, cy + 70, 65, Math.PI, 0, false);
+                        ctx.fill();
+                    }
+                    ctx.restore();
+
+                    // 6. Supporter Details Text Block
+                    ctx.textAlign = "left";
+                    ctx.fillStyle = "#ffffff";
+                    ctx.font = "700 36px 'Noto Serif Bengali', serif";
+                    ctx.fillText(name, 360, 255);
+
+                    ctx.fillStyle = "#ffd700"; // Gold color for role
+                    ctx.font = "600 23px 'Noto Serif Bengali', 'Poppins', sans-serif";
+                    ctx.fillText(`${role} • ${districtName}`, 360, 298);
+
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+                    ctx.font = "bold 20px 'Poppins', sans-serif";
+                    ctx.fillText(`ID: ${supporterId}`, 360, 340);
+
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+                    ctx.font = "500 17px 'Poppins', sans-serif";
+                    ctx.fillText(`ফোন (Phone): ${phone}`, 360, 380);
+                    ctx.fillText(`ইমেল (Email): ${email}`, 360, 415);
+
+                    // 7. Slogan Glass Quote Block with vector quote marks
+                    ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
+                    drawRoundedRect(ctx, 100, 480, 460, 200, 20);
+                    ctx.fill();
+                    ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                    // Left quote mark
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+                    ctx.font = "140px 'Poppins', sans-serif";
+                    ctx.fillText("“", 110, 580);
+
+                    ctx.fillStyle = "#ffffff";
+                    ctx.font = "bold 22px 'Noto Serif Bengali', serif";
+                    ctx.fillText("শিক্ষা ও লড়াইয়ের ময়দানে...", 130, 525);
+
+                    ctx.fillStyle = "#ffd700";
+                    ctx.font = "italic 24px 'Noto Serif Bengali', serif";
+                    
+                    // Word wrap quote text
+                    const words = slogan.split(" ");
+                    let line = "";
+                    let yPos = 570;
+                    for(let n = 0; n < words.length; n++) {
+                        let testLine = line + words[n] + " ";
+                        ctx.font = "italic 24px 'Noto Serif Bengali', serif";
+                        let metrics = ctx.measureText(testLine);
+                        if (metrics.width > 380 && n > 0) {
+                            ctx.fillText(line, 130, yPos);
+                            line = words[n] + " ";
+                            yPos += 36;
+                        } else {
+                            line = testLine;
+                        }
+                    }
+                    ctx.fillText(line, 140 || 130, yPos); // fallback compatibility for visual lines
+
+                    // QR Code container (Campaign Poster, 800x800)
+                    const posterQrX = 590, posterQrY = 510, posterQrSize = 120;
+                    ctx.save();
+                    ctx.fillStyle = "#ffffff";
+                    drawRoundedRect(ctx, posterQrX - 8, posterQrY - 8, posterQrSize + 16, posterQrSize + 16, 12);
+                    ctx.fill();
+
+                    if (typeof QRious !== 'undefined') {
+                        try {
+                            const qr = new QRious({
+                                value: `https://sfiwb.github.io/SFI/card-generator.html?id=${supporterId}`,
+                                size: posterQrSize,
+                                level: 'H',
+                                foreground: '#0c0d10',
+                                background: '#ffffff'
+                            });
+                            ctx.drawImage(qr.image, posterQrX, posterQrY, posterQrSize, posterQrSize);
+                        } catch (qrError) {
+                            console.error("QR Code drawing failed on poster:", qrError);
+                            ctx.restore();
+                            drawBarcode(ctx, posterQrX - 8, posterQrY + 30, posterQrSize + 16, 30, supporterId);
+                            ctx.save();
+                        }
+                    } else {
+                        ctx.restore();
+                        drawBarcode(ctx, posterQrX - 8, posterQrY + 30, posterQrSize + 16, 30, supporterId);
+                        ctx.save();
+                    }
+                    ctx.restore();
+
+                    // Label under the QR Code
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
+                    ctx.font = "bold 12px 'Poppins', sans-serif";
+                    ctx.textAlign = "center";
+                    ctx.fillText("SCAN TO VERIFY", posterQrX + posterQrSize / 2, posterQrY + posterQrSize + 22);
+
+                    // 8. White Footer Brand Bar
+                    ctx.fillStyle = "#ffffff";
+                    ctx.fillRect(0, 740, 800, 60);
+
+                    ctx.fillStyle = "#e31b23";
+                    ctx.font = "900 20px 'Poppins', sans-serif";
+                    ctx.fillText("STUDENTS' FEDERATION OF INDIA (SFI)", 40, 775);
+
+                    ctx.fillStyle = "#0c0d10";
+                    ctx.font = "bold 18px 'Poppins', sans-serif";
+                    ctx.textAlign = "right";
+                    ctx.fillText("sfiwb.org", 760, 775);
+
+                } else {
+                    // Supporter Card Template (800x500) - Slate Mesh Premium theme
+                    // 1. Radial background
+                    let bgGrad = ctx.createRadialGradient(400, 250, 100, 400, 250, 500);
+                    bgGrad.addColorStop(0, "#23060a");
+                    bgGrad.addColorStop(1, "#0c0d10");
+                    ctx.fillStyle = bgGrad;
+                    ctx.fillRect(0, 0, 800, 500);
+
+                    // 2. High-Tech Dotted Matrix Grid
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.015)";
+                    for(let x=40; x<760; x+=20) {
+                        for(let y=40; y<460; y+=20) {
+                            ctx.beginPath();
+                            ctx.arc(x, y, 1, 0, Math.PI*2);
+                            ctx.fill();
+                        }
+                    }
+
+                    // 3. Faded SFI star backdrop watermarked
+                    drawStar(ctx, 645, 250, 5, 210, 85, "rgba(255, 45, 60, 0.025)");
+
+                    // 4. Glassmorphic card frame panel
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.015)";
+                    drawRoundedRect(ctx, 30, 30, 740, 440, 16);
+                    ctx.fill();
+                    ctx.strokeStyle = "rgba(255, 255, 255, 0.07)";
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                    // 5. Left glowing red accent bar (shifted inset and rounded)
+                    let accGrad = ctx.createLinearGradient(42, 60, 42, 440);
+                    accGrad.addColorStop(0, "#ff2d3c");
+                    accGrad.addColorStop(1, "#a80e1a");
+                    ctx.fillStyle = accGrad;
+                    drawRoundedRect(ctx, 42, 60, 5, 380, 2.5);
+                    ctx.fill();
+
+                    // 6. Circular profile frame (Center x=160, y=250, radius=85)
+                    // Inner image is clipped slightly smaller (imgR - 2) so it sits concentric inside the red border stroke
+                    const imgCx = 160, imgCy = 250, imgR = 85;
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(imgCx, imgCy, imgR - 2, 0, Math.PI * 2);
+                    ctx.closePath();
+                    ctx.clip();
+
+                    if (userPhoto) {
+                        const aspect = userPhoto.width / userPhoto.height;
+                        let sw, sh, sx, sy;
+                        if (aspect > 1) {
+                            sh = userPhoto.height;
+                            sw = sh;
+                            sx = (userPhoto.width - sw) / 2;
+                            sy = 0;
+                        } else {
+                            sw = userPhoto.width;
+                            sh = sw;
+                            sx = 0;
+                            sy = (userPhoto.height - sh) / 2;
+                        }
+                        ctx.drawImage(userPhoto, sx, sy, sw, sh, imgCx - (imgR - 2), imgCy - (imgR - 2), (imgR - 2)*2, (imgR - 2)*2);
+                    } else {
+                        // Vector Profile Outline Placeholder (no font dependencies)
+                        ctx.fillStyle = "rgba(255, 255, 255, 0.05)";
+                        ctx.fillRect(imgCx - imgR, imgCy - imgR, imgR*2, imgR*2);
+                        
+                        ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
+                        // Head
+                        ctx.beginPath();
+                        ctx.arc(imgCx, imgCy - 15, 28, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        // Shoulders
+                        ctx.beginPath();
+                        ctx.arc(imgCx, imgCy + 65, 55, Math.PI, 0, false);
+                        ctx.fill();
+                    }
+                    ctx.restore();
+
+                    // Circular Glowing border rings (Perfect concentric alignment)
+                    ctx.beginPath();
+                    ctx.arc(imgCx, imgCy, imgR, 0, Math.PI * 2);
+                    ctx.strokeStyle = "#ff2d3c";
+                    ctx.lineWidth = 3.5;
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.arc(imgCx, imgCy, imgR + 4, 0, Math.PI * 2);
+                    ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                    // 7. SFI Brand Logo Image on right (loaded from assets/sfi-wb-sc-logo.jpg)
+                    const logoX = 290, logoY = 62, logoW = 100, logoH = 66;
+                    if (scLogoImg.complete && scLogoImg.naturalWidth !== 0) {
+                        ctx.drawImage(scLogoImg, logoX, logoY, logoW, logoH);
+                    } else {
+                        // Fallback to drawing vector flag if image fails to load
+                        drawSfiFlag(ctx, logoX, logoY, logoW, logoH);
+                    }
+
+                    // Supporters Card Title (Vertically aligned to SFI Flag)
+                    ctx.fillStyle = "#ffffff";
+                    ctx.font = "800 24px 'Noto Serif Bengali', serif";
+                    ctx.textAlign = "left";
+                    ctx.textBaseline = "middle";
+                    ctx.fillText("ডিজিটাল সমর্থক কার্ড", 410, 84);
+
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.45)";
+                    ctx.font = "500 13px 'Poppins', sans-serif";
+                    ctx.textAlign = "left";
+                    ctx.textBaseline = "middle";
+                    ctx.fillText("SFI WEST BENGAL STATE COMMITTEE", 410, 112);
+
+                    // Restore default baseline for details list
+                    ctx.textBaseline = "alphabetic";
+
+                    // 8. Text Details
+                    ctx.fillStyle = "#ffffff";
+                    ctx.font = "700 28px 'Noto Serif Bengali', serif";
+                    ctx.fillText(name, 290, 175);
+
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+                    ctx.font = "500 18px 'Noto Serif Bengali', sans-serif";
+                    ctx.fillText(`জেলা: ${districtName}  •  ভূমিকা: ${role}`, 290, 208);
+
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+                    ctx.font = "500 15px 'Poppins', sans-serif";
+                    ctx.fillText(`ফোন (Phone): ${phone}`, 290, 238);
+                    ctx.fillText(`ইমেল (Email): ${email}`, 290, 268);
+
+                    // Supporter ID Bar with Neon Glow text effect
+                    ctx.save();
+                    ctx.shadowColor = "rgba(255, 45, 60, 0.6)";
+                    ctx.shadowBlur = 8;
+                    ctx.fillStyle = "#ff2d3c";
+                    ctx.font = "bold 20px 'Poppins', sans-serif";
+                    ctx.fillText(`ID: ${supporterId}`, 290, 305);
+                    ctx.restore();
+
+                    // 9. Custom Slogan (Left-aligned & word-wrapped for premium grid alignment)
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
+                    ctx.font = "italic 16px 'Noto Serif Bengali', serif";
+                    ctx.textAlign = "left";
+                    
+                    const maxSloganWidth = 320;
+                    const sloganText = slogan.startsWith('"') ? slogan : `"${slogan}"`;
+                    const words = sloganText.split(" ");
+                    let line = "";
+                    let yPos = 342;
+                    for (let n = 0; n < words.length; n++) {
+                        let testLine = line + words[n] + " ";
+                        let metrics = ctx.measureText(testLine);
+                        if (metrics.width > maxSloganWidth && n > 0) {
+                            ctx.fillText(line, 290, yPos);
+                            line = words[n] + " ";
+                            yPos += 24;
+                        } else {
+                            line = testLine;
+                        }
+                    }
+                    ctx.fillText(line, 290, yPos);
+
+                    // Web Url (Lowered for breathing room)
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.35)";
+                    ctx.font = "bold 15px 'Poppins', sans-serif";
+                    ctx.textAlign = "right";
+                    ctx.fillText("sfiwb.org", 740, 452);
+
+                    // High-tech scannable QR Code container (100% functional, enlarged)
+                    const qrX = 630, qrY = 310, qrSize = 110;
+                    
+                    // Draw a white background square for the QR code to ensure maximum scannability on dark background
+                    ctx.save();
+                    ctx.fillStyle = "#ffffff";
+                    drawRoundedRect(ctx, qrX - 6, qrY - 6, qrSize + 12, qrSize + 12, 8);
+                    ctx.fill();
+
+                    if (typeof QRious !== 'undefined') {
+                        try {
+                            const qr = new QRious({
+                                value: `https://sfiwb.github.io/SFI/card-generator.html?id=${supporterId}`,
+                                size: qrSize,
+                                level: 'H',
+                                foreground: '#0c0d10',
+                                background: '#ffffff'
+                            });
+                            ctx.drawImage(qr.image, qrX, qrY, qrSize, qrSize);
+                        } catch (qrError) {
+                            console.error("QR Code drawing failed:", qrError);
+                            // Fallback to barcode if QR generation fails
+                            ctx.restore();
+                            drawBarcode(ctx, 600, 395, 140, 22, supporterId);
+                            ctx.save();
+                        }
+                    } else {
+                        // Fallback to barcode if QR library is missing
+                        ctx.restore();
+                        drawBarcode(ctx, 600, 395, 140, 22, supporterId);
+                        ctx.save();
+                    }
+                    ctx.restore();
+
+                    // Optional label under the QR Code
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.45)";
+                    ctx.font = "bold 11px 'Poppins', sans-serif";
+                    ctx.textAlign = "center";
+                    ctx.fillText("SCAN TO VERIFY", qrX + qrSize / 2, qrY + qrSize + 18);
+                }
+            }
+
+            // Draw initial placeholder
+            document.fonts.ready.then(drawCardPlaceholder);
+
+            // Submit Handler (Firestore unique query/insert + automatic download)
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                formError.classList.add('d-none');
+                formSuccess.classList.add('d-none');
+
+                const name = document.getElementById('studentName').value.trim();
+                const phone = document.getElementById('studentPhone').value.trim();
+                const email = document.getElementById('studentEmail').value.trim().toLowerCase();
+                const districtSelect = document.getElementById('studentDistrict');
+                const districtId = districtSelect.value;
+                const districtCode = districtSelect.options[districtSelect.selectedIndex].getAttribute('data-code');
+                const districtText = districtSelect.options[districtSelect.selectedIndex].text + " District";
+                const role = document.getElementById('studentRole').value;
+                const slogan = document.getElementById('studentSlogan').value;
+                const style = document.getElementById('templateStyle').value;
+
+                if (!userPhoto) {
+                    formError.textContent = "দয়া করে আপনার একটি প্রোফাইল ছবি আপলোড করুন।";
+                    formError.classList.remove('d-none');
+                    return;
+                }
+
+                // Show spinner and disable button
+                generateBtn.disabled = true;
+                btnSpinner.classList.remove('d-none');
+
+                try {
+                    let supporterId = null;
+                    let dbSuccess = false;
+                    const districtBengali = districtBengaliNames[districtId] || districtSelect.options[districtSelect.selectedIndex].text;
+
+                    if (typeof db !== 'undefined' && db !== null) {
+                        try {
+                            // 1. Check if user already exists with EITHER Phone OR Email matching
+                            const [phoneSnap, emailSnap] = await Promise.all([
+                                db.collection("supporters").where("phone", "==", phone).get(),
+                                db.collection("supporters").where("email", "==", email).get()
+                            ]);
+
+                            let existingDoc = null;
+                            if (!phoneSnap.empty) {
+                                existingDoc = phoneSnap.docs[0];
+                            } else if (!emailSnap.empty) {
+                                existingDoc = emailSnap.docs[0];
+                            }
+
+                            if (existingDoc) {
+                                // Supporter already exists! Reuse old ID
+                                const data = existingDoc.data();
+                                supporterId = data.supporterId;
+                                
+                                formSuccess.innerHTML = `<i class="fas fa-check-circle me-1"></i>আপনার তথ্য ডেটাবেসে আগে থেকেই নিবন্ধিত আছে। আইডি: <strong>${supporterId}</strong>`;
+                                formSuccess.classList.remove('d-none');
+                                dbSuccess = true;
+                            } else {
+                                // Reuse the currentId generated on-the-fly, or fallback if empty
+                                supporterId = currentId;
+                                if (!supporterId || !supporterId.startsWith(`SFI-WB-${districtCode}-`)) {
+                                    const randomNum = 10000 + Math.floor(Math.random() * 90000);
+                                    supporterId = `SFI-WB-${districtCode}-${randomNum}`;
+                                }
+                                
+                                // Check if this ID collides
+                                let idSnap = await db.collection("supporters").where("supporterId", "==", supporterId).get();
+                                if (!idSnap.empty) {
+                                    // Collision: generate random unique ID
+                                    let uniqueFound = false;
+                                    let attempts = 0;
+                                    while (!uniqueFound && attempts < 5) {
+                                        const randomNum = 10000 + Math.floor(Math.random() * 90000);
+                                        const testId = `SFI-WB-${districtCode}-${randomNum}`;
+                                        const checkSnap = await db.collection("supporters").where("supporterId", "==", testId).get();
+                                        if (checkSnap.empty) {
+                                            supporterId = testId;
+                                            uniqueFound = true;
+                                        }
+                                        attempts++;
+                                    }
+                                }
+
+                                if (!supporterId) {
+                                    throw new Error("ID generation collision timed out. Please try again.");
+                                }
+
+                                // Write to Firestore database
+                                await db.collection("supporters").add({
+                                    name: name,
+                                    phone: phone,
+                                    email: email,
+                                    district: districtId,
+                                    districtName: districtText,
+                                    role: role,
+                                    slogan: slogan,
+                                    supporterId: supporterId,
+                                    style: style,
+                                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                                });
+
+                                formSuccess.innerHTML = `<i class="fas fa-check-circle me-1"></i>আপনার সমর্থক আইডি তৈরি করা হয়েছে: <strong>${supporterId}</strong>`;
+                                formSuccess.classList.remove('d-none');
+                                dbSuccess = true;
+                            }
+                        } catch (dbError) {
+                            console.error("Firestore operation failed, falling back to offline mode:", dbError);
+                        }
+                    }
+
+                    if (!dbSuccess) {
+                        // Fallback offline mode (localStorage check - EITHER matches)
+                        console.warn("Database unavailable or failed. Falling back to local storage check.");
+                        const localRecords = JSON.parse(localStorage.getItem('sfi_supporters') || '[]');
+                        const match = localRecords.find(r => r.phone === phone || r.email === email);
+
+                        if (match) {
+                            supporterId = match.supporterId;
+                            formSuccess.innerHTML = `<i class="fas fa-info-circle me-1"></i>অফলাইন মোড: পূর্বের সংরক্ষিত আইডি উদ্ধার করা হলো: <strong>${supporterId}</strong>`;
+                            formSuccess.classList.remove('d-none');
+                        } else {
+                            supporterId = currentId;
+                            if (!supporterId || !supporterId.startsWith(`SFI-WB-${districtCode}-`)) {
+                                const randomNum = 10000 + Math.floor(Math.random() * 90000);
+                                supporterId = `SFI-WB-${districtCode}-${randomNum}`;
+                            }
+
+                            localRecords.push({ phone, email, supporterId, name, district: districtId, role, slogan, style });
+                            localStorage.setItem('sfi_supporters', JSON.stringify(localRecords));
+
+                            formSuccess.innerHTML = `<i class="fas fa-check-circle me-1"></i>অফলাইন মোড: আইডি তৈরি করা হলো: <strong>${supporterId}</strong>`;
+                            formSuccess.classList.remove('d-none');
+                        }
+                    }
+
+                    // Send to Google Sheets via Apps Script Web App (runs globally in both online/offline fallback modes)
+                    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynylDoj5mlVnYf7kFpu31oIGSrOVEiW-Z-k3cOoaBXfiJmoqKGT5rBrYhs6wvPwUZceA/exec";
+                    try {
+                        await fetch(APPS_SCRIPT_URL, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: {
+                                'Content-Type': 'text/plain'
+                            },
+                            body: JSON.stringify({
+                                formType: 'supporters',
+                                data: {
+                                    supporterId: supporterId,
+                                    name: name,
+                                    phone: phone,
+                                    email: email,
+                                    district: districtId,
+                                    districtName: districtText,
+                                    role: role,
+                                    slogan: slogan,
+                                    style: style,
+                                    createdAt: new Date().toISOString()
+                                }
+                            })
+                        });
+                        console.log("Supporter details sent to Google Sheets successfully.");
+                    } catch (sheetError) {
+                        console.error("Google Sheets submission failed:", sheetError);
+                    }
+
+                    // Redraw canvas with the actual generated ID and Bengali district name
+                    currentId = supporterId;
+                    drawCard(name, supporterId, districtBengali, role, slogan, style, true, phone, email);
+
+                    // Add dynamic neon glow shine animation to canvas container
+                    canvasWrap.classList.add('generated-shine');
+                    setTimeout(() => {
+                        canvasWrap.classList.remove('generated-shine');
+                    }, 1200);
+
+                    // Trigger automatic file download
+                    const image = canvas.toDataURL("image/png");
+                    const link = document.createElement('a');
+                    const cleanName = name.replace(/\s+/g, '_') || 'SFI_Supporter';
+                    link.download = `${cleanName}_sfi_card.png`;
+                    link.href = image;
+                    link.click();
+
+                    // Show Share section and bottom download button
+                    shareSection.classList.remove('d-none');
+                    if (bottomDownloadCardBtn) {
+                        bottomDownloadCardBtn.classList.remove('d-none');
+                    }
+
+                    // Set up sharing links
+                    const shareUrl = "https://sfiwb.github.io/SFI/";
+                    const encodedText = encodeURIComponent(`আমি SFI-এর ডিজিটাল সমর্থক কার্ড ডাউনলোড করেছি। আমার আইডি: ${supporterId}। আপনিও যোগ দিন এবং আপনার কার্ড ডাউনলোড করুন: ${shareUrl}`);
+                    shareWa.href = `https://api.whatsapp.com/send?text=${encodedText}`;
+                    shareFb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+                    shareTw.href = `https://twitter.com/intent/tweet?text=${encodedText}`;
+
+                } catch (error) {
+                    console.error("Error generating card:", error);
+                    formError.textContent = "সার্ভার ত্রুটি। দয়া করে ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।";
+                    formError.classList.remove('d-none');
+                } finally {
+                    btnSpinner.classList.add('d-none');
+                    generateBtn.disabled = false;
+                }
+            });
+
+            // Check if there is an ID query parameter in the URL (e.g. ?id=SFI-WB-KOL-95793)
+            async function loadSupporterFromUrl() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const urlId = urlParams.get('id');
+                if (!urlId) return;
+
+                console.log("Found Supporter ID in URL query parameter:", urlId);
+                
+                let supporterData = null;
+
+                // 1. Try Firestore
+                if (typeof db !== 'undefined' && db !== null) {
+                    try {
+                        const snap = await db.collection("supporters").where("supporterId", "==", urlId).get();
+                        if (!snap.empty) {
+                            supporterData = snap.docs[0].data();
+                            console.log("Loaded supporter data from Firestore.");
+                        }
+                    } catch (dbError) {
+                        console.error("Firestore fetch from URL query failed:", dbError);
+                    }
+                }
+
+                // 2. Try Google Sheets Apps Script query fallback
+                if (!supporterData) {
+                    try {
+                        const response = await fetch(`${APPS_SCRIPT_URL}?action=getSupporter&id=${urlId}`);
+                        if (response.ok) {
+                            const result = await response.json();
+                            if (result && result.status === 'success' && result.data) {
+                                supporterData = result.data;
+                                console.log("Loaded supporter data from Google Sheets fallback successfully.");
+                            }
+                        }
+                    } catch (err) {
+                        console.error("Apps Script fetch fallback failed:", err);
+                    }
+                }
+
+                // 3. Try local storage fallback
+                if (!supporterData) {
+                    const localRecords = JSON.parse(localStorage.getItem('sfi_supporters') || '[]');
+                    const match = localRecords.find(r => r.supporterId === urlId);
+                    if (match) {
+                        supporterData = {
+                            supporterId: match.supporterId,
+                            phone: match.phone,
+                            email: match.email,
+                            name: match.name || "কমরেড (সংরক্ষিত)",
+                            district: match.district || "wb-kolkata",
+                            role: match.role || "সমর্থক",
+                            slogan: match.slogan || "স্বাধীনতা, গণতন্ত্র, সমাজতন্ত্র—নিপাত যাক সাম্রাজ্যবাদ!",
+                            style: match.style || "supporter-card"
+                        };
+                        console.log("Loaded supporter data from local storage fallback.");
+                    }
+                }
+
+                if (supporterData) {
+                    // Pre-fill form fields
+                    document.getElementById('studentName').value = supporterData.name || '';
+                    document.getElementById('studentPhone').value = supporterData.phone || '';
+                    document.getElementById('studentEmail').value = supporterData.email || '';
+                    document.getElementById('studentDistrict').value = supporterData.district || 'wb-kolkata';
+                    document.getElementById('studentRole').value = supporterData.role || 'সমর্থক';
+                    document.getElementById('studentSlogan').value = supporterData.slogan || 'স্বাধীনতা, গণতন্ত্র, সমাজতন্ত্র—নিপাত যাক সাম্রাজ্যবাদ!';
+                    
+                    if (supporterData.style) {
+                        document.getElementById('templateStyle').value = supporterData.style;
+                    }
+                    
+                    currentId = supporterData.supporterId;
+                    
+                    // Trigger redraw
+                    const districtSelect = document.getElementById('studentDistrict');
+                    const districtId = districtSelect.value;
+                    const districtBengali = districtBengaliNames[districtId] || districtSelect.options[districtSelect.selectedIndex].text;
+                    const style = document.getElementById('templateStyle').value;
+                    
+                    drawCard(
+                        supporterData.name || '',
+                        currentId,
+                        districtBengali,
+                        supporterData.role || '',
+                        supporterData.slogan || '',
+                        style,
+                        true,
+                        supporterData.phone || '',
+                        supporterData.email || ''
+                    );
+
+                    // Show download/share area and set up sharing links
+                    shareSection.classList.remove('d-none');
+                    if (bottomDownloadCardBtn) {
+                        bottomDownloadCardBtn.classList.remove('d-none');
+                    }
+                    
+                    const shareUrl = "https://sfiwb.github.io/SFI/";
+                    const encodedText = encodeURIComponent(`আমি SFI-এর ডিজিটাল সমর্থক কার্ড ডাউনলোড করেছি। আমার আইডি: ${currentId}। আপনিও যোগ দিন এবং আপনার কার্ড ডাউনলোড করুন: ${shareUrl}`);
+                    shareWa.href = `https://api.whatsapp.com/send?text=${encodedText}`;
+                    shareFb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+                    shareTw.href = `https://twitter.com/intent/tweet?text=${encodedText}`;
+
+                    formSuccess.innerHTML = `<i class="fas fa-check-circle me-1"></i>সমর্থক আইডি লোড করা হয়েছে: <strong>${currentId}</strong>`;
+                    formSuccess.classList.remove('d-none');
+                    formError.classList.add('d-none');
+                } else {
+                    formError.innerHTML = `<i class="fas fa-exclamation-circle me-1"></i>আইডি <strong>${urlId}</strong> খুঁজে পাওয়া যায়নি।`;
+                    formError.classList.remove('d-none');
+                }
+            }
+
+            // Helper for downloading card image
+            function triggerCardDownload() {
+                const name = document.getElementById('studentName').value.trim() || 'SFI_Supporter';
+                const cleanName = name.replace(/\s+/g, '_');
+                const image = canvas.toDataURL("image/png");
+                const link = document.createElement('a');
+                link.download = `${cleanName}_sfi_card.png`;
+                link.href = image;
+                link.click();
+            }
+
+            // Separate download buttons click handlers
+            downloadCardBtn.addEventListener('click', triggerCardDownload);
+            if (bottomDownloadCardBtn) {
+                bottomDownloadCardBtn.addEventListener('click', triggerCardDownload);
+            }
+
+            // Draw initial placeholder, then try to load from URL if query param exists
+            document.fonts.ready.then(async () => {
+                drawCardPlaceholder();
+                await loadSupporterFromUrl();
+            });
+        });
+    </script>
+</body>
+
+</html>
