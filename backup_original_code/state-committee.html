@@ -223,16 +223,29 @@
         }
 
         /* District Map & Interactivity styles */
+        :root {
+            --map-fill: #2a2c35;
+            --map-stroke: #111318;
+            --bg-section: linear-gradient(180deg, #0c0d10 0%, #15161b 100%);
+            --map-wrapper-bg: rgba(0, 0, 0, 0.2);
+        }
+        [data-theme="light"] {
+            --map-fill: #cbd5e1;
+            --map-stroke: #94a3b8;
+            --bg-section: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+            --map-wrapper-bg: rgba(255, 255, 255, 0.5);
+        }
+
         .map-section {
             padding: 60px 0;
-            background: linear-gradient(180deg, #0c0d10 0%, #15161b 100%);
+            background: var(--bg-section);
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
         }
 
         .map-wrapper {
             position: relative;
-            background: rgba(0, 0, 0, 0.2);
+            background: var(--map-wrapper-bg);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius-md);
             padding: 20px;
@@ -248,8 +261,8 @@
         }
 
         .wb-district-path {
-            fill: #1b1c21;
-            stroke: #090a0d;
+            fill: var(--map-fill);
+            stroke: var(--map-stroke);
             stroke-width: 1.2px;
             transition: fill 0.25s ease, stroke 0.25s ease, filter 0.25s ease;
         }
@@ -266,6 +279,128 @@
             stroke: #ffffff;
             stroke-width: 2px;
             filter: drop-shadow(0 0 12px rgba(227, 27, 35, 0.9));
+        }
+
+        .leader-phone-row {
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .phone-number {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-call {
+            margin-left: auto;
+            font-size: 0.8rem;
+            background: rgba(211, 26, 39, 0.1);
+            color: var(--color-primary) !important;
+            border: 1px solid rgba(211, 26, 39, 0.2);
+            padding: 4px 10px;
+            border-radius: var(--border-radius-sm);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-call:hover {
+            background: var(--color-primary);
+            color: #ffffff !important;
+            border-color: var(--color-primary);
+            transform: translateY(-1px);
+        }
+
+        .btn-copy {
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 4px 10px;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-copy:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            transform: translateY(-1px);
+        }
+
+        .btn-copy.copied {
+            background: #10b981 !important;
+            color: #ffffff !important;
+            border-color: #10b981 !important;
+        }
+        
+        [data-theme="light"] .btn-copy {
+            background: rgba(0, 0, 0, 0.03);
+        }
+        [data-theme="light"] .btn-copy:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .district-info-details {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .info-detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .info-detail-item i {
+            color: var(--color-primary);
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .info-detail-item div {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .info-detail-item .detail-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .info-detail-item .detail-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .info-detail-item a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+        }
+
+        .info-detail-item a:hover {
+            color: var(--color-primary-hover);
+            text-decoration: underline;
         }
 
         .info-panel-card {
@@ -696,35 +831,61 @@
                             <div class="info-placeholder" id="infoPlaceholder">
                                 <div class="info-placeholder-icon"><i class="fas fa-map-marked-alt"></i></div>
                                 <h4>জেলা নির্বাচন করুন</h4>
-                                <p class="text-muted">পশ্চিমবঙ্গের মানচিত্রে যে কোনো জেলায় ক্লিক করে জেলা কমিটির সম্পাদক, সভাপতি ও যোগাযোগের ঠিকানা দেখুন।</p>
+                                <p class="text-muted">পশ্চিমবঙ্গের মানচিত্রে যে কোনো জেলায় ক্লিক করে জেলা কমিটির সম্পাদক, সভাপতি ও তাঁদের যোগাযোগ নম্বর দেখুন।</p>
                             </div>
                             <div class="info-content d-none" id="infoContent">
                                 <div class="district-title-bn" id="districtTitleBn">হুগলী জেলা</div>
                                 <div class="district-title-en" id="districtTitleEn">Hooghly District</div>
                                 <div class="leaders-list">
+                                    <!-- Secretary -->
                                     <div class="leader-item">
-                                        <div class="role">জেলা সম্পাদক</div>
-                                        <div class="name" id="secName">কমরেড [নাম]</div>
+                                        <div class="role">জেলা সম্পাদক &nbsp;<i class="fas fa-star" style="font-size:0.6rem;"></i></div>
+                                        <div class="name" id="secName"></div>
+                                        <div class="leader-phone-row">
+                                            <i class="fas fa-phone-alt" style="color:var(--color-primary);font-size:0.75rem;"></i>
+                                            <span class="phone-number" id="secPhone"></span>
+                                            <a class="btn-call" id="secCallBtn" href="#"><i class="fas fa-phone"></i> কল করুন</a>
+                                            <button class="btn-copy" id="secCopyBtn" title="নম্বর কপি করুন"><i class="far fa-copy"></i> কপি</button>
+                                        </div>
                                     </div>
+                                    <!-- President -->
                                     <div class="leader-item">
-                                        <div class="role">জেলা সভাপতি</div>
-                                        <div class="name" id="presName">কমরেড [নাম]</div>
+                                        <div class="role">জেলা সভাপতি &nbsp;<i class="fas fa-star" style="font-size:0.6rem;"></i></div>
+                                        <div class="name" id="presName"></div>
+                                        <div class="leader-phone-row">
+                                            <i class="fas fa-phone-alt" style="color:var(--color-primary);font-size:0.75rem;"></i>
+                                            <span class="phone-number" id="presPhone"></span>
+                                            <a class="btn-call" id="presCallBtn" href="#"><i class="fas fa-phone"></i> কল করুন</a>
+                                            <button class="btn-copy" id="presCopyBtn" title="নম্বর কপি করুন"><i class="far fa-copy"></i> কপি</button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="contact-details">
-                                    <div>
-                                        <i class="fas fa-map-marker-alt mt-1"></i>
-                                        <span id="districtAddress">অফিস ঠিকানা শীঘ্রই আপডেট করা হবে</span>
+                                
+                                <!-- Bottom SFI info details (replaces generic address/email/phone) -->
+                                <div class="district-info-details">
+                                    <div class="info-detail-item">
+                                        <i class="fas fa-bullhorn"></i>
+                                        <div>
+                                            <span class="detail-title">আন্দোলন ও সংগঠন</span>
+                                            <span class="detail-desc">এই জেলায় ছাত্র অধিকার, শিক্ষার অধিকার ও গণতন্ত্র রক্ষায় এসএফআই ক্রমাগত আন্দোলন পরিচালনা করছে।</span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <i class="fas fa-phone-alt"></i>
-                                        <span id="districtPhone">যোগাযোগ নম্বর শীঘ্রই আপডেট করা হবে</span>
+                                    <div class="info-detail-item">
+                                        <i class="fas fa-user-plus"></i>
+                                        <div>
+                                            <span class="detail-title">যোগদান করুন</span>
+                                            <span class="detail-desc">উন্নত শিক্ষার পরিবেশ ও অধিকারের লড়াইয়ে আমাদের সাথে যুক্ত হোন। <a href="join.html">এখানে আবেদন করুন →</a></span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <i class="fas fa-envelope"></i>
-                                        <span id="districtEmail">ইমেইল ঠিকানা শীঘ্রই আপডেট করা হবে</span>
+                                    <div class="info-detail-item">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <div>
+                                            <span class="detail-title">আমাদের লক্ষ্য</span>
+                                            <span class="detail-desc">"অধ্যয়ন, সংগ্রাম, শান্তি ও প্রগতি" - এই মহান আদর্শকে সামনে রেখে আমাদের সদস্যরা প্রতিটি প্রতিষ্ঠানে আন্দোলন গড়ে তুলছেন।</span>
+                                        </div>
                                     </div>
                                 </div>
+                                
                                 <div class="district-social-links" id="districtSocialLinks">
                                     <!-- Social icons will be generated here -->
                                 </div>
@@ -1321,6 +1482,37 @@
                 }
             };
 
+            // Helper: copy-to-clipboard with visual feedback
+            function makeCopyBtn(btnEl, textFn) {
+                btnEl.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const txt = textFn();
+                    if (!txt || txt.includes('শীঘ্রই')) return;
+                    navigator.clipboard.writeText(txt).then(() => {
+                        const origHTML = btnEl.innerHTML;
+                        btnEl.innerHTML = '<i class="fas fa-check"></i> কপি হয়েছে';
+                        btnEl.classList.add('copied');
+                        setTimeout(() => {
+                            btnEl.innerHTML = origHTML;
+                            btnEl.classList.remove('copied');
+                        }, 2000);
+                    }).catch(() => {
+                        const ta = document.createElement('textarea');
+                        ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
+                        document.body.appendChild(ta); ta.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(ta);
+                        const origHTML = btnEl.innerHTML;
+                        btnEl.innerHTML = '<i class="fas fa-check"></i> কপি হয়েছে';
+                        btnEl.classList.add('copied');
+                        setTimeout(() => {
+                            btnEl.innerHTML = origHTML;
+                            btnEl.classList.remove('copied');
+                        }, 2000);
+                    });
+                });
+            }
+
             const paths = document.querySelectorAll(".wb-district-path");
             const placeholder = document.getElementById("infoPlaceholder");
             const content = document.getElementById("infoContent");
@@ -1328,11 +1520,20 @@
             const titleBn = document.getElementById("districtTitleBn");
             const titleEn = document.getElementById("districtTitleEn");
             const secName = document.getElementById("secName");
+            const secPhoneEl = document.getElementById("secPhone");
+            const secCallBtn = document.getElementById("secCallBtn");
+            const secCopyBtn = document.getElementById("secCopyBtn");
+
             const presName = document.getElementById("presName");
-            const address = document.getElementById("districtAddress");
-            const phone = document.getElementById("districtPhone");
-            const email = document.getElementById("districtEmail");
+            const presPhoneEl = document.getElementById("presPhone");
+            const presCallBtn = document.getElementById("presCallBtn");
+            const presCopyBtn = document.getElementById("presCopyBtn");
+
             const socialLinks = document.getElementById("districtSocialLinks");
+
+            // Wire copy buttons once
+            makeCopyBtn(secCopyBtn, () => secPhoneEl.textContent);
+            makeCopyBtn(presCopyBtn, () => presPhoneEl.textContent);
 
             paths.forEach(function(path) {
                 path.addEventListener("click", function() {
@@ -1350,14 +1551,23 @@
                         placeholder.classList.add("d-none");
                         content.classList.remove("d-none");
                         
-                        // Add fade-in classes by rebuilding the html
+                        // Re-trigger fade-in animation
+                        content.style.animation = 'none';
+                        content.offsetHeight; // reflow
+                        content.style.animation = '';
+
                         titleBn.textContent = data.bn;
                         titleEn.textContent = data.en;
+                        
+                        // Secretary
                         secName.textContent = data.sec;
+                        secPhoneEl.textContent = data.secPhone || 'শীঘ্রই আপডেট হবে';
+                        secCallBtn.href = data.secPhone ? 'tel:' + data.secPhone.replace(/\s+/g, '') : '#';
+
+                        // President
                         presName.textContent = data.pres;
-                        address.textContent = data.address;
-                        phone.textContent = data.phone;
-                        email.textContent = data.email;
+                        presPhoneEl.textContent = data.presPhone || 'শীঘ্রই আপডেট হবে';
+                        presCallBtn.href = data.presPhone ? 'tel:' + data.presPhone.replace(/\s+/g, '') : '#';
                         
                         // Generate social links
                         socialLinks.innerHTML = "";
@@ -1370,7 +1580,7 @@
                             socialLinks.appendChild(fbLink);
                         }
                         const emailBtn = document.createElement("a");
-                        emailBtn.href = "mailto:" + data.email;
+                        emailBtn.href = "mailto:state.committee.sfi.wb@gmail.com";
                         emailBtn.title = "Send Email";
                         emailBtn.innerHTML = '<i class="fas fa-envelope"></i>';
                         socialLinks.appendChild(emailBtn);
