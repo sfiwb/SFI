@@ -536,6 +536,50 @@
         </div>
     </footer>
 
+    <!-- Supporter Verification Modal -->
+    <div class="modal fade" id="verificationModal" tabindex="-1" aria-labelledby="verificationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content text-light" style="background: #121318; border: 2px solid #ff2d3c; border-radius: 20px; box-shadow: 0 0 30px rgba(255, 45, 60, 0.25);">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold text-danger" id="verificationModalLabel" style="font-family: 'Noto Serif Bengali', serif;">
+                        <i class="fas fa-check-circle text-success me-2"></i>সমর্থক বিবরণী যাচাই (Verified Supporter)
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <div class="d-flex align-items-center justify-content-center mb-3">
+                        <div class="badge bg-success-subtle text-success border border-success px-3 py-2 rounded-pill fs-6">
+                            <i class="fas fa-shield-alt me-1"></i> SFI Digital Supporter Verified
+                        </div>
+                    </div>
+                    
+                    <!-- Loaded Card Image -->
+                    <div class="mx-auto mb-4" style="max-width: 100%; overflow: hidden; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
+                        <img id="modalCardImage" src="" alt="SFI Supporter Card" style="width: 100%; height: auto; display: block;">
+                    </div>
+                    
+                    <div class="text-start px-md-4 mb-3">
+                        <h6 class="text-danger fw-bold mb-3 border-bottom border-secondary pb-1" style="font-family: 'Noto Serif Bengali', serif;"><i class="fas fa-info-circle me-1"></i>নিবন্ধিত তথ্য (Registered Info)</h6>
+                        <div class="row g-2 text-white-50 small">
+                            <div class="col-6"><strong>নাম (Name):</strong> <span id="modalName" class="text-white"></span></div>
+                            <div class="col-6"><strong>আইডি (ID):</strong> <span id="modalId" class="text-danger fw-bold"></span></div>
+                            <div class="col-6"><strong>জেলা (District):</strong> <span id="modalDistrict" class="text-white"></span></div>
+                            <div class="col-6"><strong>ভূমিকা (Role):</strong> <span id="modalRole" class="text-white"></span></div>
+                            <div class="col-6"><strong>ফোন (Phone):</strong> <span id="modalPhone" class="text-white"></span></div>
+                            <div class="col-6"><strong>ইমেল (Email):</strong> <span id="modalEmail" class="text-white"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 pt-0 justify-content-center">
+                    <button type="button" class="btn px-4 text-white" id="modalDownloadBtn" style="background: linear-gradient(135deg, #ff2d3c 0%, #c81e2b 100%); border-radius: 50px; font-weight: bold; border: none; box-shadow: 0 4px 15px rgba(255, 45, 60, 0.4);">
+                        <i class="fas fa-download me-1"></i>ডাউনলোড করুন (Download Card)
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary px-4 rounded-pill" data-bs-dismiss="modal">বন্ধ করুন (Close)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Vendor JS Files -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -638,6 +682,7 @@
 
             let userPhoto = null;
             let currentId = null;
+            let photoBase64 = null;
 
             // Preload SFI State Committee Logo Image
             const scLogoImg = new Image();
@@ -680,6 +725,7 @@
             removePhotoBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 userPhoto = null;
+                photoBase64 = null;
                 photoInput.value = '';
                 previewContainer.classList.add('d-none');
                 uploadPlaceholder.classList.remove('d-none');
@@ -701,6 +747,29 @@
                     const img = new Image();
                     img.onload = function() {
                         userPhoto = img;
+                        
+                        // Compress photo for Firestore storage (e.g. max 200x200)
+                        const compressCanvas = document.createElement('canvas');
+                        const maxDim = 200;
+                        let width = img.width;
+                        let height = img.height;
+                        if (width > height) {
+                            if (width > maxDim) {
+                                height = Math.round(height * maxDim / width);
+                                width = maxDim;
+                            }
+                        } else {
+                            if (height > maxDim) {
+                                width = Math.round(width * maxDim / height);
+                                height = maxDim;
+                            }
+                        }
+                        compressCanvas.width = width;
+                        compressCanvas.height = height;
+                        const cCtx = compressCanvas.getContext('2d');
+                        cCtx.drawImage(img, 0, 0, width, height);
+                        photoBase64 = compressCanvas.toDataURL('image/jpeg', 0.7);
+                        
                         previewThumb.src = e.target.result;
                         uploadPlaceholder.classList.add('d-none');
                         previewContainer.classList.remove('d-none');
@@ -1517,6 +1586,7 @@
                                     slogan: slogan,
                                     supporterId: supporterId,
                                     style: style,
+                                    photo: photoBase64 || "",
                                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
                                 });
 
@@ -1546,7 +1616,7 @@
                                 supporterId = `SFI-WB-${districtCode}-${randomNum}`;
                             }
 
-                            localRecords.push({ phone, email, supporterId, name, district: districtId, role, slogan, style });
+                            localRecords.push({ phone, email, supporterId, name, district: districtId, role, slogan, style, photo: photoBase64 || "" });
                             localStorage.setItem('sfi_supporters', JSON.stringify(localRecords));
 
                             formSuccess.innerHTML = `<i class="fas fa-check-circle me-1"></i>অফলাইন মোড: আইডি তৈরি করা হলো: <strong>${supporterId}</strong>`;
@@ -1677,7 +1747,8 @@
                             district: match.district || "wb-kolkata",
                             role: match.role || "সমর্থক",
                             slogan: match.slogan || "স্বাধীনতা, গণতন্ত্র, সমাজতন্ত্র—নিপাত যাক সাম্রাজ্যবাদ!",
-                            style: match.style || "supporter-card"
+                            style: match.style || "supporter-card",
+                            photo: match.photo || ""
                         };
                         console.log("Loaded supporter data from local storage fallback.");
                     }
@@ -1698,43 +1769,97 @@
                     
                     currentId = supporterData.supporterId;
                     
-                    // Trigger redraw
-                    const districtSelect = document.getElementById('studentDistrict');
-                    const districtId = districtSelect.value;
-                    const districtBengali = districtBengaliNames[districtId] || districtSelect.options[districtSelect.selectedIndex].text;
-                    const style = document.getElementById('templateStyle').value;
-                    
-                    drawCard(
-                        supporterData.name || '',
-                        currentId,
-                        districtBengali,
-                        supporterData.role || '',
-                        supporterData.slogan || '',
-                        style,
-                        true,
-                        supporterData.phone || '',
-                        supporterData.email || ''
-                    );
-
-                    // Show download/share area and set up sharing links
-                    shareSection.classList.remove('d-none');
-                    if (bottomDownloadCardBtn) {
-                        bottomDownloadCardBtn.classList.remove('d-none');
+                    // Load photo if available before rendering card
+                    if (supporterData.photo) {
+                        const img = new Image();
+                        img.onload = function() {
+                            userPhoto = img;
+                            renderLoadedSupporter(supporterData);
+                        };
+                        img.onerror = function() {
+                            userPhoto = null;
+                            renderLoadedSupporter(supporterData);
+                        };
+                        img.src = supporterData.photo;
+                    } else {
+                        userPhoto = null;
+                        renderLoadedSupporter(supporterData);
                     }
-                    
-                    const shareUrl = "https://sfiwb.github.io/SFI/";
-                    const encodedText = encodeURIComponent(`আমি SFI-এর ডিজিটাল সমর্থক কার্ড ডাউনলোড করেছি। আমার আইডি: ${currentId}। আপনিও যোগ দিন এবং আপনার কার্ড ডাউনলোড করুন: ${shareUrl}`);
-                    shareWa.href = `https://api.whatsapp.com/send?text=${encodedText}`;
-                    shareFb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
-                    shareTw.href = `https://twitter.com/intent/tweet?text=${encodedText}`;
-
-                    formSuccess.innerHTML = `<i class="fas fa-check-circle me-1"></i>সমর্থক আইডি লোড করা হয়েছে: <strong>${currentId}</strong>`;
-                    formSuccess.classList.remove('d-none');
-                    formError.classList.add('d-none');
                 } else {
                     formError.innerHTML = `<i class="fas fa-exclamation-circle me-1"></i>আইডি <strong>${urlId}</strong> খুঁজে পাওয়া যায়নি।`;
                     formError.classList.remove('d-none');
                 }
+            }
+
+            function renderLoadedSupporter(supporterData) {
+                // Trigger redraw
+                const districtSelect = document.getElementById('studentDistrict');
+                const districtId = districtSelect.value;
+                const districtBengali = districtBengaliNames[districtId] || districtSelect.options[districtSelect.selectedIndex].text;
+                const style = document.getElementById('templateStyle').value;
+                
+                drawCard(
+                    supporterData.name || '',
+                    currentId,
+                    districtBengali,
+                    supporterData.role || '',
+                    supporterData.slogan || '',
+                    style,
+                    true,
+                    supporterData.phone || '',
+                    supporterData.email || ''
+                );
+
+                // Show download/share area and set up sharing links
+                shareSection.classList.remove('d-none');
+                if (bottomDownloadCardBtn) {
+                    bottomDownloadCardBtn.classList.remove('d-none');
+                }
+                
+                const shareUrl = "https://sfiwb.github.io/SFI/";
+                const encodedText = encodeURIComponent(`আমি SFI-এর ডিজিটাল সমর্থক কার্ড ডাউনলোড করেছি। আমার আইডি: ${currentId}। আপনিও যোগ দিন এবং আপনার কার্ড ডাউনলোড করুন: ${shareUrl}`);
+                shareWa.href = `https://api.whatsapp.com/send?text=${encodedText}`;
+                shareFb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+                shareTw.href = `https://twitter.com/intent/tweet?text=${encodedText}`;
+
+                formSuccess.innerHTML = `<i class="fas fa-check-circle me-1"></i>সমর্থক আইডি লোড করা হয়েছে: <strong>${currentId}</strong>`;
+                formSuccess.classList.remove('d-none');
+                formError.classList.add('d-none');
+
+                // Pop up the verification display modal
+                showVerificationModal(supporterData, currentId);
+            }
+
+            function showVerificationModal(supporterData, id) {
+                // Populate text details
+                document.getElementById('modalName').textContent = supporterData.name || '';
+                document.getElementById('modalId').textContent = id;
+                
+                const districtId = supporterData.district || 'wb-kolkata';
+                const districtBengali = districtBengaliNames[districtId] || districtId;
+                document.getElementById('modalDistrict').textContent = districtBengali;
+                
+                document.getElementById('modalRole').textContent = supporterData.role || 'সমর্থক';
+                document.getElementById('modalPhone').textContent = supporterData.phone || '';
+                document.getElementById('modalEmail').textContent = supporterData.email || '';
+                
+                // Export canvas to image src
+                const imgData = canvas.toDataURL("image/png");
+                document.getElementById('modalCardImage').src = imgData;
+                
+                // Set download button handler
+                const modalDownloadBtn = document.getElementById('modalDownloadBtn');
+                modalDownloadBtn.onclick = function() {
+                    const link = document.createElement('a');
+                    const cleanName = (supporterData.name || 'SFI_Supporter').replace(/\s+/g, '_');
+                    link.download = `${cleanName}_sfi_card.png`;
+                    link.href = imgData;
+                    link.click();
+                };
+                
+                // Show modal
+                const myModal = new bootstrap.Modal(document.getElementById('verificationModal'));
+                myModal.show();
             }
 
             // Helper for downloading card image
