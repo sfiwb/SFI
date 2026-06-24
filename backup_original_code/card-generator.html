@@ -1317,7 +1317,7 @@
                                 foreground: '#0c0d10',
                                 background: '#ffffff'
                             });
-                            ctx.drawImage(qr.image, posterQrX, posterQrY, posterQrSize, posterQrSize);
+                            ctx.drawImage(qr.canvas, posterQrX, posterQrY, posterQrSize, posterQrSize);
                         } catch (qrError) {
                             console.error("QR Code drawing failed on poster:", qrError);
                             ctx.restore();
@@ -1538,7 +1538,7 @@
                                 foreground: '#0c0d10',
                                 background: '#ffffff'
                             });
-                            ctx.drawImage(qr.image, qrX, qrY, qrSize, qrSize);
+                            ctx.drawImage(qr.canvas, qrX, qrY, qrSize, qrSize);
                         } catch (qrError) {
                             console.error("QR Code drawing failed:", qrError);
                             // Fallback to barcode if QR generation fails
