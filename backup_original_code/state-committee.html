@@ -877,17 +877,6 @@
                                             <span class="detail-desc">উন্নত শিক্ষার পরিবেশ ও অধিকারের লড়াইয়ে আমাদের সাথে যুক্ত হোন। <a href="join.html">এখানে আবেদন করুন →</a></span>
                                         </div>
                                     </div>
-                                    <div class="info-detail-item">
-                                        <i class="fas fa-shield-alt"></i>
-                                        <div>
-                                            <span class="detail-title">আমাদের লক্ষ্য</span>
-                                            <span class="detail-desc">"অধ্যয়ন, সংগ্রাম, শান্তি ও প্রগতি" - এই মহান আদর্শকে সামনে রেখে আমাদের সদস্যরা প্রতিটি প্রতিষ্ঠানে আন্দোলন গড়ে তুলছেন।</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="district-social-links" id="districtSocialLinks">
-                                    <!-- Social icons will be generated here -->
                                 </div>
                             </div>
                         </div>
@@ -1529,8 +1518,6 @@
             const presCallBtn = document.getElementById("presCallBtn");
             const presCopyBtn = document.getElementById("presCopyBtn");
 
-            const socialLinks = document.getElementById("districtSocialLinks");
-
             // Wire copy buttons once
             makeCopyBtn(secCopyBtn, () => secPhoneEl.textContent);
             makeCopyBtn(presCopyBtn, () => presPhoneEl.textContent);
@@ -1568,22 +1555,6 @@
                         presName.textContent = data.pres;
                         presPhoneEl.textContent = data.presPhone || 'শীঘ্রই আপডেট হবে';
                         presCallBtn.href = data.presPhone ? 'tel:' + data.presPhone.replace(/\s+/g, '') : '#';
-                        
-                        // Generate social links
-                        socialLinks.innerHTML = "";
-                        if (data.facebook) {
-                            const fbLink = document.createElement("a");
-                            fbLink.href = data.facebook;
-                            fbLink.target = "_blank";
-                            fbLink.title = "Facebook Page";
-                            fbLink.innerHTML = '<i class="fab fa-facebook-f"></i>';
-                            socialLinks.appendChild(fbLink);
-                        }
-                        const emailBtn = document.createElement("a");
-                        emailBtn.href = "mailto:state.committee.sfi.wb@gmail.com";
-                        emailBtn.title = "Send Email";
-                        emailBtn.innerHTML = '<i class="fas fa-envelope"></i>';
-                        socialLinks.appendChild(emailBtn);
                     }
                 });
             });
