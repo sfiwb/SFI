@@ -144,6 +144,13 @@
             opacity: 0.75;
         }
 
+        [data-theme="light"] .leader-card {
+            color: var(--text-primary);
+        }
+        [data-theme="light"] .leader-card .lc-org {
+            color: var(--text-secondary);
+        }
+
         .members-table-wrap {
             overflow-x: auto;
             margin: 10px 0 60px;
@@ -317,6 +324,35 @@
             color: #ffffff !important;
             border-color: var(--color-primary);
             transform: translateY(-1px);
+        }
+
+        .btn-whatsapp {
+            font-size: 0.8rem;
+            background: rgba(37, 211, 102, 0.08);
+            color: #25d366 !important;
+            border: 1px solid rgba(37, 211, 102, 0.2);
+            padding: 4px 10px;
+            border-radius: var(--border-radius-sm);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-whatsapp:hover {
+            background: #25d366;
+            color: #ffffff !important;
+            border-color: #25d366;
+            transform: translateY(-1px);
+        }
+        
+        [data-theme="light"] .btn-whatsapp {
+            background: rgba(37, 211, 102, 0.05);
+        }
+        [data-theme="light"] .btn-whatsapp:hover {
+            background: #25d366;
+            color: #ffffff !important;
         }
 
         .btn-copy {
@@ -730,14 +766,19 @@
                 <div class="divider-line"></div>
                 <div class="leadership-cards">
                     <div class="leader-card">
-                        <div class="lc-role">রাজ্য সভাপতি</div>
+                        <div class="lc-role">রাজ্য সম্পাদক</div>
                         <div class="lc-name">দেবাঞ্জন দে</div>
-                        <div class="lc-org">এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটি</div>
+                        <div class="lc-org">SFI পশ্চিমবঙ্গ রাজ্য কমিটি</div>
                     </div>
                     <div class="leader-card">
-                        <div class="lc-role">রাজ্য সম্পাদক</div>
-                        <div class="lc-name">প্রণয় কর্মকার</div>
-                        <div class="lc-org">এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটি</div>
+                        <div class="lc-role">রাজ্য সভাপতি</div>
+                        <div class="lc-name">প্রণয় কার্য্যী</div>
+                        <div class="lc-org">SFI পশ্চিমবঙ্গ রাজ্য কমিটি</div>
+                    </div>
+                    <div class="leader-card">
+                        <div class="lc-role">ছাত্রসংগ্ৰাম পত্রিকা সম্পাদক</div>
+                        <div class="lc-name">সৌভিক দাসবক্সী</div>
+                        <div class="lc-org">SFI পশ্চিমবঙ্গ রাজ্য কমিটি</div>
                     </div>
                 </div>
                 
@@ -845,6 +886,7 @@
                                             <i class="fas fa-phone-alt" style="color:var(--color-primary);font-size:0.75rem;"></i>
                                             <span class="phone-number" id="secPhone"></span>
                                             <a class="btn-call" id="secCallBtn" href="#"><i class="fas fa-phone"></i> কল করুন</a>
+                                            <a class="btn-whatsapp" id="secWhatsappBtn" href="#" target="_blank"><i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ</a>
                                             <button class="btn-copy" id="secCopyBtn" title="নম্বর কপি করুন"><i class="far fa-copy"></i> কপি</button>
                                         </div>
                                     </div>
@@ -856,6 +898,7 @@
                                             <i class="fas fa-phone-alt" style="color:var(--color-primary);font-size:0.75rem;"></i>
                                             <span class="phone-number" id="presPhone"></span>
                                             <a class="btn-call" id="presCallBtn" href="#"><i class="fas fa-phone"></i> কল করুন</a>
+                                            <a class="btn-whatsapp" id="presWhatsappBtn" href="#" target="_blank"><i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ</a>
                                             <button class="btn-copy" id="presCopyBtn" title="নম্বর কপি করুন"><i class="far fa-copy"></i> কপি</button>
                                         </div>
                                     </div>
@@ -883,11 +926,7 @@
                     </div>
                 </div>
 
-                <!-- Full State Committee List -->
-                <div class="notice-banner">
-                    <span class="icon">📢</span>
-                    <span>রাজ্য কমিটির পূর্ণ সদস্য তালিকা শীঘ্রই প্রকাশ করা হবে।</span>
-                </div>
+                
                 <p class="section-title">রাজ্য কমিটি সদস্যগণ</p>
                 <div class="divider-line"></div>
                 <div class="members-table-wrap">
@@ -896,58 +935,504 @@
                             <tr>
                                 <th>#</th>
                                 <th>নাম</th>
-                                <th>পদবি</th>
-                                <th>জেলা</th>
+                                <th>দায়িত্ব</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td class="serial">১</td>
                                 <td>কমরেড দেবাঞ্জন দে</td>
-                                <td><span class="badge">রাজ্য সভাপতি</span></td>
-                                <td>কলকাতা</td>
+                                <td><span class="badge">রাজ্য সম্পাদক</span></td>
                             </tr>
                             <tr>
                                 <td class="serial">২</td>
-                                <td>কমরেড প্রণয় কর্মকার</td>
-                                <td><span class="badge">রাজ্য সম্পাদক</span></td>
-                                <td>কলকাতা</td>
+                                <td>কমরেড প্রণয় কার্য্যী</td>
+                                <td><span class="badge">রাজ্য সভাপতি</span></td>
                             </tr>
                             <tr>
                                 <td class="serial">৩</td>
-                                <td>কমরেড [নাম শীঘ্রই]</td>
-                                <td><span class="badge">রাজ্য কমিটি সদস্য</span></td>
-                                <td>উত্তর ২৪ পরগনা</td>
+                                <td>কমরেড প্রাঞ্জল মিত্র</td>
+                                <td><span class="badge">কোচবিহার সম্পাদক</span></td>
                             </tr>
                             <tr>
                                 <td class="serial">৪</td>
-                                <td>কমরেড [নাম শীঘ্রই]</td>
-                                <td><span class="badge">রাজ্য কমিটি সদস্য</span></td>
-                                <td>দক্ষিণ ২৪ পরগনা</td>
+                                <td>কমরেড সৌমী নন্দী</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
                             </tr>
                             <tr>
                                 <td class="serial">৫</td>
-                                <td>কমরেড [নাম শীঘ্রই]</td>
-                                <td><span class="badge">রাজ্য কমিটি সদস্য</span></td>
-                                <td>হাওড়া</td>
+                                <td>কমরেড কুণাল ঘোষ</td>
+                                <td><span class="badge">আলিপুরদুয়ার সম্পাদক</span></td>
                             </tr>
                             <tr>
                                 <td class="serial">৬</td>
-                                <td>কমরেড [নাম শীঘ্রই]</td>
-                                <td><span class="badge">রাজ্য কমিটি সদস্য</span></td>
-                                <td>হুগলি</td>
+                                <td>কমরেড সায়ন সাহা</td>
+                                <td><span class="badge">আলিপুরদুয়ার সভাপতি</span></td>
                             </tr>
                             <tr>
                                 <td class="serial">৭</td>
-                                <td>কমরেড [নাম শীঘ্রই]</td>
-                                <td><span class="badge">রাজ্য কমিটি সদস্য</span></td>
-                                <td>মেদিনীপুর</td>
+                                <td>কমরেড অরিন্দম ঘোষ</td>
+                                <td><span class="badge">জলপাইগুড়ি সম্পাদক</span></td>
                             </tr>
                             <tr>
                                 <td class="serial">৮</td>
-                                <td>কমরেড [নাম শীঘ্রই]</td>
-                                <td><span class="badge">রাজ্য কমিটি সদস্য</span></td>
-                                <td>বর্ধমান</td>
+                                <td>কমরেড সাব্বির হোসেন</td>
+                                <td><span class="badge">জলপাইগুড়ি সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৯</td>
+                                <td>কমরেড সঙ্গীতা রায়</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">১০</td>
+                                <td>কমরেড অঙ্কিত দে</td>
+                                <td><span class="badge">দার্জিলিং সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">১১</td>
+                                <td>কমরেড তন্ময় অধিকারী</td>
+                                <td><span class="badge">দার্জিলিং সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">১২</td>
+                                <td>কমরেড কুষাণ ভৌমিক</td>
+                                <td><span class="badge">উত্তর দিনাজপুর সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">১৩</td>
+                                <td>কমরেড নুর আলম</td>
+                                <td><span class="badge">উত্তর দিনাজপুর সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">১৪</td>
+                                <td>কমরেড বেদত্রেয়ী গোস্বামী</td>
+                                <td><span class="badge">দক্ষিণ দিনাজপুর সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">১৫</td>
+                                <td>কমরেড উৎপল রাজবংশী</td>
+                                <td><span class="badge">দক্ষিণ দিনাজপুর সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">১৬</td>
+                                <td>কমরেড কৌশিক মৈত্র</td>
+                                <td><span class="badge">মালদা সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">১৭</td>
+                                <td>কমরেড সহিদুল ইসলাম</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">১৮</td>
+                                <td>কমরেড প্রীতম রুজ</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">১৯</td>
+                                <td>কমরেড ইঞ্জামুল হক</td>
+                                <td><span class="badge">মুর্শিদাবাদ সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">২০</td>
+                                <td>কমরেড অদিতি নন্দী</td>
+                                <td><span class="badge">মুর্শিদাবাদ সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">২১</td>
+                                <td>কমরেড সাইদুল ইসলাম</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">২২</td>
+                                <td>কমরেড শৌর্যবন্ত ডি চৌধুরী</td>
+                                <td><span class="badge">নদিয়া সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">২৩</td>
+                                <td>কমরেড সমীর সরকার</td>
+                                <td><span class="badge">নদিয়া সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">২৪</td>
+                                <td>কমরেড মৌতৃষা বিশ্বাস</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">২৫</td>
+                                <td>কমরেড সাগ্নিক চাকী</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">২৬</td>
+                                <td>কমরেড রুদ্র পোদ্দার</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">২৭</td>
+                                <td>কমরেড মনু মালাকার</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">২৮</td>
+                                <td>কমরেড সৌভিক দাসবক্সী</td>
+                                <td><span class="badge">বীরভূম সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">২৯</td>
+                                <td>কমরেড নিসার হাসান</td>
+                                <td><span class="badge">বীরভূম সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৩০</td>
+                                <td>কমরেড অজয় বাগদি</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৩১</td>
+                                <td>কমরেড দেবব্রত দাস</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৩২</td>
+                                <td>কমরেড প্রত্যুষ মুখার্জি</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৩৩</td>
+                                <td>কমরেড আলোক মুর্মু</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৩৪</td>
+                                <td>কমরেড সুদীপ কুড়ি</td>
+                                <td><span class="badge">পশ্চিম বর্ধমান সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৩৫</td>
+                                <td>কমরেড সুপ্রিয়ম চ্যাটার্জি</td>
+                                <td><span class="badge">পশ্চিম বর্ধমান সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৩৬</td>
+                                <td>কমরেড কেয়া কর্মকার</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৩৭</td>
+                                <td>কমরেড অনির্বাণ রায় চৌধুরী</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৩৮</td>
+                                <td>কমরেড প্রবীর ভৌমিক</td>
+                                <td><span class="badge">পূর্ব বর্ধমান সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৩৯</td>
+                                <td>কমরেড টিউলিপ ঘোষ</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৪০</td>
+                                <td>কমরেড অয়ন ঘোষ</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৪১</td>
+                                <td>কমরেড অয়ন মন্ডল</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৪২</td>
+                                <td>কমরেড উষসী রায় চৌধুরী</td>
+                                <td><span class="badge">পূর্ব বর্ধমান সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৪৩</td>
+                                <td>কমরেড অনির্বাণ গোস্বামী</td>
+                                <td><span class="badge">বাঁকুড়া সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৪৪</td>
+                                <td>কমরেড সুজিত মুখার্জি</td>
+                                <td><span class="badge">বাঁকুড়া সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৪৫</td>
+                                <td>কমরেড সুব্রত মাহাতো</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৪৬</td>
+                                <td>কমরেড সায়ন্তন ঘোষ</td>
+                                <td><span class="badge">পুরুলিয়া সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৪৭</td>
+                                <td>কমরেড মধুশ্রী মজুমদার</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৪৮</td>
+                                <td>কমরেড রজত ঘোষ</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৪৯</td>
+                                <td>কমরেড রণিত বেরা</td>
+                                <td><span class="badge">পশ্চিম মেদিনীপুর সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৫০</td>
+                                <td>কমরেড সুকুমার মাঝি</td>
+                                <td><span class="badge">পশ্চিম মেদিনীপুর সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৫১</td>
+                                <td>কমরেড বেলাল মির</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৫২</td>
+                                <td>কমরেড জাকির হোসেন মল্লিক</td>
+                                <td><span class="badge">পূর্ব মেদিনীপুর সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৫৩</td>
+                                <td>কমরেড সৈকত মাজি</td>
+                                <td><span class="badge">পূর্ব মেদিনীপুর সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৫৪</td>
+                                <td>কমরেড আলি আকবর</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৫৫</td>
+                                <td>কমরেড অরুনিমা মাইতি</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৫৬</td>
+                                <td>কমরেড বাদশা দাস</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৫৭</td>
+                                <td>কমরেড সোমেন মুখার্জি</td>
+                                <td><span class="badge">হুগলী সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৫৮</td>
+                                <td>কমরেড অনির্বাণ গোস্বামী (হুগলি)</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৫৯</td>
+                                <td>কমরেড অন্বেষা কোলে</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৬০</td>
+                                <td>কমরেড দীপ্তেশ মুখার্জি</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৬১</td>
+                                <td>কমরেড সৌরভ মন্ডল</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৬২</td>
+                                <td>কমরেড মহম্মদ তোমজিদুর</td>
+                                <td><span class="badge">হাওড়া সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৬৩</td>
+                                <td>কমরেড নীলাঞ্জন প্রামাণিক</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৬৪</td>
+                                <td>কমরেড আকাশ কর</td>
+                                <td><span class="badge">উত্তর ২৪ পরগনা সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৬৫</td>
+                                <td>কমরেড দীপ্তজিত দাস</td>
+                                <td><span class="badge">উত্তর ২৪ পরগনা সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৬৬</td>
+                                <td>কমরেড সোনালী মজুমদার</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৬৭</td>
+                                <td>কমরেড সঞ্চিতা পান্ডে</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৬৮</td>
+                                <td>কমরেড সন্দীপ আচার্য</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৬৯</td>
+                                <td>কমরেড অভিষেক দত্তগুপ্ত</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৭০</td>
+                                <td>কমরেড অর্ক মুখার্জি</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৭১</td>
+                                <td>কমরেড ঋতঙ্কর দাস</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৭২</td>
+                                <td>কমরেড সুতপা মিস্ত্রি</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৭৩</td>
+                                <td>কমরেড পিয়াল মল্লিক</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৭৪</td>
+                                <td>কমরেড রাকিব বিন সাইদুল</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৭৫</td>
+                                <td>কমরেড সায়ক চক্রবর্তী</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৭৬</td>
+                                <td>কমরেড অনিরুদ্ধ চক্রবর্তী</td>
+                                <td><span class="badge">দক্ষিণ ২৪ পরগনা সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৭৭</td>
+                                <td>কমরেড ঋজুরেখ দাসগুপ্ত</td>
+                                <td><span class="badge">দক্ষিণ ২৪ পরগনা সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৭৮</td>
+                                <td>কমরেড মৈত্রী ভূঁঞা</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৭৯</td>
+                                <td>কমরেড রামিজ রাজা গায়েন</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৮০</td>
+                                <td>কমরেড সপ্তর্ষি ব্যানার্জি</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৮১</td>
+                                <td>কমরেড অঙ্কিতা দাস</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৮২</td>
+                                <td>কমরেড আলেখ্য নস্কর</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৮৩</td>
+                                <td>কমরেড দীধিতি রায়</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৮৪</td>
+                                <td>কমরেড বর্ণনা মুখার্জি</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৮৫</td>
+                                <td>কমরেড মহ হাসিব হোসেন</td>
+                                <td><span class="badge">কলকাতা সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৮৬</td>
+                                <td>কমরেড শেখ রোহন</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৮৭</td>
+                                <td>কমরেড সম্রাট দত্ত</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৮৮</td>
+                                <td>কমরেড মাল্যবান গাঙ্গুলী</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৮৯</td>
+                                <td>কমরেড তাজবুল হক</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৯০</td>
+                                <td>কমরেড শুভদীপ বন্দ্যোপাধ্যায়</td>
+                                <td><span class="badge">কলকাতা সম্পাদক</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৯১</td>
+                                <td>কমরেড সৌর্য্যদীপ্ত রায়</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৯২</td>
+                                <td>কমরেড অনুরণ পাল</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৯৩</td>
+                                <td>কমরেড দেবনীল পাল</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৯৪</td>
+                                <td>কমরেড আনজারুল ইসলাম</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৯৫</td>
+                                <td>কমরেড শুভজিৎ সরকার</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৯৬</td>
+                                <td>কমরেড শানু চট্টোপাধ্যায়</td>
+                                <td><span class="badge">রাজ্য কমিটির সদস্য</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৯৭</td>
+                                <td>কমরেড জিৎ কুমার পাল</td>
+                                <td><span class="badge">কোচবিহার সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৯৮</td>
+                                <td>কমরেড পবিত্র ব্যানার্জী</td>
+                                <td><span class="badge">পুরুলিয়া সভাপতি</span></td>
+                            </tr>
+                            <tr>
+                                <td class="serial">৯৯</td>
+                                <td>কমরেড বিপাশা সাহা</td>
+                                <td><span class="badge">হাওড়া সভাপতি</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1237,95 +1722,104 @@
     <!-- Interactive District Map Script -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // SFI District Leadership Database
+                        // SFI District Leadership Database
             const districtData = {
                 "wb-alipurduar": {
                     bn: "আলিপুরদুয়ার জেলা",
                     en: "Alipurduar District",
-                    sec: "কমরেড অনুপম রায়",
-                    pres: "কমরেড রাজীব বর্মন",
+                    sec: "কমরেড কুণাল ঘোষ",
+                    pres: "কমরেড সায়ন সাহা",
                     address: "SFI আলিপুরদুয়ার জেলা কমিটি দপ্তর, আলিপুরদুয়ার চৌপথি, পশ্চিমবঙ্গ",
-                    phone: "+91 3564 251234",
+                    secPhone: "+91 90642 34866",
+                    presPhone: "+91 97352 21810",
                     email: "alipurduar@sfiwb.org",
                     facebook: "https://www.facebook.com/sfiapdr/"
                 },
                 "wb-bankura": {
                     bn: "বাঁকুড়া জেলা",
                     en: "Bankura District",
-                    sec: "কমরেড সৌরদীপ মাহাতো",
-                    pres: "কমরেড প্রীতম মুখোপাধ্যায়",
+                    sec: "কমরেড সুজিত মুখার্জী",
+                    pres: "কমরেড অনির্বাণ গোস্বামী",
                     address: "SFI বাঁকুড়া জেলা দপ্তর, লালবাজার, বাঁকুড়া, পশ্চিমবঙ্গ",
-                    phone: "+91 3242 254321",
+                    secPhone: "+91 89005 97998",
+                    presPhone: "+91 73194 75895",
                     email: "bankura@sfiwb.org",
                     facebook: "https://www.facebook.com/sfibankura/"
                 },
                 "wb-birbhum": {
                     bn: "বীরভূম জেলা",
                     en: "Birbhum District",
-                    sec: "কমরেড শুভম বোস",
-                    pres: "কমরেড সুরজিৎ সিনহা",
+                    sec: "কমরেড সৌভিক দাসবক্সী",
+                    pres: "কমরেড নিশাত হাসান",
                     address: "SFI বীরভূম জেলা দপ্তর, সিউড়ি, বীরভূম, পশ্চিমবঙ্গ",
-                    phone: "+91 3462 255678",
+                    secPhone: "+91 90643 00335",
+                    presPhone: "+91 89183 42889",
                     email: "birbhum@sfiwb.org",
                     facebook: "https://www.facebook.com/sfibirbhum/"
                 },
                 "wb-cooch-behar": {
                     bn: "কোচবিহার জেলা",
                     en: "Cooch Behar District",
-                    sec: "কমরেড আলতাব হোসেন",
-                    pres: "কমরেড অভিজিৎ রায়",
+                    sec: "কমরেড প্রাঞ্জল মিত্র",
+                    pres: "কমরেড জিৎ কুমার পাল",
                     address: "SFI কোচবিহার জেলা দপ্তর, রবীন্দ্রনগর, কোচবিহার, পশ্চিমবঙ্গ",
-                    phone: "+91 3582 221234",
+                    secPhone: "+91 70017 63075",
+                    presPhone: "+91 87596 34005",
                     email: "coochbehar@sfiwb.org",
                     facebook: "https://www.facebook.com/sficoochbehar/"
                 },
                 "wb-dakshin-dinajpur": {
                     bn: "দক্ষিণ দিনাজপুর জেলা",
                     en: "Dakshin Dinajpur District",
-                    sec: "কমরেড সুমিত ঘোষ",
-                    pres: "কমরেড অনিন্দ্য দাস",
+                    sec: "কমরেড বেদত্রয়ী গোস্বামী",
+                    pres: "কমরেড উৎপল রাজবংশী",
                     address: "SFI দক্ষিণ দিনাজপুর জেলা দপ্তর, বালুরঘাট, পশ্চিমবঙ্গ",
-                    phone: "+91 3522 251122",
+                    secPhone: "+91 81019 14402",
+                    presPhone: "+91 85972 12751",
                     email: "ddinajpur@sfiwb.org",
                     facebook: "https://www.facebook.com/sfiddinajpur/"
                 },
                 "wb-darjeeling": {
                     bn: "দার্জিলিং জেলা",
                     en: "Darjeeling District",
-                    sec: "কমরেড দীপংকর রায়",
-                    pres: "কমরেড সাদ্দাম হোসেন",
+                    sec: "কমরেড অঙ্কিত দে",
+                    pres: "কমরেড তন্ময় অধিকারী",
                     address: "SFI দার্জিলিং জেলা দপ্তর, হিল কার্ট রোড, শিলিগুড়ি, পশ্চিমবঙ্গ",
-                    phone: "+91 353 2520987",
+                    secPhone: "+91 90645 51177",
+                    presPhone: "+91 76799 18840",
                     email: "darjeeling@sfiwb.org",
                     facebook: "https://www.facebook.com/sfidarjeeling/"
                 },
                 "wb-hooghly": {
                     bn: "হুগলী জেলা",
                     en: "Hooghly District",
-                    sec: "কমরেড অর্পণ চৌধুরী",
-                    pres: "কমরেড শুভ্রদীপ রায়",
+                    sec: "কমরেড সোমেন মুখার্জী",
+                    pres: "কমরেড সুশীল দাস",
                     address: "SFI হুগলী জেলা দপ্তর, চুঁচুড়া, পশ্চিমবঙ্গ",
-                    phone: "+91 33 2680 1234",
+                    secPhone: "+91 89450 39994",
+                    presPhone: "+91 98365 88188",
                     email: "hooghly@sfiwb.org",
                     facebook: "https://www.facebook.com/SFIHooghlyDistrict/"
                 },
                 "wb-howrah": {
                     bn: "হাওড়া জেলা",
                     en: "Howrah District",
-                    sec: "কমরেড অনির্বাণ ভট্টাচার্য",
-                    pres: "কমরেড সোমনাথ পাত্র",
+                    sec: "কমরেড মহম্মদ তোমজিদুর",
+                    pres: "কমরেড বিপাশা সাহা",
                     address: "SFI হাওড়া জেলা দপ্তর, হাওড়া ময়দান, পশ্চিমবঙ্গ",
-                    phone: "+91 33 2640 5678",
+                    secPhone: "+91 62901 42134",
+                    presPhone: "+91 62908 81910",
                     email: "howrah@sfiwb.org",
                     facebook: "https://www.facebook.com/sfihowrah/"
                 },
                 "wb-jalpaiguri": {
                     bn: "জলপাইগুড়ি জেলা",
                     en: "Jalpaiguri District",
-                    sec: "কমরেড সুব্রত সেন",
-                    pres: "কমরেড দেবরাজ প্রামাণিক",
+                    sec: "কমরেড অরিন্দম ঘোষ",
+                    pres: "কমরেড সাব্বির হোসেন",
                     address: "SFI জলপাইগুড়ি জেলা দপ্তর, কদমতলা, জলপাইগুড়ি, পশ্চিমবঙ্গ",
-                    phone: "+91 3561 222334",
+                    secPhone: "+91 97496 12896",
+                    presPhone: "+91 89185 40563",
                     email: "jalpaiguri@sfiwb.org",
                     facebook: "https://www.facebook.com/sfijalpaiguri/"
                 },
@@ -1335,7 +1829,8 @@
                     sec: "কমরেড অমিত মাহাতো",
                     pres: "কমরেড বিশ্বজিৎ হেমব্রম",
                     address: "SFI ঝাড়গ্রাম জেলা দপ্তর, ঝাড়গ্রাম শহর, পশ্চিমবঙ্গ",
-                    phone: "+91 3221 256789",
+                    secPhone: "+91 3221 256789",
+                    presPhone: "+91 3221 256789",
                     email: "jhargram@sfiwb.org",
                     facebook: "https://www.facebook.com/sfijhargram/"
                 },
@@ -1345,47 +1840,52 @@
                     sec: "কমরেড নিমা লেপচা",
                     pres: "কমরেড শেরিং ভুটিয়া",
                     address: "SFI কালিম্পং জেলা কমিটি দপ্তর, কালিম্পং বাজার, পশ্চিমবঙ্গ",
-                    phone: "+91 3552 255112",
+                    secPhone: "+91 3552 255112",
+                    presPhone: "+91 3552 255112",
                     email: "kalimpong@sfiwb.org",
                     facebook: "https://www.facebook.com/sfikalimpong/"
                 },
                 "wb-kolkata": {
                     bn: "কলকাতা জেলা",
                     en: "Kolkata District",
-                    sec: "কমরেড শুভজিৎ সরকার",
-                    pres: "কমরেড দেবাঞ্জন দে",
+                    sec: "কমরেড শুভদীপ বন্দ্যোপাধ্যায়",
+                    pres: "কমরেড মহম্মদ হাসিব হোসেন",
                     address: "দীনেশ মজুমদার ভবন, ৭৯/৩এ এ.জে.সি. বোস রোড, কলকাতা - ৭০০০১৪",
-                    phone: "+91 33 2217 6633",
+                    secPhone: "+91 85840 49326",
+                    presPhone: "+91 86172 70482",
                     email: "kolkata@sfiwb.org",
                     facebook: "https://www.facebook.com/sfikolkata/"
                 },
                 "wb-malda": {
                     bn: "মালদা জেলা",
                     en: "Malda District",
-                    sec: "কমরেড সর্বজিৎ মন্ডল",
-                    pres: "কমরেড রানা প্রামাণিক",
+                    sec: "",
+                    pres: "কমরেড কৌশিক মৈত্র",
                     address: "SFI মালদা জেলা দপ্তর, রাজমহল রোড, ইংরেজবাজার, মালদা, পশ্চিমবঙ্গ",
-                    phone: "+91 3512 254123",
+                    secPhone: "",
+                    presPhone: "+91 98512 25516",
                     email: "malda@sfiwb.org",
                     facebook: "https://www.facebook.com/sfimaldadistrict/"
                 },
                 "wb-murshidabad": {
                     bn: "মুর্শিদাবাদ জেলা",
                     en: "Murshidabad District",
-                    sec: "কমরেড মুস্তাফিজুর রহমান",
-                    pres: "কমরেড দেবব্রত ঘোষ",
+                    sec: "কমরেড ইঞ্জামাম হক (রানা)",
+                    pres: "কমরেড অদিতি নন্দী",
                     address: "SFI মুর্শিদাবাদ জেলা দপ্তর, বহরমপুর, পশ্চিমবঙ্গ",
-                    phone: "+91 3482 255223",
+                    secPhone: "+91 86531 36498",
+                    presPhone: "+91 81678 62167",
                     email: "murshidabad@sfiwb.org",
                     facebook: "https://www.facebook.com/sfimurshidabad/"
                 },
                 "wb-nadia": {
                     bn: "নদিয়া জেলা",
                     en: "Nadia District",
-                    sec: "কমরেড সন্দীপন বাগচী",
-                    pres: "কমরেড অনির্বাণ সেন",
+                    sec: "কমরেড শৌর্যবন্ত ডি চৌধুরী",
+                    pres: "কমরেড সমীর সরকার",
                     address: "SFI নদিয়া জেলা দপ্তর, কৃষ্ণনগর, নদিয়া, পশ্চিমবঙ্গ",
-                    phone: "+91 3472 252468",
+                    secPhone: "+91 87770 73784",
+                    presPhone: "+91 97334 06538",
                     email: "nadia@sfiwb.org",
                     facebook: "https://www.facebook.com/sfinadia/"
                 },
@@ -1393,79 +1893,87 @@
                     bn: "উত্তর ২৪ পরগনা জেলা",
                     en: "North 24 Parganas District",
                     sec: "কমরেড আকাশ কর",
-                    pres: "কমরেড অম্লান মুখার্জী",
+                    pres: "কমরেড দীপ্তজিৎ দাস",
                     address: "SFI উত্তর ২৪ পরগনা জেলা দপ্তর, বারাসাত, পশ্চিমবঙ্গ",
-                    phone: "+91 33 2552 1122",
+                    secPhone: "+91 82508 43689",
+                    presPhone: "+91 90071 34070",
                     email: "n24parganas@sfiwb.org",
                     facebook: "https://www.facebook.com/sfinorth24/"
                 },
                 "wb-paschim-bardhaman": {
                     bn: "পশ্চিম বর্ধমান জেলা",
                     en: "Paschim Bardhaman District",
-                    sec: "কমরেড দীপংকর সেনগুপ্ত",
-                    pres: "কমরেড সুরজিৎ কুন্ডু",
+                    sec: "কমরেড সুদীপ কুড়ি",
+                    pres: "কমরেড সুপ্রিয়ম চ্যাটার্জী",
                     address: "SFI পশ্চিম বর্ধমান জেলা দপ্তর, আসানসোল, পশ্চিমবঙ্গ",
-                    phone: "+91 341 2256789",
+                    secPhone: "+91 70013 87318",
+                    presPhone: "+91 99334 27067",
                     email: "pbardhaman@sfiwb.org",
                     facebook: "https://www.facebook.com/sfipaschimbardhaman/"
                 },
                 "wb-paschim-medinipur": {
                     bn: "পশ্চিম মেদিনীপুর জেলা",
                     en: "Paschim Medinipur District",
-                    sec: "কমরেড শুভদীপ পাত্র",
-                    pres: "কমরেড অর্পণ গোস্বামী",
+                    sec: "কমরেড রণিত বেরা",
+                    pres: "কমরেড সুকুমার মাজি",
                     address: "SFI পশ্চিম মেদিনীপুর জেলা দপ্তর, মেদিনীপুর শহর, পশ্চিমবঙ্গ",
-                    phone: "+91 3222 275678",
+                    secPhone: "+91 77973 40540",
+                    presPhone: "+91 97495 01875",
                     email: "pmedinipur@sfiwb.org",
                     facebook: "https://www.facebook.com/sfipmedinipur/"
                 },
                 "wb-purba-bardhaman": {
                     bn: "পূর্ব বর্ধমান জেলা",
                     en: "Purba Bardhaman District",
-                    sec: "কমরেড অনির্বাণ সাহা",
-                    pres: "কমরেড সৌম্যদীপ অধিকারী",
+                    sec: "কমরেড উষসী রায়চৌধুরী",
+                    pres: "কমরেড প্রবীর ভৌমিক",
                     address: "SFI পূর্ব বর্ধমান জেলা দপ্তর, বর্ধমান শহর, পশ্চিমবঙ্গ",
-                    phone: "+91 342 2661234",
+                    secPhone: "+91 95646 26803",
+                    presPhone: "+91 96475 52146",
                     email: "pubardhaman@sfiwb.org",
                     facebook: "https://www.facebook.com/sfipurbabardhaman/"
                 },
                 "wb-purba-medinipur": {
                     bn: "পূর্ব মেদিনীপুর জেলা",
                     en: "Purba Medinipur District",
-                    sec: "কমরেড বিশ্বরূপ জানা",
-                    pres: "কমরেড সুমিত শাসমল",
+                    sec: "কমরেড জাকির হোসেন মল্লিক",
+                    pres: "কমরেড সৈকত মাজি",
                     address: "SFI পূর্ব মেদিনীপুর জেলা দপ্তর, তমলুক, পশ্চিমবঙ্গ",
-                    phone: "+91 3228 266778",
+                    secPhone: "+91 97352 43052",
+                    presPhone: "+91 97338 79488",
                     email: "pumedinipur@sfiwb.org",
                     facebook: "https://www.facebook.com/sfipurbamedinipur/"
                 },
                 "wb-purulia": {
                     bn: "পুরুলিয়া জেলা",
                     en: "Purulia District",
-                    sec: "কমরেড অনিরুদ্ধ বাউরী",
-                    pres: "কমরেড প্রকাশ মাহাতো",
+                    sec: "কমরেড সায়ন্তন ঘোষ",
+                    pres: "কমরেড পবিত্র ব্যানার্জি",
                     address: "SFI পুরুলিয়া জেলা দপ্তর, পুরুলিয়া শহর, পশ্চিমবঙ্গ",
-                    phone: "+91 3252 222333",
+                    secPhone: "+91 86370 83595",
+                    presPhone: "+91 90644 85906",
                     email: "purulia@sfiwb.org",
                     facebook: "https://www.facebook.com/sfipurulia/"
                 },
                 "wb-south-24-parganas": {
                     bn: "দক্ষিণ ২৪ পরগনা জেলা",
                     en: "South 24 Parganas District",
-                    sec: "কমরেড শেখর নস্কর",
-                    pres: "কমরেড অভীক মন্ডল",
+                    sec: "কমরেড অনিরুদ্ধ চক্রবর্তী",
+                    pres: "কমরেড ঋজুরেখ দাশগুপ্ত",
                     address: "SFI দক্ষিণ ২৪ পরগনা জেলা দপ্তর, বারুইপুর, পশ্চিমবঙ্গ",
-                    phone: "+91 33 2433 9988",
+                    secPhone: "+91 82505 61522",
+                    presPhone: "+91 84203 88715",
                     email: "s24parganas@sfiwb.org",
                     facebook: "https://www.facebook.com/sfisouth24/"
                 },
                 "wb-uttar-dinajpur": {
                     bn: "উত্তর দিনাজপুর জেলা",
                     en: "Uttar Dinajpur District",
-                    sec: "কমরেড জয়দীপ রায়",
-                    pres: "কমরেড দেবজিৎ সেনগুপ্ত",
+                    sec: "কমরেড কুশান ভৌমিক",
+                    pres: "কমরেড নুর আলম",
                     address: "SFI উত্তর দিনাজপুর জেলা দপ্তর, রায়গঞ্জ, পশ্চিমবঙ্গ",
-                    phone: "+91 3523 252345",
+                    secPhone: "+91 75011 38003",
+                    presPhone: "+91 83459 33770",
                     email: "udinajpur@sfiwb.org",
                     facebook: "https://www.facebook.com/sfiuttardinajpur/"
                 }
@@ -1511,11 +2019,13 @@
             const secName = document.getElementById("secName");
             const secPhoneEl = document.getElementById("secPhone");
             const secCallBtn = document.getElementById("secCallBtn");
+            const secWhatsappBtn = document.getElementById("secWhatsappBtn");
             const secCopyBtn = document.getElementById("secCopyBtn");
 
             const presName = document.getElementById("presName");
             const presPhoneEl = document.getElementById("presPhone");
             const presCallBtn = document.getElementById("presCallBtn");
+            const presWhatsappBtn = document.getElementById("presWhatsappBtn");
             const presCopyBtn = document.getElementById("presCopyBtn");
 
             // Wire copy buttons once
@@ -1550,14 +2060,52 @@
                         secName.textContent = data.sec;
                         secPhoneEl.textContent = data.secPhone || 'শীঘ্রই আপডেট হবে';
                         secCallBtn.href = data.secPhone ? 'tel:' + data.secPhone.replace(/\s+/g, '') : '#';
+                        
+                        const secPhoneClean = data.secPhone ? data.secPhone.replace(/\D/g, '') : '';
+                        if (secPhoneClean) {
+                            const secPhoneFormatted = secPhoneClean.length === 10 ? '91' + secPhoneClean : secPhoneClean;
+                            const secMsg = `নমস্কার, আমি ভারতের ছাত্র ফেডারেশন (SFI) পশ্চিমবঙ্গ রাজ্য কমিটির ওয়েব পোর্টাল থেকে আপনার নম্বরটি পেয়েছি। আমি ${data.bn}-এর জেলা সম্পাদকের সাথে যোগাযোগ করতে চাই।`;
+                            secWhatsappBtn.href = 'https://wa.me/' + secPhoneFormatted + '?text=' + encodeURIComponent(secMsg);
+                            secWhatsappBtn.style.display = 'inline-flex';
+                        } else {
+                            secWhatsappBtn.href = '#';
+                            secWhatsappBtn.style.display = 'none';
+                        }
 
                         // President
                         presName.textContent = data.pres;
                         presPhoneEl.textContent = data.presPhone || 'শীঘ্রই আপডেট হবে';
                         presCallBtn.href = data.presPhone ? 'tel:' + data.presPhone.replace(/\s+/g, '') : '#';
+
+                        const presPhoneClean = data.presPhone ? data.presPhone.replace(/\D/g, '') : '';
+                        if (presPhoneClean) {
+                            const presPhoneFormatted = presPhoneClean.length === 10 ? '91' + presPhoneClean : presPhoneClean;
+                            const presMsg = `নমস্কার, আমি ভারতের ছাত্র ফেডারেশন (SFI) পশ্চিমবঙ্গ রাজ্য কমিটির ওয়েব পোর্টাল থেকে আপনার নম্বরটি পেয়েছি। আমি ${data.bn}-এর জেলা সভাপতির সাথে যোগাযোগ করতে চাই।`;
+                            presWhatsappBtn.href = 'https://wa.me/' + presPhoneFormatted + '?text=' + encodeURIComponent(presMsg);
+                            presWhatsappBtn.style.display = 'inline-flex';
+                        } else {
+                            presWhatsappBtn.href = '#';
+                            presWhatsappBtn.style.display = 'none';
+                        }
                     }
                 });
             });
+
+            // Auto-select district from URL parameter if present (e.g. ?district=wb-hooghly)
+            const urlParams = new URLSearchParams(window.location.search);
+            const distParam = urlParams.get('district');
+            if (distParam) {
+                const targetPath = document.getElementById(distParam);
+                if (targetPath) {
+                    setTimeout(() => {
+                        targetPath.click();
+                        const card = document.getElementById("districtInfoCard");
+                        if (card) {
+                            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }, 300); // Tiny delay to ensure map renders
+                }
+            }
         });
     </script>
 </body>

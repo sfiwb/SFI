@@ -250,12 +250,28 @@ def build_index():
             "content": "SFI office address headquarters location phone email. SFI Central Committee Office: 3, Canning Lane, New Delhi - 110001. SFI West Bengal State Committee Office: Dinesh Majumder Bhavan, 79/3A, A. J. C. Bose Road, Kolkata, West Bengal, India - 700014. ফোন: +৯১-৮৯১০০৪৪১৩৮, +৯১-৯৯৩৩৬৪৬৫৫৬. ইমেল: state.committee.sfi.wb@gmail.com"
         },
         {
-            "url": "about.html#leadership",
+            "url": "state-committee.html",
             "title": "Who are SFI West Bengal State Secretary and President? / এসএফআই রাজ্য কমিটির সম্পাদক ও সভাপতি কে?",
-            "fullTitle": "SFI West Bengal Leadership: Secretary Pronoy Karmakar & President Debanjan Dey | পশ্চিমবঙ্গ রাজ্য নেতৃত্বের তালিকা",
-            "description": "SFI West Bengal State Secretary is Comrade Pronoy Karmakar, and State President is Comrade Debanjan Dey. এসএফআই পশ্চিমবঙ্গের বর্তমান রাজ্য সম্পাদক কমরেড প্রণয় কর্মকার এবং রাজ্য সভাপতি কমরেড দেবাঞ্জন দে।",
-            "headings": ["State Secretary", "State President", "Leadership", "প্রণয় কর্মকার", "দেবাঞ্জন দে"],
-            "content": "SFI West Bengal leaders State Secretary Pronoy Karmakar President Debanjan Dey. SFI West Bengal State Committee is currently led by Comrade Debanjan Dey as State President and Comrade Pronoy Karmakar as State Secretary. এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটির বর্তমান রাজ্য সভাপতি কমরেড দেবাঞ্জন দে এবং রাজ্য সম্পাদক কমরেড প্রণয় কর্মকার। রাজ্য সচিবালয়ের অন্য সদস্যদের তালিকাও পাওয়া যাবে।"
+            "fullTitle": "SFI West Bengal Leadership: Secretary Debanjan Dey & President Pranoy Karji | পশ্চিমবঙ্গ রাজ্য নেতৃত্বের তালিকা",
+            "description": "SFI West Bengal State Secretary is Comrade Debanjan Dey, and State President is Comrade Pranoy Karji. এসএফআই পশ্চিমবঙ্গের বর্তমান রাজ্য সম্পাদক কমরেড দেবাঞ্জন দে এবং রাজ্য সভাপতি কমরেড প্রণয় কার্য্যী।",
+            "headings": ["State Secretary", "State President", "Leadership", "দেবাঞ্জন দে", "প্রণয় কার্য্যী", "সৌভিক দাসবক্সী", "Souvik Dasboxi"],
+            "content": "SFI West Bengal leaders State Secretary Debanjan Dey President Pranoy Karji Editor Souvik Dasboxi. SFI West Bengal State Committee is currently led by Comrade Debanjan Dey as State Secretary and Comrade Pranoy Karji as State President. এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটির বর্তমান রাজ্য সম্পাদক কমরেড দেবাঞ্জন দে এবং রাজ্য সভাপতি কমরেড প্রণয় কার্য্যী। রাজ্য কমিটির পত্রিকা সম্পাদক কমরেড সৌভিক দাসবক্সী।"
+        },
+        {
+            "url": "about.html#history",
+            "title": "Who is the first secretary and first president of SFI? / এসএফআই-এর প্রথম সম্পাদক ও প্রথম সভাপতি কে?",
+            "fullTitle": "SFI First General Secretary & President | এসএফআই-এর প্রথম সাধারণ সম্পাদক ও প্রথম সভাপতি",
+            "description": "First General Secretary of SFI was Comrade Biman Bose, and first President was Comrade C. Bhaskaran. এসএফআই-এর প্রথম সর্বভারতীয় সাধারণ সম্পাদক কমরেড বিমান বসু এবং প্রথম সভাপতি কমরেড সি. ভাস্করন।",
+            "headings": ["First Secretary", "First President", "Establishment", "বিমান বসু", "সি. ভাস্করন", "Biman Bose", "C. Bhaskaran"],
+            "content": "SFI first secretary Biman Bose first president C. Bhaskaran. SFI was founded in 1970. প্রথম সাধারণ সম্পাদক বিমান বসু ও প্রথম সভাপতি কমরেড সি. ভাস্করন।"
+        },
+        {
+            "url": "about.html#leadership",
+            "title": "Who are SFI All India General Secretary and President? / এসএফআই সর্বভারতীয় সাধারণ সম্পাদক ও সভাপতি কে?",
+            "fullTitle": "SFI All India Leadership: General Secretary Srijan Bhattacharyya & President Adarsh M. Saji | সর্বভারতীয় নেতৃত্ব",
+            "description": "SFI All India General Secretary is Comrade Srijan Bhattacharyya, and All India President is Comrade Adarsh M. Saji. এসএফআই-এর বর্তমান সর্বভারতীয় সাধারণ সম্পাদক কমরেড সৃজন ভট্টাচার্য এবং সভাপতি কমরেড আদর্শ এম সাজি।",
+            "headings": ["All India Secretary", "All India President", "Srijan Bhattacharyya", "Adarsh M. Saji", "সৃজন ভট্টাচার্য", "আদর্শ এম সাজি"],
+            "content": "SFI All India leaders General Secretary Srijan Bhattacharyya President Adarsh M. Saji. SFI Central Committee leaders. সর্বভারতীয় সাধারণ সম্পাদক সৃজন ভট্টাচার্য এবং সর্বভারতীয় সভাপতি আদর্শ এম সাজি।"
         },
         {
             "url": "publications.html",
@@ -263,7 +279,7 @@ def build_index():
             "fullTitle": "Chhatra Sangram: SFI West Bengal Official Mouthpiece | ছাত্রসংগ্রাম পত্রিকা ও প্রকাশনা",
             "description": "Chhatra Sangram is the official student mouthpiece and magazine of SFI West Bengal State Committee. ছাত্রসংগ্রাম হলো ভারতের ছাত্র ফেডারেশন (এসএফআই) পশ্চিমবঙ্গ রাজ্য কমিটির অফিশিয়াল মুখপত্র ও মাসিক পত্রিকা।",
             "headings": ["Chhatra Sangram", "Mouthpiece", "Publications", "ছাত্রসংগ্রাম", "প্রকাশনা"],
-            "content": "Chhatra Sangram official organ magazine mouthpiece of SFI West Bengal. chhatrasangram.org. ছাত্রসংগ্রাম হলো পশ্চিমবঙ্গের প্রগতিশীল ছাত্র আন্দোলনের প্রধান মুখপাত্র ও পত্রিকা, যা শিক্ষার্থীদের গণতান্ত্রিক ও ধর্মনিরপেক্ষ মূল্যবোধে উদ্বুদ্ধ করে।"
+            "content": "Chhatra Sangram official organ magazine mouthpiece of SFI West Bengal. chhatrasangram.org. ছাত্রসংগ্রাম হলো pulsations-এর মতো প্রগতিশীল ছাত্র আন্দোলনের প্রধান মুখপাত্র ও পত্রিকা, যা শিক্ষার্থীদের গণতান্ত্রিক ও ধর্মনিরপেক্ষ মূল্যবোধে উদ্বুদ্ধ করে।"
         },
         {
             "url": "constitution.html#membership",
@@ -277,8 +293,28 @@ def build_index():
     index_data.extend(sfi_faqs)
     print(f"  Indexed {len(sfi_faqs)} FAQs.")
 
+    # Extract districtData from state-committee.html to include in search_data.js
+    district_data_js = ""
+    try:
+        sc_path = os.path.join(backup_dir, "state-committee.html")
+        if os.path.exists(sc_path):
+            with open(sc_path, "r", encoding="utf-8", errors="ignore") as f:
+                sc_content = f.read()
+            start_idx = sc_content.find("const districtData = {")
+            if start_idx != -1:
+                end_idx = sc_content.find("};", start_idx)
+                if end_idx != -1:
+                    district_data_js = sc_content[start_idx:end_idx + 2]
+                    # Rename the variable in search_data.js to searchDistrictData to be safe
+                    district_data_js = district_data_js.replace("const districtData =", "const searchDistrictData =")
+    except Exception as e:
+        print(f"Error reading districtData: {e}")
+
     # Write search_data.js
     js_content = f"// Automatically generated search index. Do not edit directly.\nconst SEARCH_INDEX = {json.dumps(index_data, ensure_ascii=False, indent=2)};\n"
+    if district_data_js:
+        js_content += "\n" + district_data_js + "\n"
+
     with open(os.path.join(backup_dir, "search_data.js"), "w", encoding="utf-8") as f:
         f.write(js_content)
     print("search_data.js compiled successfully.\n")

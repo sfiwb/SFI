@@ -69,7 +69,7 @@
             border-radius: 50px;
             border: 2px solid var(--border-color);
             background: var(--bg-card);
-            color: var(--text-primary);
+            color: var(--text-main);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
         }
@@ -93,12 +93,12 @@
             top: 100%;
             left: 0;
             right: 0;
-            background: rgba(21, 22, 28, 0.95);
+            background: var(--bg-card);
             backdrop-filter: blur(15px);
-            border: 1px solid var(--border-color, rgba(255,255,255,0.1));
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             margin-top: 10px;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.5);
+            box-shadow: var(--shadow-main);
             z-index: 9999 !important;
             max-height: 350px;
             overflow-y: auto;
@@ -111,9 +111,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid var(--border-color);
             font-size: 0.95rem;
-            color: var(--text-secondary);
+            color: var(--text-main);
         }
         .suggestion-item:last-child {
             border-bottom: none;
@@ -272,13 +272,13 @@
         }
         .result-snippet {
             font-size: 0.95rem;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             line-height: 1.6;
             text-align: left;
         }
         .result-snippet mark, .suggestion-item mark {
-            background-color: rgba(255, 234, 0, 0.25) !important;
-            color: #fff !important;
+            background-color: rgba(255, 234, 0, 0.3) !important;
+            color: var(--text-main) !important;
             font-weight: 600;
             padding: 0 2px;
             border-radius: 2px;
@@ -324,6 +324,42 @@
         .results-section {
             position: relative;
             z-index: 0;
+        }
+        .direct-answer-card {
+            border: 1px solid rgba(227, 27, 35, 0.2) !important;
+            border-radius: var(--border-radius-md, 8px);
+            padding: 24px;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, rgba(227, 27, 35, 0.05) 0%, rgba(15, 16, 22, 0.8) 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        [data-theme="light"] .direct-answer-card {
+            background: linear-gradient(135deg, rgba(227, 27, 35, 0.03) 0%, rgba(255, 255, 255, 0.95) 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        .direct-answer-card:hover {
+            transform: translateY(-2px);
+        }
+        .btn-outline-success {
+            color: #25d366 !important;
+            border-color: #25d366 !important;
+            background-color: transparent !important;
+        }
+        .btn-outline-success:hover {
+            color: #fff !important;
+            background-color: #25d366 !important;
+            border-color: #25d366 !important;
+        }
+        /* Theme-aware Close Button & Modal Styling */
+        .modal-content {
+            color: var(--text-main);
+        }
+        .modal-content .text-body {
+            color: var(--text-main) !important;
+        }
+        [data-theme="dark"] .modal .btn-close {
+            filter: invert(1) grayscale(1) brightness(2);
         }
     </style>
     <!-- Theme Flash Prevention -->
@@ -504,6 +540,7 @@
             <div class="container">
                 <div class="results-container">
                     <div id="searchStats" class="search-stats"></div>
+                    <div id="directAnswerContainer" class="mb-4" style="display: none;"></div>
                     <div id="searchResults">
                         <!-- Search results will appear here -->
                     </div>
@@ -636,6 +673,34 @@
     <!-- Scroll Top Button -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center bg-danger rounded text-white shadow"><i class="bi bi-arrow-up-short"></i></a>
 
+    <!-- Direct Answer Modal -->
+    <div class="modal fade" id="directAnswerModal" tabindex="-1" aria-labelledby="directAnswerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.35);">
+                <div class="modal-header" style="border-bottom: 1px solid var(--border-color); padding: 1.25rem 1.5rem;">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-danger bg-opacity-25 text-danger rounded-circle p-2 me-3 d-inline-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+                            <i class="bi bi-info-circle-fill fs-5"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title fw-bold text-danger mb-0" id="directAnswerModalLabel" style="font-size: 1.1rem;">সরাসরি উত্তর (Direct Answer)</h5>
+                            <span class="small text-muted" style="font-size: 0.75rem;">আপনার প্রশ্নের তাৎক্ষণিক সমাধান</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="padding: 1.5rem;">
+                    <h5 id="modalAnswerTitle" class="fw-bold text-header mb-3" style="font-size: 1.15rem; border-left: 3px solid var(--accent-color); padding-left: 10px;"></h5>
+                    <div id="modalAnswerBody" class="text-body leading-relaxed"></div>
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid var(--border-color); padding: 1rem 1.5rem; justify-content: space-between;">
+                    <button type="button" class="btn btn-outline-secondary btn-sm fw-bold px-3" data-bs-dismiss="modal">বন্ধ করুন (Close)</button>
+                    <a id="modalReadMoreBtn" href="#" class="btn btn-danger btn-sm fw-bold px-4"><i class="bi bi-arrow-right-circle me-1"></i> আরো পড়ুন (Read More)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- JS Files -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -747,9 +812,243 @@
             const searchResults = document.getElementById("searchResults");
             const searchStats = document.getElementById("searchStats");
             const suggestionsDropdown = document.getElementById("searchSuggestions");
+            const directAnswerContainer = document.getElementById("directAnswerContainer");
             
             let activeSuggestionIndex = -1;
             let currentSuggestions = [];
+
+            // Initialize Bootstrap Modal for Direct Answers
+            const directAnswerModal = new bootstrap.Modal(document.getElementById('directAnswerModal'));
+
+            function showDirectAnswerModal(query) {
+                const directAns = checkDirectAnswer(query);
+                if (directAns) {
+                    document.getElementById('modalAnswerTitle').textContent = directAns.title;
+                    document.getElementById('modalAnswerBody').innerHTML = directAns.html;
+                    const readMoreBtn = document.getElementById('modalReadMoreBtn');
+                    readMoreBtn.href = directAns.url;
+                    readMoreBtn.innerHTML = `<i class="bi bi-arrow-right-circle me-1"></i> ${directAns.btnText || 'আরো পড়ুন (Read More)'}`;
+                    directAnswerModal.show();
+                }
+            }
+
+            function findDistrictMatch(query) {
+                if (typeof searchDistrictData === 'undefined') return null;
+                const normalizedQuery = query.toLowerCase();
+                for (const key in searchDistrictData) {
+                    const d = searchDistrictData[key];
+                    const nameBn = d.bn.toLowerCase();
+                    const nameEn = d.en.toLowerCase();
+                    const matchBn = nameBn.replace(/ী/g, "ি").replace(/ি/g, "ি");
+                    const cleanQuery = normalizedQuery.replace(/ী/g, "ি").replace(/ি/g, "ি");
+                    
+                    if (cleanQuery.includes(nameEn.replace(" district", "")) || cleanQuery.includes(nameBn.replace(" জেলা", "")) || cleanQuery.includes(matchBn.replace(" জেলা", ""))) {
+                        return { key, ...d };
+                    }
+                }
+                return null;
+            }
+
+            function checkDirectAnswer(query) {
+                const normQuery = query.toLowerCase();
+                
+                // 1. First Leadership / Founders Match
+                if (normQuery.includes("who founded") || normQuery.includes("founder") || normQuery.includes("first") || normQuery.includes("প্রথম") || normQuery.includes("প্রতিষ্ঠাতা") || normQuery.includes("কে প্রতিষ্ঠা") || normQuery.includes("কারা প্রতিষ্ঠা") || normQuery.includes("বিমান বসু") || normQuery.includes("ভাস্করন")) {
+                    if (normQuery.includes("sec") || normQuery.includes("pres") || normQuery.includes("gen") || normQuery.includes("সম্পাদক") || normQuery.includes("সভাপতি") || normQuery.includes("নেতৃ") || normQuery.includes("কে") || normQuery.includes("কারা") || normQuery.includes("who")) {
+                        return {
+                            title: "এসএফআই-এর প্রথম নেতৃত্ব (First SFI Leadership - 1970):",
+                            html: `
+                                <ul class="list-unstyled mb-0 d-flex flex-column gap-2 text-body">
+                                    <li><strong>প্রথম সর্বভারতীয় সাধারণ সম্পাদক (First General Secretary):</strong> কমরেড বিমান বসু (Comrade Biman Bose)</li>
+                                    <li><strong>প্রথম সর্বভারতীয় সভাপতি (First President):</strong> কমরেড সি. ভাস্করন (Comrade C. Bhaskaran)</li>
+                                </ul>
+                            `,
+                            url: "about.html#history",
+                            btnText: "ইতিহাস ও প্রথম নেতৃত্বের বিবরণ দেখুন"
+                        };
+                    }
+                }
+                
+                // 2. Foundation Date Match
+                if ((normQuery.includes("when") && (normQuery.includes("found") || normQuery.includes("start"))) || normQuery.includes("founded") || normQuery.includes("establishment") || (normQuery.includes("কবে") && normQuery.includes("প্রতিষ্ঠা")) || normQuery.includes("প্রতিষ্ঠা দিবস") || normQuery.includes("প্রতিষ্ঠা সাল") || normQuery.includes("আত্মপ্রকাশ") || normQuery.includes("জন্ম")) {
+                    return {
+                        title: "এসএফআই-এর প্রতিষ্ঠা (SFI Foundation):",
+                        html: `
+                            <p class="text-body leading-relaxed mb-0">
+                                ভারতের ছাত্র ফেডারেশন (SFI) **১৯৭০ সালের ২৭-৩০ ডিসেম্বর** কেরলের তিরুবনন্তপুরমে অনুষ্ঠিত প্রথম সর্বভারতীয় ছাত্র সম্মেলনের মাধ্যমে আনুষ্ঠানিকভাবে আত্মপ্রকাশ করে। 
+                            </p>
+                        `,
+                        url: "about.html#history",
+                        btnText: "ইতিহাস ও প্রতিষ্ঠা বিবরণ দেখুন"
+                    };
+                }
+
+                // 3. Slogan and Ideals Match
+                if (normQuery.includes("slogan") || normQuery.includes("ideal") || normQuery.includes("স্লোগান") || normQuery.includes("আদর্শ") || normQuery.includes("স্বাধীনতা") || normQuery.includes("গণতন্ত্র") || normQuery.includes("সমাজতন্ত্র")) {
+                    return {
+                        title: "এসএফআই-এর স্লোগান ও আদর্শ (SFI Slogan & Ideals):",
+                        html: `
+                            <p class="text-body leading-relaxed mb-2">
+                                এসএফআই-এর মূল স্লোগান ও আদর্শ হলো: <strong>স্বাধীনতা, গণতন্ত্র, সমাজতন্ত্র (Independence, Democracy, Socialism)</strong>।
+                            </p>
+                            <p class="text-body leading-relaxed mb-0">
+                                এটি ধর্মনিরপেক্ষ, বৈজ্ঞানিক ও সমান শিক্ষার অধিকার প্রতিষ্ঠার লড়াইয়ে বিশ্বাস করে এবং সাম্প্রদায়িকতা ও সামন্ততান্ত্রিক শক্তির তীব্র বিরোধিতা করে।
+                            </p>
+                        `,
+                        url: "about.html#slogan",
+                        btnText: "স্লোগান ও আদর্শের বিশদ বিবরণ দেখুন"
+                    };
+                }
+
+                // 4. Flag and Symbol Match
+                if (normQuery.includes("flag") || normQuery.includes("symbol") || normQuery.includes("পতাকা") || normQuery.includes("চিহ্ন") || normQuery.includes("লাল তারা") || normQuery.includes("সাদা")) {
+                    return {
+                        title: "এসএফআই-এর পতাকা ও প্রতীক (SFI Flag & Symbol):",
+                        html: `
+                            <p class="text-body leading-relaxed mb-2">
+                                এসএফআই-এর পতাকা সাদা রঙের, যার মাঝখানে একটি পাঁচ-কোণা লাল তারা রয়েছে এবং উপরে লেখা রয়েছে <strong>'STUDENTS' FEDERATION OF INDIA'</strong>।
+                            </p>
+                            <ul class="list-unstyled mb-0 d-flex flex-column gap-2 text-body">
+                                <li><strong>সাদা রং:</strong> ছাত্রদের সংগ্রামের পবিত্রতা ও শান্তিকামিতার প্রতীক।</li>
+                                <li><strong>লাল তারা:</strong> প্রগতি ও বৈপ্লবিক আদর্শের প্রতীক।</li>
+                                <li><strong>অনুপাত:</strong> পতাকার দৈর্ঘ্য ও প্রস্থের অনুপাত ৩:২।</li>
+                            </ul>
+                        `,
+                        url: "about.html#flag",
+                        btnText: "পতাকার বিশদ বিবরণ দেখুন"
+                    };
+                }
+
+                // 5. Headquarters / Office Match
+                if (normQuery.includes("headquarter") || normQuery.includes("office") || normQuery.includes("address") || normQuery.includes("location") || normQuery.includes("দপ্তর") || normQuery.includes("কার্যালয়") || normQuery.includes("অফিস") || normQuery.includes("ঠিকানা") || normQuery.includes("দীনেশ মজুমদার") || normQuery.includes("canning lane")) {
+                    return {
+                        title: "এসএফআই সদর দফতর ও কার্যালয় (SFI Headquarters & Offices):",
+                        html: `
+                            <div class="row g-3 text-body">
+                                <div class="col-md-6">
+                                    <div class="p-3 rounded h-100" style="background: var(--bg-main); border: 1px solid var(--border-color);">
+                                        <div class="fw-bold text-danger small mb-1">সর্বভারতীয় কেন্দ্রীয় কার্যালয় (Central Office)</div>
+                                        <p class="mb-0 small">
+                                            3, Canning Lane, New Delhi - 110001<br>
+                                            ৩, ক্যানিং লেন, নয়া দিল্লি - ১১০০০১
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 rounded h-100" style="background: var(--bg-main); border: 1px solid var(--border-color);">
+                                        <div class="fw-bold text-danger small mb-1">পশ্চিমবঙ্গ রাজ্য কার্যালয় (State Committee Office)</div>
+                                        <p class="mb-0 small">
+                                            Dinesh Majumder Bhavan, 79/3A, A. J. C. Bose Road, Kolkata - 700014<br>
+                                            দীনেশ মজুমদার ভবন, ৭৯/৩এ, এ. জে. সি. বোস রোড, কলকাতা - ৭০০০১৪
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        `,
+                        url: "contact.html#office",
+                        btnText: "যোগাযোগ ও কার্যালয়ের ঠিকানা দেখুন"
+                    };
+                }
+                
+                // 6. All India Current Leadership Match
+                if (normQuery.includes("all india") || normQuery.includes("national") || normQuery.includes("central") || normQuery.includes("সর্বভারতীয়") || normQuery.includes("অল ইন্ডিয়া") || normQuery.includes("আদর্শ") || normQuery.includes("saji") || normQuery.includes("srijan") || normQuery.includes("সৃজন")) {
+                    if (normQuery.includes("sec") || normQuery.includes("pres") || normQuery.includes("gen") || normQuery.includes("সম্পাদক") || normQuery.includes("সভাপতি") || normQuery.includes("নেতৃ")) {
+                        return {
+                            title: "এসএফআই সর্বভারতীয় নেতৃত্ব (SFI All India Leadership):",
+                            html: `
+                                <ul class="list-unstyled mb-0 d-flex flex-column gap-2 text-body">
+                                    <li><strong>সর্বভারতীয় সাধারণ সম্পাদক (General Secretary):</strong> কমরেড Srijan Bhattacharyya (সৃজন ভট্টাচার্য)</li>
+                                    <li><strong>সর্বভারতীয় সভাপতি (President):</strong> কমরেড Adarsh M. Saji (আদর্শ এম সাজি)</li>
+                                </ul>
+                            `,
+                            url: "about.html#leadership",
+                            btnText: "বিশদ সর্বভারতীয় বিবরণ দেখুন"
+                        };
+                    }
+                }
+                
+                // 7. State Committee Secretary and President Match
+                if (normQuery.includes("state") || normQuery.includes("west bengal") || normQuery.includes("wb") || normQuery.includes("পশ্চিমবঙ্গ") || normQuery.includes("রাজ্য")) {
+                    if (normQuery.includes("sec") || normQuery.includes("pres") || normQuery.includes("editor") || normQuery.includes("সম্পাদক") || normQuery.includes("সভাপতি") || normQuery.includes("নেতৃ") || normQuery.includes("যোগাযোগ")) {
+                        return {
+                            title: "SFI পশ্চিমবঙ্গ রাজ্য কমিটির নেতৃত্ব (SFI West Bengal State Leadership):",
+                            html: `
+                                <ul class="list-unstyled mb-0 d-flex flex-column gap-2 text-body">
+                                    <li><strong>রাজ্য সম্পাদক (State Secretary):</strong> কমরেড দেবাঞ্জন দে (Comrade Debanjan Dey)</li>
+                                    <li><strong>রাজ্য সভাপতি (State President):</strong> কমরেড প্রণয় কার্য্যী (Comrade Pranoy Karji)</li>
+                                    <li><strong>ছাত্রসংগ্রাম পত্রিকা সম্পাদক (Editor):</strong> কমরেড সৌভিক দাসবক্সী (Comrade Shouvik Dasboxi)</li>
+                                    <li class="mt-2 small text-muted"><i class="bi bi-telephone-fill me-1"></i> যোগাযোগ: +৯১-৮৯১০০৪৪১৩৮ (সম্পাদক) / +৯১-৯৯৩৩৬৪৬৫৫৬ (সভাপতি)</li>
+                                </ul>
+                            `,
+                            url: "state-committee.html",
+                            btnText: "রাজ্য কমিটির বিবরণ ও যোগাযোগ দেখুন"
+                        };
+                    }
+                }
+                
+                // 8. District Matches (Dynamic lookup)
+                const districtMatch = findDistrictMatch(query);
+                if (districtMatch) {
+                    const d = districtMatch;
+                    const contactKeywords = ["sec", "pres", "phone", "contact", "call", "whatsapp", "number", "email", "সম্পাদক", "সভাপতি", "যোগাযোগ", "নম্বর", "ফোন", "কল", "হোয়াটসঅ্যাপ", "মেল"];
+                    const matchesKeyword = contactKeywords.some(k => normQuery.includes(k));
+                    
+                    if (matchesKeyword || normQuery.includes("কে") || normQuery.includes("who") || normQuery.includes("how")) {
+                        const secPhoneClean = d.secPhone ? d.secPhone.replace(/\D/g, '') : '';
+                        const presPhoneClean = d.presPhone ? d.presPhone.replace(/\D/g, '') : '';
+                        
+                        const secPhoneFormatted = secPhoneClean.length === 10 ? '91' + secPhoneClean : secPhoneClean;
+                        const presPhoneFormatted = presPhoneClean.length === 10 ? '91' + presPhoneClean : presPhoneClean;
+                        
+                        const secMsg = `নমস্কার, আমি ভারতের ছাত্র ফেডারেশন (SFI) পশ্চিমবঙ্গ রাজ্য কমিটির ওয়েব পোর্টাল থেকে আপনার নম্বরটি পেয়েছি। আমি ${d.bn}-এর জেলা সম্পাদকের সাথে যোগাযোগ করতে চাই।`;
+                        const presMsg = `নমস্কার, আমি ভারতের ছাত্র ফেডারেশন (SFI) পশ্চিমবঙ্গ রাজ্য কমিটির ওয়েব পোর্টাল থেকে আপনার নম্বরটি পেয়েছি। আমি ${d.bn}-এর জেলা সভাপতির সাথে যোগাযোগ করতে চাই।`;
+                        
+                        const secWaLink = secPhoneFormatted ? `https://wa.me/${secPhoneFormatted}?text=${encodeURIComponent(secMsg)}` : '#';
+                        const presWaLink = presPhoneFormatted ? `https://wa.me/${presPhoneFormatted}?text=${encodeURIComponent(presMsg)}` : '#';
+                        
+                        const secCallLink = d.secPhone ? `tel:${d.secPhone.replace(/\s+/g, '')}` : '#';
+                        const presCallLink = d.presPhone ? `tel:${d.presPhone.replace(/\s+/g, '')}` : '#';
+                        
+                        return {
+                            title: `SFI ${d.bn} জেলা কমিটির নেতৃত্ব (SFI ${d.en} District Leadership):`,
+                            html: `
+                                <div class="row g-3 text-body mt-1">
+                                    <div class="col-md-6">
+                                        <div class="p-3 rounded h-100" style="background: var(--bg-main); border: 1px solid var(--border-color);">
+                                            <div class="fw-bold text-danger small mb-1">জেলা সম্পাদক (District Secretary)</div>
+                                            <div class="fs-5 fw-bold mb-2">${d.sec}</div>
+                                            <div class="mb-3 small text-muted"><i class="bi bi-telephone-fill me-1"></i> ${d.secPhone || 'শীঘ্রই আপডেট হবে'}</div>
+                                            ${d.secPhone && !d.secPhone.includes('শীঘ্রই') ? `
+                                                <div class="d-flex gap-2">
+                                                    <a href="${secCallLink}" class="btn btn-sm btn-outline-danger px-3"><i class="bi bi-telephone me-1"></i> কল করুন</a>
+                                                    <a href="${secWaLink}" target="_blank" class="btn btn-sm btn-outline-success px-3"><i class="bi bi-whatsapp me-1"></i> হোয়াটসঅ্যাপ</a>
+                                                </div>
+                                            ` : ''}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="p-3 rounded h-100" style="background: var(--bg-main); border: 1px solid var(--border-color);">
+                                            <div class="fw-bold text-danger small mb-1">জেলা সভাপতি (District President)</div>
+                                            <div class="fs-5 fw-bold mb-2">${d.pres}</div>
+                                            <div class="mb-3 small text-muted"><i class="bi bi-telephone-fill me-1"></i> ${d.presPhone || 'শীঘ্রই আপডেট হবে'}</div>
+                                            ${d.presPhone && !d.presPhone.includes('শীঘ্রই') ? `
+                                                <div class="d-flex gap-2">
+                                                    <a href="${presCallLink}" class="btn btn-sm btn-outline-danger px-3"><i class="bi bi-telephone me-1"></i> কল করুন</a>
+                                                    <a href="${presWaLink}" target="_blank" class="btn btn-sm btn-outline-success px-3"><i class="bi bi-whatsapp me-1"></i> হোয়াটসঅ্যাপ</a>
+                                                </div>
+                                            ` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                            `,
+                            url: `state-committee.html?district=${d.key}`,
+                            btnText: `${d.bn} কমিটির বিশদ বিবরণ ও মানচিত্র দেখুন`
+                        };
+                    }
+                }
+                
+                return null;
+            }
 
             // Extract query from URL (?q=term)
             const urlParams = new URLSearchParams(window.location.search);
@@ -886,7 +1185,16 @@
                     currentSuggestions.push({
                         text: p.title,
                         searchText: p.title,
-                        action: () => { window.location.href = p.url; },
+                        action: () => { 
+                            if (p.type === "FAQ") {
+                                searchInput.value = p.title;
+                                performSearch(p.title);
+                                showDirectAnswerModal(p.title);
+                                hideSuggestions();
+                            } else {
+                                window.location.href = p.url;
+                            }
+                        },
                         type: p.type,
                         icon: p.icon
                     });
@@ -898,7 +1206,12 @@
                         text: h.title,
                         searchText: h.title,
                         action: () => { 
-                            if (h.type === "Martyr" || h.type === "Press" || h.type === "FAQ") {
+                            if (h.type === "FAQ") {
+                                searchInput.value = h.title;
+                                performSearch(h.title);
+                                showDirectAnswerModal(h.title);
+                                hideSuggestions();
+                            } else if (h.type === "Martyr" || h.type === "Press") {
                                 window.location.href = h.url;
                             } else {
                                 searchInput.value = h.title;
@@ -993,8 +1306,25 @@
                 }
             });
 
+            // Intercept clicks on FAQ results to prevent redirect and display answer directly in pop-up modal
+            searchResults.addEventListener("click", function(e) {
+                const faqLink = e.target.closest(".faq-search-link");
+                if (faqLink) {
+                    e.preventDefault();
+                    const title = faqLink.getAttribute("data-title");
+                    searchInput.value = title;
+                    performSearch(title);
+                    showDirectAnswerModal(title);
+                }
+            });
+
             function performSearch(query) {
                 query = query.trim();
+                
+                // Clear and hide Direct Answer box
+                directAnswerContainer.innerHTML = "";
+                directAnswerContainer.style.display = "none";
+
                 if (!query) {
                     searchResults.innerHTML = "";
                     searchStats.innerHTML = "";
@@ -1006,6 +1336,30 @@
                     searchResults.innerHTML = "";
                     searchStats.innerHTML = "";
                     return;
+                }
+
+                // Check for Direct Answer match
+                const directAns = checkDirectAnswer(query);
+                if (directAns) {
+                    directAnswerContainer.innerHTML = `
+                        <div class="direct-answer-card" data-aos="fade-up">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-danger bg-opacity-25 text-danger rounded-circle p-2 me-3 d-inline-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+                                    <i class="bi bi-info-circle-fill fs-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold text-danger mb-0" style="font-size: 1.05rem;">সরাসরি উত্তর (Direct Answer)</h5>
+                                    <span class="small text-muted" style="font-size: 0.8rem;">আপনার প্রশ্নের তাৎক্ষণিক সমাধান</span>
+                                </div>
+                            </div>
+                            <div class="answer-body mb-3">
+                                <h5 class="fw-bold text-header mb-3" style="font-size: 1.1rem; border-left: 3px solid var(--accent-color); padding-left: 10px;">${directAns.title}</h5>
+                                <div class="text-body leading-relaxed">${directAns.html}</div>
+                            </div>
+                            <a href="${directAns.url}" class="btn btn-outline-danger btn-sm fw-bold"><i class="bi bi-arrow-right-circle me-1"></i> ${directAns.btnText}</a>
+                        </div>
+                    `;
+                    directAnswerContainer.style.display = "block";
                 }
 
                 const results = [];
@@ -1106,13 +1460,19 @@
                         badgeClass = "search-badge-media";
                     }
 
+                    const isFaq = page.url.includes("#history") || page.url.includes("#slogan") || page.url.includes("#flag") || page.url.includes("#leadership");
+                    const escapedTitle = page.title.replace(/"/g, '&quot;');
+                    const linkHtml = isFaq 
+                        ? `<a href="${page.url}" class="faq-search-link" data-title="${escapedTitle}">${highlightText(page.title, keywords)}</a>` 
+                        : `<a href="${page.url}">${highlightText(page.title, keywords)}</a>`;
+
                     html += `
                         <div class="result-item" data-aos="fade-up">
                             <div class="result-meta">
                                 <span class="search-badge ${badgeClass}">${sectionName}</span>
                                 <span><i class="bi bi-link-45deg"></i> ${page.url}</span>
                             </div>
-                            <h3><a href="${page.url}">${highlightText(page.title, keywords)}</a></h3>
+                            <h3>${linkHtml}</h3>
                             ${page.description ? `<div class="result-desc">${highlightText(page.description, keywords)}</div>` : ''}
                             <div class="result-snippet">${snippet}</div>
                         </div>`;
