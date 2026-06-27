@@ -1245,4 +1245,79 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     }
+
+    // Touch device card flipping for Rights Section
+    var rightsCards = document.querySelectorAll(".rights-card-container");
+    if (rightsCards.length) {
+        rightsCards.forEach(function(card) {
+            card.addEventListener("click", function() {
+                card.classList.toggle("active-flip");
+            });
+        });
+    }
+
+    // Stats Count Up Animation with Bengali Digits Support & Preloader Fallbacks
+    var statNumbers = document.querySelectorAll(".stat-number");
+    if (statNumbers.length) {
+        var options = {
+            threshold: 0.1
+        };
+        
+        var observer = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    startCountUpAnimation(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+        
+        statNumbers.forEach(function(num) {
+            observer.observe(num);
+        });
+
+        // SAFETY FALLBACK: Trigger count-up manually after 3.5 seconds in case the preloader blocks the IntersectionObserver
+        setTimeout(function() {
+            statNumbers.forEach(function(num) {
+                if (num.getAttribute("data-animated") !== "true") {
+                    startCountUpAnimation(num);
+                }
+            });
+        }, 3500);
+    }
+    
+    function startCountUpAnimation(targetElement) {
+        if (targetElement.getAttribute("data-animated") === "true") return;
+        targetElement.setAttribute("data-animated", "true");
+
+        var targetVal = parseInt(targetElement.getAttribute("data-target"), 10);
+        var suffix = targetElement.getAttribute("data-suffix") || "";
+        var duration = 2000; // 2 seconds
+        var startTime = null;
+        
+        function animateCount(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = timestamp - startTime;
+            var currentVal = Math.min(Math.floor((progress / duration) * targetVal), targetVal);
+            
+            // Format with commas (Indian style)
+            var formattedNum = currentVal.toLocaleString('en-IN');
+            targetElement.textContent = toBengaliNumber(formattedNum) + suffix;
+            
+            if (currentVal < targetVal) {
+                requestAnimationFrame(animateCount);
+            } else {
+                targetElement.textContent = toBengaliNumber(targetVal.toLocaleString('en-IN')) + suffix;
+            }
+        }
+        
+        requestAnimationFrame(animateCount);
+    }
+    
+    function toBengaliNumber(numStr) {
+        var bengaliDigits = {'0': '০', '1': '১', '2': '২', '3': '৩', '4': '৪', '5': '৫', '6': '৬', '7': '৭', '8': '৮', '9': '৯'};
+        return numStr.toString().split('').map(function(char) {
+            return bengaliDigits[char] || char;
+        }).join('');
+    }
 });

@@ -1122,25 +1122,95 @@ header, .header {
     border-bottom: 1px solid var(--border-color);
 }
 
-.stat-item {
-    text-align: center;
+.stat-card {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border) !important;
+    border-radius: var(--border-radius-md);
+    padding: 30px 20px;
+    box-shadow: var(--shadow-main);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.stat-card:hover::before {
+    left: 150%;
+    transition: left 0.85s ease-in-out;
+}
+
+.stat-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(211, 26, 39, 0.35) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 0 0 20px rgba(211, 26, 39, 0.15) !important;
+    background: linear-gradient(135deg, var(--glass-bg), rgba(211, 26, 39, 0.05)) !important;
+}
+
+.stat-icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(211, 26, 39, 0.08);
+    border: 1px solid rgba(211, 26, 39, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    margin: 0 auto 15px auto;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.stat-card:hover .stat-icon-box {
+    transform: scale(1.15) rotate(10deg);
+    background: var(--color-primary);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(211, 26, 39, 0.3);
 }
 
 .stat-number {
-    font-size: 3.5rem;
+    font-size: 2.8rem;
     font-family: var(--font-heading);
     font-weight: 800;
     color: var(--color-primary);
-    line-height: 1;
-    margin-bottom: 8px;
+    line-height: 1.1;
+    margin-bottom: 10px;
     display: inline-block;
+    letter-spacing: -0.5px;
 }
 
 .stat-label {
     font-weight: 600;
-    font-size: 1.05rem;
+    font-size: 0.88rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
+.stat-card:hover .stat-label {
     color: var(--text-main);
 }
 
@@ -5918,4 +5988,316 @@ html[data-theme="light"] .generator-card select option {
 
 .ideal-more-link:hover i {
     transform: translateX(4px);
+}
+
+/* --- SFI LEGAL RIGHTS CARD DECK --- */
+.rights-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.rights-card-container {
+    perspective: 1200px;
+    height: 410px;
+    margin-bottom: 24px;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rights-card-container:hover {
+    transform: translateY(-8px);
+}
+
+.rights-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+/* Flipping card triggers */
+.rights-card-container:hover .rights-card-inner,
+.rights-card-container.active-flip .rights-card-inner {
+    transform: rotateY(180deg);
+}
+
+.rights-card-front, .rights-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: var(--border-radius-md);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+/* Card Front & Back Glass & Neomorphic Bases (Resting State with Radial Glow Spotlight) */
+.rights-card-front {
+    background: radial-gradient(130% 130% at 50% 12%, var(--glass-bg) 65%, rgba(var(--accent-color-rgb), 0.04) 100%) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(var(--accent-color-rgb), 0.12) !important;
+    box-shadow: 
+        var(--shadow-main), 
+        0 8px 30px rgba(var(--accent-color-rgb), 0.03),
+        inset 0 1px 2px rgba(255, 255, 255, 0.05) !important;
+}
+
+.rights-card-back {
+    background: radial-gradient(130% 130% at 50% 12%, var(--glass-bg) 65%, rgba(var(--accent-color-rgb), 0.04) 100%) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(var(--accent-color-rgb), 0.12) !important;
+    transform: rotateY(180deg);
+    box-shadow: 
+        var(--shadow-main), 
+        0 8px 30px rgba(var(--accent-color-rgb), 0.03),
+        inset 0 1px 2px rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Diagonal sweeping shine animation */
+.rights-card-front::before, .rights-card-back::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.12) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.rights-card-container:hover .rights-card-front::before,
+.rights-card-container:hover .rights-card-back::before {
+    left: 150%;
+    transition: left 0.95s ease-in-out;
+}
+
+/* Card Accent Borders and Glows on Hover */
+.rights-card-container:hover .rights-card-front {
+    border-color: var(--accent-border-color) !important;
+    background: linear-gradient(135deg, var(--glass-bg), rgba(var(--accent-color-rgb), 0.1)) !important;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35), 0 0 25px var(--accent-glow-color) !important;
+}
+
+.rights-card-container:hover .rights-card-back {
+    border-color: var(--accent-border-color) !important;
+    background: linear-gradient(135deg, var(--glass-bg), rgba(var(--accent-color-rgb), 0.1)) !important;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35), 0 0 25px var(--accent-glow-color) !important;
+}
+
+/* Color Accents definition */
+.accent-red {
+    --accent-color: #ff2d3c;
+    --accent-color-rgb: 255, 45, 60;
+    --accent-border-color: rgba(255, 45, 60, 0.55);
+    --accent-glow-color: rgba(255, 45, 60, 0.25);
+}
+.accent-orange {
+    --accent-color: #ff9f00;
+    --accent-color-rgb: 255, 159, 0;
+    --accent-border-color: rgba(255, 159, 0, 0.55);
+    --accent-glow-color: rgba(255, 159, 0, 0.25);
+}
+.accent-purple {
+    --accent-color: #d500f9;
+    --accent-color-rgb: 213, 0, 249;
+    --accent-border-color: rgba(213, 0, 249, 0.55);
+    --accent-glow-color: rgba(213, 0, 249, 0.25);
+}
+.accent-blue {
+    --accent-color: #00b0ff;
+    --accent-color-rgb: 0, 176, 255;
+    --accent-border-color: rgba(0, 176, 255, 0.55);
+    --accent-glow-color: rgba(0, 176, 255, 0.25);
+}
+.accent-green {
+    --accent-color: #00e676;
+    --accent-color-rgb: 0, 230, 118;
+    --accent-border-color: rgba(0, 230, 118, 0.55);
+    --accent-glow-color: rgba(0, 230, 118, 0.25);
+}
+.accent-teal {
+    --accent-color: #00bfa5;
+    --accent-color-rgb: 0, 191, 165;
+    --accent-border-color: rgba(0, 191, 165, 0.55);
+    --accent-glow-color: rgba(0, 191, 165, 0.25);
+}
+
+/* Custom Icons styling (Colorful resting background) */
+.rights-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    background: rgba(var(--accent-color-rgb), 0.08);
+    border: 1px solid rgba(var(--accent-color-rgb), 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--accent-color);
+    margin: 0 auto 20px auto;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 10px rgba(var(--accent-color-rgb), 0.05);
+}
+
+.rights-card-container:hover .rights-icon-wrapper {
+    transform: scale(1.18) rotate(8deg);
+    background: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 8px 20px var(--accent-glow-color);
+    border-color: transparent;
+}
+
+/* Card Titles with animated accent lines */
+.rights-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 12px;
+    position: relative;
+    display: inline-block;
+}
+
+.rights-title::after {
+    content: "";
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--accent-color);
+    margin: 6px auto 0 auto;
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rights-card-container:hover .rights-title::after {
+    width: 60px;
+}
+
+.rights-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    flex-grow: 1;
+}
+
+/* Card Back specifics */
+.rights-back-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.rights-back-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.rights-back-icon {
+    font-size: 1.4rem;
+    color: var(--accent-color);
+}
+
+.rights-back-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    flex-grow: 1;
+}
+
+.rights-back-list li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 20px;
+    line-height: 1.45;
+}
+
+.rights-back-list li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.rights-card-back .btn-outline-danger {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.rights-card-back .btn-outline-danger:hover {
+    background-color: var(--accent-color) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px var(--accent-glow-color);
+}
+
+/* Light Theme tweaks to keep perfect text contrast */
+[data-theme="light"] .rights-card-front,
+[data-theme="light"] .rights-card-back {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05), inset 0 1px 2px rgba(255, 255, 255, 0.6) !important;
+}
+
+[data-theme="light"] .rights-back-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .rights-icon-wrapper {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+.rights-flip-indicator {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.rights-flip-indicator i {
+    animation: bounceX 2s infinite;
+}
+
+@keyframes bounceX {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(4px); }
+}
+
+@media (max-width: 991px) {
+    .rights-card-container {
+        height: 430px;
+    }
+}
+
+@media (max-width: 767px) {
+    .rights-card-container {
+        height: 420px;
+    }
 }
