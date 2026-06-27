@@ -6300,4 +6300,24 @@ html[data-theme="light"] .generator-card select option {
     .rights-card-container {
         height: 420px;
     }
+    
+    .stat-card {
+        padding: 24px 8px;
+    }
+    
+    .stat-number {
+        font-size: 1.65rem;
+        margin-bottom: 6px;
+    }
+    
+    .stat-icon-box {
+        width: 40px;
+        height: 40px;
+        font-size: 1.15rem;
+        margin-bottom: 10px;
+    }
+    
+    .stat-label {
+        font-size: 0.76rem;
+    }
 }
