@@ -1149,3 +1149,100 @@ window.addEventListener('load', () => {
     CounterAnimation.init();
   }, 2000);
 });
+
+
+/* ==========================================================
+   YOUTUBE VIDEO LAZY LOADING FACADE & PLAYLIST HANDLERS
+   ========================================================== */
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. YouTube Facade Click Listener (loads iframe on-demand)
+    document.body.addEventListener("click", function(e) {
+        var facade = e.target.closest(".youtube-facade");
+        if (facade) {
+            var videoId = facade.getAttribute("data-video-id");
+            var iframeId = facade.getAttribute("data-iframe-id");
+            var videoType = facade.getAttribute("data-video-type") || "youtube";
+            
+            var iframe = document.createElement("iframe");
+            iframe.setAttribute("id", iframeId);
+            iframe.setAttribute("class", "w-100 h-100");
+            iframe.setAttribute("allowfullscreen", "true");
+            
+            if (videoType === "facebook") {
+                iframe.setAttribute("src", "https://www.facebook.com/plugins/video.php?href=" + encodeURIComponent(videoId) + "&show_text=0&autoplay=true");
+                iframe.setAttribute("allow", "autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share");
+                iframe.setAttribute("style", "border:none;overflow:hidden");
+                iframe.setAttribute("scrolling", "no");
+                iframe.setAttribute("frameborder", "0");
+            } else {
+                iframe.setAttribute("src", "https://www.youtube.com/embed/" + videoId + "?autoplay=1&enablejsapi=1&showinfo=0");
+                iframe.setAttribute("allow", "autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+            }
+            
+            facade.innerHTML = "";
+            facade.appendChild(iframe);
+            facade.classList.remove("youtube-facade"); // remove class to stop re-triggering
+        }
+    });
+
+    // 2. Playlist Switcher Logic
+    var playlistItems = document.querySelectorAll(".video-item");
+    var mainPlayer = document.getElementById("mainVideoPlayer");
+    var mainTitle = document.getElementById("mainVideoTitle");
+    var mainDesc = document.getElementById("mainVideoDesc");
+    var mainMetaDate = document.querySelector(".video-info-meta .badge");
+
+    if (playlistItems.length && mainPlayer) {
+        playlistItems.forEach(function(item) {
+            item.addEventListener("click", function() {
+                var videoId = item.getAttribute("data-video-id");
+                var iframeId = item.getAttribute("data-iframe-id");
+                var videoType = item.getAttribute("data-video-type") || "youtube";
+                var dateStr = item.getAttribute("data-date");
+                var descStr = item.getAttribute("data-desc");
+                var titleStr = item.querySelector("h6").textContent;
+
+                // Update active states
+                playlistItems.forEach(function(i) { i.classList.remove("active-video"); });
+                item.classList.add("active-video");
+
+                // Update text meta
+                if (mainTitle) mainTitle.textContent = titleStr;
+                if (mainDesc) mainDesc.textContent = descStr;
+                if (mainMetaDate) mainMetaDate.innerHTML = '<i class="bi bi-calendar-event me-1"></i> ' + dateStr;
+
+                // Play the video immediately in the player
+                var newSrc = "";
+                if (videoType === "facebook") {
+                    newSrc = "https://www.facebook.com/plugins/video.php?href=" + encodeURIComponent(videoId) + "&show_text=0&autoplay=true";
+                } else {
+                    newSrc = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&enablejsapi=1&showinfo=0";
+                }
+
+                var iframe = document.createElement("iframe");
+                iframe.setAttribute("id", iframeId);
+                iframe.setAttribute("class", "w-100 h-100");
+                iframe.setAttribute("allowfullscreen", "true");
+                iframe.setAttribute("src", newSrc);
+                
+                if (videoType === "facebook") {
+                    iframe.setAttribute("allow", "autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share");
+                    iframe.setAttribute("style", "border:none;overflow:hidden");
+                    iframe.setAttribute("scrolling", "no");
+                    iframe.setAttribute("frameborder", "0");
+                } else {
+                    iframe.setAttribute("allow", "autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+                }
+
+                mainPlayer.innerHTML = "";
+                mainPlayer.appendChild(iframe);
+                mainPlayer.classList.remove("youtube-facade");
+                
+                // Update attributes on mainPlayer
+                mainPlayer.setAttribute("data-video-id", videoId);
+                mainPlayer.setAttribute("data-iframe-id", iframeId);
+                mainPlayer.setAttribute("data-video-type", videoType);
+            });
+        });
+    }
+});

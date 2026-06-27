@@ -57,6 +57,35 @@ def restore_from_backup():
     print("Restored clean source files.\n")
     return True
 
+def minify_css(css):
+    """Minify CSS content using regular expressions."""
+    # Remove comments
+    css = re.sub(r'/\*.*?\*/', '', css, flags=re.DOTALL)
+    # Remove excessive whitespaces
+    css = re.sub(r'\s+', ' ', css)
+    # Remove spaces around selectors, operators, and properties
+    css = re.sub(r'\s*([\{\};:,])\s*', r'\1', css)
+    # Remove unnecessary semicolons before closing brace
+    css = re.sub(r';\}', '}', css)
+    return css.strip()
+
+def minify_js(js):
+    """Minify JS content safely by removing comments and unnecessary spaces."""
+    # Remove block comments
+    js = re.sub(r'/\*.*?\*/', '', js, flags=re.DOTALL)
+    # Remove single-line comments safely
+    lines = js.split('\n')
+    cleaned_lines = []
+    for line in lines:
+        line_stripped = line.strip()
+        if not line_stripped:
+            continue
+        if line_stripped.startswith('//'):
+            continue
+        cleaned_lines.append(line_stripped)
+    js = '\n'.join(cleaned_lines)
+    return js.strip()
+
 def generate_random_key(length=16):
     """Generate a random alphanumeric key."""
     return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
@@ -87,6 +116,7 @@ def inline_local_js(html_content):
         if os.path.exists(backup_js_path):
             with open(backup_js_path, 'r', encoding='utf-8', errors='ignore') as f_js:
                 js_content = f_js.read()
+            js_content = minify_js(js_content)
             # Escape </script> inside script code to prevent prematurely closing HTML tag
             js_content = js_content.replace("</script>", "<\\/script>")
             return f"<script>\n{js_content}\n</script>"
@@ -111,12 +141,14 @@ def obfuscate_html_file(file_path):
         backup_css_path = os.path.join(BACKUP_DIR, css_file)
         if os.path.exists(backup_css_path):
             with open(backup_css_path, 'r', encoding='utf-8', errors='ignore') as f_css:
-                local_css_contents.append(f_css.read())
+                css_content = f_css.read()
+                local_css_contents.append(minify_css(css_content))
         else:
             active_css_path = os.path.join(WORKSPACE_DIR, css_file)
             if os.path.exists(active_css_path):
                 with open(active_css_path, 'r', encoding='utf-8', errors='ignore') as f_css:
-                    local_css_contents.append(f_css.read())
+                    css_content = f_css.read()
+                    local_css_contents.append(minify_css(css_content))
                     
     # 2. Find body content
     body_match = re.search(r'(<body[^>]*>)(.*?)(</body>)', html, re.IGNORECASE | re.DOTALL)

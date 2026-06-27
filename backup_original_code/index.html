@@ -39,6 +39,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png" default-fallback="true">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
 
+    <!-- Preload LCP (Largest Contentful Paint) Image -->
+    <link rel="preload" as="image" href="assets/images/protest.png">
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -304,170 +307,63 @@
             </div>
         </section>
 
-        <!-- HIGHLIGHT VIDEO CAROUSEL SECTION -->
-        <section id="about" class="about section">
+        <!-- SFI CORE IDEALS SECTION -->
+        <section id="ideals" class="ideals section py-5">
             <div class="container" data-aos="fade-up" data-aos-delay="100">
-                <div class="row align-items-stretch">
-                    <!-- Main Video (Left) -->
-                    <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="zoom-out"
-                        data-aos-delay="200">
-                        <div class="about-image p-3 glass-card h-100 d-flex flex-column justify-content-between">
-                            <div>
-                                <h3 class="fw-bold mb-3 text-header border-start border-danger border-4 ps-3">সাংবাদিক
-                                    সম্মেলনে এসএফআই ও ছাত্রনেতৃত্ব</h3>
-                                <div
-                                    class="ratio ratio-16x9 rounded overflow-hidden shadow-lg border border-secondary border-opacity-25">
-                                    <iframe id="mainYoutube" class="w-100"
-                                        src="https://www.youtube.com/embed/AFRTZXBhD2Y?enablejsapi=1&showinfo=0"
-                                        allowfullscreen></iframe>
-                                </div>
+                
+                <!-- Section Title -->
+                <div class="container section-title text-center mb-5" data-aos="fade-up">
+                    <h2>আমাদের আদর্শ</h2>
+                    <div class="mt-2 text-header">ভারতের ছাত্র ফেডারেশন (এসএফআই)-এর <span class="text-danger">মূল স্তম্ভত্রয়</span></div>
+                </div>
+
+                <div class="row g-4 align-items-stretch">
+                    
+                    <!-- Independence (স্বাধীনতা) Card -->
+                    <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
+                        <div class="glass-card ideal-card p-4 rounded-4 shadow-lg border border-secondary border-opacity-25 d-flex flex-column w-100">
+                            <div class="ideal-illustration-wrapper rounded-3 overflow-hidden mb-4 position-relative">
+                                <img src="assets/images/independence.png" alt="Independence Illustration" class="w-100 h-100 object-fit-cover ideal-img">
+                                <div class="ideal-badge-icon bg-danger text-white"><i class="bi bi-flag-fill"></i></div>
                             </div>
-                            <div
-                                class="experience-badge bg-danger text-white p-2 rounded mt-3 d-flex justify-content-between align-items-center">
-                                <span class="fw-semibold"><i class="bi bi-play-circle-fill me-1"></i> সাম্প্রতিক
-                                    প্রকাশ</span>
-                                <span class="small">প্রকাশ: ১৭-মে-২০২৬</span>
+                            <h4 class="fw-bold text-header mb-3 text-center text-md-start">স্বাধীনতা</h4>
+                            <p class="text-muted small flex-grow-1">স্বাধীন চিন্তার বিকাশ এবং শিক্ষার গণতান্ত্রিক অধিকার অর্জন। যে কোনও আধিপত্য ও শোষণের বিরুদ্ধে রুখে দাঁড়িয়ে স্বাধীন মতামত প্রকাশের স্বাধীনতা নিশ্চিত করাই আমাদের অন্যতম প্রধান কাজ।</p>
+                            <div class="ideal-footer border-top border-secondary border-opacity-25 pt-3 mt-3">
+                                <a href="about.html" class="ideal-more-link fw-semibold text-danger small"><i class="bi bi-arrow-right-circle me-1"></i> বিশদে জানুন</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Democracy (গণতন্ত্র) Card -->
+                    <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
+                        <div class="glass-card ideal-card p-4 rounded-4 shadow-lg border border-secondary border-opacity-25 d-flex flex-column w-100">
+                            <div class="ideal-illustration-wrapper rounded-3 overflow-hidden mb-4 position-relative">
+                                <img src="assets/images/democracy.png" alt="Democracy Illustration" class="w-100 h-100 object-fit-cover ideal-img">
+                                <div class="ideal-badge-icon bg-danger text-white"><i class="bi bi-people-fill"></i></div>
+                            </div>
+                            <h4 class="fw-bold text-header mb-3 text-center text-md-start">গণতন্ত্র</h4>
+                            <p class="text-muted small flex-grow-1">ক্যাম্পাসে গণতান্ত্রিক মূল্যবোধ রক্ষা এবং ছাত্র সংসদ নির্বাচনে প্রতিটি ছাত্রছাত্রীর ভোটাধিকার প্রতিষ্ঠা করা। ছাত্র ঐক্য ও অধিকার নিশ্চিত করার জন্য সমস্ত স্তরের শিক্ষার্থীদের সমানাধিকারের লড়াই।</p>
+                            <div class="ideal-footer border-top border-secondary border-opacity-25 pt-3 mt-3">
+                                <a href="about.html" class="ideal-more-link fw-semibold text-danger small"><i class="bi bi-arrow-right-circle me-1"></i> বিশদে জানুন</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Carousel of other videos (Right) -->
-                    <div class="col-lg-6 d-flex flex-column justify-content-between mt-4 mt-lg-0" data-aos="fade-up"
-                        data-aos-delay="300">
-                        <div class="about-content p-3 glass-card h-100 d-flex flex-column justify-content-between">
-                            <h4 class="fw-semibold text-header mb-3"><i
-                                    class="bi bi-collection-play me-2 text-danger"></i> ভিডিও গ্যালারি</h4>
-
-                            <!-- Large view carousel (2 videos per slide) -->
-                            <div id="youtbecarouselLarge" class="carousel slide w-100 d-none d-sm-block"
-                                data-bs-ride="carousel" data-bs-interval="5000">
-                                <div class="carousel-inner">
-
-                                    <!-- Slide 1 -->
-                                    <div class="carousel-item active">
-                                        <div class="row g-3">
-                                            <div class="col-md-6">
-                                                <div class="card glass-card border-0 h-100 shadow-sm">
-                                                    <div class="ratio ratio-16x9 rounded-top overflow-hidden">
-                                                        <iframe id="youtube11" class="w-100"
-                                                            src="https://www.youtube.com/embed/8RFQwjlKPXA?enablejsapi=1&showinfo=0"
-                                                            allowfullscreen></iframe>
-                                                    </div>
-                                                    <div class="card-body p-2 fs-6 text-body text-center">
-                                                        মুজফফর আহমেদ ভবনে সাংবাদিক সম্মেলনে এসএফআই নেতৃত্ব।
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="card glass-card border-0 h-100 shadow-sm">
-                                                    <div class="ratio ratio-16x9 rounded-top overflow-hidden">
-                                                        <iframe id="youtube12" class="w-100"
-                                                            src="https://www.youtube.com/embed/4AqaOpJ8LX8?enablejsapi=1&showinfo=0"
-                                                            allowfullscreen></iframe>
-                                                    </div>
-                                                    <div class="card-body p-2 fs-6 text-body text-center">
-                                                        প্রেস ক্লাবে সাংবাদিক সম্মেলনে এসএফআই রাজ্য নেতৃত্ব।
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Slide 2 -->
-                                    <div class="carousel-item">
-                                        <div class="row g-3">
-                                            <div class="col-md-6">
-                                                <div class="card glass-card border-0 h-100 shadow-sm">
-                                                    <div class="ratio ratio-16x9 rounded-top overflow-hidden">
-                                                        <iframe id="youtube13" class="w-100"
-                                                            src="https://www.youtube.com/embed/yIv8CpBLXl8?enablejsapi=1&showinfo=0"
-                                                            allowfullscreen></iframe>
-                                                    </div>
-                                                    <div class="card-body p-2 fs-6 text-body text-center">
-                                                        মুজফফর আহমেদ ভবনে সাংবাদিক সম্মেলনে বাম নেতৃত্ব ও এসএফআই।
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="card glass-card border-0 h-100 shadow-sm">
-                                                    <div class="ratio ratio-16x9 rounded-top overflow-hidden">
-                                                        <iframe id="youtube14" class="w-100"
-                                                            src="https://www.youtube.com/embed/bZQIjByW8lk?enablejsapi=1&showinfo=0"
-                                                            allowfullscreen></iframe>
-                                                    </div>
-                                                    <div class="card-body p-2 fs-6 text-body text-center">
-                                                        মুখোমুখি আলোচনায় এসএফআই ও বাম নেতৃত্ব।
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <button class="carousel-control-prev" type="button"
-                                    data-bs-target="#youtbecarouselLarge" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon bg-danger rounded-circle p-2"
-                                        aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button"
-                                    data-bs-target="#youtbecarouselLarge" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon bg-danger rounded-circle p-2"
-                                        aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
+                    <!-- Socialism (সমাজতন্ত্র) Card -->
+                    <div class="col-lg-4 col-md-12 d-flex" data-aos="fade-up" data-aos-delay="400">
+                        <div class="glass-card ideal-card p-4 rounded-4 shadow-lg border border-secondary border-opacity-25 d-flex flex-column w-100">
+                            <div class="ideal-illustration-wrapper rounded-3 overflow-hidden mb-4 position-relative">
+                                <img src="assets/images/socialism.png" alt="Socialism Illustration" class="w-100 h-100 object-fit-cover ideal-img">
+                                <div class="ideal-badge-icon bg-danger text-white"><i class="bi bi-star-fill"></i></div>
                             </div>
-
-                            <!-- Mobile view carousel (1 video per slide) -->
-                            <div id="youtbecarouselMobile" class="carousel slide w-100 d-block d-sm-none"
-                                data-bs-ride="carousel" data-bs-interval="6000">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <div class="card glass-card border-0">
-                                            <div class="ratio ratio-16x9 rounded-top overflow-hidden">
-                                                <iframe id="youtube31" class="w-100"
-                                                    src="https://www.youtube.com/embed/8RFQwjlKPXA?enablejsapi=1&showinfo=0"
-                                                    allowfullscreen></iframe>
-                                            </div>
-                                            <div class="card-body p-2 fs-6 text-body text-center">মুজফফর আহমেদ ভবনে
-                                                সাংবাদিক সম্মেলনে এসএফআই নেতৃত্ব।</div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="card glass-card border-0">
-                                            <div class="ratio ratio-16x9 rounded-top overflow-hidden">
-                                                <iframe id="youtube32" class="w-100"
-                                                    src="https://www.youtube.com/embed/4AqaOpJ8LX8?enablejsapi=1&showinfo=0"
-                                                    allowfullscreen></iframe>
-                                            </div>
-                                            <div class="card-body p-2 fs-6 text-body text-center">প্রেস ক্লাবে সাংবাদিক
-                                                সম্মেলনে এসএফআই রাজ্য নেতৃত্ব।</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button"
-                                    data-bs-target="#youtbecarouselMobile" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon bg-danger rounded-circle p-2"
-                                        aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button"
-                                    data-bs-target="#youtbecarouselMobile" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon bg-danger rounded-circle p-2"
-                                        aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-
-                            <div
-                                class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top border-secondary border-opacity-25">
-                                <a href="videos.html" class="btn btn-neon-red btn-sm px-3 fw-semibold">দেখুন আরো
-                                    ভিডিও</a>
-                                <button id="pauseButton" type="button"
-                                    class="btn btn-outline-light btn-sm px-3 d-sm-none">Pause</button>
+                            <h4 class="fw-bold text-header mb-3 text-center text-md-start">সমাজতন্ত্র</h4>
+                            <p class="text-muted small flex-grow-1">সবার জন্য অবৈতনিক ও উন্নত মানের বৈজ্ঞানিক শিক্ষার লড়াই এবং বৈষম্যহীন সাম্যের সমাজ গড়ে তোলার প্রয়াস। শিক্ষার পণ্যকরণ রুখে এক বৈপ্লবিক প্রগতিশীল সমাজ ব্যবস্থার অঙ্গীকার।</p>
+                            <div class="ideal-footer border-top border-secondary border-opacity-25 pt-3 mt-3">
+                                <a href="about.html" class="ideal-more-link fw-semibold text-danger small"><i class="bi bi-arrow-right-circle me-1"></i> বিশদে জানুন</a>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -640,7 +536,7 @@
                                     <div
                                         class="ratio ratio-16x9 rounded overflow-hidden mb-3 border border-secondary border-opacity-25">
                                         <img src="assets/images/relief.png" alt="ত্রাণ শিবির"
-                                            class="img-fluid object-fit-cover">
+                                            class="img-fluid object-fit-cover" loading="lazy">
                                     </div>
                                     <h5 class="fw-bold text-header mb-2"><a href="gallery.html"
                                             class="text-header hover-text-danger">ত্রাণ শিবির</a></h5>
@@ -664,7 +560,7 @@
                                     <div
                                         class="ratio ratio-16x9 rounded overflow-hidden mb-3 border border-secondary border-opacity-25">
                                         <img src="assets/images/study.png" alt="পাঠচক্র"
-                                            class="img-fluid object-fit-cover">
+                                            class="img-fluid object-fit-cover" loading="lazy">
                                     </div>
                                     <h5 class="fw-bold text-header mb-2"><a href="gallery.html"
                                             class="text-header hover-text-danger">পাঠচক্র</a></h5>
@@ -688,7 +584,7 @@
                                     <div
                                         class="ratio ratio-16x9 rounded overflow-hidden mb-3 border border-secondary border-opacity-25">
                                         <img src="assets/images/protest.png" alt="ছাত্র আন্দোলন"
-                                            class="img-fluid object-fit-cover">
+                                            class="img-fluid object-fit-cover" loading="lazy">
                                     </div>
                                     <h5 class="fw-bold text-header mb-2"><a href="publications.html"
                                             class="text-header hover-text-danger">শিক্ষার অধিকার লড়াই</a></h5>
@@ -732,7 +628,7 @@
                                 <div
                                     class="ratio ratio-16x9 rounded overflow-hidden mb-3 border border-secondary border-opacity-25">
                                     <img src="assets/images/study.png" alt="Article image"
-                                        class="img-fluid object-fit-cover">
+                                        class="img-fluid object-fit-cover" loading="lazy">
                                 </div>
                                 <h5 class="fw-bold text-header mb-2"><a href="publications.html"
                                         class="text-header hover-text-danger">ঋত্বিক: প্রান্তিক শ্রেনী ও কৌম অবচেতন</a>
@@ -745,7 +641,7 @@
                                 <div class="testimonial-author d-flex align-items-center">
                                     <img src="assets/images/c_bhaskaran.png" alt="Author avatar"
                                         class="img-fluid rounded-circle me-2 border border-2 border-danger"
-                                        style="width: 40px; height: 40px; object-fit: cover;">
+                                        style="width: 40px; height: 40px; object-fit: cover;" loading="lazy">
                                     <div>
                                         <h6 class="fw-bold text-header mb-0 fs-6">স্বস্তিক সরকার</h6>
                                         <span class="small text-muted">প্রকাশ: ০৪-নভেম্বর-২০২৫</span>
@@ -762,7 +658,7 @@
                                 <div
                                     class="ratio ratio-16x9 rounded overflow-hidden mb-3 border border-secondary border-opacity-25">
                                     <img src="assets/images/protest.png" alt="Article image"
-                                        class="img-fluid object-fit-cover">
+                                        class="img-fluid object-fit-cover" loading="lazy">
                                 </div>
                                 <h5 class="fw-bold text-header mb-2"><a href="publications.html"
                                         class="text-header hover-text-danger">মার্কসবাদের আলোয় সংস্কৃতি (তৃতীয়
@@ -775,7 +671,7 @@
                                 <div class="testimonial-author d-flex align-items-center">
                                     <img src="assets/images/biman_bose.png" alt="Author avatar"
                                         class="img-fluid rounded-circle me-2 border border-2 border-danger"
-                                        style="width: 40px; height: 40px; object-fit: cover;">
+                                        style="width: 40px; height: 40px; object-fit: cover;" loading="lazy">
                                     <div>
                                         <h6 class="fw-bold text-header mb-0 fs-6">চন্দন মুখোপাধ্যায়</h6>
                                         <span class="small text-muted">প্রকাশ: ২৭-মে-২০২৬</span>
@@ -792,7 +688,7 @@
                                 <div
                                     class="ratio ratio-16x9 rounded overflow-hidden mb-3 border border-secondary border-opacity-25">
                                     <img src="assets/images/sfi_flag.png" alt="Article image"
-                                        class="img-fluid object-fit-cover">
+                                        class="img-fluid object-fit-cover" loading="lazy">
                                 </div>
                                 <h5 class="fw-bold text-header mb-2"><a href="publications.html"
                                         class="text-header hover-text-danger">ধুমকেতু’র গল্প ও নজরুল ইসলাম</a></h5>
@@ -804,7 +700,7 @@
                                 <div class="testimonial-author d-flex align-items-center">
                                     <img src="assets/images/biman_bose.png" alt="Author avatar"
                                         class="img-fluid rounded-circle me-2 border border-2 border-danger"
-                                        style="width: 40px; height: 40px; object-fit: cover;">
+                                        style="width: 40px; height: 40px; object-fit: cover;" loading="lazy">
                                     <div>
                                         <h6 class="fw-bold text-header mb-0 fs-6">শমীক লাহিড়ী</h6>
                                         <span class="small text-muted">প্রকাশ: ২৪-মে-২০২৬</span>
@@ -821,7 +717,7 @@
                                 <div
                                     class="ratio ratio-16x9 rounded overflow-hidden mb-3 border border-secondary border-opacity-25">
                                     <img src="assets/images/relief.png" alt="Article image"
-                                        class="img-fluid object-fit-cover">
+                                        class="img-fluid object-fit-cover" loading="lazy">
                                 </div>
                                 <h5 class="fw-bold text-header mb-2"><a href="publications.html"
                                         class="text-header hover-text-danger">আমরা তিমির বিলাসী নই, তিমির বিনাশী হতে
@@ -834,7 +730,7 @@
                                 <div class="testimonial-author d-flex align-items-center">
                                     <img src="assets/images/c_bhaskaran.png" alt="Author avatar"
                                         class="img-fluid rounded-circle me-2 border border-2 border-danger"
-                                        style="width: 40px; height: 40px; object-fit: cover;">
+                                        style="width: 40px; height: 40px; object-fit: cover;" loading="lazy">
                                     <div>
                                         <h6 class="fw-bold text-header mb-0 fs-6">শমীক লাহিড়ী</h6>
                                         <span class="small text-muted">প্রকাশ: ১০-মে-২০২৬</span>
@@ -1054,9 +950,6 @@
                                     class="fas fa-chevron-right me-1 text-danger small-icon"></i> প্রকাশনা</a></li>
                         <li><a href="https://chhatrasangram.org/" target="_blank" class="text-body hover-text-danger small d-block py-1"><i
                                     class="fas fa-chevron-right me-1 text-danger small-icon"></i> ছাত্রসংগ্রাম (Chhatra Sangram) ↗</a></li>
-                        <li><a href="videos.html" class="text-body hover-text-danger small d-block py-1"><i
-                                    class="fas fa-chevron-right me-1 text-danger small-icon"></i> ভিডিও গ্যালারি</a>
-                        </li>
                         <li><a href="gallery.html" class="text-body hover-text-danger small d-block py-1"><i
                                     class="fas fa-chevron-right me-1 text-danger small-icon"></i> ফটো গ্যালারি</a></li>
                         <li><a href="martyrs.html" class="text-body hover-text-danger small d-block py-1"><i
