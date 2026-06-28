@@ -61,44 +61,500 @@
     <link href="home.css" rel="stylesheet" />
     <style>
         .page-hero {
-            background: linear-gradient(135deg, #0c0d10 0%, #0a0a1a 100%);
-            padding: 100px 0 60px;
+            background: linear-gradient(135deg, #0f1016 0%, #1e0b12 50%, #0b0c16 100%);
+            padding: 130px 0 90px;
             text-align: center;
             border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(211, 26, 39, 0.18), transparent 60%);
+            pointer-events: none;
         }
 
         .page-hero h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(2.5rem, 6vw, 4.2rem);
             color: var(--color-primary);
-            margin-bottom: 12px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            text-shadow: 0 0 25px rgba(211, 26, 39, 0.4);
         }
 
         .page-hero p {
             color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 640px;
+            font-size: 1.25rem;
+            max-width: 780px;
             margin: 0 auto;
+            line-height: 1.7;
         }
 
         .section-title {
-            font-size: 1.6rem;
+            font-size: 1.80rem;
             color: var(--color-primary);
             margin-bottom: 6px;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .section-subtitle {
             color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 10px;
+            font-size: 1rem;
+            margin-bottom: 12px;
         }
 
         .divider-line {
             height: 3px;
-            width: 60px;
-            background: var(--color-primary);
+            width: 80px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
             border-radius: 2px;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+        }
+
+        /* Archive Controls */
+        .archive-controls {
+            background: rgba(18, 20, 26, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--border-radius-md);
+            padding: 28px;
+            margin-bottom: 45px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 22px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 16px 16px 16px 52px;
+            background: rgba(8, 9, 12, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-sm);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 18px rgba(211, 26, 39, 0.35);
+        }
+
+        .filter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .filter-btn {
+            padding: 10px 22px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .filter-btn:hover {
+            background: rgba(211, 26, 39, 0.12);
+            color: var(--color-primary);
+            border-color: rgba(211, 26, 39, 0.3);
+        }
+
+        .filter-btn.active {
+            background: var(--color-primary);
+            color: #fff;
+            border-color: var(--color-primary);
+            box-shadow: 0 4px 15px rgba(211, 26, 39, 0.4);
+        }
+
+        /* Solidarity Grid & Cards */
+        .solidarity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+
+        .solidarity-card {
+            background: rgba(18, 20, 26, 0.65);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--border-radius-md);
+            padding: 34px 30px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border-top: 4px solid var(--color-primary);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .solidarity-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(211, 26, 39, 0.18), 0 5px 15px rgba(0,0,0,0.4);
+            border-color: rgba(211, 26, 39, 0.35);
+        }
+
+        .solidarity-card .s-flag {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .solidarity-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 14px;
+            color: var(--text-primary);
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .solidarity-card p {
+            font-size: 0.94rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+            margin-bottom: 22px;
+            flex-grow: 1;
+        }
+
+        /* Stat Indicator Meter Bar */
+        .card-stat-box {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: var(--border-radius-sm);
+            padding: 16px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .card-stat-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stat-meter {
+            margin-bottom: 10px;
+        }
+
+        .stat-meter:last-child {
+            margin-bottom: 0;
+        }
+
+        .stat-label-wrap {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .stat-label-wrap span.val {
+            font-weight: bold;
+            color: var(--color-primary);
+        }
+
+        .stat-bar-container {
+            height: 6px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .stat-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            border-radius: 4px;
+            width: 0; /* Animated/filled dynamically */
+            transition: width 1s ease-in-out;
+        }
+
+        /* Button to open Modal */
+        .read-more-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(211, 26, 39, 0.08);
+            border: 1px solid rgba(211, 26, 39, 0.25);
+            border-radius: var(--border-radius-sm);
+            color: var(--color-primary);
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+            margin-top: auto;
+        }
+
+        .read-more-btn:hover {
+            background: var(--color-primary);
+            color: #fff;
+            border-color: var(--color-primary);
+            box-shadow: 0 4px 15px rgba(211, 26, 39, 0.3);
+        }
+
+        .solidarity-card .s-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(211, 26, 39, 0.1);
+            color: var(--color-primary);
+            font-size: 0.78rem;
+            font-weight: 600;
+            border: 1px solid rgba(211, 26, 39, 0.25);
+            margin-bottom: 16px;
+            align-self: flex-start;
+        }
+
+        /* Color Coding Themes */
+        .solidarity-card.theme-middle-east { border-top-color: var(--color-primary); }
+        .solidarity-card.theme-europe { border-top-color: #3b82f6; }
+        .solidarity-card.theme-europe .read-more-btn { color: #3b82f6; border-color: rgba(59, 130, 246, 0.25); background: rgba(59, 130, 246, 0.08); }
+        .solidarity-card.theme-europe .read-more-btn:hover { background: #3b82f6; color: #fff; border-color: #3b82f6; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); }
+        .solidarity-card.theme-europe .stat-label-wrap span.val { color: #3b82f6; }
+        .solidarity-card.theme-europe .stat-bar-fill { background: linear-gradient(90deg, #3b82f6, #00d2ff); }
+        .solidarity-card.theme-europe .s-tag { color: #3b82f6; border-color: rgba(59, 130, 246, 0.25); background: rgba(59, 130, 246, 0.1); }
+
+        .solidarity-card.theme-latin-america { border-top-color: #eab308; }
+        .solidarity-card.theme-latin-america .read-more-btn { color: #eab308; border-color: rgba(234, 179, 8, 0.25); background: rgba(234, 179, 8, 0.08); }
+        .solidarity-card.theme-latin-america .read-more-btn:hover { background: #eab308; color: #111; border-color: #eab308; box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3); }
+        .solidarity-card.theme-latin-america .stat-label-wrap span.val { color: #eab308; }
+        .solidarity-card.theme-latin-america .stat-bar-fill { background: linear-gradient(90deg, #eab308, #ffd700); }
+        .solidarity-card.theme-latin-america .s-tag { color: #eab308; border-color: rgba(234, 179, 8, 0.25); background: rgba(234, 179, 8, 0.1); }
+
+        .solidarity-card.theme-south-asia-africa { border-top-color: #10b981; }
+        .solidarity-card.theme-south-asia-africa .read-more-btn { color: #10b981; border-color: rgba(16, 185, 129, 0.25); background: rgba(16, 185, 129, 0.08); }
+        .solidarity-card.theme-south-asia-africa .read-more-btn:hover { background: #10b981; color: #fff; border-color: #10b981; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+        .solidarity-card.theme-south-asia-africa .stat-label-wrap span.val { color: #10b981; }
+        .solidarity-card.theme-south-asia-africa .stat-bar-fill { background: linear-gradient(90deg, #10b981, #05ffd2); }
+        .solidarity-card.theme-south-asia-africa .s-tag { color: #10b981; border-color: rgba(16, 185, 129, 0.25); background: rgba(16, 185, 129, 0.1); }
+
+        /* Premium Custom Modal Dialog */
+        .custom-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(6, 8, 12, 0.85);
+            backdrop-filter: blur(18px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .custom-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .custom-modal-box {
+            background: rgba(18, 22, 28, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-md);
+            max-width: 820px;
+            width: 100%;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 30px rgba(211, 26, 39, 0.15);
+            transform: scale(0.92) translateY(20px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .custom-modal-overlay.active .custom-modal-box {
+            transform: scale(1) translateY(0);
+        }
+
+        .custom-modal-header {
+            padding: 24px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 12, 16, 0.5);
+        }
+
+        .custom-modal-header h2 {
+            font-size: 1.45rem;
+            color: #fff;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(255,255,255,0.06);
+            color: #fff;
+        }
+
+        /* Modal Sub-Tabs Navigation */
+        .modal-tabs {
+            display: flex;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0 30px;
+        }
+
+        .modal-tab-link {
+            padding: 16px 20px;
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            font-weight: 600;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-tab-link:hover {
+            color: #fff;
+        }
+
+        .modal-tab-link.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        /* Modal body & panels */
+        .custom-modal-body {
+            padding: 30px;
+            overflow-y: auto;
+            flex-grow: 1;
+            line-height: 1.8;
+            font-size: 0.98rem;
+            color: var(--text-primary);
+        }
+
+        .modal-panel {
+            display: none;
+        }
+
+        .modal-panel.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .modal-data-table th, .modal-data-table td {
+            padding: 12px 18px;
+            text-align: left;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .modal-data-table th {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .modal-data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .modal-stat-value {
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .modal-resolution-card {
+            background: rgba(211, 26, 39, 0.06);
+            border: 1px solid rgba(211, 26, 39, 0.25);
+            border-radius: var(--border-radius-sm);
+            padding: 20px;
+            margin-top: 15px;
+            border-left: 5px solid var(--color-primary);
+        }
+
+        .modal-resolution-card blockquote {
+            font-style: italic;
+            margin: 0;
+            color: #fff;
+        }
+
+        .custom-modal-footer {
+            padding: 20px 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: flex-end;
+            background: rgba(10, 12, 16, 0.4);
         }
 
         /* IUS Block */
@@ -112,6 +568,12 @@
             gap: 30px;
             align-items: center;
             margin-bottom: 50px;
+            transition: var(--transition-smooth);
+        }
+
+        .ius-block:hover {
+            border-color: rgba(211, 26, 39, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
         }
 
         @media (max-width: 600px) {
@@ -131,93 +593,116 @@
             justify-content: center;
             font-size: 3rem;
             flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .ius-info h3 {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             margin-bottom: 8px;
             color: var(--color-accent);
+            font-weight: 600;
         }
 
         .ius-info p {
-            font-size: 0.95rem;
+            font-size: 0.98rem;
             color: var(--text-muted);
             line-height: 1.7;
+            margin-bottom: 0;
         }
 
-        /* Solidarity Cards */
-        .solidarity-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 24px;
-            margin-bottom: 50px;
-        }
-
-        .solidarity-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+        /* State Committee Resolution Block */
+        .resolution-block {
+            background: linear-gradient(135deg, rgba(211, 26, 39, 0.12) 0%, rgba(20, 22, 28, 0.95) 50%, rgba(255, 189, 9, 0.04) 100%);
+            border: 2px solid rgba(211, 26, 39, 0.3);
             border-radius: var(--border-radius-md);
-            padding: 28px 24px;
-            transition: var(--transition-smooth);
-            border-top: 3px solid var(--color-primary);
-        }
-
-        .solidarity-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-glow);
-            border-color: var(--border-hover);
-        }
-
-        .solidarity-card .s-flag {
-            font-size: 2.5rem;
-            margin-bottom: 14px;
-        }
-
-        .solidarity-card h3 {
-            font-size: 1.05rem;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-
-        .solidarity-card p {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            line-height: 1.65;
-        }
-
-        .solidarity-card .s-tag {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 3px 10px;
-            border-radius: 20px;
-            background: rgba(211, 26, 39, 0.12);
-            color: var(--color-primary);
-            font-size: 0.75rem;
-            border: 1px solid rgba(211, 26, 39, 0.3);
-        }
-
-        /* Statement Block */
-        .statement-block {
-            background: linear-gradient(135deg, rgba(211, 26, 39, 0.08) 0%, rgba(255, 189, 9, 0.05) 100%);
-            border: 1px solid rgba(211, 26, 39, 0.2);
-            border-radius: var(--border-radius-md);
-            padding: 40px 36px;
+            padding: 50px 40px;
             margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(211, 26, 39, 0.1);
         }
 
-        .statement-block blockquote {
-            font-size: 1.15rem;
-            line-height: 1.85;
-            color: var(--text-primary);
-            font-style: italic;
-            margin: 0 0 18px;
-            border-left: 4px solid var(--color-primary);
-            padding-left: 20px;
+        .resolution-block::before {
+            content: '★';
+            position: absolute;
+            right: -30px;
+            bottom: -50px;
+            font-size: 15rem;
+            color: rgba(211, 26, 39, 0.04);
+            font-weight: 900;
+            pointer-events: none;
         }
 
-        .statement-block .attrib {
+        .resolution-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 24px;
+        }
+
+        .resolution-star {
+            width: 45px;
+            height: 45px;
+            background: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.5rem;
+            box-shadow: 0 0 15px rgba(211, 26, 39, 0.5);
+        }
+
+        .resolution-title-text h3 {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .resolution-title-text p {
             font-size: 0.85rem;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0;
+        }
+
+        .resolution-block blockquote {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin: 0 0 24px;
+            border-left: 5px solid var(--color-primary);
+            padding-left: 24px;
+        }
+
+        .resolution-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        .resolution-sign {
+            font-size: 0.95rem;
             color: var(--text-muted);
+        }
+
+        .resolution-sign strong {
+            color: var(--text-primary);
+        }
+
+        .resolution-slogan {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-shadow: 0 0 10px rgba(211, 26, 39, 0.2);
         }
 
         /* Timeline */
@@ -440,121 +925,421 @@
     <!-- Particle Canvas -->
     <!-- Theme Toggle Floating -->
     <!-- Header / Navbar -->
-    <main>
+        <main>
         <section class="page-hero">
-            <div class="container">
-                <h1>🌍 আন্তর্জাতিক সংহতি</h1>
-                <p>বিশ্বজুড়ে প্রগতিশীল ছাত্র আন্দোলনের সাথে এসএফআই-এর অটুট সংহতি ও সম্পর্কের কথা</p>
+            <div class="container" data-aos="fade-up">
+                <h1>🌍 আন্তর্জাতিক সংহতি ও সাম্রাজ্যবাদ-বিরোধী সংগ্রাম</h1>
+                <p>সাম্রাজ্যবাদী আগ্রাসন ও নিপীড়নের বিরুদ্ধে বিশ্বজুড়ে লড়াকু ছাত্র আন্দোলনের প্রতি ভারতের ছাত্র ফেডারেশন (SFI) পশ্চিমবঙ্গ রাজ্য কমিটির ভ্রাতৃত্বপূর্ণ সংহতি ও সংগ্রামের বার্তা।</p>
             </div>
         </section>
+
         <section class="section">
             <div class="container">
-                <!-- IUS Section -->
-                <p class="section-title">আন্তর্জাতিক ছাত্র ইউনিয়ন (IUS)</p>
-                <p class="section-subtitle">International Union of Students — এর সাথে এসএফআই-এর সম্পর্ক</p>
-                <div class="divider-line"></div>
-                <div class="ius-block">
+                <!-- Search & Filters -->
+                <div class="archive-controls" data-aos="fade-up">
+                    <div class="search-box">
+                        <i class="bi bi-search"></i>
+                        <input type="text" id="conflictSearch" placeholder="সাম্প্রতিক দ্বন্দ্ব, জাতিসংঘ প্রস্তাব বা আন্দোলনের বিষয় খুঁজুন...">
+                    </div>
+                    <div class="filter-tabs">
+                        <button class="filter-btn active" data-filter="all">সবগুলো আর্কাইভ</button>
+                        <button class="filter-btn" data-filter="middle-east">মধ্যপ্রাচ্য (Middle East)</button>
+                        <button class="filter-btn" data-filter="europe">ইউরোপ ও বৈশ্বিক (Europe & Global)</button>
+                        <button class="filter-btn" data-filter="latin-america">লাতিন আমেরিকা (Latin America)</button>
+                        <button class="filter-btn" data-filter="south-asia-africa">দক্ষিণ এশিয়া ও আফ্রিকা (South Asia & Africa)</button>
+                    </div>
+                </div>
+
+                <!-- Main Archive Grid -->
+                <div class="solidarity-grid" id="archiveGrid">
+                    <!-- Yemen Crisis & Red Sea Conflict -->
+                    <div class="solidarity-card theme-middle-east" data-region="middle-east" data-aos="fade-up">
+                        <div>
+                            <div class="s-flag">🇾🇪</div>
+                            <span class="s-tag">ইয়েমেন সংঘাত</span>
+                            <h3>ইয়েমেন সংকট ও লোহিত সাগরে সাম্রাজ্যবাদী আগ্রাসন</h3>
+                            <p>দীর্ঘ এক দশক ধরে চলা যুদ্ধ এবং মার্কিন-সৌদি জোটের অমানবিক অর্থনৈতিক অবরোধ ইয়েমেনকে এক ভয়াবহ মানবিক সংকটের মুখে দাঁড় করিয়েছে। লোহিত সাগরে আগ্রাসী ইঙ্গ-মার্কিন বিমান হামলা ও বোমাবর্ষণ ইয়েমেনের সার্বভৌমত্ব হরণ করে আঞ্চলিক শান্তিকে বিপন্ন করছে।</p>
+                            
+                            <!-- Socio-Economic Cost Box -->
+                            <div class="card-stat-box">
+                                <div class="card-stat-title"><i class="bi bi-exclamation-octagon"></i> মানবিক ও আর্থ-সামাজিক ক্ষতি সূচক:</div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>নিত্যপ্রয়োজনীয় পণ্যের মূল্যবৃদ্ধি (Commodity Price Hike)</span><span class="val">৯৫%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="95%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>ঝুঁকিপূর্ণ শিশুশ্রমের বিস্তার (Child Labor & Exploitation)</span><span class="val">৮৫%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="85%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>শিক্ষা প্রতিষ্ঠান ধ্বংস ও স্কুলছুট (Student Dropouts)</span><span class="val">৭৫%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="75%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="read-more-btn" data-key="yemen-crisis"><i class="bi bi-file-earmark-medical"></i> বিস্তারিত তথ্য ও সংহতি</button>
+                    </div>
+
+                    <!-- Sri Lanka Economic Crisis & IMF -->
+                    <div class="solidarity-card theme-south-asia-africa" data-region="south-asia-africa" data-aos="fade-up">
+                        <div>
+                            <div class="s-flag">🇱🇰</div>
+                            <span class="s-tag">দক্ষিণ এশীয় প্রগতিশীল মৈত্রী</span>
+                            <h3>শ্রীলঙ্কা ও আইএমএফ-বিরোধী ছাত্র সংগ্রাম</h3>
+                            <p>বৈদেশিক ঋণের ফাঁদ এবং আন্তর্জাতিক মুদ্রা তহবিলের (IMF) কঠোর শর্তের কারণে শ্রীলঙ্কায় তীব্র অর্থনৈতিক সংকট ও মুদ্রাস্ফীতি সৃষ্টি হয়েছে। শিক্ষা বেসরকারিকরণ ও বাজেট সংকোচনের বিরুদ্ধে সে দেশের প্রগতিশীল ছাত্র সমাজ প্রতিরোধ আন্দোলন গড়ে তুলেছে।</p>
+                            
+                            <!-- Socio-Economic Cost Box -->
+                            <div class="card-stat-box">
+                                <div class="card-stat-title"><i class="bi bi-exclamation-octagon"></i> মানবিক ও আর্থ-সামাজিক ক্ষতি সূচক:</div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>নিত্যপ্রয়োজনীয় পণ্যের মূল্যবৃদ্ধি (Commodity Price Hike)</span><span class="val">৯০%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="90%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>ঝুঁকিপূর্ণ শিশুশ্রমের বিস্তার (Child Labor & Exploitation)</span><span class="val">৪০%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="40%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>শিক্ষা প্রতিষ্ঠান ধ্বংস ও স্কুলছুট (Student Dropouts)</span><span class="val">৬০%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="60%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="read-more-btn" data-key="srilanka-imf"><i class="bi bi-file-earmark-medical"></i> বিস্তারিত তথ্য ও সংহতি</button>
+                    </div>
+                    <!-- Palestine & Lebanon War -->
+                    <div class="solidarity-card theme-middle-east" data-region="middle-east" data-aos="fade-up">
+                        <div>
+                            <div class="s-flag">🇵🇸 🇱🇧</div>
+                            <span class="s-tag">মধ্যপ্রাচ্য সংঘাত</span>
+                            <h3>মার্কিন-ইজরায়েল আগ্রাসন ও মধ্যপ্রাচ্য যুদ্ধ</h3>
+                            <p>ইজরায়েলি দখলদারিত্ব ও মার্কিন সাম্রাজ্যবাদের পৃষ্ঠপোষকতায় মধ্যপ্রাচ্যে চরম যুদ্ধাবস্থা বিরাজ করছে। ফিলিস্তিনের গাজায় নৃশংসতম গণহত্যার পর ইজরায়েল তার যুদ্ধসীমা প্রসারিত করেছে লেবাননের ওপর। সার্বভৌম লেবাননে নির্বিচারে বোমাবর্ষণ, সাধারণ নাগরিকদের হত্যা এবং যুদ্ধ অপরাধমূলক আগ্রাসন মধ্যপ্রাচ্যকে এক মারাত্মক আঞ্চলিক সংঘাতের কিনারায় দাঁড় করিয়েছে।</p>
+                            
+                            <!-- Socio-Economic Cost Box -->
+                            <div class="card-stat-box">
+                                <div class="card-stat-title"><i class="bi bi-exclamation-octagon"></i> মানবিক ও আর্থ-সামাজিক ক্ষতি সূচক:</div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>নিত্যপ্রয়োজনীয় পণ্যের মূল্যবৃদ্ধি (Commodity Price Hike)</span><span class="val">৯৫%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="95%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>ঝুঁকিপূর্ণ শিশুশ্রমের বিস্তার (Child Labor & Exploitation)</span><span class="val">৭০%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="70%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>শিক্ষা প্রতিষ্ঠান ধ্বংস ও স্কুলছুট (Student Dropouts)</span><span class="val">৯০%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="90%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="read-more-btn" data-key="palestine-lebanon"><i class="bi bi-file-earmark-medical"></i> বিস্তারিত তথ্য ও সংহতি</button>
+                    </div>
+
+                    <!-- UN Genocide Documents & War Crimes -->
+                    <div class="solidarity-card war-crimes theme-middle-east" data-region="middle-east" data-aos="fade-up">
+                        <div>
+                            <div class="s-flag">⚖️ 🇺🇳</div>
+                            <span class="s-tag">যুদ্ধাপরাধ দস্তাবেজ</span>
+                            <h3>ইজরায়েলি যুদ্ধাপরাধ ও গণহত্যার প্রমাণ</h3>
+                            <p>জাতিসংঘ (UN) এবং আন্তর্জাতিক বিচার আদালতে (ICJ) ইজরায়েলের যুদ্ধাপরাধ ও গণহত্যার বিবরণ প্রমাণিত। দক্ষিণ আফ্রিকা কর্তৃক দায়ের করা গণহত্যার মামলা এবং জাতিসংঘের বিশেষ রিপোর্টার ফ্রান্সেসকা আলবানিজের ঐতিহাসিক রিপোর্ট "অ্যানাটমি অব এ জেনোসাইড" এ গণহত্যা এবং হাসপাতাল, স্কুল, বিশ্ববিদ্যালয় ও জাতিসংঘ শরণার্থী শিবিরে হামলার যুদ্ধাপরাধ প্রমাণিত হয়েছে।</p>
+                            
+                            <!-- Socio-Economic Cost Box -->
+                            <div class="card-stat-box">
+                                <div class="card-stat-title"><i class="bi bi-exclamation-octagon"></i> মানবিক ও আর্থ-সামাজিক ক্ষতি সূচক:</div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>নিত্যপ্রয়োজনীয় পণ্যের মূল্যবৃদ্ধি (Commodity Price Hike)</span><span class="val">৯৮%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="98%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>ঝুঁকিপূর্ণ শিশুশ্রমের বিস্তার (Child Labor & Exploitation)</span><span class="val">৭৫%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="75%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>শিক্ষা প্রতিষ্ঠান ধ্বংস ও schoolছুট (Student Dropouts)</span><span class="val">৯৫%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="95%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="read-more-btn" data-key="war-crimes"><i class="bi bi-file-earmark-medical"></i> বিস্তারিত তথ্য ও সংহতি</button>
+                    </div>
+
+                    <!-- Russia-Ukraine & NATO Expansionism -->
+                    <div class="solidarity-card theme-europe" data-region="europe" data-aos="fade-up">
+                        <div>
+                            <div class="s-flag">🇷🇺 🇺🇦</div>
+                            <span class="s-tag">ইউরোপ ও ন্যাটো আগ্রাসন</span>
+                            <h3>ইউক্রেন যুদ্ধ ও ন্যাটোর সাম্রাজ্যবাদী বিস্তার</h3>
+                            <p>ইউক্রেন ও রাশিয়ার যুদ্ধ লক্ষ লক্ষ নিরপরাধ মানুষের জীবন ধ্বংস করছে। এই সংকটের মূল চালিকাশক্তি হলো মার্কিন নেতৃত্বাধীন সামরিক জোট ন্যাটোর (NATO) পূর্বমুখী বিস্তারবাদী নীতি এবং কর্পোরেট যুদ্ধব্যবসায়ীদের মুনাফালোভী আগ্রাসন। রাশিয়া ও ইউক্রেনের এই যুদ্ধের ফলে সাধারণ ছাত্র ও শ্রমিকশ্রেণী সবচেয়ে বেশি ক্ষতিগ্রস্ত হচ্ছে।</p>
+                            
+                            <!-- Socio-Economic Cost Box -->
+                            <div class="card-stat-box">
+                                <div class="card-stat-title"><i class="bi bi-exclamation-octagon"></i> মানবিক ও আর্থ-সামাজিক ক্ষতি সূচক:</div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>নিত্যপ্রয়োজনীয় পণ্যের মূল্যবৃদ্ধি (Commodity Price Hike)</span><span class="val">৬৫%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="65%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>ঝুঁকিপূর্ণ শিশুশ্রমের বিস্তার (Child Labor & Exploitation)</span><span class="val">৩০%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="30%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>শিক্ষা প্রতিষ্ঠান ধ্বংস ও স্কুলছুট (Student Dropouts)</span><span class="val">৫০%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="50%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="read-more-btn" data-key="russia-ukraine"><i class="bi bi-file-earmark-medical"></i> বিস্তারিত তথ্য ও সংহতি</button>
+                    </div>
+
+                    <!-- Cuba & Latin America -->
+                    <div class="solidarity-card theme-latin-america" data-region="latin-america" data-aos="fade-up">
+                        <div>
+                            <div class="s-flag">🇨🇺 🇻🇪</div>
+                            <span class="s-tag">লাতিন আমেরিকা প্রতিরোধ</span>
+                            <h3>কিউবা ও লাতিন আমেরিকার সাম্রাজ্যবাদ-বিরোধী লড়াই</h3>
+                            <p>দশকের পর দশক ধরে মার্কিন যুক্তরাষ্ট্রের চাপিয়ে দেওয়া অমানবিক ও বেআইনি অর্থনৈতিক অবরোধ সত্ত্বেও সমাজতান্ত্রিক কিউবা যেভাবে বিজ্ঞান, শিক্ষা ও জনস্বাস্থ্যে তার অগ্রযাত্রা অব্যাহত রেখেছে তা বিশ্বের প্রগতিশীল মানুষের কাছে গভীর অনুপ্রেরণা। ভেনেজুয়েলাসহ লাতিন আমেরিকার সার্বভৌম দেশগুলোর ওপর মার্কিন সাম্রাজ্যবাদ ও তার চক্রান্তের তীব্র বিরোধিতা করে এসএফআই।</p>
+                            
+                            <!-- Socio-Economic Cost Box -->
+                            <div class="card-stat-box">
+                                <div class="card-stat-title"><i class="bi bi-exclamation-octagon"></i> মানবিক ও আর্থ-সামাজিক ক্ষতি সূচক:</div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>নিত্যপ্রয়োজনীয় পণ্যের মূল্যবৃদ্ধি (Commodity Price Hike)</span><span class="val">৮০%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="80%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>ঝুঁকিপূর্ণ শিশুশ্রমের বিস্তার (Child Labor & Exploitation)</span><span class="val">৫%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="5%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>শিক্ষা প্রতিষ্ঠান ধ্বংস ও স্কুলছুট (Student Dropouts)</span><span class="val">১০%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="10%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="read-more-btn" data-key="cuba-latin"><i class="bi bi-file-earmark-medical"></i> বিস্তারিত তথ্য ও সংহতি</button>
+                    </div>
+
+                    <!-- Bangladesh & South Asia -->
+                    <div class="solidarity-card theme-south-asia-africa" data-region="south-asia-africa" data-aos="fade-up">
+                        <div>
+                            <div class="s-flag">🇧🇩 🇳🇵 🇱🇰</div>
+                            <span class="s-tag">দক্ষিণ এশীয় প্রগতিশীল মৈত্রী</span>
+                            <h3>বাংলাদেশ ও দক্ষিণ এশিয়ায় ছাত্র গণআন্দোলন</h3>
+                            <p>দক্ষিণ এশিয়ার দেশগুলোতে স্বৈরতন্ত্র, মেধার মূল্যায়নহীন কোটা ব্যবস্থা, দুর্নীতির বিরুদ্ধে এবং বৈষম্যহীন শিক্ষার দাবিতে ছাত্র সমাজ গৌরবোজ্জ্বল সংগ্রাম পরিচালনা করছে। বাংলাদেশে বৈষম্যবিরোধী ছাত্র আন্দোলন ও রাজনৈতিক পরিবর্তনের পর প্রগতিশীলদের সুরক্ষায়, ধর্মনিরপেক্ষতা ও শান্তির সংগ্রামে এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটি অবিচল সংহতি জ্ঞাপন করছে।</p>
+                            
+                            <!-- Socio-Economic Cost Box -->
+                            <div class="card-stat-box">
+                                <div class="card-stat-title"><i class="bi bi-exclamation-octagon"></i> মানবিক ও আর্থ-সামাজিক ক্ষতি সূচক:</div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>নিত্যপ্রয়োজনীয় পণ্যের মূল্যবৃদ্ধি (Commodity Price Hike)</span><span class="val">৪০%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="40%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>ঝুঁকিপূর্ণ শিশুশ্রমের বিস্তার (Child Labor & Exploitation)</span><span class="val">২৫%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="25%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>শিক্ষা প্রতিষ্ঠান ধ্বংস ও স্কুলছুট (Student Dropouts)</span><span class="val">৩৫%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="35%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="read-more-btn" data-key="bangladesh-southasia"><i class="bi bi-file-earmark-medical"></i> বিস্তারিত তথ্য ও সংহতি</button>
+                    </div>
+
+                    <!-- Western Sahara, Sudan & DRC -->
+                    <div class="solidarity-card theme-south-asia-africa" data-region="south-asia-africa" data-aos="fade-up">
+                        <div>
+                            <div class="s-flag">🇪🇭 🇸🇩 🇨🇩</div>
+                            <span class="s-tag">আফ্রিকান নয়া-ঔপনিবেশিক প্রতিরোধ</span>
+                            <h3>পশ্চিম সাহারা ও আফ্রিকার নয়া-উপনিবেশবাদী সংকট</h3>
+                            <p>মরক্কোর অবৈধ দখলদারিত্বের বিরুদ্ধে পশ্চিম সাহারার সাহরাউই জনগণের আত্মনিয়ন্ত্রণাধিকারের লড়াই এবং সুদানে গৃহযুদ্ধ ও ডেমোক্রটিক রিপাবলিক অব কঙ্গো (DRC) তে খনিজ সম্পদ লুটের পেছনে বহুজাতিক কর্পোরেশন ও পশ্চিমা শক্তিগুলোর নব্য-ঔপনিবেশিক চক্রান্ত সক্রিয়। এসএফআই এই লুণ্ঠন ও শোষণের বিরুদ্ধে সংহতিবদ্ধ।</p>
+                            
+                            <!-- Socio-Economic Cost Box -->
+                            <div class="card-stat-box">
+                                <div class="card-stat-title"><i class="bi bi-exclamation-octagon"></i> মানবিক ও আর্থ-সামাজিক ক্ষতি সূচক:</div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>নিত্যপ্রয়োজনীয় পণ্যের মূল্যবৃদ্ধি (Commodity Price Hike)</span><span class="val">৭০%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="70%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>ঝুঁকিপূর্ণ শিশুশ্রমের বিস্তার (Child Labor & Exploitation)</span><span class="val">৮৫%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="85%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>শিক্ষা প্রতিষ্ঠান ধ্বংস ও স্কুলছুট (Student Dropouts)</span><span class="val">৮০%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="80%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="read-more-btn" data-key="western-sahara-africa"><i class="bi bi-file-earmark-medical"></i> বিস্তারিত তথ্য ও সংহতি</button>
+                    </div>
+
+                    <!-- Global Education Rights -->
+                    <div class="solidarity-card theme-europe" data-region="europe" data-aos="fade-up">
+                        <div>
+                            <div class="s-flag">🎓 🌐</div>
+                            <span class="s-tag">IUS শিক্ষাধিকার অ্যাজেন্ডা</span>
+                            <h3>সর্বজনীন শিক্ষার বৈশ্বিক লড়াই ও IUS</h3>
+                            <p>বিশ্বজুড়ে নব্য-উদারবাদী অর্থনৈতিক নীতি এবং শিক্ষার বাণিজ্যিকীকরণ, বেসরকারিকরণ ও কর্পোরেটাইজেশনের বিরুদ্ধে সংগ্রাম জারি রয়েছে। এসএফআই আন্তর্জাতিক ছাত্র ইউনিয়ন (IUS)-এর সদস্য হিসেবে বিশ্বব্যাপী প্রগতিশীল ছাত্র সংগঠনগুলোর সাথে কাঁধে কাঁধ মিলিয়ে লড়াই করছে।</p>
+                            
+                            <!-- Socio-Economic Cost Box -->
+                            <div class="card-stat-box">
+                                <div class="card-stat-title"><i class="bi bi-exclamation-octagon"></i> মানবিক ও আর্থ-সামাজিক ক্ষতি সূচক:</div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>নিত্যপ্রয়োজনীয় পণ্যের মূল্যবৃদ্ধি (Commodity Price Hike)</span><span class="val">৫০%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="50%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>ঝুঁকিপূর্ণ শিশুশ্রমের বিস্তার (Child Labor & Exploitation)</span><span class="val">১৫%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="15%"></div></div>
+                                </div>
+                                <div class="stat-meter">
+                                    <div class="stat-label-wrap"><span>শিক্ষা প্রতিষ্ঠান ধ্বংস ও স্কুলছুট (Student Dropouts)</span><span class="val">৪০%</span></div>
+                                    <div class="stat-bar-container"><div class="stat-bar-fill" data-width="40%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="read-more-btn" data-key="global-education"><i class="bi bi-file-earmark-medical"></i> বিস্তারিত তথ্য ও সংহতি</button>
+                    </div>
+                </div>
+
+                <!-- Official Resolution Section -->
+                <div class="resolution-block" data-aos="fade-up">
+                    <div class="resolution-header">
+                        <div class="resolution-star">★</div>
+                        <div class="resolution-title-text">
+                            <h3>বিশেষ রাজনৈতিক প্রস্তাব ও সংহতি ঘোষণা</h3>
+                            <p>ভারতের ছাত্র ফেডারেশন (SFI) পশ্চিমবঙ্গ রাজ্য কমিটি</p>
+                        </div>
+                    </div>
+                    <blockquote>
+                        "ভারতের ছাত্র ফেডারেশনের পশ্চিমবঙ্গ রাজ্য কমিটি সাম্রাজ্যবাদী যুদ্ধবাজ নীতি এবং নিপীড়নের তীব্র নিন্দা জানাচ্ছে। ওয়াশিংটন থেকে তেল আবিব — যে সাম্রাজ্যবাদী নেক্সাস বিশ্বজুড়ে গণহত্যা, সার্বভৌমত্ব হরণ ও যুদ্ধের আগুন ছড়াচ্ছে, তার বিরুদ্ধে আন্তর্জাতিক ছাত্র ঐক্যের লাল দুর্গ আরও শক্তিশালী করতে হবে। ফিলিস্তিন, লেবানন, কিউবার বিপ্লবী জনগণ এবং বিশ্বের প্রতিটি কোণে লড়াইরত মুক্তিকামী মানুষের প্রতি আমরা আমাদের অটুট ও লড়াকু সংহতি প্রকাশ করছি। মানবজাতির শান্তি, গণতন্ত্র এবং সমাজতন্ত্রের লক্ষ্যই আমাদের বৈশ্বিক সংগ্রামের চালিকাশক্তি।"
+                    </blockquote>
+                    <div class="resolution-footer">
+                        <div class="resolution-sign">
+                            গৃহীত: <strong>পশ্চিমবঙ্গ রাজ্য কমিটি সভা, কলকাতা</strong>
+                        </div>
+                        <div class="resolution-slogan">
+                            ★ স্বাধীনতা • গণতন্ত্র • সমাজতন্ত্র দীর্ঘজীবী হোক!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IUS Block -->
+                <p class="section-title" data-aos="fade-up">আন্তর্জাতিক ছাত্র ইউনিয়ন (IUS)</p>
+                <p class="section-subtitle" data-aos="fade-up">International Union of Students এর বৈশ্বিক ভূমিকা</p>
+                <div class="divider-line" data-aos="fade-up"></div>
+                <div class="ius-block" data-aos="fade-up">
                     <div class="ius-logo">🎓</div>
                     <div class="ius-info">
                         <h3>International Union of Students (IUS)</h3>
-                        <p>এসএফআই হলো আন্তর্জাতিক ছাত্র ইউনিয়ন (IUS)-এর একটি গুরুত্বপূর্ণ সদস্য সংগঠন। ১৯৪৬ সালে প্রাগে
-                            প্রতিষ্ঠিত এই আন্তর্জাতিক সংস্থা বিশ্বের বিভিন্ন দেশের প্রগতিশীল ছাত্র সংগঠনগুলোকে ঐক্যবদ্ধ
-                            করে। IUS-এর মাধ্যমে এসএফআই বৈশ্বিক ছাত্র আন্দোলনের সাথে যুক্ত থেকে সাম্রাজ্যবাদ-বিরোধী লড়াই
-                            পরিচালনা করে।</p>
+                        <p>১৯৪৬ সালে চেকোস্লোভাকিয়ার প্রাগে প্রতিষ্ঠিত আন্তর্জাতিক ছাত্র ইউনিয়ন (IUS) বিশ্বজুড়ে ফ্যাসিবাদের পরাজয় এবং প্রগতিশীল সমাজ বিনির্মাণের লক্ষ্যে ঐক্যবদ্ধ হয়েছিল। এসএফআই এই আন্তর্জাতিক ছাত্র ফ্রন্টের শুরু থেকেই একটি দায়িত্বশীল অঙ্গ-সংগঠন হিসেবে কাজ করে আসছে। IUS-এর মাধ্যমে আমরা এশিয়া, আফ্রিকা, ইউরোপ এবং লাতিন আমেরিকার ছাত্র আন্দোলনের সাথে মতাদর্শগত ও রাজপথের সমন্বয় সাধন করি।</p>
                     </div>
                 </div>
-                <!-- Solidarity Statement -->
-                <p class="section-title">আন্তর্জাতিক সংহতির বিবৃতি</p>
-                <div class="divider-line"></div>
-                <div class="statement-block">
-                    <blockquote>
-                        "ফিলিস্তিনের মুক্তিকামী মানুষের ন্যায্য সংগ্রামের প্রতি আমাদের অবিচল সংহতি জানাই। ইজরায়েলি
-                        দখলদারিত্ব ও গণহত্যার বিরুদ্ধে বিশ্বের সকল প্রগতিশীল শক্তি ঐক্যবদ্ধ হোক — এই আহ্বান জানায়
-                        ভারতের ছাত্র ফেডারেশন।"
-                    </blockquote>
-                    <span class="attrib">— এসএফআই কেন্দ্রীয় কমিটি, আন্তর্জাতিক সংহতি বিবৃতি</span>
-                </div>
-                <!-- Solidarity Cards -->
-                <p class="section-title">আন্তর্জাতিক সংহতির বিষয়সমূহ</p>
-                <p class="section-subtitle">বিশ্বের বিভিন্ন প্রান্তে চলমান মুক্তিকামী আন্দোলনের প্রতি এসএফআই-এর অবস্থান।
-                </p>
-                <div class="divider-line"></div>
-                <div class="solidarity-grid">
-                    <div class="solidarity-card">
-                        <div class="s-flag">🇵🇸</div>
-                        <h3>ফিলিস্তিন মুক্তি সংগ্রাম</h3>
-                        <p>ফিলিস্তিনের মানুষের আত্মনিয়ন্ত্রণের অধিকার ও ইজরায়েলি দখলদারিত্বের অবসানের দাবিতে এসএফআই
-                            সর্বদা সোচ্চার। গাজায় গণহত্যার বিরুদ্ধে আমরা বিশ্বব্যাপী ছাত্রসমাজের সাথে কাঁধে কাঁধ
-                            মিলিয়ে আন্দোলন করি।</p>
-                        <span class="s-tag">সক্রিয় সংহতি</span>
-                    </div>
-                    <div class="solidarity-card">
-                        <div class="s-flag">🌐</div>
-                        <h3>বৈশ্বিক শিক্ষার অধিকার</h3>
-                        <p>শিক্ষার বাণিজ্যিকীকরণ ও বেসরকারিকরণের বিরুদ্ধে বিশ্বজুড়ে ছাত্র আন্দোলন চলছে। এসএফআই এই
-                            লড়াইয়ে সরব — সর্বজনীন, বিজ্ঞানভিত্তিক ও বিনামূল্যের শিক্ষার দাবিতে।</p>
-                        <span class="s-tag">IUS অ্যাজেন্ডা</span>
-                    </div>
-                    <div class="solidarity-card">
-                        <div class="s-flag">✊</div>
-                        <h3>সাম্রাজ্যবাদ-বিরোধী আন্দোলন</h3>
-                        <p>মার্কিন সাম্রাজ্যবাদ ও তার মিত্রদের আগ্রাসনের বিরুদ্ধে বিশ্বের বিভিন্ন প্রান্তে পরিচালিত
-                            মুক্তিকামী আন্দোলনগুলোর প্রতি এসএফআই-এর আন্তরিক সমর্থন ও সংহতি।</p>
-                        <span class="s-tag">নীতিগত অবস্থান</span>
-                    </div>
-                    <div class="solidarity-card">
-                        <div class="s-flag">🕊️</div>
-                        <h3>শান্তি ও নিরস্ত্রীকরণ</h3>
-                        <p>পারমাণবিক অস্ত্র নিরস্ত্রীকরণ, যুদ্ধবিরতি এবং শান্তিপূর্ণ সহাবস্থানের দাবিতে এসএফআই বিশ্বের
-                            শান্তিকামী সংগঠনগুলোর সাথে একযোগে কাজ করে।</p>
-                        <span class="s-tag">আন্তর্জাতিক দাবি</span>
-                    </div>
-                    <div class="solidarity-card">
-                        <div class="s-flag">🌱</div>
-                        <h3>জলবায়ু ন্যায়বিচার</h3>
-                        <p>জলবায়ু সংকটের প্রতিকারে ধনী দেশগুলোর দায়িত্ব নেওয়ার দাবিতে এবং পরিবেশ রক্ষার ন্যায্য
-                            সংগ্রামে বিশ্বের তরুণ প্রজন্মের সাথে এসএফআই সংহতিবদ্ধ।</p>
-                        <span class="s-tag">যুব আন্দোলন</span>
-                    </div>
-                    <div class="solidarity-card">
-                        <div class="s-flag">🤝</div>
-                        <h3>ছাত্র বিনিময় ও সহযোগিতা</h3>
-                        <p>বিশ্বের বিভিন্ন দেশের প্রগতিশীল ছাত্র সংগঠনগুলোর সাথে সংলাপ, ছাত্র বিনিময় কর্মসূচি এবং যৌথ
-                            রাজনৈতিক শিক্ষা কার্যক্রমে এসএফআই সক্রিয় ভূমিকা পালন করে।</p>
-                        <span class="s-tag">বিনিময় কর্মসূচি</span>
-                    </div>
-                </div>
+
                 <!-- Historical Timeline -->
-                <p class="section-title">আন্তর্জাতিক সম্পর্কের ইতিহাস</p>
-                <div class="divider-line"></div>
-                <div class="intl-timeline">
+                <p class="section-title" data-aos="fade-up">আন্তর্জাতিক সম্পর্কের ইতিহাস ও আমাদের ঐতিহ্য</p>
+                <div class="divider-line" data-aos="fade-up"></div>
+                <div class="intl-timeline" data-aos="fade-up">
                     <div class="timeline-item">
                         <div class="t-year">১৯৭০</div>
-                        <h4>এসএফআই প্রতিষ্ঠা ও IUS-এ যোগদান</h4>
-                        <p>ভারতের ছাত্র ফেডারেশন প্রতিষ্ঠার পর থেকেই আন্তর্জাতিক ছাত্র ইউনিয়নের সাথে সম্পর্ক গড়ে তোলা
-                            শুরু হয়।</p>
+                        <h4>এসএফআই প্রতিষ্ঠা ও আন্তর্জাতিক মতাদর্শগত অবস্থান গ্রহণ</h4>
+                        <p>ভারতের ছাত্র ফেডারেশনের জন্মের পর থেকেই তার ঐতিহাসিক সাধারণ দলিলে সাম্রাজ্যবাদ-বিরোধী সংগ্রামকে অন্যতম প্রধান স্তম্ভ হিসেবে গ্রহণ করা হয় এবং আন্তর্জাতিক ছাত্র ইউনিয়নের সাথে সংহতি সুদৃঢ় করা হয়।</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="t-year">১৯৭০-এর দশক</div>
+                        <h4>ভিয়েতনামের বীরত্বপূর্ণ মুক্তি সংগ্রামে সংহতি</h4>
+                        <p>মার্কিন সাম্রাজ্যবাদের বিরুদ্ধে ভিয়েতনামের জনগণের মরণপণ লড়াইয়ের সমর্থনে এ রাজ্যে ও দেশজুড়ে "তোমার নাম আমার নাম — Vietnam Vietnam" স্লোগানে বিশাল ছাত্র আন্দোলন সংগঠিত করে এসএফআই।</p>
                     </div>
                     <div class="timeline-item">
                         <div class="t-year">১৯৮০-এর দশক</div>
-                        <h4>দক্ষিণ আফ্রিকার বর্ণবিদ্বেষ-বিরোধী সংগ্রামে সংহতি</h4>
-                        <p>দক্ষিণ আফ্রিকার বর্ণবাদী শাসনের বিরুদ্ধে নেলসন ম্যান্ডেলার মুক্তি আন্দোলনে এসএফআই সক্রিয়
-                            সংহতি জানায়।</p>
+                        <h4>দক্ষিণ আফ্রিকার বর্ণবাদ-বিরোধী সংগ্রাম</h4>
+                        <p>নেলসন ম্যান্ডেলার মুক্তি এবং দক্ষিণ আফ্রিকায় বর্ণবাদী শ্বেতাঙ্গ শাসকের নিপীড়নের বিরুদ্ধে প্রতিবাদে ভারতের রাজপথে আন্দোলন গড়ে তোলা এবং IUS-এর মাধ্যমে বৈশ্বিক সংহতি প্রচার করা হয়।</p>
                     </div>
                     <div class="timeline-item">
-                        <div class="t-year">২০০০-এর দশক</div>
-                        <h4>ইরাক যুদ্ধ-বিরোধী আন্দোলন</h4>
-                        <p>আমেরিকার ইরাক আগ্রাসনের বিরুদ্ধে বিশ্বজুড়ে ছাত্র-যুব আন্দোলনে এসএফআই অংশগ্রহণ করে।</p>
+                        <div class="t-year">২০০৩</div>
+                        <h4>ইরাক যুদ্ধ-বিরোধী বৈশ্বিক প্রতিবাদ</h4>
+                        <p>আমেরিকা ও তার সহযোগী শক্তিগুলোর ইরাক আক্রমণের বিরুদ্ধে বিশ্বব্যাপী মিলিয়ন মিলিয়ন ছাত্র-যুবাদের প্রতিবাদের সমান্তরালে পশ্চিমবঙ্গে college ও বিশ্ববিদ্যালয় স্তরে ধর্মঘট ও বিক্ষোভ সমাবেশ আয়োজন।</p>
                     </div>
                     <div class="timeline-item">
                         <div class="t-year">২০২৩-বর্তমান</div>
-                        <h4>গাজায় যুদ্ধবিরতির দাবি</h4>
-                        <p>ইজরায়েলের গাজায় সামরিক অভিযানের বিরুদ্ধে ও ফিলিস্তিনের মানুষের প্রতি সংহতি জানিয়ে এসএফআই
-                            দেশজুড়ে বিক্ষোভ সংগঠিত করেছে।</p>
+                        <h4>গাজায় ও লেবাননে গণহত্যার প্রতিবাদে নিরবচ্ছিন্ন আন্দোলন</h4>
+                        <p>ইজরায়েলি গণহত্যার বিরুদ্ধে এবং অবিলম্বে যুদ্ধবিরতির দাবিতে পশ্চিমবঙ্গের প্রতিটি জেলায় পোস্টারিং, সেমিনার, প্রতিবাদ মিছিল এবং সাংস্কৃতিক প্রতিরোধের ডাক দেওয়া হয়েছে ও ফিলিস্তিনি স্বার্থরক্ষায় ধারাবাহিক তহবিল সংগ্রহ অভিযান চালানো হয়েছে।</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- Interactive Details Popup Modal -->
+    <div class="custom-modal-overlay" id="conflictModal">
+        <div class="custom-modal-box">
+            <div class="custom-modal-header">
+                <h2 id="modalTitle">🌍 আন্তর্জাতিক সংঘাত বিবরণী</h2>
+                <button class="modal-close-btn" id="modalClose"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="modal-tabs">
+                <button class="modal-tab-link active" data-tab="tab-overview"><i class="bi bi-info-circle"></i> বিবরণ ও জাতিসংঘ রিপোর্ট</button>
+                <button class="modal-tab-link" data-tab="tab-socio"><i class="bi bi-graph-up-arrow"></i> আর্থ-সামাজিক প্রভাব</button>
+                <button class="modal-tab-link" data-tab="tab-solidarity"><i class="bi bi-shield-shaded"></i> আমাদের সংহতি বার্তা</button>
+            </div>
+            <div class="custom-modal-body">
+                <!-- Panel 1: Overview -->
+                <div class="modal-panel active" id="tab-overview">
+                    <p id="modalDesc"></p>
+                    <div id="modalUNDocs" style="display:none;">
+                        <h5 class="fw-bold mt-4 mb-2 text-danger"><i class="bi bi-file-earmark-text"></i> গুরুত্বপূর্ণ আন্তর্জাতিক দস্তাবেজ সমূহ:</h5>
+                        <ul class="list-unstyled ps-0" id="modalUNDocList"></ul>
+                    </div>
+                </div>
+                <!-- Panel 2: Socio-economic impacts -->
+                <div class="modal-panel" id="tab-socio">
+                    <h5 class="fw-bold text-danger mb-3"><i class="bi bi-exclamation-triangle"></i> যুদ্ধের আর্থ-সামাজিক কুফল ও মানবিক ক্ষতি সূচক:</h5>
+                    <table class="modal-data-table">
+                        <thead>
+                            <tr>
+                                <th>ক্ষতির ক্ষেত্রসমূহ (Socio-Economic Cost Metrics)</th>
+                                <th>ক্ষতির মাত্রা (Cost Index)</th>
+                                <th>মূল প্রতিক্রিয়া ও বিশ্লেষণ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>নিত্যপ্রয়োজনীয় জিনিসের মূল্যবৃদ্ধি (Household Commodities Price Hike)</td>
+                                <td class="modal-stat-value" id="valInflation">0%</td>
+                                <td id="descInflation"></td>
+                            </tr>
+                            <tr>
+                                <td>শিক্ষা প্রতিষ্ঠান বন্ধ ও ঝরে পড়া (Student Dropout Rate)</td>
+                                <td class="modal-stat-value" id="valDropouts">0%</td>
+                                <td id="descDropouts"></td>
+                            </tr>
+                            <tr>
+                                <td>অনানুষ্ঠানিক ও বিপজ্জনক শিশুশ্রমের বিস্তার (Child Labour & Exploitation)</td>
+                                <td class="modal-stat-value" id="valChildLabour">0%</td>
+                                <td id="descChildLabour"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="mt-4 p-3 bg-dark bg-opacity-40 border border-secondary border-opacity-10 rounded">
+                        <h6 class="fw-bold text-white mb-2"><i class="bi bi-lightbulb"></i> বিশ্লেষকের পর্যবেক্ষণ:</h6>
+                        <p class="small text-muted mb-0" id="modalSocioDetails"></p>
+                    </div>
+                </div>
+                <!-- Panel 3: Solidarity Statement -->
+                <div class="modal-panel" id="tab-solidarity">
+                    <h5 class="fw-bold text-danger mb-3"><i class="bi bi-chat-left-quote"></i> এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটির বিশেষ বিবৃতি:</h5>
+                    <div class="modal-resolution-card">
+                        <blockquote id="modalSolidarityMsg"></blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-modal-footer">
+                <button class="btn btn-danger btn-sm px-4" id="modalFooterClose">বন্ধ করুন (Close)</button>
+            </div>
+        </div>
+    </div>
     <!-- ============================================================
        FOOTER - পাদটীকা
   ============================================================ -->
@@ -692,6 +1477,282 @@
                 easing: 'ease-in-out',
                 once: true,
                 mirror: false
+            });
+
+            // Conflict Data Object containing exhaustive socio-economic & legal documentation
+            const conflictData = {
+                "yemen-crisis": {
+                    title: "🇾🇪 ইয়েমেন সংকট ও লোহিত সাগরে সাম্রাজ্যবাদী আগ্রাসন",
+                    desc: "দীর্ঘ এক দশক ধরে চলা গৃহযুদ্ধ এবং মার্কিন-সৌদি জোটের অমানবিক অর্থনৈতিক অবরোধ ইয়েমেনকে বিশ্বের বৃহত্তম মানবিক সংকটের দিকে ঠেলে দিয়েছে। সম্প্রতি ফিলিস্তিনের সমর্থনে ইয়েমেনের হুথি প্রতিরোধ আন্দোলনের লোহিত সাগরে জাহাজ চলাচলে নিষেধাজ্ঞাকে কেন্দ্র করে মার্কিন যুক্তরাষ্ট্র ও যুক্তরাজ্য ইয়েমেনের সার্বভৌম এলাকায় বেআইনি বিমান হামলা ও বোমাবর্ষণ শুরু করেছে। এই সাম্রাজ্যবাদী আগ্রাসনের ফলে কয়েক হাজার সাধারণ মানুষের প্রাণহানি ঘটেছে এবং ইয়েমেনের অবরুদ্ধ অর্থনীতি সম্পূর্ণ ভেঙে পড়েছে। এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটি ইয়েমেনের সার্বভৌমত্ব রক্ষায় এবং ইঙ্গ-মার্কিন যুদ্ধবাজ আগ্রাসনের বিরুদ্ধে দৃঢ় সংহতি জানাচ্ছে।",
+                    inflation: "৯৫%",
+                    descInflation: "বন্দরে অবরোধ ও আমদানিতে বাধার কারণে খাদ্যশস্য, চাল, ঔষধ এবং পানীয় জলের দাম প্রায় ১০ গুণ বৃদ্ধি পেয়েছে। দেশের ৮০% মানুষের বেঁচে থাকার জন্য ত্রাণের প্রয়োজন।",
+                    childLabour: "৮৫%",
+                    descChildLabour: "তীব্র খাদ্যাভাব ও দারিদ্র্যের কারণে শিশুরা পড়াশোনা ছেড়ে পরিবারের অন্নসংস্থানের জন্য আবর্জনা থেকে প্লাস্টিক সংগ্রহ ও চরম ঝুঁকিপূর্ণ কৃষিকাজে নিযুক্ত হতে বাধ্য হচ্ছে।",
+                    dropouts: "৭৫%",
+                    descDropouts: "যুদ্ধের কারণে দেশের ৩,০০০-এর বেশি স্কুল সম্পূর্ণ ধ্বংস বা সামরিক ছাউনিতে পরিণত হয়েছে। প্রায় ৩০ লক্ষ শিশু বর্তমানে স্কুলছুট ও শিক্ষার আলো থেকে বঞ্চিত।",
+                    socioDetails: "জাতিসংঘের ইউনিসেফ (UNICEF) রিপোর্টের তথ্যমতে ইয়েমেনে প্রতি ১০ মিনিটে একটি শিশু অপুষ্টি ও নিরাময়যোগ্য রোগে মারা যায়। সাম্রাজ্যবাদী যুদ্ধবাজ নীতি এই মানবিক বিপর্যয়কে আরও ঘনীভূত করেছে।",
+                    solidarity: "ইয়েমেনের যুদ্ধক্লান্ত ও প্রতিরোধকামী সাধারণ মানুষ এবং প্রগতিশীল যুব সমাজের প্রতি ভারতের ছাত্র ফেডারেশন পশ্চিমবঙ্গ রাজ্য কমিটির অকুণ্ঠ সংহতি ও লাল সেলাম। বিশ্বজুড়ে ইঙ্গ-মার্কিন যুদ্ধবাজ আগ্রাসন নিপাত যাক!",
+                    undocs: [
+                        { name: "UN OCHA: Yemen Humanitarian Response Plan ↗", url: "https://www.unocha.org/yemen" }
+                    ]
+                },
+                "srilanka-imf": {
+                    title: "🇱🇰 শ্রীলঙ্কা ও আইএমএফ-বিরোধী ছাত্র সংগ্রাম",
+                    desc: "ভুল অর্থনৈতিক নীতি, বৈদেশিক ঋণের ফাঁদ এবং আন্তর্জাতিক মুদ্রা তহবিলের (IMF) জনবিরোধী নীতির কঠোর শর্তাবলীর কারণে শ্রীলঙ্কায় ভয়াবহ অর্থনৈতিক বিপর্যয় নেমে আসে। নিত্যপ্রয়োজনীয় পণ্যের মূল্যবৃদ্ধি, বিদ্যুৎ সংযোগ বিচ্ছিন্নতা এবং কাগজের অভাবে স্কুল ও বিশ্ববিদ্যালয়ের পরীক্ষা বাতিল হওয়ার ঘটনায় সাধারণ ছাত্র ও যুব সমাজ স্বতঃস্ফূর্ত জনআন্দোলন 'আরাগালয়' (Aragalaya)-এর সম্মুখভাগে দাঁড়িয়ে লড়াই করেছে। আইএমএফ-এর প্রেসক্রিপশনে শিক্ষা ও স্বাস্থ্য খাতে বাজেট বরাদ্দ কমানো এবং বেসরকারিকরণের চক্রান্তের বিরুদ্ধে আন্তঃবিশ্ববিদ্যালয় ছাত্র পরিষদ (IUSF) ধারাবাহিকভাবে রাজপথের লড়াই পরিচালনা করছে। এসএফআই আইএমএফ-এর সাম্রাজ্যবাদী অর্থনৈতিক প্রেসক্রিপশনের ধিক্কার জানায় এবং শ্রীলঙ্কার লড়াকু ছাত্র সমাজের পাশে দাঁড়ায়।",
+                    inflation: "৯০%",
+                    descInflation: "জ্বালানি তেল, রান্নার গ্যাস, দুধের গুঁড়ো এবং নিত্যপ্রয়োজনীয় খাদ্য সামগ্রীর দাম কয়েকগুণ বৃদ্ধি পেয়েছে। মুদ্রাস্ফীতির জেরে সাধারণ মধ্যবিত্তের নাভিশ্বাস উঠেছে।",
+                    childLabour: "৪০%",
+                    descChildLabour: "পারিবারিক আয় আশঙ্কাজনকভাবে কমে যাওয়ায় স্কুলগামী বহু শিশু হোটেল, চায়ের দোকান ও রাজমিস্ত্রিদের সহকারী হিসেবে দৈনিক মজুরিতে কাজ শুরু করেছে।",
+                    dropouts: "৬০%",
+                    descDropouts: "যাতায়াত খরচ বৃদ্ধি, কাগজের অভাব এবং বিশ্ববিদ্যালয়গুলোতে লাগাতার ফি বৃদ্ধির কারণে গত তিন বছরে কয়েক হাজার পড়ুয়া কলেজ ও বিশ্ববিদ্যালয় স্তরের শিক্ষা অসমাপ্ত রেখে ঝরে পড়েছে।",
+                    socioDetails: "আইএমএফ-এর কাঠামোগত সমন্বয় কর্মসূচি (Structural Adjustment) শিক্ষা ও জনস্বাস্থ্য পরিষেবাকে সংকুচিত করে কর্পোরেটদের পকেট ভরাচ্ছে, যা ছাত্র সমাজের পিঠে সরাসরি আঘাত।",
+                    solidarity: "শ্রীলঙ্কার আন্তঃবিশ্ববিদ্যালয় ছাত্র পরিষদ (IUSF) এবং সে দেশের প্রগতিশীল ছাত্র ও শ্রমিক আন্দোলনের প্রতি এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটির সংগ্রামী মৈত্রী ও সংহতি। সাম্রাজ্যবাদী লুটেরা আইএমএফ-এর শিক্ষা ধ্বংসের নীতি নিপাত যাক!",
+                    undocs: []
+                },
+                "palestine-lebanon": {
+                    title: "🌍 মার্কিন-ইজরায়েল আগ্রাসন ও মধ্যপ্রাচ্য যুদ্ধ",
+                    desc: "ইজরায়েলি দখলদারিত্ব ও মার্কিন সাম্রাজ্যবাদের পৃষ্ঠপোষকতায় মধ্যপ্রাচ্যে চরম যুদ্ধাবস্থা বিরাজ করছে। ফিলিস্তিনের গাজায় ইতিহাসের নৃশংসতম গণহত্যার পর ইজরায়েল তার যুদ্ধসীমা প্রসারিত করেছে লেবাননের ওপর। সার্বভৌম লেবাননে নির্বিচারে বোমাবর্ষণ, সাধারণ নাগরিকদের হত্যা এবং যুদ্ধ অপরাধমূলক আগ্রাসন মধ্যপ্রাচ্যকে এক মারাত্মক আঞ্চলিক সংঘাতের কিনারায় দাঁড় করিয়েছে, যা প্রত্যক্ষভাবে ইরানকেও প্রভাবিত করছে। মার্কিন যুক্তরাষ্ট্রের সামরিক সাহায্য, কোটি কোটি ডলারের অস্ত্র সরবরাহ এবং জাতিসংঘের নিরাপত্তা পরিষদে একের পর এক যুদ্ধবিরতি প্রস্তাব ভেটো দেওয়ার মাধ্যমেই ইজরায়েল এই দুঃসাহস প্রদর্শন করছে। এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটি অবিলম্বে যুদ্ধবিরতি এবং মধ্যপ্রাচ্যে শান্তি ও ফিলিস্তিন-লেবাননের পূর্ণ সার্বভৌমত্বের দাবি জানায়।",
+                    inflation: "৯৫%",
+                    descInflation: "গাজা ও লেবাননে সম্পূর্ণ অর্থনৈতিক অবরোধের ফলে খাদ্য, পানীয় জল, এবং জ্বালানির মূল্যবৃদ্ধি প্রায় অবর্ণনীয়। সাধারণ রুটি ও দুধের দাম ১০ গুণ বৃদ্ধি পেয়েছে।",
+                    childLabour: "৭০%",
+                    descChildLabour: "স্কুল ধ্বংস হওয়ায় এবং পিতামাতার মৃত্যু বা কর্মহীনতায় শিশুরা বাধ্য হয়ে ধ্বংসাবশেষ থেকে লোহা কুড়ানো ও চরম ঝুঁকিপূর্ণ কাজে লিপ্ত হচ্ছে।",
+                    dropouts: "৯০%",
+                    descDropouts: "গাজায় সব কয়টি বিশ্ববিদ্যালয় এবং অধিকাংশ স্কুল ধ্বংসপ্রাপ্ত। লেবাননে হাজার হাজার বিদ্যালয় আশ্রয় শিবিরে পরিণত হওয়ায় শিক্ষা কার্যক্রম সম্পূর্ণ স্তব্ধ।",
+                    socioDetails: "সাম্রাজ্যবাদী আগ্রাসন মধ্যপ্রাচ্যের দুই প্রজন্মের শিক্ষাজীবন ও শৈশবকে চিরতরে মুছে দিয়েছে। যুদ্ধের পরিকাঠামোগত ক্ষতি কাটিয়ে উঠতে অন্তত ৪ দশক সময় লাগবে বলে জাতিসংঘের রিপোর্টে প্রকাশ।",
+                    solidarity: "ফিলিস্তিন ও লেবাননের বীর সংগ্রামী জনগণের সাম্রাজ্যবাদ-বিরোধী লড়াইয়ের প্রতি ভারতের ছাত্র ফেডারেশন (এসএফআই) পশ্চিমবঙ্গ রাজ্য কমিটি তার বিপ্লবী অভিনন্দন ও লাল সেলাম পাঠাচ্ছে। যতক্ষণ না স্বাধীন সার্বভৌম ফিলিস্তিন রাষ্ট্র গঠিত হচ্ছে, এবং লেবাননের সার্বভৌমত্ব সুনিশ্চিত হচ্ছে, আমাদের আন্তর্জাতিক রাজপথের সংহতি অব্যাহত থাকবে।",
+                    undocs: []
+                },
+                "war-crimes": {
+                    title: "⚖️ ইজরায়েলি যুদ্ধাপরাধ ও গণহত্যার দস্তাবেজ",
+                    desc: "জাতিসংঘ (UN) এবং আন্তর্জাতিক বিচার আদালতে (ICJ) ইজরায়েলের যুদ্ধাপরাধ ও গণহত্যার বিবরণ আজ বিশ্ববাসীর সামনে প্রমাণিত। দক্ষিণ আফ্রিকা কর্তৃক আন্তর্জাতিক বিচার আদালতে (ICJ) দায়ের করা মামলায় ইজরায়েলের বিরুদ্ধে গণহত্যার স্পষ্ট তথ্যপ্রমাণ উত্থাপিত হয়েছে। জাতিসংঘের বিশেষ রিপোর্টার ফ্রান্সেসকা আলবানিজের ঐতিহাসিক রিপোর্ট 'অ্যানাটমি অব এ জেনোসাইড' (Anatomy of a Genocide)-এ পরিষ্কার বলা হয়েছে যে ইজরায়েল গাজায় নিয়মতান্ত্রিকভাবে গণহত্যার তিনটি উপাদান পূর্ণ করেছে। আন্তর্জাতিক অপরাধ আদালত (ICC) কর্তৃক প্রধানমন্ত্রী বেঞ্জামিন নেতানিয়াহু ও প্রাক্তন প্রতিরক্ষামন্ত্রীর বিরুদ্ধে যুদ্ধাপরাধের অভিযোগে গ্রেফতারি পরোয়ানা জারি করা হয়েছে। হাসপাতাল (আল-শিফা, নাসের), বিশ্ববিদ্যালয়, জাতিসংঘ শরণার্থী শিবির (UNRWA) ও আশ্রয়স্থলে ইজরায়েলি আক্রমণ এবং শ্বেত ফসফরাসের ন্যায় নিষিদ্ধ রাসায়নিক অস্ত্রের ব্যবহার মানব সভ্যতার ইতিহাসে এক কালো অধ্যায়। এসএফআই এই সমস্ত যুদ্ধাপরাধীদের কঠোর শাস্তির দাবি জানায়।",
+                    inflation: "৯৮%",
+                    descInflation: "অবরুদ্ধ সীমানার কারণে চোরাবাজারে খাদ্য ও জরুরি ঔষধের দাম আকাশছোঁয়া। একটি সিলিন্ডার গ্যাসের দাম সাধারণ সময়ের চেয়ে ১৫ গুণ বেশি।",
+                    childLabour: "৭৫%",
+                    descChildLabour: "পরিবারের জীবিকা নির্বাহ করতে এবং বেঁচে থাকার ন্যূনতম সংস্থানের খোঁজে হাজার হাজার শিশু দৈনিক ১৬ ঘণ্টা অমানবিক শারীরিক শ্রমে নিয়োজিত হতে বাধ্য হচ্ছে।",
+                    dropouts: "৯৫%",
+                    descDropouts: "জাতিসংঘের ইউনেস্কো রিপোর্টের তথ্যমতে, গাজা উপত্যকায় 'Scholasticide' বা পদ্ধতিগত শিক্ষানিধন সম্পন্ন হয়েছে। বিদ্যালয় ও উচ্চশিক্ষা প্রতিষ্ঠানগুলির ৯২% সম্পূর্ণ ধ্বংস বা মারাত্মক ক্ষতিগ্রস্ত।",
+                    socioDetails: "আন্তর্জাতিক আদালতের একাধিক রায় ও নিষেধাজ্ঞা থাকা সত্ত্বেও মার্কিন ভেটোর আশ্রয়ে ইজরায়েল যুদ্ধাপরাধ চালিয়েই যাচ্ছে, যা আন্তর্জাতিক মানবাধিকার ব্যবস্থার সম্পূর্ণ দেউলিয়াত্ব প্রমাণ করে।",
+                    solidarity: "যুদ্ধাপরাধী নেতানিয়াহু ও তার দোসরদের আন্তর্জাতিক অপরাধ আদালতের মাধ্যমে ফাঁসি এবং মার্কিন সাম্রাজ্যবাদের বিশ্বজুড়ে যুদ্ধবাদী চক্রান্তের ধিক্কার জানাচ্ছে ভারতের ছাত্র ফেডারেশন পশ্চিমবঙ্গ রাজ্য কমিটি। আমরা গাজায় নিহত ৩৫০+ শিক্ষক ও হাজার হাজার শিক্ষার্থীর রক্তের হিসাব ও বিচার চাই।",
+                    undocs: [
+                        { name: "Francesca Albanese - 'Anatomy of a Genocide' (Report A/HRC/55/73) ↗", url: "https://www.un.org/unispal/document/anatomy-of-a-genocide-report-of-the-special-rapporteur-on-the-situation-of-human-rights-in-the-palestinian-territories-occupied-since-1967-francesca-albanese-a-hrc-55-73/" },
+                        { name: "ICJ Case: South Africa v. Israel (Genocide Convention Application) ↗", url: "https://www.icj-cij.org/case/192" },
+                        { name: "ICC Arrest Warrants for Netanyahu & Gallant ↗", url: "https://www.icc-cpi.int/news/situation-state-palestine-icc-pre-trial-chamber-i-issues-warrants-arrest-benjamin-netanyahu" }
+                    ]
+                },
+                "russia-ukraine": {
+                    title: "🇷🇺 🇺🇦 ইউক্রেন যুদ্ধ ও ন্যাটোর সাম্রাজ্যবাদী বিস্তার",
+                    desc: "ইউক্রেন ও রাশিয়ার যুদ্ধ লক্ষ লক্ষ নিরপরাধ মানুষের জীবন ধ্বংস করছে। এই সংকটের মূল চালিকাশক্তি হলো মার্কিন নেতৃত্বাধীন সামরিক জোট ন্যাটোর (NATO) পূর্বমুখী বিস্তারবাদী নীতি এবং কর্পোরেট যুদ্ধব্যবসায়ীদের মুনাফালোভী আগ্রাসন। রাশিয়া ও ইউক্রেনের এই ভ্রাতৃঘাতী যুদ্ধের ফলে সাধারণ ছাত্র ও শ্রমিকশ্রেণী সবচেয়ে বেশি ক্ষতিগ্রস্ত হচ্ছে। এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটি সাম্রাজ্যবাদী প্রক্সি যুদ্ধের কড়া সমালোচনা করে এবং অবিলম্বে যুদ্ধের অবসান ঘটিয়ে আলোচনার মাধ্যমে peaceful সমাধানের আহ্বান জানায়। সামরিক ঘাঁটি নির্মাণ ও পারমাণবিক অস্ত্রের উন্মাদনা রুখে দিয়ে বিশ্ব শান্তিকামী তরুণ সমাজের ঐক্য গড়ে তোলাই আমাদের মূল লক্ষ্য।",
+                    inflation: "৬৫%",
+                    descInflation: "ইউরোপের অন্যতম শস্যভাণ্ডার আক্রান্ত হওয়ায় গম, তেল এবং সারের দাম বিশ্বজুড়ে বেড়েছে। ইউক্রেন ও রাশিয়া উভয় দেশে বিদ্যুৎ ও জ্বালানির বিল ২ থেকে ৩ গুণ বৃদ্ধি পেয়েছে।",
+                    childLabour: "৩০%",
+                    descChildLabour: "ইউক্রেনের সংঘাতময় অঞ্চল থেকে উচ্ছেদ হওয়া ও পিতৃমাতৃহীন হওয়া শিশুরা প্রতিবেশী দেশগুলোতে অনানুষ্ঠানিক ও কম মজুরির শ্রমে লিপ্ত হতে বাধ্য হচ্ছে।",
+                    dropouts: "৫০%",
+                    descDropouts: "পূর্ব ইউক্রেনের ৩,০০০-এর বেশি স্কুল ও কলেজ সম্পূর্ণভাবে বোমায় বিধ্বস্ত। অনলাইন শিক্ষা চালুর চেষ্টা সত্ত্বেও নিয়মিত লোডশেডিং এবং ইন্টারনেটহীনতায় লাখ লাখ পড়ুয়া পড়াশোনা ছাড়তে বাধ্য হচ্ছে।",
+                    socioDetails: "ন্যাটোর মদদপুষ্ট এই সংঘাত শুধু অস্ত্র ব্যবসায়ীদের পকেট ভরিয়েছে। ইউক্রেনের জাতীয় অর্থনীতি আজ দেউলিয়া এবং পরবর্তী প্রজন্মের যুব সমাজ এক বিশাল ঋণের বোঝায় দণ্ডিত।",
+                    solidarity: "উভয় দেশের সাধারণ শ্রমজীবী মানুষ ও শিক্ষার্থীদের রক্ষার্থে অনতিবিলম্বে ন্যাটোর আগ্রাসন বন্ধের এবং অবিলম্বে দ্বিপাক্ষিক আলোচনার মাধ্যমে শান্তি প্রতিষ্ঠার জোরালো দাবি জানাচ্ছে এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটি। আমরা ইউক্রেন ও রাশিয়ার শান্তিকামী প্রগতিশীল ছাত্র সমাজের যুদ্ধের বিরুদ্ধে আন্দোলনকে স্যালুট জানাই।",
+                    undocs: []
+                },
+                "cuba-latin": {
+                    title: "🇨🇺 🇻🇪 কিউবা ও লাতিন আমেরিকার সাম্রাজ্যবাদ-বিরোধী প্রতিরোধ",
+                    desc: "দশকের পর দশক ধরে মার্কিন যুক্তরাষ্ট্রের চাপিয়ে দেওয়া অমানবিক ও বেআইনি অর্থনৈতিক অবরোধ সত্ত্বেও সমাজতান্ত্রিক কিউবা যেভাবে বিজ্ঞান, শিক্ষা ও জনস্বাস্থ্যে তার অগ্রযাত্রা অব্যাহত রেখেছে তা বিশ্বের প্রগতিশীল মানুষের কাছে গভীর অনুপ্রেরণা। ভেনেজুয়েলাসহ লাতিন আমেরিকার সার্বভৌম দেশগুলোর ওপর মার্কিন সাম্রাজ্যবাদ ও তার চক্রান্তের তীব্র বিরোধিতা করে এসএফআই। কিউবার ছাত্র সংগঠন FEU (Federation of University Students)-এর সাথে কাঁধে কাঁধ মিলিয়ে এসএফআই সাম্রাজ্যবাদ-বিরোধী লড়াইকে এগিয়ে নিয়ে যাওয়ার প্রতিশ্রুতি পুনর্ব্যক্ত করছে।",
+                    inflation: "৮০%",
+                    descInflation: "মার্কিন অবরোধের (The Blockade) কারণে খাদ্য আমদানি ব্যাহত হচ্ছে, পেট্রোলিয়ামের অভাবে যাতায়াত ব্যয় ৩ গুণ বেড়েছে, এবং নিত্যপ্রয়োজনীয় জীবনদায়ী ওষুধপত্রের দাম সংকটে পড়েছে।",
+                    childLabour: "৫%",
+                    descChildLabour: "অবরোধ সত্ত্বেও সমাজতান্ত্রিক সমাজব্যবস্থার কল্যাণে কিউবায় বাধ্যতামূলক শিশুশ্রম সম্পূর্ণ নির্মূল। তবে অন্যান্য পুঁজিবাদী লাতিন দেশে মার্কিন নিষেধাজ্ঞার চাপ পরোক্ষভাবে শিশুশ্রম বাড়াচ্ছে।",
+                    dropouts: "১০%",
+                    descDropouts: "কিউবায় নিখরচায় উচ্চশিক্ষা সুনিশ্চিত। তবে কাগজের আকাল, স্কুলের পরিকাঠামোর সরঞ্জাম ও ল্যাব কিটস মার্কিন নিষেধাজ্ঞার জন্য আমদানি না হওয়ায় শিক্ষাদানের মান ধরে রাখা কঠিন হচ্ছে।",
+                    socioDetails: "মার্কিন যুক্তরাষ্ট্রের উদ্দেশ্য হলো কিউবা বিপ্লবের সুফলগুলিকে ধ্বংস করা। অবরোধের কারণে কিউবার বার্ষিক আর্থিক ক্ষতির পরিমাণ শত কোটি ডলার ছাড়িয়ে গেছে।",
+                    solidarity: "কিউবার প্রগতিশীল কমিউনিস্ট পার্টি, দেশের যুব ও ছাত্র সমাজ এবং কিউবার বিশ্ববিখ্যাত স্বাস্থ্য ব্যবস্থার প্রতি এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটির রক্তিম ও সর্বাত্মক সংহতি। কিউবা একলা নয় — এ বঙ্গে ও বিশ্বজুড়ে কিউবার সমাজতন্ত্র রক্ষায় আমরা সোচ্চার থাকব।",
+                    undocs: []
+                },
+                "bangladesh-southasia": {
+                    title: "🇧🇩 🇳🇵 বাংলাদেশ ও দক্ষিণ এশিয়ায় ছাত্র গণআন্দোলন",
+                    desc: "দক্ষিণ এশিয়ার দেশগুলোতে স্বৈরতন্ত্র, মেধার মূল্যায়নহীন কোটা ব্যবস্থা, দুর্নীতির বিরুদ্ধে এবং বৈষম্যহীন শিক্ষার দাবিতে ছাত্র সমাজ গৌরবোজ্জ্বল সংগ্রাম পরিচালনা করছে। বাংলাদেশে বৈষম্যবিরোধী ছাত্র আন্দোলন ও রাজনৈতিক পরিবর্তনের পর প্রগতিশীলদের সুরক্ষায়, ধর্মনিরপেক্ষতা ও শান্তির সংগ্রামে এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটি অবিচল সংহতি জ্ঞাপন করছে। নেপাল ও শ্রীলঙ্কার প্রগতিশীল ছাত্র আন্দোলনের সঙ্গেও আমাদের ঘনিষ্ঠ সম্পর্ক রয়েছে।",
+                    inflation: "৪০%",
+                    descInflation: "import শুল্ক বৃদ্ধি এবং রাজনৈতিক অস্থিরতায় চাল, ডাল, আলু ও ভোজ্য তেলের দাম গত দুই বছরে ৩০% থেকে ৫০% বেড়েছে। নিম্নবিত্তের নাভিশ্বাস উঠেছে।",
+                    childLabour: "২৫%",
+                    descChildLabour: "অস্থিরতায় পরিবারগুলো অর্থনৈতিক সংকটে পড়ায় এবং গ্রামীণ দারিদ্র্যের কারণে বহু ছাত্র বিদ্যালয় ছেড়ে ইটভাটা, চায়ের দোকান ও রিকশা চালনায় নেমে পড়েছে।",
+                    dropouts: "৩৫%",
+                    descDropouts: "বিশ্ববিদ্যালয় ও কলেজগুলো রাজনৈতিক কারণে দীর্ঘ সময় বন্ধ থাকা এবং সেশন জটের কারণে বিশেষ করে ছাত্রীদের স্কুল ও কলেজ ছাড়ার হার বৃদ্ধি পেয়েছে।",
+                    socioDetails: "দক্ষিণ এশিয়ায় শিক্ষা বাজেট ছাঁটাই ও ফি বৃদ্ধির কর্পোরেট প্রেসক্রিপশন ছাত্রদের শিক্ষাজীবনকে ধ্বংস করছে। দক্ষিণ এশীয় স্তরে শিক্ষার অধিকার আন্দোলনে আমাদের আরও ঐক্যবদ্ধ হতে হবে।",
+                    solidarity: "বাংলাদেশের প্রগতিশীল ছাত্র আন্দোলন এবং নেপাল ও শ্রীলঙ্কার সমাজতান্ত্রিক ছাত্র কমরেডদের প্রতি এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটির ভ্রাতৃত্বপূর্ণ সংগ্রামী লাল সেলাম। আমরা সাম্প্রদায়িকতা ও মৌলবাদের বিরুদ্ধে এবং ধর্মনিরপেক্ষ প্রগতিশীল বাংলাদেশ বিনির্মাণে এ পার বাংলার পাশে দাঁড়ানোর অঙ্গীকার ঘোষণা করছি।",
+                    undocs: []
+                },
+                "western-sahara-africa": {
+                    title: "🇪🇭 🇸🇩 পশ্চিম সাহারা ও আফ্রিকার নয়া-উপনিবেশবাদী সংকট",
+                    desc: "মরক্কোর অবৈধ দখলদারিত্বের বিরুদ্ধে পশ্চিম সাহারার সাহরাউই জনগণের আত্মনিয়ন্ত্রণাধিকারের লড়াই এবং সুদানে গৃহযুদ্ধ ও ডেমোক্রটিক রিপাবলিক অব কঙ্গো (DRC) তে খনিজ সম্পদ লুটের পেছনে বাণিজ্যের আড়ালে বহুজাতিক কর্পোরেশন ও পশ্চিমা শক্তিগুলোর নব্য-ঔপনিবেশিক চক্রান্ত সক্রিয়। এসএফআই এই লুণ্ঠন ও শোষণের বিরুদ্ধে সংহতিবদ্ধ।",
+                    inflation: "৭০%",
+                    descInflation: "কঙ্গো ও সুদানের সংঘাতপ্রবণ অঞ্চলে food জল ও চালের দাম স্বাভাবিকের চেয়ে ৩০০% বেশি। যুদ্ধরত গোষ্ঠীগুলোর কারণে নিত্যপ্রয়োজনীয় পণ্যের কৃত্রিম সংকট নিত্যদিনের ব্যাপার।",
+                    childLabour: "৮৫%",
+                    descChildLabour: "স্মার্টফোনের ব্যাটারির প্রধান উপাদান কোবাল্ট উত্তোলনে কঙ্গোর খনিগুলোতে হাজার হাজার শিশুকে অমানবিক ও বিষাক্ত পরিবেশে খাটিয়ে নিচ্ছে বহুজাতিক মার্কিন ও ইউরোপীয় কোম্পানিগুলি।",
+                    dropouts: "৮০%",
+                    descDropouts: "সুদানে অভ্যন্তরীণ লড়াইয়ের জেরে গত কয়েক বছরে ৯,০০০-এর বেশি স্কুল বন্ধ হয়ে গেছে। ২ কোটি শিশু স্কুলছুট হয়ে এক চরম শিক্ষাহীনতার অন্ধকারের মুখোমুখি দাঁড়িয়েছে।",
+                    socioDetails: "পশ্চিমা দেশগুলির বিলাসবহুল জীবন ও প্রযুক্তির জ্বালানি সরবরাহ হচ্ছে আফ্রিকার লক্ষ লক্ষ শিশুর রক্ত ও ঘামের বিনিময়ে। একেই বলা হয় নয়া-ঔপনিবেশিক সম্পদ লুণ্ঠন।",
+                    solidarity: "পশ্চিম সাহারার POLISARIO ফ্রন্টের বিপ্লবী বীর যোদ্ধাদের এবং কঙ্গো ও সুদানে লুটেরা কর্পোরেটের বিরুদ্ধে লড়াইরত আফ্রিকান ছাত্র ও কৃষক আন্দোলনের প্রতি এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটির গভীর বৈপ্লবিক সংহতি। আমরা কঙ্গোর কোবাল্ট খনি ও আফ্রিকার খনিজ সম্পদে সাম্রাজ্যবাদী আগ্রাসন নিপাত যাওয়ার ডাক দিই।",
+                    undocs: []
+                },
+                "global-education": {
+                    title: "🎓 🌐 সর্বজনীন শিক্ষার বৈশ্বিক লড়াই ও IUS",
+                    desc: "বিশ্বজুড়ে নব্য-উদারবাদী অর্থনৈতিক নীতি এবং শিক্ষার বাণিজ্যিকীকরণ, বেসরকারিকরণ ও কর্পোরেটাইজেশনের বিরুদ্ধে সংগ্রাম জারি রয়েছে। এসএফআই আন্তর্জাতিক ছাত্র ইউনিয়ন (IUS)-এর সদস্য হিসেবে বিশ্বব্যাপী প্রগতিশীল ছাত্র সংগঠনগুলোর সাথে কাঁধে কাঁধ মিলিয়ে লড়াই করছে।",
+                    inflation: "৫০%",
+                    descInflation: "বিশ্বব্যাপী উচ্চশিক্ষার ফি, হোস্টেল চার্জ এবং রেফারেন্স বইয়ের দাম হু হু করে বাড়ছে। শিক্ষার ব্যয় সাধারণ পরিবারের সামর্থ্যের বাইরে চলে গেছে।",
+                    childLabour: "১৫%",
+                    descChildLabour: "উন্নত ও অনুন্নত পুঁজিবাদী দেশে আংশিক সময়ের পার্ট-টাইম কাজ বা খণ্ডকালীন শ্রম বাড়ায় শিক্ষার্থীরা পড়া শেষ করার আগেই শ্রমে জড়িয়ে পড়াশোনা ছাড়তে বাধ্য হচ্ছে।",
+                    dropouts: "৪০%",
+                    descDropouts: "নব্য-উদারবাদী শিক্ষা লোনের ফাঁদ ও ঋণগ্রস্ততার দরুন বিশ্বের কয়েক কোটি শিক্ষার্থী স্নাতক স্তরের আগেই পড়াশোনা চিরতরে বন্ধ করে দিচ্ছে।",
+                    socioDetails: "শিক্ষা কোনো পণ্য নয়, শিক্ষা মানুষের জন্মগত সামাজিক অধিকার। নব্য-উদারবাদী নীতিগুলি শিক্ষাকে কেবল ধনিক শ্রেণীর সম্পত্তি বানিয়ে তুলতে চায়।",
+                    solidarity: "বিশ্বের প্রগতিশীল ছাত্র সংগঠনগুলির সম্মিলিত আন্তর্জাতিক প্ল্যাটফর্ম IUS-এর সাথে আমাদের বন্ধন দৃঢ় রাখার অঙ্গীকার করছে এসএফআই পশ্চিমবঙ্গ রাজ্য কমিটি। শিক্ষার বেসরকারিকরণ ও কর্পোরেটাইজেশন রুখতে বিশ্বব্যাপী ছাত্র প্রতিরোধ দীর্ঘজীবী হোক!",
+                    undocs: []
+                }
+            };
+
+            // Archive Search and Filter Logic
+            const searchInput = document.getElementById('conflictSearch');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const archiveItems = document.querySelectorAll('#archiveGrid .solidarity-card');
+
+            function filterArchive() {
+                const query = searchInput.value.toLowerCase().trim();
+                const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+
+                archiveItems.forEach(item => {
+                    const title = item.querySelector('h3').textContent.toLowerCase();
+                    const text = item.querySelector('p').textContent.toLowerCase();
+                    const region = item.getAttribute('data-region');
+
+                    const matchesSearch = title.includes(query) || text.includes(query);
+                    const matchesFilter = activeFilter === 'all' || region === activeFilter;
+
+                    if (matchesSearch && matchesFilter) {
+                        item.style.display = 'flex';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                            // Trigger meter fills
+                            const fills = item.querySelectorAll('.stat-bar-fill');
+                            fills.forEach(fill => {
+                                const percent = fill.getAttribute('data-width');
+                                fill.style.width = percent;
+                            });
+                        }, 50);
+                    } else {
+                        item.style.display = 'none';
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(15px)';
+                    }
+                });
+            }
+
+            if (searchInput) {
+                searchInput.addEventListener('input', filterArchive);
+            }
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    filterArchive();
+                });
+            });
+
+            // Trigger meter animations on load
+            setTimeout(() => {
+                const fills = document.querySelectorAll('.stat-bar-fill');
+                fills.forEach(fill => {
+                    const percent = fill.getAttribute('data-width');
+                    fill.style.width = percent;
+                });
+            }, 300);
+
+            // Modal Logic
+            const modal = document.getElementById('conflictModal');
+            const modalClose = document.getElementById('modalClose');
+            const modalFooterClose = document.getElementById('modalFooterClose');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+            const modalUNDocs = document.getElementById('modalUNDocs');
+            const modalUNDocList = document.getElementById('modalUNDocList');
+            const valInflation = document.getElementById('valInflation');
+            const valChildLabour = document.getElementById('valChildLabour');
+            const valDropouts = document.getElementById('valDropouts');
+            const descInflation = document.getElementById('descInflation');
+            const descChildLabour = document.getElementById('descChildLabour');
+            const descDropouts = document.getElementById('descDropouts');
+            const modalSocioDetails = document.getElementById('modalSocioDetails');
+            const modalSolidarityMsg = document.getElementById('modalSolidarityMsg');
+            const modalTabs = document.querySelectorAll('.modal-tab-link');
+            const modalPanels = document.querySelectorAll('.modal-panel');
+
+            // Open modal function
+            document.querySelectorAll('.read-more-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const key = this.getAttribute('data-key');
+                    const data = conflictData[key];
+                    if (!data) return;
+
+                    // Populate fields
+                    modalTitle.innerHTML = data.title;
+                    modalDesc.innerHTML = data.desc;
+                    valInflation.innerHTML = data.inflation;
+                    valChildLabour.innerHTML = data.childLabour;
+                    valDropouts.innerHTML = data.dropouts;
+                    descInflation.innerHTML = data.descInflation;
+                    descChildLabour.innerHTML = data.descChildLabour;
+                    descDropouts.innerHTML = data.descDropouts;
+                    modalSocioDetails.innerHTML = data.socioDetails;
+                    modalSolidarityMsg.innerHTML = data.solidarity;
+
+                    // Populate UN Docs list
+                    modalUNDocList.innerHTML = '';
+                    if (data.undocs && data.undocs.length > 0) {
+                        data.undocs.forEach(doc => {
+                            const li = document.createElement('li');
+                            li.className = 'mb-2';
+                            li.innerHTML = `<a href="${doc.url}" target="_blank" class="un-doc-link py-1" style="font-size:0.92rem;"><i class="bi bi-arrow-right-short text-warning"></i> ${doc.name}</a>`;
+                            modalUNDocList.appendChild(li);
+                        });
+                        modalUNDocs.style.display = 'block';
+                    } else {
+                        modalUNDocs.style.display = 'none';
+                    }
+
+                    // Reset tabs
+                    modalTabs.forEach(t => t.classList.remove('active'));
+                    modalPanels.forEach(p => p.classList.remove('active'));
+                    modalTabs[0].classList.add('active');
+                    modalPanels[0].classList.add('active');
+
+                    // Open Modal
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Lock background scroll
+                });
+            });
+
+            // Close modal functions
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = ''; // Unlock scroll
+            }
+
+            if (modalClose) modalClose.addEventListener('click', closeModal);
+            if (modalFooterClose) modalFooterClose.addEventListener('click', closeModal);
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Modal Tab Switching
+            modalTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    modalTabs.forEach(t => t.classList.remove('active'));
+                    modalPanels.forEach(p => p.classList.remove('active'));
+
+                    this.classList.add('active');
+                    const targetId = this.getAttribute('data-tab');
+                    document.getElementById(targetId).classList.add('active');
+                });
             });
 
             // Mobile Nav Toggle

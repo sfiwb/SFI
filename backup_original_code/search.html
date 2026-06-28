@@ -351,15 +351,42 @@
             background-color: #25d366 !important;
             border-color: #25d366 !important;
         }
-        /* Theme-aware Close Button & Modal Styling */
+        /* Theme-aware Close Button & Modal Styling (Solid Background) */
         .modal-content {
-            color: var(--text-main);
+            background: #15171e !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 12px !important;
+            color: var(--text-main) !important;
+            backdrop-filter: none !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+        }
+        [data-theme="light"] .modal-content {
+            background: #ffffff !important;
+            color: #000000 !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
         }
         .modal-content .text-body {
             color: var(--text-main) !important;
         }
         [data-theme="dark"] .modal .btn-close {
             filter: invert(1) grayscale(1) brightness(2);
+        }
+        /* Blur background when modal is open */
+        header, main, footer, .topbar {
+            transition: filter 0.3s ease;
+        }
+        body.modal-open header,
+        body.modal-open main,
+        body.modal-open footer,
+        body.modal-open .topbar,
+        body.modal-open .pointer-glow {
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+        }
+        .modal-backdrop.show {
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            background-color: rgba(10, 12, 16, 0.4) !important;
         }
     </style>
     <!-- Theme Flash Prevention -->
@@ -1336,29 +1363,8 @@
                     return;
                 }
 
-                // Check for Direct Answer match
-                const directAns = checkDirectAnswer(query);
-                if (directAns) {
-                    directAnswerContainer.innerHTML = `
-                        <div class="direct-answer-card" data-aos="fade-up">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="bg-danger bg-opacity-25 text-danger rounded-circle p-2 me-3 d-inline-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
-                                    <i class="bi bi-info-circle-fill fs-5"></i>
-                                </div>
-                                <div>
-                                    <h5 class="fw-bold text-danger mb-0" style="font-size: 1.05rem;">সরাসরি উত্তর (Direct Answer)</h5>
-                                    <span class="small text-muted" style="font-size: 0.8rem;">আপনার প্রশ্নের তাৎক্ষণিক সমাধান</span>
-                                </div>
-                            </div>
-                            <div class="answer-body mb-3">
-                                <h5 class="fw-bold text-header mb-3" style="font-size: 1.1rem; border-left: 3px solid var(--accent-color); padding-left: 10px;">${directAns.title}</h5>
-                                <div class="text-body leading-relaxed">${directAns.html}</div>
-                            </div>
-                            <a href="${directAns.url}" class="btn btn-outline-danger btn-sm fw-bold"><i class="bi bi-arrow-right-circle me-1"></i> ${directAns.btnText}</a>
-                        </div>
-                    `;
-                    directAnswerContainer.style.display = "block";
-                }
+                // Direct Answer (chatbot) rendering is removed from the results page as requested
+                // Answers will now display exclusively in the modal popup dialog when clicked.
 
                 const results = [];
 
