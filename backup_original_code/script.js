@@ -1202,6 +1202,26 @@ document.addEventListener("DOMContentLoaded", function() {
                 var descStr = item.getAttribute("data-desc");
                 var titleStr = item.querySelector("h6").textContent;
 
+                var sanitizedVideoId = "";
+                if (videoType === "facebook") {
+                    try {
+                        var parsedUrl = new URL((videoId || "").trim());
+                        if (parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:") {
+                            sanitizedVideoId = parsedUrl.toString();
+                        } else {
+                            return;
+                        }
+                    } catch (e) {
+                        return;
+                    }
+                } else {
+                    var ytId = (videoId || "").trim();
+                    if (!/^[A-Za-z0-9_-]{11}$/.test(ytId)) {
+                        return;
+                    }
+                    sanitizedVideoId = ytId;
+                }
+
                 // Update active states
                 playlistItems.forEach(function(i) { i.classList.remove("active-video"); });
                 item.classList.add("active-video");
@@ -1214,9 +1234,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Play the video immediately in the player
                 var newSrc = "";
                 if (videoType === "facebook") {
-                    newSrc = "https://www.facebook.com/plugins/video.php?href=" + encodeURIComponent(videoId) + "&show_text=0&autoplay=true";
+                    newSrc = "https://www.facebook.com/plugins/video.php?href=" + encodeURIComponent(sanitizedVideoId) + "&show_text=0&autoplay=true";
                 } else {
-                    newSrc = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&enablejsapi=1&showinfo=0";
+                    newSrc = "https://www.youtube.com/embed/" + sanitizedVideoId + "?autoplay=1&enablejsapi=1&showinfo=0";
                 }
 
                 var iframe = document.createElement("iframe");
@@ -1239,7 +1259,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 mainPlayer.classList.remove("youtube-facade");
                 
                 // Update attributes on mainPlayer
-                mainPlayer.setAttribute("data-video-id", videoId);
+                mainPlayer.setAttribute("data-video-id", sanitizedVideoId);
                 mainPlayer.setAttribute("data-iframe-id", iframeId);
                 mainPlayer.setAttribute("data-video-type", videoType);
             });
