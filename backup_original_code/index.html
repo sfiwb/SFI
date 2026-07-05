@@ -273,19 +273,10 @@
                         data-aos-delay="200">
                         <div class="hero-visual-card glass-card">
                             <div class="visual-card-glow"></div>
-                            <div class="flag-container position-relative py-4 px-3 text-center">
-                                <svg class="sfi-flag-svg shadow-lg" viewBox="0 0 300 200" width="280" height="186"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="300" height="200" rx="6" fill="#ffffff" stroke="#ff1e38"
-                                        stroke-width="2" />
-                                    <polygon
-                                        points="110,55 123,90 159,90 130,111 141,145 110,124 79,145 90,111 61,90 97,90"
-                                        fill="#ff1e38" />
-                                    <text x="225" y="112" font-family="'Poppins', 'Roboto', sans-serif" font-size="28"
-                                        font-weight="900" fill="#ff1e38" text-anchor="middle"
-                                        letter-spacing="1">S.F.I.</text>
-                                </svg>
-                                <div class="visual-card-info mt-4">
+                            <div class="flag-visual-container position-relative">
+                                <canvas id="wavingFlagCanvas"></canvas>
+                            </div>
+                            <div class="visual-card-info mt-3">
                                     <div class="info-item d-flex align-items-center mb-2 justify-content-center">
                                         <span
                                             class="badge bg-danger bg-opacity-10 text-accent border border-danger border-opacity-25 px-3 py-1 me-2 rounded-pill"><i
@@ -1402,6 +1393,308 @@
             // Initialize theme on load
             const savedTheme = localStorage.getItem('theme') || 'dark';
             applyTheme(savedTheme);
+
+            // ==========================================
+            // Interactive 3D Physics-Waving SFI Flag
+            // ==========================================
+            const canvas = document.getElementById('wavingFlagCanvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                const container = canvas.parentElement;
+                
+                // Create offscreen canvas for SFI flag texture
+                const textureCanvas = document.createElement('canvas');
+                textureCanvas.width = 600;
+                textureCanvas.height = 400;
+                const tCtx = textureCanvas.getContext('2d');
+                
+                // Draw SFI Flag on offscreen canvas
+                function drawFlagTexture() {
+                    // White flag body
+                    tCtx.fillStyle = '#ffffff';
+                    tCtx.fillRect(0, 0, textureCanvas.width, textureCanvas.height);
+                    
+                    // SFI Red Star on the left
+                    drawStar(tCtx, 130, 200, 5, 52, 20, '#ff1e38');
+                    
+                    // SFI Slogan Texts in bold Bengali red stacked vertically
+                    tCtx.fillStyle = '#ff1e38';
+                    tCtx.font = 'bold 54px "Noto Serif Bengali", "Poppins", "Segoe UI", sans-serif';
+                    tCtx.textBaseline = 'middle';
+                    tCtx.fillText('স্বাধীনতা', 230, 120);
+                    tCtx.fillText('গণতন্ত্র', 230, 200);
+                    tCtx.fillText('সমাজতন্ত্র', 230, 280);
+                }
+                
+                function drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius, color) {
+                    let rot = Math.PI / 2 * 3;
+                    let x = cx;
+                    let y = cy;
+                    let step = Math.PI / spikes;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy - outerRadius);
+                    for (let i = 0; i < spikes; i++) {
+                        x = cx + Math.cos(rot) * outerRadius;
+                        y = cy + Math.sin(rot) * outerRadius;
+                        ctx.lineTo(x, y);
+                        rot += step;
+                        
+                        x = cx + Math.cos(rot) * innerRadius;
+                        y = cy + Math.sin(rot) * innerRadius;
+                        ctx.lineTo(x, y);
+                        rot += step;
+                    }
+                    ctx.lineTo(cx, cy - outerRadius);
+                    ctx.closePath();
+                    ctx.fillStyle = color;
+                    ctx.fill();
+                }
+                
+                // Initial draw of texture
+                drawFlagTexture();
+                
+                // Waving Physics Variables
+                let time = 0;
+                const baseWindSpeed = 0.055;
+                const baseAmplitude = 14;
+                
+                // Embers Particle System
+                let particles = [];
+                const maxParticles = 16;
+                
+                function initParticles() {
+                    particles = [];
+                    for (let i = 0; i < maxParticles; i++) {
+                        particles.push({
+                            x: Math.random() * 200 + 20,
+                            baseY: Math.random() * 120 + 30,
+                            vx: Math.random() * 1.3 + 1.0,
+                            size: Math.random() * 1.8 + 0.8,
+                            alpha: Math.random() * 0.55 + 0.35,
+                            color: Math.random() > 0.45 ? '#ff1e38' : '#ffb900'
+                        });
+                    }
+                }
+                
+                // Mouse Interactive Ripples
+                let ripple = { x: null, y: null, radius: 0, maxRadius: 110, active: false, strength: 0 };
+                
+                let isPageVisible = true;
+                let animationId = null;
+                
+                function resizeCanvas() {
+                    const rect = container.getBoundingClientRect();
+                    canvas.width = rect.width * window.devicePixelRatio;
+                    canvas.height = rect.height * window.devicePixelRatio;
+                    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+                    initParticles();
+                }
+                
+                // Wait briefly for font load, then resize & redraw
+                setTimeout(() => {
+                    drawFlagTexture();
+                    resizeCanvas();
+                }, 800);
+                
+                window.addEventListener('resize', resizeCanvas);
+                
+                // Track mouse interactions to create dynamic fabric ripples
+                container.addEventListener('mousemove', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const mx = e.clientX - rect.left;
+                    const my = e.clientY - rect.top;
+                    
+                    const flagStartX = 20;
+                    const flagWidth = rect.width - flagStartX - 15;
+                    
+                    if (mx > flagStartX && mx < flagStartX + flagWidth) {
+                        if (!ripple.active || Math.abs(mx - ripple.x) > 35) {
+                            ripple.x = mx;
+                            ripple.y = my;
+                            ripple.radius = 0;
+                            ripple.active = true;
+                            ripple.strength = 7.0; // Displacement force
+                        }
+                    }
+                });
+                
+                function animateFlag() {
+                    if (!isPageVisible) return;
+                    
+                    const rect = container.getBoundingClientRect();
+                    const canvasWidth = rect.width;
+                    const canvasHeight = rect.height;
+                    
+                    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+                    
+                    // Generate natural, organic wind surges using sine overlays
+                    const windCycle = Date.now() * 0.0008;
+                    const currentWindSpeed = baseWindSpeed + Math.sin(windCycle) * 0.015 + Math.cos(windCycle * 2.3) * 0.005;
+                    const currentAmplitude = baseAmplitude + Math.sin(windCycle * 0.7) * 2.5 + Math.cos(windCycle * 1.5) * 1.0;
+                    
+                    time += currentWindSpeed;
+                    
+                    // Wave ripple progress
+                    if (ripple.active) {
+                        ripple.radius += 4.2;
+                        if (ripple.radius > ripple.maxRadius) {
+                            ripple.active = false;
+                        }
+                    }
+                    
+                    const flagStartX = 20;
+                    const flagWidth = canvasWidth - flagStartX - 15;
+                    const flagHeight = canvasHeight - 30;
+                    
+                    const slices = 45;
+                    const sliceWidth = flagWidth / slices;
+                    
+                    const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+                    const maxShadow = theme === 'light' ? 0.12 : 0.22;
+                    
+                    // 1. Render vertical slices with sine deformation and crease shading
+                    for (let i = 0; i < slices; i++) {
+                        const sliceX = flagStartX + i * sliceWidth;
+                        
+                        // Amplitude is 0 at flagpole (left) and reaches maximum at right edge
+                        const amp = (i / slices) * currentAmplitude;
+                        
+                        // Base sine wave offset
+                        let yOffset = Math.sin((i / slices) * Math.PI * 2.2 - time) * amp;
+                        
+                        // Add interactive mouse ripple wave front
+                        if (ripple.active) {
+                            const dist = Math.abs(sliceX - ripple.x);
+                            if (dist < ripple.radius && ripple.radius - dist < 30) {
+                                const waveFront = (ripple.radius - dist) / 30;
+                                const rippleForce = Math.sin(waveFront * Math.PI) * ripple.strength * (1 - ripple.radius / ripple.maxRadius);
+                                yOffset += rippleForce;
+                            }
+                        }
+                        
+                        // Derivative of wave to calculate shadows and highlights
+                        const slope = Math.cos((i / slices) * Math.PI * 2.2 - time);
+                        const shadow = slope * maxShadow;
+                        
+                        const sourceX = (i / slices) * textureCanvas.width;
+                        const sourceWidth = textureCanvas.width / slices;
+                        
+                        ctx.drawImage(
+                            textureCanvas,
+                            sourceX, 0, sourceWidth, textureCanvas.height,
+                            sliceX, yOffset + 15, sliceWidth + 0.5, flagHeight
+                        );
+                        
+                        // 3D Shadow creases
+                        ctx.fillStyle = shadow < 0 
+                            ? `rgba(0, 0, 0, ${Math.abs(shadow) * 1.15})` 
+                            : `rgba(255, 255, 255, ${shadow * 0.45})`;
+                        ctx.fillRect(sliceX, yOffset + 15, sliceWidth + 0.6, flagHeight);
+                        
+                        // Specular highlights (Silk/Satin glare effect)
+                        const spec = Math.pow(Math.abs(slope), 5) * (theme === 'light' ? 0.08 : 0.18);
+                        ctx.fillStyle = `rgba(255, 255, 255, ${spec})`;
+                        ctx.fillRect(sliceX, yOffset + 15, sliceWidth + 0.6, flagHeight);
+                    }
+                    
+                    // 2. Draw flagpole visual directly on canvas (synchronized and layered)
+                    const poleWidth = 5;
+                    const poleX = 14;
+                    
+                    // Draw metallic pole
+                    const poleGrad = ctx.createLinearGradient(poleX, 0, poleX + poleWidth, 0);
+                    poleGrad.addColorStop(0, '#9ca3af');
+                    poleGrad.addColorStop(0.4, '#f3f4f6');
+                    poleGrad.addColorStop(0.8, '#6b7280');
+                    poleGrad.addColorStop(1, '#374151');
+                    ctx.fillStyle = poleGrad;
+                    ctx.fillRect(poleX, 8, poleWidth, flagHeight + 16);
+                    
+                    // Draw gold finial top ball with pulsing aura glow
+                    const glowPulse = 6 + Math.sin(Date.now() * 0.006) * 4;
+                    ctx.save();
+                    ctx.shadowBlur = glowPulse;
+                    ctx.shadowColor = '#ca8a04';
+                    
+                    ctx.beginPath();
+                    ctx.arc(poleX + poleWidth / 2, 8, 7, 0, Math.PI * 2);
+                    const finialGrad = ctx.createRadialGradient(poleX + 1, 6, 1, poleX + poleWidth / 2, 8, 7);
+                    finialGrad.addColorStop(0, '#fde047');
+                    finialGrad.addColorStop(0.7, '#ca8a04');
+                    finialGrad.addColorStop(1, '#854d0e');
+                    ctx.fillStyle = finialGrad;
+                    ctx.fill();
+                    ctx.restore();
+                    
+                    // 3. Render and animate wind embers/sparks sliding over flag folds
+                    particles.forEach(p => {
+                        p.x += p.vx;
+                        
+                        // Fade particles near the right margin
+                        const fadeStart = flagStartX + flagWidth * 0.65;
+                        let currentAlpha = p.alpha;
+                        if (p.x > fadeStart) {
+                            const ratio = (p.x - fadeStart) / (flagWidth * 0.35);
+                            currentAlpha = Math.max(0, p.alpha * (1 - ratio));
+                        }
+                        
+                        // Reset particle position when it goes out of flag boundaries
+                        if (p.x > flagStartX + flagWidth - 5) {
+                            p.x = flagStartX + Math.random() * 15;
+                            p.baseY = Math.random() * (flagHeight - 20) + 15;
+                            p.alpha = Math.random() * 0.55 + 0.35;
+                            p.vx = Math.random() * 1.3 + 1.0;
+                            p.color = Math.random() > 0.45 ? '#ff1e38' : '#ffb900';
+                        }
+                        
+                        // Project particle Y coordinate onto the moving wave folds of the flag
+                        const progress = (p.x - flagStartX) / flagWidth;
+                        const clampProg = Math.max(0, Math.min(1, progress));
+                        const amp = clampProg * currentAmplitude;
+                        
+                        let yOffset = Math.sin(clampProg * Math.PI * 2.2 - time) * amp;
+                        
+                        // Shift particle Y coordinate by active mouse ripples too
+                        if (ripple.active) {
+                            const dist = Math.abs(p.x - ripple.x);
+                            if (dist < ripple.radius && ripple.radius - dist < 30) {
+                                const waveFront = (ripple.radius - dist) / 30;
+                                const rippleForce = Math.sin(waveFront * Math.PI) * ripple.strength * (1 - ripple.radius / ripple.maxRadius);
+                                yOffset += rippleForce;
+                            }
+                        }
+                        
+                        const finalY = p.baseY + yOffset + 15;
+                        
+                        // Draw spark dot
+                        ctx.beginPath();
+                        ctx.arc(p.x, finalY, p.size, 0, Math.PI * 2);
+                        ctx.fillStyle = p.color;
+                        ctx.globalAlpha = currentAlpha;
+                        ctx.fill();
+                        ctx.globalAlpha = 1.0; // Restore
+                    });
+                    
+                    animationId = requestAnimationFrame(animateFlag);
+                }
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        isPageVisible = entry.isIntersecting;
+                        if (isPageVisible) {
+                            if (!animationId) animateFlag();
+                        } else {
+                            if (animationId) {
+                                cancelAnimationFrame(animationId);
+                                animationId = null;
+                            }
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                observer.observe(container);
+            }
         });
     </script>
     <!-- Firebase SDKs and Forms Handler -->
