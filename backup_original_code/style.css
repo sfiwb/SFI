@@ -6000,6 +6000,7 @@ html[data-theme="light"] .generator-card select option {
     perspective: 1200px;
     height: 410px;
     margin-bottom: 24px;
+    cursor: pointer;
 }
 
 .rights-card-inner {
@@ -6015,9 +6016,14 @@ html[data-theme="light"] .generator-card select option {
 }
 
 /* Flipping card triggers with translation (parent container stays completely static for stability) */
-.rights-card-container:hover .rights-card-inner,
 .rights-card-container.active-flip .rights-card-inner {
     transform: translateY(-8px) rotateY(180deg);
+}
+
+@media (hover: hover) {
+    .rights-card-container:hover .rights-card-inner {
+        transform: translateY(-8px) rotateY(180deg);
+    }
 }
 
 .rights-card-front, .rights-card-back {
@@ -6079,23 +6085,42 @@ html[data-theme="light"] .generator-card select option {
     will-change: transform;
 }
 
-.rights-card-container:hover .rights-card-front::before,
-.rights-card-container:hover .rights-card-back::before {
+.rights-card-container.active-flip .rights-card-front::before,
+.rights-card-container.active-flip .rights-card-back::before {
     transform: translateX(250%) skewX(-25deg);
     transition: transform 0.75s ease-in-out;
 }
 
-/* Card Accent Borders and Glows on Hover - Gradient structure matches resting state for smooth transition */
-.rights-card-container:hover .rights-card-front {
+.rights-card-container.active-flip .rights-card-front {
     border-color: var(--accent-border-color) !important;
     background: radial-gradient(130% 130% at 50% 12%, var(--glass-bg) 65%, rgba(var(--accent-color-rgb), 0.08) 100%) !important;
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35), 0 0 25px var(--accent-glow-color) !important;
 }
 
-.rights-card-container:hover .rights-card-back {
+.rights-card-container.active-flip .rights-card-back {
     border-color: var(--accent-border-color) !important;
     background: radial-gradient(130% 130% at 50% 12%, var(--glass-bg) 65%, rgba(var(--accent-color-rgb), 0.08) 100%) !important;
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35), 0 0 25px var(--accent-glow-color) !important;
+}
+
+@media (hover: hover) {
+    .rights-card-container:hover .rights-card-front::before,
+    .rights-card-container:hover .rights-card-back::before {
+        transform: translateX(250%) skewX(-25deg);
+        transition: transform 0.75s ease-in-out;
+    }
+    
+    .rights-card-container:hover .rights-card-front {
+        border-color: var(--accent-border-color) !important;
+        background: radial-gradient(130% 130% at 50% 12%, var(--glass-bg) 65%, rgba(var(--accent-color-rgb), 0.08) 100%) !important;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35), 0 0 25px var(--accent-glow-color) !important;
+    }
+    
+    .rights-card-container:hover .rights-card-back {
+        border-color: var(--accent-border-color) !important;
+        background: radial-gradient(130% 130% at 50% 12%, var(--glass-bg) 65%, rgba(var(--accent-color-rgb), 0.08) 100%) !important;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35), 0 0 25px var(--accent-glow-color) !important;
+    }
 }
 
 /* Color Accents definition */
@@ -6158,12 +6183,22 @@ html[data-theme="light"] .generator-card select option {
     will-change: transform;
 }
 
-.rights-card-container:hover .rights-icon-wrapper {
+.rights-card-container.active-flip .rights-icon-wrapper {
     transform: scale(1.18) rotate(8deg);
     background: var(--accent-color);
     color: #fff;
     box-shadow: 0 8px 20px var(--accent-glow-color);
     border-color: transparent;
+}
+
+@media (hover: hover) {
+    .rights-card-container:hover .rights-icon-wrapper {
+        transform: scale(1.18) rotate(8deg);
+        background: var(--accent-color);
+        color: #fff;
+        box-shadow: 0 8px 20px var(--accent-glow-color);
+        border-color: transparent;
+    }
 }
 
 /* Card Titles with animated accent lines */
@@ -6191,8 +6226,14 @@ html[data-theme="light"] .generator-card select option {
     will-change: transform;
 }
 
-.rights-card-container:hover .rights-title::after {
+.rights-card-container.active-flip .rights-title::after {
     transform: scaleX(1);
+}
+
+@media (hover: hover) {
+    .rights-card-container:hover .rights-title::after {
+        transform: scaleX(1);
+    }
 }
 
 .rights-desc {

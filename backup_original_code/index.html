@@ -94,6 +94,9 @@
                     preloader.classList.add('hidden');
                     setTimeout(function() {
                         preloader.remove();
+                        if (typeof window.initFacebookPopup === 'function') {
+                            window.initFacebookPopup();
+                        }
                     }, 600);
                 }, 800);
             }
@@ -110,6 +113,9 @@
                     preloader.classList.add('hidden');
                     setTimeout(function() {
                         preloader.remove();
+                        if (typeof window.initFacebookPopup === 'function') {
+                            window.initFacebookPopup();
+                        }
                     }, 600);
                 }
             }, 5000);
@@ -1695,6 +1701,103 @@
                 
                 observer.observe(container);
             }
+
+            // ==========================================
+            // Facebook Pop-up Timeline Modal
+            // ==========================================
+            window.initFacebookPopup = function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const isTestMode = urlParams.has('test') || urlParams.has('preview');
+                const lastShown = localStorage.getItem('fbPopupLastShown');
+                const now = Date.now();
+                const oneDay = 24 * 60 * 60 * 1000;
+                
+                if (!isTestMode && lastShown && (now - parseInt(lastShown)) < oneDay) return;
+                
+                const popup = document.getElementById('fbPopup');
+                const bodyContainer = document.getElementById('fbPopupBody');
+                if (!popup || !bodyContainer) return;
+                
+                // Allow transition to settle down post-preloader
+                setTimeout(() => {
+                    // Compute optimal adapt width based on window screen size and card padding
+                    const windowWidth = window.innerWidth;
+                    const cardWidth = Math.min(460, Math.floor(windowWidth * 0.9));
+                    const containerWidth = Math.max(280, cardWidth - 32); // 32px for popup body padding (16px left + 16px right)
+                    const fbPageUrl = encodeURIComponent('https://www.facebook.com/sfiwb/');
+                    
+                    const iframeSrc = `https://www.facebook.com/plugins/page.php?href=${fbPageUrl}&tabs=timeline&width=${containerWidth}&height=450&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true`;
+                    
+                    bodyContainer.innerHTML = `<iframe src="${iframeSrc}" width="${containerWidth}" height="450" style="border:none;overflow:hidden;width:100%;height:450px;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
+                    
+                    document.body.style.overflow = 'hidden'; // Lock scrolling
+                    popup.style.display = 'flex';
+                    
+                    // Force DOM reflow
+                    popup.offsetHeight;
+                    popup.classList.add('active');
+                    
+                    localStorage.setItem('fbPopupLastShown', now.toString());
+                }, 400);
+            };
+
+            window.closeFacebookPopup = function() {
+                const popup = document.getElementById('fbPopup');
+                if (!popup) return;
+                
+                popup.classList.remove('active');
+                document.body.style.overflow = ''; // Unlock scrolling
+                
+                setTimeout(() => {
+                    popup.style.display = 'none';
+                    const bodyContainer = document.getElementById('fbPopupBody');
+                    if (bodyContainer) bodyContainer.innerHTML = ''; // Clean up memory
+                }, 400);
+            };
+
+            const closeBtn = document.getElementById('closeFbPopup');
+            const popupOverlay = document.getElementById('fbPopup');
+            if (closeBtn && popupOverlay) {
+                closeBtn.addEventListener('click', window.closeFacebookPopup);
+                popupOverlay.addEventListener('click', function(e) {
+                    if (e.target === popupOverlay) {
+                        window.closeFacebookPopup();
+                    }
+                });
+                
+                // Escape key support
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && popupOverlay.classList.contains('active')) {
+                        window.closeFacebookPopup();
+                    }
+                });
+            }
+
+            // Touch device card flipping for Rights Section
+            var rightsCards = document.querySelectorAll(".rights-card-container");
+            if (rightsCards.length) {
+                rightsCards.forEach(function(card) {
+                    var inner = card.querySelector(".rights-card-inner");
+                    if (inner) {
+                        inner.addEventListener("click", function(e) {
+                            // Let link / button click bubble normally without toggling the card
+                            if (e.target.closest("a") || e.target.closest("button")) {
+                                return;
+                            }
+                            
+                            // For large screen devices (desktop >= 992px), automatically toggle/close other cards
+                            if (window.innerWidth >= 992) {
+                                rightsCards.forEach(function(otherCard) {
+                                    if (otherCard !== card) {
+                                        otherCard.classList.remove("active-flip");
+                                    }
+                                });
+                            }
+                            card.classList.toggle("active-flip");
+                        });
+                    }
+                });
+            }
         });
     </script>
     <!-- Firebase SDKs and Forms Handler -->
@@ -1703,6 +1806,32 @@
     <script src="forms_handler.js"></script>
     <!-- Dynamic Commentary Fetcher -->
     <script src="commentary_fetcher.js"></script>
+
+    <!-- Facebook Page Pop-up Modal -->
+    <div id="fbPopup" class="fb-popup-overlay" style="display: none;">
+        <div class="fb-popup-card">
+            <button id="closeFbPopup" class="fb-popup-close" aria-label="Close Pop-up">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            <div class="fb-popup-header">
+                <div class="fb-popup-avatar">
+                    <img src="assets/sfi-wb-sc-logo.jpg" alt="SFI WB Logo">
+                </div>
+                <div class="fb-popup-title-area">
+                    <h4 class="fb-popup-title">SFI West Bengal</h4>
+                    <span class="fb-popup-badge"><i class="bi bi-patch-check-fill text-danger"></i> অফিশিয়াল পেজ</span>
+                </div>
+            </div>
+            <div class="fb-popup-body" id="fbPopupBody">
+                <!-- Facebook Iframe dynamically rendered here -->
+            </div>
+            <div class="fb-popup-footer">
+                <a href="https://www.facebook.com/sfiwb/" target="_blank" class="btn btn-primary w-100 fb-popup-action-btn d-flex align-items-center justify-content-center">
+                    <i class="bi bi-facebook me-2 fs-5"></i> ফেসবুক পেজে যান
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

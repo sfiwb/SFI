@@ -1266,15 +1266,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Touch device card flipping for Rights Section
-    var rightsCards = document.querySelectorAll(".rights-card-container");
-    if (rightsCards.length) {
-        rightsCards.forEach(function(card) {
-            card.addEventListener("click", function() {
-                card.classList.toggle("active-flip");
-            });
-        });
-    }
 
     // Stats Count Up Animation with Bengali Digits Support & Preloader Fallbacks
     var statNumbers = document.querySelectorAll(".stat-number");
