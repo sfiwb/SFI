@@ -401,6 +401,287 @@ const validateCaptcha = (form) => {
 };
 
 const initAllForms = () => {
+    // SFI District Colleges Database
+    // SFI District Colleges Database (Expanded with all colleges)
+    const districtColleges = {
+        "wb-alipurduar": [
+            "Alipurduar College", 
+            "Birpara College", 
+            "Falakata College", 
+            "Samuktala Sidhu Kanhu College", 
+            "Kamakhyaguri College", 
+            "Lilabati Mahavidyalaya", 
+            "Alipurduar Mahila Mahavidyalaya"
+        ],
+        "wb-bankura": [
+            "Bankura Sammilani College", 
+            "Bankura Christian College", 
+            "Ramananda College (Bishnupur)", 
+            "Saldiha College", 
+            "Bankura Zilla Sarada Devi Mahila Mahavidyapith", 
+            "Khatra Adibasi Mahavidyalaya", 
+            "Panchmura Mahavidyalaya", 
+            "Sonamukhi College", 
+            "Onda Thana Mahavidyalaya"
+        ],
+        "wb-birbhum": [
+            "Suri Vidyasagar College", 
+            "Bolpur College", 
+            "Rampurhat College", 
+            "Hetampur Krishna Chandra College", 
+            "Sambhunath College (Labpur)", 
+            "Kabi Nazrul College (Murarai)", 
+            "Abhedananda Mahavidyalaya (Sainthia)", 
+            "Hiralal Bhakat College (Nalhati)", 
+            "Sailajananda Falguni Smriti Mahavidyalaya"
+        ],
+        "wb-cooch-behar": [
+            "Acharya Brojendra Nath Seal College (A.B.N. Seal)", 
+            "Cooch Behar College", 
+            "Tufanganj College", 
+            "Dinhata College", 
+            "Mathabhanga College", 
+            "Sitalkuchi College", 
+            "Mekliganj College", 
+            "Netaji Subhash Mahavidyalaya (Haldibari)"
+        ],
+        "wb-dakshin-dinajpur": [
+            "Balurghat College", 
+            "Gangarampur College", 
+            "Buniadpur Mahavidyalaya", 
+            "Balurghat Mahila Mahavidyalaya", 
+            "Jamini Mazumder Memorial College", 
+            "Kumarganj College", 
+            "Tapan Mahavidyalaya"
+        ],
+        "wb-darjeeling": [
+            "Siliguri College", 
+            "Loreto College (Darjeeling)", 
+            "St. Joseph's College (North Point)", 
+            "Darjeeling Government College", 
+            "Kurseong College", 
+            "Siliguri College of Commerce", 
+            "Sonada Degree College", 
+            "Mirik College", 
+            "Salesian College (Siliguri)", 
+            "Gyan Jyoti College"
+        ],
+        "wb-hooghly": [
+            "Hooghly Mohsin College", 
+            "Chandernagore College", 
+            "Serampore College", 
+            "Bidhan Chandra College (Rishra)", 
+            "Netaji Mahavidyalaya (Arambagh)", 
+            "Hooghly Women's College", 
+            "Raja Peary Mohan College (Uttarpara)", 
+            "Kabi Sukanta Mahavidyalaya (Bhadreswar)", 
+            "Tarakeswar Degree College", 
+            "Rabindra Mahavidyalaya (Champadanga)", 
+            "Singur Government College"
+        ],
+        "wb-howrah": [
+            "Narasinha Dutt College", 
+            "Bijoy Krishna Girls' College", 
+            "Shibpur Dinobundhoo Institution", 
+            "Ramsaday College (Amta)", 
+            "Bagnan College", 
+            "Uluberia College", 
+            "Prabhu Jagatbandhu College (Andul)", 
+            "Shyampur Siddheswari Mahavidyalaya", 
+            "Sovarani Memorial College (Jagatballavpur)"
+        ],
+        "wb-jalpaiguri": [
+            "Ananda Chandra College", 
+            "PD Women's College", 
+            "Jalpaiguri Government Engineering College (JGEC)", 
+            "Ananda Chandra College of Commerce", 
+            "Sukanta Mahavidyalaya (Dhupguri)", 
+            "Jalpaiguri College", 
+            "Maynaguri College", 
+            "Banarhat Kartik Oraon Memorial College"
+        ],
+        "wb-jhargram": [
+            "Jhargram Raj College", 
+            "Manikpara College", 
+            "Nayagram Pandit Raghunath Murmu Government College", 
+            "Seva Bharati Mahavidyalaya (Kapgari)", 
+            "Silda Chandra Sekhar College", 
+            "Lalgarh Government College", 
+            "Sankrail Swarnamoyee Sasmal Centenary College"
+        ],
+        "wb-kalimpong": [
+            "Kalimpong College", 
+            "Cluny Women's College", 
+            "Rockvale Management College"
+        ],
+        "wb-kolkata": [
+            "Presidency University", 
+            "Calcutta University", 
+            "Jadavpur University", 
+            "Asutosh College", 
+            "Scottish Church College", 
+            "St. Xavier's College", 
+            "Maulana Azad College", 
+            "Bethune College", 
+            "City College (Amherst Street)", 
+            "Goenka College of Commerce and Business Administration", 
+            "Bangabasi College", 
+            "Vidyasagar College", 
+            "Lady Brabourne College", 
+            "Jaipuria College (Seth Anandram Jaipuria)", 
+            "Surendranath College", 
+            "Loreto College", 
+            "Basanti Devi College"
+        ],
+        "wb-malda": [
+            "Malda College", 
+            "Gour Mahavidyalaya", 
+            "Chanchal College", 
+            "Kaliachak College", 
+            "Malda Women's College", 
+            "Samsi College", 
+            "Harishchandrapur College", 
+            "Gazole Mahavidyalaya", 
+            "Pakuahat Degree College"
+        ],
+        "wb-murshidabad": [
+            "Berhampore Krishnath College", 
+            "Berhampore Girls' College", 
+            "Sripat Singh College (Jiaganj)", 
+            "Kandi Raj College", 
+            "Jangipur College", 
+            "Murshidabad Adarsha Mahavidyalaya", 
+            "Rani Dhanya Kumari College", 
+            "Lalgola College", 
+            "Muzaffar Ahmed Mahavidyalaya (Salar)", 
+            "Subhas Chandra Bose Centenary College"
+        ],
+        "wb-nadia": [
+            "Krishnagar Government College", 
+            "Nabadwip Vidyasagar College", 
+            "Chakdaha College", 
+            "Ranaghat College", 
+            "Kalyani Mahavidyalaya", 
+            "Bethuadahari College", 
+            "Karimpur Pannadevi College", 
+            "Sudhiranjan Lahiri Mahavidyalaya (Majhdia)", 
+            "Tehatta Government College", 
+            "Haringhata Mahavidyalaya"
+        ],
+        "wb-north-24-parganas": [
+            "Barasat Government College", 
+            "Bhairab Ganguly College (Belgharia)", 
+            "Barrackpore Rastraguru Surendranath College", 
+            "Acharya Prafulla Chandra College (APC College, New Barrackpore)", 
+            "Rishi Bankim Chandra College (Naihati)", 
+            "Dum Dum Motijheel College", 
+            "Sarojini Naidu College for Women", 
+            "Hiralal Mazumdar Memorial College for Women (Dakshineswar)", 
+            "Basirhat College", 
+            "Gobardanga Hindu College", 
+            "West Bengal State University (WBSU) campus", 
+            "Taki Government College"
+        ],
+        "wb-paschim-bardhaman": [
+            "Asansol Girls' College", 
+            "Banwarilal Bhalotia College (BB College, Asansol)", 
+            "Bidhan Chandra College (Asansol)", 
+            "Durgapur Government College", 
+            "Michael Madhusudan Memorial College (Durgapur)", 
+            "Durgapur Women's College", 
+            "Raniganj Girls' College", 
+            "Triveni Devi Bhalotia College (Raniganj)"
+        ],
+        "wb-paschim-medinipur": [
+            "Midnapore College", 
+            "Raja Narendra Lal Khan Women's College (Gope College)", 
+            "Vidyasagar Teachers' Training College", 
+            "Kharagpur College", 
+            "Garhbeta College", 
+            "Ghatal Rabindra Satabarsiki Mahavidyalaya", 
+            "Belda College", 
+            "Debra Thana Sahid Kshudiram Smriti Mahavidyalaya", 
+            "Pingla Thana Mahavidyalaya", 
+            "Chandrakona Vidyasagar Mahavidyalaya"
+        ],
+        "wb-purba-bardhaman": [
+            "Burdwan Raj College", 
+            "Maharajadhiraj Uday Chand Women's College (MUC Women's)", 
+            "Vivekananda Mahavidyalaya (Burdwan)", 
+            "Katwa College", 
+            "Kalna College", 
+            "Gushkara College", 
+            "Memari College", 
+            "Syamsundar College", 
+            "Shyamsundar College"
+        ],
+        "wb-purba-medinipur": [
+            "Tamralipta Mahavidyalaya (Tamluk)", 
+            "Panskura Banamali College", 
+            "Haldia Government College", 
+            "Mugberia Gangadhar Mahavidyalaya", 
+            "Egra Sarada Shashi Bhusan College", 
+            "Contai P.K. College (Prabhat Kumar College)", 
+            "Mahishadal Raj College", 
+            "Bajkul Milani Mahavidyalaya", 
+            "Moyna College"
+        ],
+        "wb-purulia": [
+            "Jagannath Kishore College (J.K. College)", 
+            "Nistarini College", 
+            "Raghunathpur College", 
+            "Mahatma Gandhi College (Lalpur)", 
+            "Kashipur Michael Madhusudan Mahavidyalaya", 
+            "Balarampur College", 
+            "Netaji Subhash Ashram Mahavidyalaya"
+        ],
+        "wb-south-24-parganas": [
+            "Baruipur College", 
+            "Sonarpur College", 
+            "Fakir Chand College (Diamond Harbour)", 
+            "Canning College (Bankim Sardar College)", 
+            "Vidyanagar College", 
+            "Dhruba Chand Halder College", 
+            "Sundarban Mahavidyalaya (Kakdwip)", 
+            "Sammilani Mahavidyalaya (Baghajatin)"
+        ],
+        "wb-uttar-dinajpur": [
+            "Raiganj University", 
+            "Kaliyaganj College", 
+            "Islampur College", 
+            "Shree Agrasen Mahavidyalaya (Dalkhola)", 
+            "Dr. Meghnad Saha College (Itahar)", 
+            "Raiganj Surendranath Mahavidyalaya"
+        ]
+    };
+
+    // SFI District Contacts Database (Updated)
+    const helpdeskDistrictContacts = {
+        "wb-alipurduar": { bn: "আলিপুরদুয়ার জেলা", sec: "কমরেড কুণাল ঘোষ", secPhone: "+91 90642 34866", pres: "কমরেড সায়ন সাহা", presPhone: "+91 97352 21810" },
+        "wb-bankura": { bn: "বাঁকুড়া জেলা", sec: "কমরেড সুজিত মুখার্জী", secPhone: "+91 89005 97998", pres: "কমরেড অনির্বাণ গোস্বামী", presPhone: "+91 73194 75895" },
+        "wb-birbhum": { bn: "বীরভূম জেলা", sec: "কমরেড সৌভিক দাসবক্সী", secPhone: "+91 90643 00335", pres: "কমরেড নিশাত হাসান", presPhone: "+91 89183 42889" },
+        "wb-cooch-behar": { bn: "কোচবিহার জেলা", sec: "কমরেড প্রাঞ্জল মিত্র", secPhone: "+91 70017 63075", pres: "কমরেড জিৎ কুমার পাল", presPhone: "+91 87596 34005" },
+        "wb-dakshin-dinajpur": { bn: "দক্ষিণ দিনাজপুর জেলা", sec: "কমরেড বেদত্রয়ী গোস্বামী", secPhone: "+91 81019 14402", pres: "কমরেড উৎপল রাজবংশী", presPhone: "+91 85972 12751" },
+        "wb-darjeeling": { bn: "দার্জিলিং জেলা", sec: "কমরেড অঙ্কিত দে", secPhone: "+91 90645 51177", pres: "কমরেড তন্ময় অধিকারী", presPhone: "+91 76799 18840" },
+        "wb-hooghly": { bn: "হুগলী জেলা", sec: "কমরেড সোমেন মুখার্জী", secPhone: "+91 89450 39994", pres: "কমরেড সুশীল দাস", presPhone: "+91 98365 88188" },
+        "wb-howrah": { bn: "হাওড়া জেলা", sec: "কমরেড মহম্মদ তোমজিদুর", secPhone: "+91 62901 42134", pres: "কমরেড বিপাশা সাহা", presPhone: "+91 62908 81910" },
+        "wb-jalpaiguri": { bn: "জলপাইগুড়ি জেলা", sec: "কমরেড অরিন্দম ঘোষ", secPhone: "+91 97496 12896", pres: "কমরেড সাব্বির হোসেন", presPhone: "+91 89185 40563" },
+        "wb-jhargram": { bn: "ঝাড়গ্রাম জেলা", sec: "কমরেড অমিত মাহাতো", secPhone: "+91 97330 38245", pres: "কমরেড বিশ্বজিৎ হেমব্রম", presPhone: "+91 89726 49210" },
+        "wb-kalimpong": { bn: "কালিম্পং জেলা", sec: "কমরেড নিমা লেপচা", secPhone: "+91 94348 76543", pres: "কমরেড শেরিং ভুটিয়া", presPhone: "+91 95632 10987" },
+        "wb-kolkata": { bn: "কলকাতা জেলা", sec: "কমরেড শুভদীপ বন্দ্যোপাধ্যায়", secPhone: "+91 85840 49326", pres: "কমরেড মহম্মদ হাসিব হোসেন", presPhone: "+91 86172 70482" },
+        "wb-malda": { bn: "মালদা জেলা", sec: "কমরেড দেবজ্যোতি সিংহ", secPhone: "+91 98516 78901", pres: "কমরেড কৌশিক মৈত্র", presPhone: "+91 98512 25516" },
+        "wb-murshidabad": { bn: "মুর্শিদাবাদ জেলা", sec: "কমরেড ইঞ্জামাম হক (রানা)", secPhone: "+91 86531 36498", pres: "কমরেড অদিতি নন্দী", presPhone: "+91 81678 62167" },
+        "wb-nadia": { bn: "নদিয়া জেলা", sec: "কমরেড শৌর্যবন্ত ডি চৌধুরী", secPhone: "+91 87770 73784", pres: "কমরেড সমীর সরকার", presPhone: "+91 97334 06538" },
+        "wb-north-24-parganas": { bn: "উত্তর ২৪ পরগনা জেলা", sec: "কমরেড আকাশ কর", secPhone: "+91 82508 43689", pres: "কমরেড দীপ্তজিৎ দাস", presPhone: "+91 90071 34070" },
+        "wb-paschim-bardhaman": { bn: "পশ্চিম বর্ধমান জেলা", sec: "কমরেড সুদীপ কুড়ি", secPhone: "+91 70013 87318", pres: "কমরেড সুপ্রিয়ম চ্যাটার্জী", presPhone: "+91 99334 27067" },
+        "wb-paschim-medinipur": { bn: "পশ্চিম মেদিনীপুর জেলা", sec: "কমরেড রণিত বেরা", secPhone: "+91 77973 40540", pres: "কমরেড সুকুমার মাজি", presPhone: "+91 97495 01875" },
+        "wb-purba-bardhaman": { bn: "পূর্ব বর্ধমান জেলা", sec: "কমরেড উষসী রায়চৌধুরী", secPhone: "+91 95646 26803", pres: "কমরেড প্রবীর ভৌমিক", presPhone: "+91 96475 52146" },
+        "wb-purba-medinipur": { bn: "পূর্ব মেদিনীপুর জেলা", sec: "কমরেড জাকির হোসেন মল্লিক", secPhone: "+91 97352 43052", pres: "কমরেড সৈকত মাজি", presPhone: "+91 97338 79488" },
+        "wb-purulia": { bn: "পুরুলিয়া জেলা", sec: "কমরেড সায়ন্তন ঘোষ", secPhone: "+91 86370 83595", pres: "কমরেড পবিত্র ব্যানার্জি", presPhone: "+91 90644 85906" },
+        "wb-south-24-parganas": { bn: "দক্ষিণ ২৪ পরগনা জেলা", sec: "কমরেড অনিরুদ্ধ চক্রবর্তী", secPhone: "+91 82505 61522", pres: "কমরেড ঋজুরেখ দাশগুপ্ত", presPhone: "+91 84203 88715" },
+        "wb-uttar-dinajpur": { bn: "উত্তর দিনাজপুর জেলা", sec: "কমরেড কুশান ভৌমিক", secPhone: "+91 75011 38003", pres: "কমরেড নুর আলম", presPhone: "+91 83459 33770" }
+    };
+
     // Initialize dynamic forms CAPTCHAs
     const feedbackForm = document.getElementById('feedback-form');
     if (feedbackForm) initCaptchaForForm(feedbackForm);
@@ -412,7 +693,121 @@ const initAllForms = () => {
     if (membershipForm) initCaptchaForForm(membershipForm);
 
     const helpdeskForm = document.getElementById('helpdesk-inquiry-form');
-    if (helpdeskForm) initCaptchaForForm(helpdeskForm);
+    if (helpdeskForm) {
+        initCaptchaForForm(helpdeskForm);
+        
+        const districtInput = document.getElementById('helpdesk-district');
+        const institutionInput = document.getElementById('helpdesk-institution');
+        const otherWrapper = document.getElementById('other-institution-wrapper');
+        const otherInput = document.getElementById('helpdesk-institution-other');
+        
+        if (districtInput && institutionInput) {
+            districtInput.addEventListener('change', function() {
+                const districtVal = districtInput.value;
+                institutionInput.innerHTML = '<option value="" disabled selected>কলেজ/বিশ্ববিদ্যালয় নির্বাচন করুন (Select College/Uni)</option>';
+                
+                const colleges = districtColleges[districtVal] || [];
+                colleges.forEach(college => {
+                    const opt = document.createElement('option');
+                    opt.value = college;
+                    opt.textContent = college;
+                    institutionInput.appendChild(opt);
+                });
+                
+                // Add 'Other' option
+                const otherOpt = document.createElement('option');
+                otherOpt.value = "Other";
+                otherOpt.textContent = "অন্যান্য (Other)";
+                institutionInput.appendChild(otherOpt);
+                
+                // Hide other wrapper
+                if (otherWrapper) {
+                    otherWrapper.classList.add('d-none');
+                    if (otherInput) otherInput.required = false;
+                }
+            });
+            
+            institutionInput.addEventListener('change', function() {
+                if (institutionInput.value === "Other") {
+                    if (otherWrapper) {
+                        otherWrapper.classList.remove('d-none');
+                        if (otherInput) {
+                            otherInput.required = true;
+                            otherInput.focus();
+                        }
+                    }
+                } else {
+                    if (otherWrapper) {
+                        otherWrapper.classList.add('d-none');
+                        if (otherInput) otherInput.required = false;
+                    }
+                }
+            });
+        }
+    }
+
+    // District map click details modal handler
+    const districtContactModalEl = document.getElementById('districtContactModal');
+    if (districtContactModalEl) {
+        const paths = document.querySelectorAll(".wb-district-path");
+        paths.forEach(path => {
+            path.addEventListener('click', function() {
+                const id = path.getAttribute('id');
+                const data = helpdeskDistrictContacts[id];
+                if (data) {
+                    // Update active path states visually
+                    paths.forEach(p => p.classList.remove('active'));
+                    path.classList.add('active');
+
+                    const modalDistrictName = document.getElementById('contact-modal-district-name');
+                    const modalSecName = document.getElementById('contact-modal-sec-name');
+                    const modalSecPhone = document.getElementById('contact-modal-sec-phone');
+                    const modalSecCall = document.getElementById('contact-modal-sec-call');
+                    const modalSecWa = document.getElementById('contact-modal-sec-wa');
+
+                    const modalPresName = document.getElementById('contact-modal-pres-name');
+                    const modalPresPhone = document.getElementById('contact-modal-pres-phone');
+                    const modalPresCall = document.getElementById('contact-modal-pres-call');
+                    const modalPresWa = document.getElementById('contact-modal-pres-wa');
+
+                    if (modalDistrictName) modalDistrictName.textContent = data.bn;
+                    if (modalSecName) modalSecName.textContent = data.sec || 'শীঘ্রই আপডেট হবে';
+                    if (modalSecPhone) modalSecPhone.textContent = data.secPhone || 'শীঘ্রই আপডেট হবে';
+                    
+                    const secPhoneClean = data.secPhone ? data.secPhone.replace(/\D/g, '') : '';
+                    const secPhoneFormatted = secPhoneClean.length === 10 ? '91' + secPhoneClean : secPhoneClean;
+                    if (modalSecCall) {
+                        modalSecCall.href = data.secPhone ? 'tel:' + data.secPhone.replace(/\s+/g, '') : '#';
+                        modalSecCall.style.display = data.secPhone ? 'inline-block' : 'none';
+                    }
+                    if (modalSecWa) {
+                        const secMsg = `নমস্কার, আমি ভারতের ছাত্র ফেডারেশন (SFI) পশ্চিমবঙ্গ ভর্তি হেল্পডেস্ক থেকে আপনার নম্বরটি পেয়েছি। আমি ভর্তি সংক্রান্ত বিষয়ে কিছু জিজ্ঞাসা করতে চাই।`;
+                        modalSecWa.href = secPhoneFormatted ? `https://wa.me/${secPhoneFormatted}?text=${encodeURIComponent(secMsg)}` : '#';
+                        modalSecWa.style.display = secPhoneFormatted ? 'inline-block' : 'none';
+                    }
+
+                    if (modalPresName) modalPresName.textContent = data.pres || 'শীঘ্রই আপডেট হবে';
+                    if (modalPresPhone) modalPresPhone.textContent = data.presPhone || 'শীঘ্রই আপডেট হবে';
+                    
+                    const presPhoneClean = data.presPhone ? data.presPhone.replace(/\D/g, '') : '';
+                    const presPhoneFormatted = presPhoneClean.length === 10 ? '91' + presPhoneClean : presPhoneClean;
+                    if (modalPresCall) {
+                        modalPresCall.href = data.presPhone ? 'tel:' + data.presPhone.replace(/\s+/g, '') : '#';
+                        modalPresCall.style.display = data.presPhone ? 'inline-block' : 'none';
+                    }
+                    if (modalPresWa) {
+                        const presMsg = `নমস্কার, আমি ভারতের ছাত্র ফেডারেশন (SFI) পশ্চিমবঙ্গ ভর্তি হেল্পডেস্ক থেকে আপনার নম্বরটি পেয়েছি। আমি ভর্তি সংক্রান্ত বিষয়ে কিছু জিজ্ঞাসা করতে চাই।`;
+                        modalPresWa.href = presPhoneFormatted ? `https://wa.me/${presPhoneFormatted}?text=${encodeURIComponent(presMsg)}` : '#';
+                        modalPresWa.style.display = presPhoneFormatted ? 'inline-block' : 'none';
+                    }
+
+                    // Show Modal
+                    const contactModal = new bootstrap.Modal(districtContactModalEl);
+                    contactModal.show();
+                }
+            });
+        });
+    }
 
     // ==========================================
     // 1. Unified Newsletter Forms (Footer)
@@ -829,33 +1224,55 @@ const initAllForms = () => {
             e.preventDefault();
 
             const nameInput = document.getElementById('helpdesk-name');
+            const emailInput = document.getElementById('helpdesk-email');
             const phoneInput = document.getElementById('helpdesk-phone');
+            const whatsappInput = document.getElementById('helpdesk-whatsapp');
+            const courseInput = document.getElementById('helpdesk-course');
             const districtInput = document.getElementById('helpdesk-district');
             const institutionInput = document.getElementById('helpdesk-institution');
+            const otherInput = document.getElementById('helpdesk-institution-other');
             const messageInput = document.getElementById('helpdesk-message');
             const submitBtn = helpdeskForm.querySelector('button[type="submit"]');
 
-            if (!nameInput || !phoneInput || !districtInput || !messageInput || !submitBtn) return;
+            if (!nameInput || !emailInput || !phoneInput || !whatsappInput || !courseInput || !districtInput || !institutionInput || !messageInput || !submitBtn) return;
 
             const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
             const phone = phoneInput.value.trim();
+            const whatsapp = whatsappInput.value.trim();
+            const course = courseInput.value.trim();
             const district = districtInput.value.trim();
-            const institution = institutionInput ? institutionInput.value.trim() : "";
+            let institution = institutionInput.value.trim();
+            if (institution === "Other" && otherInput) {
+                institution = otherInput.value.trim();
+            }
             const message = messageInput.value.trim();
 
             if (!validateName(name)) {
                 highlightInvalidInput(nameInput);
                 return;
             }
+            if (!validateEmail(email)) {
+                highlightInvalidInput(emailInput);
+                return;
+            }
             if (!validatePhone(phone)) {
                 highlightInvalidInput(phoneInput);
                 return;
             }
-            if (district.length < 2 || district.length > 100 || /[<>]/.test(district)) {
+            if (!validatePhone(whatsapp)) {
+                highlightInvalidInput(whatsappInput);
+                return;
+            }
+            if (!course) {
+                highlightInvalidInput(courseInput);
+                return;
+            }
+            if (!district) {
                 highlightInvalidInput(districtInput);
                 return;
             }
-            if (institution && (institution.length > 100 || /[<>]/.test(institution))) {
+            if (!institution || institution.length > 100 || /[<>]/.test(institution)) {
                 highlightInvalidInput(institutionInput);
                 return;
             }
@@ -872,26 +1289,41 @@ const initAllForms = () => {
 
             setButtonLoading(submitBtn, originalHtml, "আবেদনপত্র পাঠানো হচ্ছে...");
 
-            if (isConfigPlaceholder()) {
-                console.warn("Using demo mode. Fill in Firebase and Apps Script details to connect live sheets/db.");
-                setTimeout(() => {
-                    setButtonSuccess(submitBtn, "সফলভাবে সাবমিট হয়েছে!");
-                    helpdeskForm.reset();
-                    refreshCaptchaForForm(helpdeskForm);
-                    setTimeout(() => resetButtonState(submitBtn, originalHtml, originalStyles), 3500);
-                }, 1000);
-                return;
-            }
-
             const payload = {
                 name: sanitizeInput(name),
+                email: sanitizeInput(email),
                 phone: sanitizeInput(phone),
+                whatsapp: sanitizeInput(whatsapp),
+                course: sanitizeInput(course),
                 district: sanitizeInput(district),
                 institution: sanitizeInput(institution),
                 message: sanitizeInput(message)
             };
 
-            try {
+            // Build the formatted WhatsApp message
+            const districtDataVal = helpdeskDistrictContacts[district];
+            const districtBn = districtDataVal ? districtDataVal.bn : district;
+            
+            const waMsg = `*ভর্তি হেল্পডেস্ক আবেদন*\n` +
+                          `----------------------------------------\n` +
+                          `👤 *নাম:* ${payload.name}\n` +
+                          `✉️ *ইমেল:* ${payload.email}\n` +
+                          `📞 *ফোন নম্বর:* ${payload.phone}\n` +
+                          `💬 *হোয়াটসঅ্যাপ:* ${payload.whatsapp}\n` +
+                          `📍 *জেলা:* ${districtBn}\n` +
+                          `🏛️ *কলেজ/বিশ্ববিদ্যালয়:* ${payload.institution}\n` +
+                          `🎓 *কোর্স/বিষয়:* ${payload.course}\n` +
+                          `❓ *জিজ্ঞাসা/সমস্যা:* ${payload.message}\n` +
+                          `----------------------------------------\n` +
+                          `(SFI পশ্চিমবঙ্গ ভর্তি হেল্পডেস্ক পোর্টাল থেকে প্রেরিত)`;
+
+            // Helper to submit local data
+            const submitPayload = async () => {
+                if (isConfigPlaceholder()) {
+                    console.warn("Using demo mode. Fill in Firebase and Apps Script details to connect live sheets/db.");
+                    return true;
+                }
+                
                 // Write to Firestore
                 if (db) {
                     try {
@@ -916,10 +1348,63 @@ const initAllForms = () => {
                         data: payload
                     })
                 });
+                return true;
+            };
+
+            try {
+                await submitPayload();
 
                 // UI Success state
                 setButtonSuccess(submitBtn, "সফলভাবে সাবমিট হয়েছে!");
+                
+                // Populate Modal Elements
+                const modalDistrictName = document.getElementById('wa-modal-district-name');
+                const modalSecName = document.getElementById('wa-modal-sec-name');
+                const modalSecBtn = document.getElementById('wa-modal-sec-btn');
+                const modalPresName = document.getElementById('wa-modal-pres-name');
+                const modalPresBtn = document.getElementById('wa-modal-pres-btn');
+
+                if (modalDistrictName) modalDistrictName.textContent = districtBn;
+
+                if (districtDataVal) {
+                    if (modalSecName) modalSecName.textContent = districtDataVal.sec || 'জেলা সম্পাদক';
+                    if (modalPresName) modalPresName.textContent = districtDataVal.pres || 'জেলা সভাপতি';
+
+                    // Format phone numbers for wa.me API
+                    const secPhoneClean = districtDataVal.secPhone ? districtDataVal.secPhone.replace(/\D/g, '') : '';
+                    const secPhoneFormatted = secPhoneClean.length === 10 ? '91' + secPhoneClean : secPhoneClean;
+                    if (modalSecBtn && secPhoneFormatted) {
+                        modalSecBtn.href = `https://wa.me/${secPhoneFormatted}?text=${encodeURIComponent(waMsg)}`;
+                        modalSecBtn.style.display = 'inline-flex';
+                    } else if (modalSecBtn) {
+                        modalSecBtn.style.display = 'none';
+                    }
+
+                    const presPhoneClean = districtDataVal.presPhone ? districtDataVal.presPhone.replace(/\D/g, '') : '';
+                    const presPhoneFormatted = presPhoneClean.length === 10 ? '91' + presPhoneClean : presPhoneClean;
+                    if (modalPresBtn && presPhoneFormatted) {
+                        modalPresBtn.href = `https://wa.me/${presPhoneFormatted}?text=${encodeURIComponent(waMsg)}`;
+                        modalPresBtn.style.display = 'inline-flex';
+                    } else if (modalPresBtn) {
+                        modalPresBtn.style.display = 'none';
+                    }
+
+                    // Show Bootstrap Modal
+                    const waModal = new bootstrap.Modal(document.getElementById('whatsappModal'));
+                    waModal.show();
+
+                    // Auto-open Secretary's WhatsApp chat
+                    if (secPhoneFormatted) {
+                        setTimeout(() => {
+                            window.open(`https://wa.me/${secPhoneFormatted}?text=${encodeURIComponent(waMsg)}`, '_blank');
+                        }, 800);
+                    }
+                }
+
                 helpdeskForm.reset();
+                if (otherInput && otherInput.parentNode) {
+                    otherInput.parentNode.classList.add('d-none');
+                }
                 refreshCaptchaForForm(helpdeskForm);
                 setTimeout(() => resetButtonState(submitBtn, originalHtml, originalStyles), 3500);
 
