@@ -190,7 +190,7 @@
                             <div class="article-spinner"></div>
                             <span class="small opacity-75">নিবন্ধ লোড হচ্ছে...</span>
                         </div>
-                        <iframe src="" class="article-modal-iframe" id="articleModalIframe"></iframe>
+                        <iframe src="" class="article-modal-iframe" id="articleModalIframe" title="Article Viewer"></iframe>
                     </div>
                 </div>
             </div>

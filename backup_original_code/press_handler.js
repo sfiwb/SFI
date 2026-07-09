@@ -512,9 +512,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="step-item d-flex align-items-start ${index < recentItems.length - 1 ? 'border-bottom border-secondary border-opacity-25 pb-3 mb-3' : ''}">
                     <div class="step-number text-danger fw-bold fs-2 me-3">${stepNum}</div>
                     <div class="step-content flex-grow-1">
-                        <h5 class="fw-semibold text-header mb-1" style="font-family: 'Noto Serif Bengali', 'Roboto', sans-serif;">
+                        <h4 class="fw-semibold text-header mb-1" style="font-family: 'Noto Serif Bengali', 'Roboto', sans-serif; font-size: 1.1rem;">
                             <a href="#" class="text-header hover-text-danger view-pdf-link" data-id="${item.id}">${item.title}</a>
-                        </h5>
+                        </h4>
                         <p class="small text-body mb-1" style="font-family: 'Noto Serif Bengali', sans-serif; line-height: 1.6;">${item.intro}</p>
                         <div class="small text-muted d-flex align-items-center justify-content-between flex-wrap gap-2 mt-2">
                             <div>
