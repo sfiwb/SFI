@@ -306,7 +306,7 @@
                             <div>
                                 <a href="${safeLink}" class="d-block mb-3 article-trigger">
                                     <div class="ratio ratio-16x9 rounded overflow-hidden border border-secondary border-opacity-25">
-                                        <img src="${safeImageUrl}" alt="${safeTitle}" class="img-fluid object-fit-cover w-100 h-100">
+                                        <img src="${safeImageUrl}" alt="${safeTitle}" class="img-fluid object-fit-cover w-100 h-100" loading="lazy">
                                     </div>
                                 </a>
                                 <h5 class="fw-bold text-header mb-2">
