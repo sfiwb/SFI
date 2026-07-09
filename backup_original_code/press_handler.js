@@ -484,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="badge bg-danger mb-3 px-3 py-1 text-uppercase">Featured Statement</span>
                         <h3 class="fw-bold text-header mb-3" style="font-family: 'Noto Serif Bengali', 'Roboto', sans-serif;">${featuredItem.title}</h3>
                         <div class="ratio ratio-21x9 mb-3 rounded overflow-hidden border border-secondary border-opacity-25">
-                            <img src="${featuredItem.image || 'assets/images/protest.png'}" alt="Featured Press Image" class="img-fluid w-100 object-fit-cover">
+                            <img src="${featuredItem.image || 'assets/images/protest.webp'}" alt="Featured Press Image" class="img-fluid w-100 object-fit-cover">
                         </div>
                         <p class="text-body leading-relaxed mb-3" style="font-family: 'Noto Serif Bengali', sans-serif; font-size: 0.95rem;">${featuredItem.intro}</p>
                         <div class="small text-muted mb-2"><i class="bi bi-clock me-1"></i> <strong>প্রকাশ:</strong> ${featuredItem.date}</div>

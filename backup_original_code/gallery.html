@@ -26,13 +26,13 @@
     <meta property="og:url" content="https://sfiwb.org/gallery.html" />
     <meta property="og:title" content="Photo Gallery & Movement Archives | SFI West Bengal" />
     <meta property="og:description" content="Explore the visual history of student struggles in West Bengal through our official movement photo gallery." />
-    <meta property="og:image" content="assets/images/protest.png" />
+    <meta property="og:image" content="assets/images/protest.webp" />
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Photo Gallery & Movement Archives | SFI West Bengal" />
     <meta name="twitter:description" content="Explore the visual history of student struggles in West Bengal through our official movement photo gallery." />
-    <meta name="twitter:image" content="assets/images/protest.png" />
+    <meta name="twitter:image" content="assets/images/protest.webp" />
 
     <!-- Global Favicon Settings (Consistent across all pages) -->
     <link rel="icon" type="image/svg+xml"
@@ -258,8 +258,8 @@
                 <!-- Logo Image Toggler -->
                 <div class="col-10 col-xl-4">
                     <a class="logo d-flex align-items-center me-auto" href="index.html">
-                        <img alt="SFI WB State Committee Logo" class="img-fluid logo-img" id="siteLogoImg"
-                            src="assets/SFI-WB-WEB-LOGO-DARK.png" />
+                        <img id="siteLogoImg" width="415" height="52" alt="SFI WB State Committee Logo" class="img-fluid logo-img" 
+                            src="assets/SFI-WB-WEB-LOGO-DARK.webp" />
                     </a>
                 </div>
                 <!-- Navigation menu (Cleaned, simplified, and inline theme toggler) -->
@@ -353,28 +353,28 @@
                 </div>
                 <div class="photo-grid" id="photo-grid">
                     <div class="photo-card" data-category="protest">
-                        <img alt="এসএফআই আন্দোলন" loading="lazy" src="assets/images/protest.png" />
+                        <img alt="এসএফআই আন্দোলন" loading="lazy" src="assets/images/protest.webp" />
                         <div class="photo-info">
                             <h3>ছাত্র অধিকার রক্ষার আন্দোলন</h3>
                             <span>📍 পশ্চিমবঙ্গ • ২০২৬</span>
                         </div>
                     </div>
                     <div class="photo-card" data-category="relief">
-                        <img alt="এসএফআই ত্রাণ" loading="lazy" src="assets/images/relief.png" />
+                        <img alt="এসএফআই ত্রাণ" loading="lazy" src="assets/images/relief.webp" />
                         <div class="photo-info">
                             <h3>বন্যাপীড়িতদের পাশে এসএফআই</h3>
                             <span>📍 পশ্চিমবঙ্গ • ২০২৫</span>
                         </div>
                     </div>
                     <div class="photo-card" data-category="education">
-                        <img alt="পাঠচক্র" loading="lazy" src="assets/images/study.png" />
+                        <img alt="পাঠচক্র" loading="lazy" src="assets/images/study.webp" />
                         <div class="photo-info">
                             <h3>বিজ্ঞান-যুক্তিবাদ পাঠচক্র</h3>
                             <span>📍 কলকাতা • ২০২৬</span>
                         </div>
                     </div>
                     <div class="photo-card" data-category="conference">
-                        <img alt="সম্মেলন" loading="lazy" src="assets/images/conference.png" />
+                        <img alt="সম্মেলন" loading="lazy" src="assets/images/conference.webp" />
                         <div class="photo-info">
                             <h3>রাজ্য সম্মেলন ২০২৫</h3>
                             <span>📍 কলকাতা • ২০২৫</span>
@@ -660,12 +660,12 @@
                     if (themeIcon) {
                         themeIcon.className = 'fas fa-sun text-warning';
                     }
-                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO-DARK.png';
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO-DARK.webp';
                 } else {
                     if (themeIcon) {
                         themeIcon.className = 'fas fa-moon text-dark';
                     }
-                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO.png';
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO.webp';
                 }
             }
 
@@ -684,9 +684,9 @@
             applyTheme(savedTheme);
         });
     </script> <!-- Firebase SDKs and Forms Handler -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js" integrity="sha384-4gq9w/AGf72FXdNQ3Kn3EqWP7633NbCMjpYHt8YCZyXf23o2opcuAr4cif41tLrC" crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js" integrity="sha384-Qgqc/HETq5lqJnRDqWnV1AZGw3pgMYNUVaqLLN1W/55XuWK94epwbCQrOvdoh1Zo" crossorigin="anonymous"></script>
-    <script src="forms_handler.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js" integrity="sha384-4gq9w/AGf72FXdNQ3Kn3EqWP7633NbCMjpYHt8YCZyXf23o2opcuAr4cif41tLrC" crossorigin="anonymous"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js" integrity="sha384-Qgqc/HETq5lqJnRDqWnV1AZGw3pgMYNUVaqLLN1W/55XuWK94epwbCQrOvdoh1Zo" crossorigin="anonymous"></script>
+    <script defer src="forms_handler.js"></script>
 </body>
 
 </html>

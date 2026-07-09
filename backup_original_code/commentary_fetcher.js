@@ -387,9 +387,9 @@
      */
     function getAuthorAvatar(post) {
         if (post._embedded && post._embedded.author && post._embedded.author[0] && post._embedded.author[0].avatar_urls) {
-            return post._embedded.author[0].avatar_urls['96'] || post._embedded.author[0].avatar_urls['48'] || 'assets/images/c_bhaskaran.png';
+            return post._embedded.author[0].avatar_urls['96'] || post._embedded.author[0].avatar_urls['48'] || 'assets/images/c_bhaskaran.webp';
         }
-        return 'assets/images/c_bhaskaran.png';
+        return 'assets/images/c_bhaskaran.webp';
     }
 
     /**
@@ -449,10 +449,10 @@
 
         // Fallback placeholder images
         const fallbacks = [
-            'assets/images/study.png',
-            'assets/images/protest.png',
-            'assets/images/sfi_flag.png',
-            'assets/images/relief.png'
+            'assets/images/study.webp',
+            'assets/images/protest.webp',
+            'assets/images/sfi_flag.webp',
+            'assets/images/relief.webp'
         ];
         return fallbacks[post.id % fallbacks.length];
     }

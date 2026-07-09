@@ -21,7 +21,7 @@
     <meta property="og:url" content="https://sfiwb.org/card-generator.html" />
     <meta property="og:title" content="Card Generator | SFI West Bengal State Committee | Official Website" />
     <meta property="og:description" content="Generate and download your SFI Supporter Card or Campaign Poster to share on social media." />
-    <meta property="og:image" content="assets/images/protest.png" />
+    <meta property="og:image" content="assets/images/protest.webp" />
 
     <!-- Global Favicon Settings -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%23ff2d3c%22/><polygon points=%2250,18 58,40 82,40 62,54 70,78 50,62 30,78 38,54 18,40 42,40%22 fill=%22%23ffffff%22/></svg>">
@@ -195,7 +195,7 @@
             <div class="row w-100 align-items-center">
                 <div class="col-10 col-xl-4">
                     <a href="index.html" class="logo d-flex align-items-center me-auto">
-                        <img id="siteLogoImg" src="assets/SFI-WB-WEB-LOGO-DARK.png" alt="SFI WB State Committee Logo" class="img-fluid logo-img">
+                        <img id="siteLogoImg" width="415" height="52" src="assets/SFI-WB-WEB-LOGO-DARK.webp" alt="SFI WB State Committee Logo" class="img-fluid logo-img">
                     </a>
                 </div>
                 <div class="col-2 col-xl-8 text-end p-0">
@@ -658,10 +658,10 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" integrity="sha384-n1AULnKdMJlK1oQCLNDL9qZsDgXtH6jRYFCpBtWFc+a9Yve0KSoMn575rk755NJZ" crossorigin="anonymous"></script>
 
     <!-- Firebase SDKs and Forms Handler -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js" integrity="sha384-4gq9w/AGf72FXdNQ3Kn3EqWP7633NbCMjpYHt8YCZyXf23o2opcuAr4cif41tLrC" crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js" integrity="sha384-Qgqc/HETq5lqJnRDqWnV1AZGw3pgMYNUVaqLLN1W/55XuWK94epwbCQrOvdoh1Zo" crossorigin="anonymous"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js" integrity="sha384-4gq9w/AGf72FXdNQ3Kn3EqWP7633NbCMjpYHt8YCZyXf23o2opcuAr4cif41tLrC" crossorigin="anonymous"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js" integrity="sha384-Qgqc/HETq5lqJnRDqWnV1AZGw3pgMYNUVaqLLN1W/55XuWK94epwbCQrOvdoh1Zo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-    <script src="forms_handler.js"></script>
+    <script defer src="forms_handler.js"></script>
 
     <!-- Global Theme Switcher and Mouse Glow script -->
     <script>
@@ -706,10 +706,10 @@
                 htmlElement.setAttribute('data-theme', themeName);
                 if (themeName === 'dark') {
                     if (themeIcon) themeIcon.className = 'fas fa-sun text-warning';
-                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO-DARK.png';
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO-DARK.webp';
                 } else {
                     if (themeIcon) themeIcon.className = 'fas fa-moon text-dark';
-                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO.png';
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO.webp';
                 }
             }
 

@@ -479,8 +479,8 @@
             <div class="row w-100 align-items-center">
                 <div class="col-10 col-xl-4">
                     <a class="logo d-flex align-items-center me-auto" href="index.html">
-                        <img alt="SFI WB State Committee Logo" class="img-fluid logo-img" id="siteLogoImg"
-                            src="assets/SFI-WB-WEB-LOGO-DARK.png" />
+                        <img id="siteLogoImg" width="415" height="52" alt="SFI WB State Committee Logo" class="img-fluid logo-img" 
+                            src="assets/SFI-WB-WEB-LOGO-DARK.webp" />
                     </a>
                 </div>
                 <div class="col-2 col-xl-8 text-end p-0">
@@ -732,7 +732,7 @@
     
     <!-- Include the generated search index -->
     <script src="search_data.js"></script>
-    <script src="forms_handler.js"></script>
+    <script defer src="forms_handler.js"></script>
     
     <!-- Search Script -->
     <script>
@@ -812,10 +812,10 @@
                 htmlElement.setAttribute('data-theme', themeName);
                 if (themeName === 'dark') {
                     if (themeIcon) themeIcon.className = 'fas fa-sun text-warning';
-                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO-DARK.png';
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO-DARK.webp';
                 } else {
                     if (themeIcon) themeIcon.className = 'fas fa-moon text-dark';
-                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO.png';
+                    if (logoImg) logoImg.src = 'assets/SFI-WB-WEB-LOGO.webp';
                 }
             }
 
