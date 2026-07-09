@@ -1156,16 +1156,9 @@ const initAllForms = () => {
 
             setButtonLoading(submitBtn, originalHtml, "আবেদনপত্র পাঠানো হচ্ছে...");
 
-            if (isConfigPlaceholder()) {
-                console.warn("Using demo mode. Fill in Firebase and Apps Script details to connect live sheets/db.");
-                setTimeout(() => {
-                    setButtonSuccess(submitBtn, "আবেদনপত্র পাঠানো হয়েছে!");
-                    membershipForm.reset();
-                    refreshCaptchaForForm(membershipForm);
-                    setTimeout(() => resetButtonState(submitBtn, originalHtml, originalStyles), 3500);
-                }, 1000);
-                return;
-            }
+            // Capture date & time in Indian Timezone
+            const now = new Date();
+            const formattedDateTime = now.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' });
 
             const payload = {
                 name: sanitizeInput(name),
@@ -1176,7 +1169,28 @@ const initAllForms = () => {
                 message: sanitizeInput(message)
             };
 
-            try {
+            // Build formatted WhatsApp message
+            const districtDataVal = helpdeskDistrictContacts[district];
+            const districtBn = districtDataVal ? districtDataVal.bn : district;
+
+            const waMsg = `*সদস্যপদ আবেদন (Membership Application)*\n` +
+                          `----------------------------------------\n` +
+                          `👤 *নাম:* ${payload.name}\n` +
+                          `✉️ *ইমেল:* ${payload.email}\n` +
+                          `📞 *ফোন নম্বর:* ${payload.phone}\n` +
+                          `📍 *জেলা:* ${districtBn}\n` +
+                          `🏛️ *শিক্ষা প্রতিষ্ঠান:* ${payload.institution}\n` +
+                          `💬 *বার্তা/কারণ:* ${payload.message || 'N/A'}\n` +
+                          `📅 *আবেদনের সময়:* ${formattedDateTime}\n` +
+                          `----------------------------------------\n` +
+                          `(SFI পশ্চিমবঙ্গ সদস্যপদ পোর্টাল থেকে প্রেরিত)`;
+
+            const submitPayload = async () => {
+                if (isConfigPlaceholder()) {
+                    console.warn("Using demo mode. Fill in Firebase and Apps Script details to connect live sheets/db.");
+                    return true;
+                }
+                
                 // Write to Firestore
                 if (db) {
                     try {
@@ -1201,9 +1215,59 @@ const initAllForms = () => {
                         data: payload
                     })
                 });
+                return true;
+            };
+
+            try {
+                await submitPayload();
 
                 // UI Success state
                 setButtonSuccess(submitBtn, "আবেদনপত্র পাঠানো হয়েছে!");
+                
+                // Populate Modal Elements
+                const modalDistrictName = document.getElementById('wa-modal-district-name');
+                const modalSecName = document.getElementById('wa-modal-sec-name');
+                const modalSecBtn = document.getElementById('wa-modal-sec-btn');
+                const modalPresName = document.getElementById('wa-modal-pres-name');
+                const modalPresBtn = document.getElementById('wa-modal-pres-btn');
+
+                if (modalDistrictName) modalDistrictName.textContent = districtBn;
+
+                if (districtDataVal) {
+                    if (modalSecName) modalSecName.textContent = districtDataVal.sec || 'জেলা সম্পাদক';
+                    if (modalPresName) modalPresName.textContent = districtDataVal.pres || 'জেলা সভাপতি';
+
+                    // Format phone numbers for wa.me API
+                    const secPhoneClean = districtDataVal.secPhone ? districtDataVal.secPhone.replace(/\D/g, '') : '';
+                    const secPhoneFormatted = secPhoneClean.length === 10 ? '91' + secPhoneClean : secPhoneClean;
+                    if (modalSecBtn && secPhoneFormatted) {
+                        modalSecBtn.href = `https://wa.me/${secPhoneFormatted}?text=${encodeURIComponent(waMsg)}`;
+                        modalSecBtn.style.display = 'inline-flex';
+                    } else if (modalSecBtn) {
+                        modalSecBtn.style.display = 'none';
+                    }
+
+                    const presPhoneClean = districtDataVal.presPhone ? districtDataVal.presPhone.replace(/\D/g, '') : '';
+                    const presPhoneFormatted = presPhoneClean.length === 10 ? '91' + presPhoneClean : presPhoneClean;
+                    if (modalPresBtn && presPhoneFormatted) {
+                        modalPresBtn.href = `https://wa.me/${presPhoneFormatted}?text=${encodeURIComponent(waMsg)}`;
+                        modalPresBtn.style.display = 'inline-flex';
+                    } else if (modalPresBtn) {
+                        modalPresBtn.style.display = 'none';
+                    }
+
+                    // Show Bootstrap Modal
+                    const waModal = new bootstrap.Modal(document.getElementById('whatsappModal'));
+                    waModal.show();
+
+                    // Auto-open Secretary's WhatsApp chat
+                    if (secPhoneFormatted) {
+                        setTimeout(() => {
+                            window.open(`https://wa.me/${secPhoneFormatted}?text=${encodeURIComponent(waMsg)}`, '_blank');
+                        }, 800);
+                    }
+                }
+
                 membershipForm.reset();
                 refreshCaptchaForForm(membershipForm);
                 setTimeout(() => resetButtonState(submitBtn, originalHtml, originalStyles), 3500);

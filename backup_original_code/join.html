@@ -406,29 +406,29 @@
                                 <label for="user-district">জেলা (Your District) *</label>
                                 <select class="form-select" id="user-district" required="">
                                     <option disabled="" selected="" value="">জেলা নির্বাচন করুন</option>
-                                    <option value="kolkata">কলকাতা</option>
-                                    <option value="howrah">হাওড়া</option>
-                                    <option value="hooghly">হুগলী</option>
-                                    <option value="north-24-pgs">উত্তর ২৪ পরগনা</option>
-                                    <option value="south-24-pgs">দক্ষিণ ২৪ পরগনা</option>
-                                    <option value="purba-bardhaman">পূর্ব বর্ধমান</option>
-                                    <option value="paschim-bardhaman">পশ্চিম বর্ধমান</option>
-                                    <option value="nadia">নদিয়া</option>
-                                    <option value="paschim-medinipur">পশ্চিম মেদিনীপুর</option>
-                                    <option value="purba-medinipur">পূর্ব মেদিনীপুর</option>
-                                    <option value="murshidabad">মুর্শিদাবাদ</option>
-                                    <option value="malda">মালদা</option>
-                                    <option value="darjeeling">দার্জিলিং</option>
-                                    <option value="jalpaiguri">জলপাইগুড়ি</option>
-                                    <option value="alipurduar">আলিপুরদুয়ার</option>
-                                    <option value="coochbehar">কোচবিহার</option>
-                                    <option value="kalimpong">কালিম্পং</option>
-                                    <option value="uttar-dinajpur">উত্তর দিনাজপুর</option>
-                                    <option value="dakshin-dinajpur">দক্ষিণ দিনাজপুর</option>
-                                    <option value="purulia">পুরুলিয়া</option>
-                                    <option value="bankura">বাঁকুড়া</option>
-                                    <option value="birbhum">বীরভূম</option>
-                                    <option value="jhargram">ঝাড়গ্রাম</option>
+                                    <option value="wb-kolkata">কলকাতা</option>
+                                    <option value="wb-howrah">হাওড়া</option>
+                                    <option value="wb-hooghly">হুগলী</option>
+                                    <option value="wb-north-24-parganas">উত্তর ২৪ পরগনা</option>
+                                    <option value="wb-south-24-parganas">দক্ষিণ ২৪ পরগনা</option>
+                                    <option value="wb-purba-bardhaman">পূর্ব বর্ধমান</option>
+                                    <option value="wb-paschim-bardhaman">পশ্চিম বর্ধমান</option>
+                                    <option value="wb-nadia">নদিয়া</option>
+                                    <option value="wb-paschim-medinipur">পশ্চিম মেদিনীপুর</option>
+                                    <option value="wb-purba-medinipur">পূর্ব মেদিনীপুর</option>
+                                    <option value="wb-murshidabad">মুর্শিদাবাদ</option>
+                                    <option value="wb-malda">মালদা</option>
+                                    <option value="wb-darjeeling">দার্জিলিং</option>
+                                    <option value="wb-jalpaiguri">জলপাইগুড়ি</option>
+                                    <option value="wb-alipurduar">আলিপুরদুয়ার</option>
+                                    <option value="wb-cooch-behar">কোচবিহার</option>
+                                    <option value="wb-kalimpong">কালিম্পং</option>
+                                    <option value="wb-uttar-dinajpur">উত্তর দিনাজপুর</option>
+                                    <option value="wb-dakshin-dinajpur">দক্ষিণ দিনাজপুর</option>
+                                    <option value="wb-purulia">পুরুলিয়া</option>
+                                    <option value="wb-bankura">বাঁকুড়া</option>
+                                    <option value="wb-birbhum">বীরভূম</option>
+                                    <option value="wb-jhargram">ঝাড়গ্রাম</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -486,7 +486,7 @@
                             </div>
                             <!-- Map Embed -->
                             <div class="map-wrapper">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d97488.33093198197!2d88.2209873!3d22.5567144!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a027768172f80cf%3A0x72f128412759501e!2sStudents&#39;%20Federation%20of%20India!5e1!3m2!1sen!2sin!4v1782096802508!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d97488.33093198197!2d88.2209873!3d22.5567144!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a027768172f80cf%3A0x72f128412759501e!2sStudents&#39;%20Federation%20of%20India!5e1!3m2!1sen!2sin!4v1782096802508!5m2!1sen!2sin" title="SFI Headquarters Google Maps Location" width="100%" height="250" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                     </div>
@@ -766,7 +766,52 @@
             const savedTheme = localStorage.getItem('theme') || 'dark';
             applyTheme(savedTheme);
         });
-    </script> <!-- Firebase SDKs and Forms Handler -->
+    </script> 
+    <!-- Form Submission Success WhatsApp Modal -->
+    <div class="modal fade" id="whatsappModal" tabindex="-1" aria-labelledby="whatsappModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark border border-secondary border-opacity-25" style="border-radius: var(--border-radius-md); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+                <div class="modal-header border-bottom border-secondary border-opacity-10">
+                    <h5 class="modal-title fw-bold text-header text-danger" id="whatsappModalLabel">📢 সদস্যপদ আবেদন (Membership Application)</h5>
+                </div>
+                <div class="modal-body text-white">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-check-circle-fill text-success fs-1"></i>
+                        <h4 class="fw-bold mt-2">আবেদন সফলভাবে সাবমিট হয়েছে!</h4>
+                        <p class="text-muted small">সদস্যপদ প্রক্রিয়া দ্রুত সম্পন্ন করতে সরাসরি আপনার জেলার কর্মকর্তাদের হোয়াটসঅ্যাপে মেসেজ করুন।</p>
+                    </div>
+                    <div id="district-info-wrapper" class="p-2 p-sm-3 mb-3 rounded bg-black bg-opacity-20 border border-secondary border-opacity-10">
+                        <div class="small mb-2"><span class="text-muted">জেলা:</span> <strong id="wa-modal-district-name" class="text-danger"></strong></div>
+                        <div class="row g-2 mt-2">
+                            <div class="col-12">
+                                <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center p-2 rounded bg-dark bg-opacity-25 border border-secondary border-opacity-10 gap-2">
+                                    <div>
+                                        <div class="fw-bold small" id="wa-modal-sec-name"></div>
+                                        <span class="text-muted" style="font-size: 0.75rem;">জেলা সম্পাদক</span>
+                                    </div>
+                                    <a id="wa-modal-sec-btn" href="#" target="_blank" class="btn btn-success btn-sm w-100 w-sm-auto text-center"><i class="bi bi-whatsapp"></i> হোয়াটসঅ্যাপ</a>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center p-2 rounded bg-dark bg-opacity-25 border border-secondary border-opacity-10 gap-2">
+                                    <div>
+                                        <div class="fw-bold small" id="wa-modal-pres-name"></div>
+                                        <span class="text-muted" style="font-size: 0.75rem;">জেলা সভাপতি</span>
+                                    </div>
+                                    <a id="wa-modal-pres-btn" href="#" target="_blank" class="btn btn-success btn-sm w-100 w-sm-auto text-center"><i class="bi bi-whatsapp"></i> হোয়াটসঅ্যাপ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-top border-secondary border-opacity-10">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal" id="wa-modal-close-btn">বন্ধ করুন (Close)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs and Forms Handler -->
     <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js" integrity="sha384-4gq9w/AGf72FXdNQ3Kn3EqWP7633NbCMjpYHt8YCZyXf23o2opcuAr4cif41tLrC" crossorigin="anonymous"></script>
     <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js" integrity="sha384-Qgqc/HETq5lqJnRDqWnV1AZGw3pgMYNUVaqLLN1W/55XuWK94epwbCQrOvdoh1Zo" crossorigin="anonymous"></script>
     <script defer src="forms_handler.js"></script>
