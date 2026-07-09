@@ -2,7 +2,7 @@
    ORIGINAL BASE COMPONENT STYLES
    ========================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap');
+
 
 /* --- DESIGN SYSTEM & TOKENS --- */
 :root {
@@ -2073,8 +2073,8 @@ textarea.form-input {
 }
 
 @keyframes preloader-pulse-glow {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(211, 26, 39, 0.75)); }
-    50% { transform: scale(1.15); filter: drop-shadow(0 0 35px rgba(211, 26, 39, 1)); }
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.15); opacity: 1; }
 }
 
 @keyframes preloader-fade-in {
