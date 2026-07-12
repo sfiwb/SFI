@@ -243,6 +243,7 @@
             <div class="hero-spotlight" id="heroSpotlight"></div>
             <div class="neon-blob blob-1"></div>
             <div class="neon-blob blob-2"></div>
+            <canvas id="hero-network-canvas" class="hero-network-canvas"></canvas>
             <div class="container position-relative z-3">
                 <div class="row align-items-center gy-5">
                     <!-- Left Column: Slogan, badges, buttons -->
@@ -252,7 +253,9 @@
                                 INDIA</span>
                         </div>
                         <h1 class="hero-slogan mb-3">
-                            ★ স্বাধীনতা<br>★ গণতন্ত্র<br>★ সমাজতন্ত্র
+                            <span class="glitch-line" data-text="★ স্বাধীনতা">★ স্বাধীনতা</span>
+                            <span class="glitch-line" data-text="★ গণতন্ত্র">★ গণতন্ত্র</span>
+                            <span class="glitch-line" data-text="★ সমাজতন্ত্র">★ সমাজতন্ত্র</span>
                         </h1>
                         <h2 class="hero-tagline fs-4 text-accent fw-bold mb-3">
                             Students' Federation of India — West Bengal State Committee
@@ -271,9 +274,13 @@
                         </div>
                     </div>
 
-                    <!-- Right Column: Visual glassmorphic card with SFI flag SVG -->
-                    <div class="col-lg-6 d-flex justify-content-center align-items-center" data-aos="fade-left"
+                    <!-- Right Column: Visual glassmorphic card with SFI flag SVG & Revolutionary Bubbles -->
+                    <div class="col-lg-6 position-relative d-flex justify-content-center align-items-center hero-visual-col" data-aos="fade-left"
                         data-aos-delay="200">
+                        
+                        <!-- Floating Bubbles Container -->
+                        <div class="hero-bubbles-container" id="heroBubblesContainer"></div>
+                        
                         <div class="hero-visual-card glass-card">
                             <div class="visual-card-glow"></div>
                             <div class="flag-visual-container position-relative">
@@ -295,7 +302,51 @@
                                         ছাত্র আন্দোলনের অগ্রসেনানী</p>
                                 </div>
                             </div>
+
+                        <!-- Biography Detail Card -->
+                        <div class="rev-info-card" id="revInfoCard">
+                            <button class="rev-info-close" id="closeRevInfo" aria-label="Close Profile">&times;</button>
+                            <div class="rev-info-header">
+                                <div class="rev-info-avatar-wrap">
+                                    <img src="" alt="" id="revInfoAvatar" class="rev-info-avatar">
+                                </div>
+                                <div class="rev-info-titles">
+                                    <h4 id="revInfoNameBn" class="rev-info-name-bn"></h4>
+                                    <span id="revInfoNameEn" class="rev-info-name-en"></span>
+                                </div>
+                            </div>
+                            <div class="rev-info-body">
+                                <p id="revInfoSub" class="rev-info-sub text-accent"></p>
+                                <p id="revInfoDesc" class="rev-info-desc"></p>
+                            </div>
+                            <div class="rev-info-footer">
+                                <a href="" id="revInfoLink" class="btn btn-danger w-100 rev-info-btn">বিশদ জানতে ক্লিক করুন</a>
+                            </div>
                         </div>
+
+                        <!-- History Detail Card -->
+                        <div class="rev-info-card" id="historyInfoCard">
+                            <button class="rev-info-close" id="closeHistoryInfo" aria-label="Close Profile">&times;</button>
+                            <div class="rev-info-header">
+                                <div class="rev-info-avatar-wrap" style="background-color: var(--accent-color); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 12px var(--accent-glow);">
+                                    <span style="font-size: 1.8rem; color: #fff; font-weight: bold; font-family: sans-serif; line-height: 1;">☭</span>
+                                </div>
+                                <div class="rev-info-titles">
+                                    <h4 id="historyInfoTitleBn" class="rev-info-name-bn">ইতিহাসের পাতা থেকে</h4>
+                                    <span id="historyInfoTitleEn" class="rev-info-name-en">Pages of History</span>
+                                </div>
+                            </div>
+                            <div class="rev-info-body">
+                                <p id="historyInfoSub" class="rev-info-sub text-accent" style="font-size: 0.95rem; font-weight: 700; margin-bottom: 10px;"></p>
+                                <p id="historyInfoDesc" class="rev-info-desc" style="font-size: 0.88rem; line-height: 1.5; color: var(--text-light-body);"></p>
+                            </div>
+                            <div class="rev-info-footer">
+                                <a href="" id="historyInfoLink" class="btn btn-danger w-100 rev-info-btn">বিশদ জানতে ক্লিক করুন</a>
+                            </div>
+                        </div>
+
+                        <!-- Shards & Stars Burst Canvas -->
+                        <canvas id="bubble-burst-canvas" class="bubble-burst-canvas"></canvas>
                     </div>
                 </div>
             </div>
@@ -316,6 +367,7 @@
                     <!-- Debanjan Dey Card -->
                     <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
                         <div class="glass-card leader-card p-4 rounded-4 shadow-lg border d-flex flex-column w-100 position-relative overflow-hidden">
+                            <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0" y="0" width="100" height="100" rx="4" ry="4" class="border-rect"/></svg>
                             <div class="leader-avatar-wrapper rounded-4 overflow-hidden mb-4 position-relative">
                                 <img src="assets/Leadership/debanjan-dey.jpg" alt="Debanjan Dey" class="w-100 h-100 object-fit-cover leader-img">
                                 <div class="leader-badge-role bg-danger text-white px-3 py-1 rounded-pill small position-absolute bottom-0 start-50 translate-middle-x mb-3 shadow">রাজ্য সম্পাদক</div>
@@ -345,6 +397,7 @@
                     <!-- Pranay Karjee Card -->
                     <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
                         <div class="glass-card leader-card p-4 rounded-4 shadow-lg border d-flex flex-column w-100 position-relative overflow-hidden">
+                            <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0" y="0" width="100" height="100" rx="4" ry="4" class="border-rect"/></svg>
                             <div class="leader-avatar-wrapper rounded-4 overflow-hidden mb-4 position-relative">
                                 <img src="assets/Leadership/pranay-karjee.jpg" alt="Pranay Karjee" class="w-100 h-100 object-fit-cover leader-img">
                                 <div class="leader-badge-role bg-danger text-white px-3 py-1 rounded-pill small position-absolute bottom-0 start-50 translate-middle-x mb-3 shadow">রাজ্য সভাপতি</div>
@@ -374,6 +427,7 @@
                     <!-- Souvik Das Bakshi Card -->
                     <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
                         <div class="glass-card leader-card p-4 rounded-4 shadow-lg border d-flex flex-column w-100 position-relative overflow-hidden">
+                            <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0" y="0" width="100" height="100" rx="4" ry="4" class="border-rect"/></svg>
                             <div class="leader-avatar-wrapper rounded-4 overflow-hidden mb-4 position-relative">
                                 <img src="assets/Leadership/souvik-das-bakshi.jpg" alt="Souvik Das Bakshi" class="w-100 h-100 object-fit-cover leader-img">
                                 <div class="leader-badge-role bg-danger text-white px-3 py-1 rounded-pill small position-absolute bottom-0 start-50 translate-middle-x mb-3 shadow">ছাত্রসংগ্ৰাম পত্রিকা সম্পাদক</div>
@@ -421,6 +475,7 @@
                         <div class="rights-card-inner">
                             <!-- Front -->
                             <div class="rights-card-front">
+                                <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0" y="0" width="100" height="100" rx="4" ry="4" class="border-rect"/></svg>
                                 <div class="rights-icon-wrapper">
                                     <i class="bi bi-chat-left-quote-fill"></i>
                                 </div>
@@ -432,6 +487,7 @@
                             </div>
                             <!-- Back -->
                             <div class="rights-card-back">
+                                <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0" y="0" width="100" height="100" rx="4" ry="4" class="border-rect"/></svg>
                                 <div class="rights-back-header">
                                     <i class="bi bi-chat-left-quote-fill rights-back-icon"></i>
                                     <h3 class="rights-back-title">আইনি অধিকার সমূহ:</h3>
@@ -451,6 +507,7 @@
                         <div class="rights-card-inner">
                             <!-- Front -->
                             <div class="rights-card-front">
+                                <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0" y="0" width="100" height="100" rx="4" ry="4" class="border-rect"/></svg>
                                 <div class="rights-icon-wrapper">
                                     <i class="bi bi-shield-fill-exclamation"></i>
                                 </div>
@@ -462,6 +519,7 @@
                             </div>
                             <!-- Back -->
                             <div class="rights-card-back">
+                                <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0" y="0" width="100" height="100" rx="4" ry="4" class="border-rect"/></svg>
                                 <div class="rights-back-header">
                                     <i class="bi bi-shield-fill-exclamation rights-back-icon"></i>
                                     <h3 class="rights-back-title">আইনি অধিকার সমূহ:</h3>
@@ -481,6 +539,7 @@
                         <div class="rights-card-inner">
                             <!-- Front -->
                             <div class="rights-card-front">
+                                <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0" y="0" width="100" height="100" rx="4" ry="4" class="border-rect"/></svg>
                                 <div class="rights-icon-wrapper">
                                     <i class="bi bi-heart-pulse-fill"></i>
                                 </div>
@@ -492,6 +551,7 @@
                             </div>
                             <!-- Back -->
                             <div class="rights-card-back">
+                                <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0" y="0" width="100" height="100" rx="4" ry="4" class="border-rect"/></svg>
                                 <div class="rights-back-header">
                                     <i class="bi bi-heart-pulse-fill rights-back-icon"></i>
                                     <h3 class="rights-back-title">আইনি অধিকার সমূহ:</h3>
@@ -511,6 +571,7 @@
                         <div class="rights-card-inner">
                             <!-- Front -->
                             <div class="rights-card-front">
+                                <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0" y="0" width="100" height="100" rx="4" ry="4" class="border-rect"/></svg>
                                 <div class="rights-icon-wrapper">
                                     <i class="bi bi-people-fill"></i>
                                 </div>
@@ -522,6 +583,7 @@
                             </div>
                             <!-- Back -->
                             <div class="rights-card-back">
+                                <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0" y="0" width="100" height="100" rx="4" ry="4" class="border-rect"/></svg>
                                 <div class="rights-back-header">
                                     <i class="bi bi-people-fill rights-back-icon"></i>
                                     <h3 class="rights-back-title">আইনি অধিকার সমূহ:</h3>
@@ -541,6 +603,7 @@
                         <div class="rights-card-inner">
                             <!-- Front -->
                             <div class="rights-card-front">
+                                <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0" y="0" width="100" height="100" rx="4" ry="4" class="border-rect"/></svg>
                                 <div class="rights-icon-wrapper">
                                     <i class="bi bi-book-half"></i>
                                 </div>
@@ -552,6 +615,7 @@
                             </div>
                             <!-- Back -->
                             <div class="rights-card-back">
+                                <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0" y="0" width="100" height="100" rx="4" ry="4" class="border-rect"/></svg>
                                 <div class="rights-back-header">
                                     <i class="bi bi-book-half rights-back-icon"></i>
                                     <h3 class="rights-back-title">আইনি অধিকার সমূহ:</h3>
@@ -571,6 +635,7 @@
                         <div class="rights-card-inner">
                             <!-- Front -->
                             <div class="rights-card-front">
+                                <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0" y="0" width="100" height="100" rx="4" ry="4" class="border-rect"/></svg>
                                 <div class="rights-icon-wrapper">
                                     <i class="bi bi-journal-check"></i>
                                 </div>
@@ -582,6 +647,7 @@
                             </div>
                             <!-- Back -->
                             <div class="rights-card-back">
+                                <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0" y="0" width="100" height="100" rx="4" ry="4" class="border-rect"/></svg>
                                 <div class="rights-back-header">
                                     <i class="bi bi-journal-check rights-back-icon"></i>
                                     <h3 class="rights-back-title">আইনি অধিকার সমূহ:</h3>
@@ -1369,17 +1435,310 @@
                 });
             }
 
-            // Mouse-following cursor spotlight in Hero Section
+            // Mouse-following cursor spotlight in Hero Section & Network Particles
             const heroSection = document.getElementById('hero');
             const spotlight = document.getElementById('heroSpotlight');
-            if (heroSection && spotlight) {
+            const heroCanvas = document.getElementById('hero-network-canvas');
+
+            if (heroSection && (spotlight || heroCanvas)) {
+                let mouseX = null;
+                let mouseY = null;
+                let mouseActive = false;
+
                 heroSection.addEventListener('mousemove', (e) => {
                     const rect = heroSection.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    spotlight.style.setProperty('--mouse-x', `${x}px`);
-                    spotlight.style.setProperty('--mouse-y', `${y}px`);
+                    mouseX = e.clientX - rect.left;
+                    mouseY = e.clientY - rect.top;
+                    mouseActive = true;
+
+                    if (spotlight) {
+                        spotlight.style.setProperty('--mouse-x', `${mouseX}px`);
+                        spotlight.style.setProperty('--mouse-y', `${mouseY}px`);
+                    }
                 });
+
+                heroSection.addEventListener('mouseleave', () => {
+                    mouseActive = false;
+                });
+
+                // Network particles canvas logic
+                if (heroCanvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    const hCtx = heroCanvas.getContext('2d');
+                    let hParticles = [];
+                    let hAnimId = null;
+                    let hIsVisible = true;
+                    const particleCount = window.innerWidth < 768 ? 28 : 60;
+                    
+                    const historyStories = [
+                        {
+                            titleBn: "আহমেদাবাদ কংগ্রেস ও পূর্ণ স্বরাজ",
+                            titleEn: "Ahmedabad Congress & Poorna Swaraj (1921)",
+                            sub: "হসরত মোহানি কর্তৃক প্রথম স্বাধীনতার প্রস্তাব উত্থাপন",
+                            desc: "১৯২১ সালের আহমেদাবাদ কংগ্রেসে কমিউনিস্ট নেতা মওলানা হসরত মোহানি প্রথম ভারতের 'পূর্ণ স্বরাজ' বা সম্পূর্ণ স্বাধীনতার প্রস্তাব উত্থাপন করেন। মহাত্মা গান্ধী সহ অনেকে তখন এই প্রস্তাবের বিরোধিতা করলেও, কমিউনিস্টদের এই অনমনীয় দাবিই পরবর্তীকালে জাতীয় কংগ্রেসের মূল লক্ষ্যে পরিণত হয়।",
+                            link: "martyrs.html"
+                        },
+                        {
+                            titleBn: "কানপুর বলশেভিক ষড়যন্ত্র মামলা",
+                            titleEn: "Kanpur Bolshevik Conspiracy Case (1924)",
+                            sub: "কমিউনিস্ট আন্দোলনের ওপর ব্রিটিশ রাজের প্রথম আঘাত",
+                            desc: "ঔপনিবেশিক শাসনের ভিত কাঁপিয়ে দেওয়া কমিউনিস্ট ভাবাদর্শের প্রসারে ভীত হয়ে ব্রিটিশ রাজ এস. এ. ডাঙ্গে, মুজফফর আহমদ সহ কমিউনিস্ট নেতাদের বিরুদ্ধে এই মামলা দায়ের করে। রাজদ্রোহিতার অপবাদে নেতাদের কারাদণ্ড দেওয়া হলেও, এই মামলার ফলেই ভারতের সাধারণ মানুষ কমিউনিস্টদের আদর্শ সম্পর্কে প্রথম জানতে পারে।",
+                            link: "about.html"
+                        },
+                        {
+                            titleBn: "মিরাট ষড়যন্ত্র মামলা",
+                            titleEn: "Meerut Conspiracy Case (1929)",
+                            sub: "সাম্রাজ্যবাদ বিরোধী প্রচারের বৈশ্বিক মঞ্চ",
+                            desc: "ব্রিটিশ শাসনকে উৎখাত করার ষড়যন্ত্রের অভিযোগে দেশী ও বিদেশী কমিউনিস্ট নেতাদের গ্রেফতার করা হয়। দীর্ঘ সাড়ে চার বছরের বিচারে কমিউনিস্টরা আদালত কক্ষকেই সাম্রাজ্যবাদ বিরোধী প্রচারের মূল রাজনৈতিক মঞ্চে পরিণত করেন। আইনস্টাইন, রোমা রোলাঁ ও আর জি ওয়েলস সহ বিশ্ববরেণ্য ব্যক্তিত্বরা এই বন্দীদের সমর্থনে এগিয়ে আসেন।",
+                            link: "booklets.html"
+                        },
+                        {
+                            titleBn: "ভগৎ সিং ও সমাজতান্ত্রিক বৈপ্লবিক ধারা",
+                            titleEn: "Bhagat Singh & Socialist Transformation (1928)",
+                            sub: "HSRA ও সমাজতান্ত্রিক ভারতের স্বপ্ন",
+                            desc: "ভগৎ সিং ও সুখদেব সহ বিপ্লবীরা সমাজতান্ত্রিক দর্শনে উদ্বুদ্ধ হয়ে হিন্দুস্তান রিপাবলিকান অ্যাসোসিয়েশনকে 'হিন্দুস্তান সোশ্যালিস্ট রিপাবলিকান অ্যাসোসিয়েশন' (HSRA) হিসেবে রূপান্তর করেন। তাঁরা সমাজতন্ত্রের আদর্শে একটি শোষণহীন ভারত প্রতিষ্ঠার ডাক দিয়েছিলেন এবং কারান্তরালে মার্ক্সবাদ চর্চা করে কমিউনিস্ট আন্দোলনে যোগ দেন।",
+                            link: "martyrs.html"
+                        },
+                        {
+                            titleBn: "তেভাগা আন্দোলন",
+                            titleEn: "Tebhaga Movement (1946-1947)",
+                            sub: "বাংলা জুড়ে ভাগচাষীদের ঐতিহাসিক প্রতিরোধ",
+                            desc: "কমিউনিস্ট পার্টি ও কৃষক সভার নেতৃত্বে বাংলার ১৯টি জেলায় ফসলের দুই-তৃতীয়াংশ (তেভাগা) কৃষককে দেওয়ার দাবিতে এক ঐতিহাসিক সংগ্রাম গড়ে ওঠে। 'জান দেব তবু ধান দেব না' স্লোগান তুলে চাষীরা ঔপনিবেশিক শাসক ও জোতদারদের শোষণের বিরুদ্ধে সশস্ত্র প্রতিরোধ গড়ে তোলেন, যা স্বাধীন ভারতের ভূমি সংস্কার আন্দোলনের মূল অনুপ্রেরণা ছিল।",
+                            link: "programme.html"
+                        },
+                        {
+                            titleBn: "তেলেঙ্গানা সশস্ত্র কৃষক সংগ্রাম",
+                            titleEn: "Telangana Armed Struggle (1946-1951)",
+                            sub: "নিজাম ও সামন্ততন্ত্রের বিরুদ্ধে ঐতিহাসিক যুদ্ধ",
+                            desc: "হায়দ্রাবাদের নিজাম ও দেশীয় জমিদারদের নৃশংস শোষণের বিরুদ্ধে কমিউনিস্টদের নেতৃত্বে প্রায় ৩,০০০ গ্রাম মুক্ত হয় এবং ১০ লক্ষ একর জমি চাষীদের মাঝে বণ্টন করা হয়। এশিয়ার ইতিহাসে এটিকে অন্যতম বৃহত্তম সশস্ত্র কৃষক অভ্যুত্থান হিসেবে গণ্য করা হয়, যা সামন্তবাদের ভিত কাঁপিয়ে দিয়েছিল।",
+                            link: "programme.html"
+                        },
+                        {
+                            titleBn: "রয়াল ইন্ডিয়ান নেভি বিদ্রোহ",
+                            titleEn: "Royal Indian Navy Mutiny (1946)",
+                            sub: "নৌ-বিদ্রোহ ও কমিউনিস্টদের সংহতি",
+                            desc: "বোম্বে বন্দরে রাজকীয় নৌবাহিনীর জওয়ানরা ব্রিটিশ ঔপনিবেশিক শাসনের বিরুদ্ধে বিদ্রোহ ঘোষণা করলে কমিউনিস্ট পার্টি তাদের সমর্থনে বোম্বের শ্রমিক ধর্মঘটের ডাক দেয়। ৩০ লক্ষেরও বেশি বোম্বে শ্রমিক রাস্তায় নেমে জওয়ানদের খাবার সরবরাহ করেন ও পুলিশের বুলেটের মুখোমুখি হন। এই সংহতি ব্রিটিশ শক্তির দ্রুত বিদায় নিশ্চিত করে।",
+                            link: "about.html"
+                        },
+                        {
+                            titleBn: "আন্দামান সেলুলার জেল ও মার্ক্সবাদী দীক্ষা",
+                            titleEn: "Cellular Jail & Marxist Transformation",
+                            sub: "সশস্ত্র বিপ্লবী ধারা থেকে কমিউনিস্ট আন্দোলনের সূচনা",
+                            desc: "চট্টগ্রাম অস্ত্রাগার লুণ্ঠন ও অন্যান্য সশস্ত্র বিপ্লবী আন্দোলনের মহানায়কেরা যখন আন্দামানের সেলুলার জেলে নির্বাসিত হন, সেখানে কমিউনিস্ট কনসলিডেশন গঠন করে তাঁরা মার্ক্সবাদী সাহিত্য পাঠ করেন। মুক্তি পেয়ে মাস্টারদার সহযোদ্ধা অনন্ত সিংহ, গণেশ ঘোষ প্রমুখ সরাসরি ভারতের কমিউনিস্ট আন্দোলনে ঝাঁপিয়ে পড়েন।",
+                            link: "martyrs.html"
+                        }
+                    ];
+
+                    let hoveredNode = null;
+
+                    function resizeHeroCanvas() {
+                        const rect = heroSection.getBoundingClientRect();
+                        let w = rect.width;
+                        let h = rect.height;
+                        
+                        // Self-healing fallback if layout isn't ready
+                        if (h === 0) {
+                            h = heroSection.offsetHeight || heroSection.clientHeight || 750;
+                        }
+                        if (w === 0) {
+                            w = heroSection.offsetWidth || heroSection.clientWidth || window.innerWidth;
+                        }
+                        
+                        heroCanvas.width = w;
+                        heroCanvas.height = h;
+                        initHeroParticles();
+                    }
+
+                    function initHeroParticles() {
+                        hParticles = [];
+                        for (let i = 0; i < particleCount; i++) {
+                            const isHistory = i < 8;
+                            hParticles.push({
+                                x: Math.random() * heroCanvas.width,
+                                y: Math.random() * heroCanvas.height,
+                                vx: (Math.random() - 0.5) * 0.35,
+                                vy: (Math.random() - 0.5) * 0.35,
+                                size: isHistory ? (window.innerWidth < 768 ? 3.5 : 4.5) : Math.random() * 1.5 + 0.8,
+                                isHistoryNode: isHistory,
+                                storyIndex: isHistory ? i : null
+                            });
+                        }
+                    }
+
+                    function animateHeroParticles() {
+                        // Pause rendering if scrolled way down to save resource
+                        if (window.scrollY > 900) {
+                            hAnimId = requestAnimationFrame(animateHeroParticles);
+                            return;
+                        }
+                        
+                        hCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+                        
+                        const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+                        const nodeColor = theme === 'dark' ? 'rgba(255, 45, 60, 0.28)' : 'rgba(214, 0, 28, 0.25)';
+                        const lineColor = theme === 'dark' ? '255, 45, 60' : '214, 0, 28';
+                        const maxDist = 110;
+
+                        for (let i = 0; i < hParticles.length; i++) {
+                            let p = hParticles[i];
+                            p.x += p.vx;
+                            p.y += p.vy;
+
+                            if (p.x < 0 || p.x > heroCanvas.width) p.vx *= -1;
+                            if (p.y < 0 || p.y > heroCanvas.height) p.vy *= -1;
+
+                            if (mouseActive && mouseX !== null && mouseY !== null) {
+                                const dx = mouseX - p.x;
+                                const dy = mouseY - p.y;
+                                const dist = Math.sqrt(dx*dx + dy*dy);
+                                if (dist < 140) {
+                                    p.x += dx * 0.012;
+                                    p.y += dy * 0.012;
+                                }
+                            }
+
+                            // Draw particle dot
+                            hCtx.beginPath();
+                            hCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                            hCtx.fillStyle = p.isHistoryNode ? 'rgba(255, 45, 60, 0.95)' : nodeColor;
+                            hCtx.fill();
+
+                            if (p.isHistoryNode) {
+                                // Glow halo
+                                hCtx.save();
+                                hCtx.shadowBlur = window.innerWidth < 768 ? 8 : 12;
+                                hCtx.shadowColor = 'rgba(255, 45, 60, 0.9)';
+                                hCtx.beginPath();
+                                hCtx.arc(p.x, p.y, p.size + 1.2, 0, Math.PI * 2);
+                                hCtx.fillStyle = 'rgba(255, 45, 60, 0.4)';
+                                hCtx.fill();
+                                hCtx.restore();
+                                
+                                // Blinking outer ring
+                                const ringPulse = 1.4 + Math.sin(Date.now() * 0.006 + p.storyIndex) * 0.3;
+                                hCtx.beginPath();
+                                hCtx.arc(p.x, p.y, p.size * ringPulse, 0, Math.PI * 2);
+                                hCtx.strokeStyle = theme === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.35)';
+                                hCtx.lineWidth = 1.0;
+                                hCtx.stroke();
+                            }
+
+                            // Connected lines between particles
+                            for (let j = i + 1; j < hParticles.length; j++) {
+                                let p2 = hParticles[j];
+                                const dx = p.x - p2.x;
+                                const dy = p.y - p2.y;
+                                const dist = Math.sqrt(dx*dx + dy*dy);
+
+                                if (dist < maxDist) {
+                                    const alpha = (1 - dist / maxDist) * 0.2;
+                                    hCtx.beginPath();
+                                    hCtx.moveTo(p.x, p.y);
+                                    hCtx.lineTo(p2.x, p2.y);
+                                    hCtx.strokeStyle = `rgba(${lineColor}, ${alpha})`;
+                                    hCtx.lineWidth = 0.7;
+                                    hCtx.stroke();
+                                }
+                            }
+
+                            // Connected lines to mouse
+                            if (mouseActive && mouseX !== null && mouseY !== null) {
+                                const dx = p.x - mouseX;
+                                const dy = p.y - mouseY;
+                                const dist = Math.sqrt(dx*dx + dy*dy);
+                                if (dist < 140) {
+                                    const alpha = (1 - dist / 140) * 0.25;
+                                    hCtx.beginPath();
+                                    hCtx.moveTo(p.x, p.y);
+                                    hCtx.lineTo(mouseX, mouseY);
+                                    hCtx.strokeStyle = `rgba(${lineColor}, ${alpha})`;
+                                    hCtx.lineWidth = 0.8;
+                                    hCtx.stroke();
+                                }
+                            }
+                        }
+
+                        hAnimId = requestAnimationFrame(animateHeroParticles);
+                    }
+
+                    // Hover detection for interactive nodes (attached to parent heroSection since canvas has pointer-events: none)
+                    heroSection.addEventListener('mousemove', (e) => {
+                        const rect = heroCanvas.getBoundingClientRect();
+                        const mx = e.clientX - rect.left;
+                        const my = e.clientY - rect.top;
+                        
+                        let found = null;
+                        for (let p of hParticles) {
+                            if (p.isHistoryNode) {
+                                const dist = Math.hypot(p.x - mx, p.y - my);
+                                if (dist < 14) {
+                                    found = p;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        if (found) {
+                            heroSection.style.cursor = 'pointer';
+                            hoveredNode = found;
+                        } else {
+                            if (heroSection.style.cursor === 'pointer') {
+                                heroSection.style.cursor = 'default';
+                            }
+                            hoveredNode = null;
+                        }
+                    });
+
+                    // Click handler to open history card (attached to parent heroSection)
+                    heroSection.addEventListener('click', (e) => {
+                        // Ignore clicks on links, buttons or inside detail cards
+                        if (e.target.closest('a') || e.target.closest('button') || e.target.closest('.rev-info-card')) return;
+                        
+                        if (hoveredNode) {
+                            e.stopPropagation();
+                            const story = historyStories[hoveredNode.storyIndex];
+                            
+                            // Set contents of history card
+                            document.getElementById('historyInfoTitleBn').textContent = story.titleBn;
+                            document.getElementById('historyInfoTitleEn').textContent = story.titleEn;
+                            document.getElementById('historyInfoSub').textContent = story.sub;
+                            document.getElementById('historyInfoDesc').textContent = story.desc;
+                            document.getElementById('historyInfoLink').href = story.link;
+                            
+                            // Close biography card if open
+                            const revInfoCard = document.getElementById('revInfoCard');
+                            if (revInfoCard) revInfoCard.classList.remove('active');
+                            
+                            document.getElementById('historyInfoCard').classList.add('active');
+                        }
+                    });
+
+                    // Close history details card listener
+                    const closeHistoryBtn = document.getElementById('closeHistoryInfo');
+                    if (closeHistoryBtn) {
+                        closeHistoryBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            document.getElementById('historyInfoCard').classList.remove('active');
+                        });
+                    }
+
+                    // Click outside to close history card
+                    document.addEventListener('click', (e) => {
+                        const hCard = document.getElementById('historyInfoCard');
+                        if (hCard && hCard.classList.contains('active')) {
+                            if (!hCard.contains(e.target) && e.target !== heroCanvas && !e.target.closest('#hero')) {
+                                hCard.classList.remove('active');
+                            }
+                        }
+                    });
+
+                    window.addEventListener('load', resizeHeroCanvas);
+                    window.addEventListener('resize', resizeHeroCanvas);
+                    resizeHeroCanvas();
+                    animateHeroParticles();
+                    
+                    // Fallback retry after 200ms
+                    setTimeout(resizeHeroCanvas, 200);
+                }
             }
 
             // Smooth trailing global cursor glow (Pointer Glow)
@@ -1527,6 +1886,8 @@
                 
                 let isPageVisible = true;
                 let animationId = null;
+                let isFlagHovered = false;
+                let poleTilt = 0;
                 
                 function resizeCanvas() {
                     const rect = container.getBoundingClientRect();
@@ -1563,6 +1924,25 @@
                         }
                     }
                 });
+
+                container.addEventListener('click', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const mx = e.clientX - rect.left;
+                    const my = e.clientY - rect.top;
+                    ripple.x = mx;
+                    ripple.y = my;
+                    ripple.radius = 0;
+                    ripple.active = true;
+                    ripple.strength = 18.0; // High click impact force!
+                });
+
+                container.addEventListener('mouseenter', () => {
+                    isFlagHovered = true;
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    isFlagHovered = false;
+                });
                 
                 function animateFlag() {
                     if (!isPageVisible) return;
@@ -1572,6 +1952,17 @@
                     const canvasHeight = rect.height;
                     
                     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+                    
+                    // Pole torque tilt physics interpolation
+                    const targetTilt = isFlagHovered ? -0.016 : 0;
+                    poleTilt += (targetTilt - poleTilt) * 0.08;
+
+                    ctx.save();
+                    const poleX = 14;
+                    // Rotate around the bottom of the flagpole
+                    ctx.translate(poleX, canvasHeight);
+                    ctx.rotate(poleTilt);
+                    ctx.translate(-poleX, -canvasHeight);
                     
                     // Generate natural, organic wind surges using sine overlays
                     const windCycle = Date.now() * 0.0008;
@@ -1645,7 +2036,6 @@
                     
                     // 2. Draw flagpole visual directly on canvas (synchronized and layered)
                     const poleWidth = 5;
-                    const poleX = 14;
                     
                     // Draw metallic pole
                     const poleGrad = ctx.createLinearGradient(poleX, 0, poleX + poleWidth, 0);
@@ -1721,6 +2111,7 @@
                         ctx.globalAlpha = 1.0; // Restore
                     });
                     
+                    ctx.restore();
                     animationId = requestAnimationFrame(animateFlag);
                 }
                 
@@ -1834,6 +2225,397 @@
                             }
                             card.classList.toggle("active-flip");
                         });
+                    }
+                });
+            }
+
+            // 3D Tilt Effect for Statistics, Leadership, and Rights Cards
+            if (!window.matchMedia('(pointer: coarse)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                const tiltCards = document.querySelectorAll('.stat-card, .leader-card, .rights-card-front, .rights-card-back');
+                tiltCards.forEach(card => {
+                    card.addEventListener('mousemove', function (e) {
+                        const rect = this.getBoundingClientRect();
+                        const x = (e.clientX - rect.left) / rect.width;
+                        const y = (e.clientY - rect.top) / rect.height;
+
+                        const maxTilt = 8;
+                        const rotateX = (y - 0.5) * -maxTilt;
+                        const rotateY = (x - 0.5) * maxTilt;
+
+                        this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+                        this.style.transition = 'transform 0.08s ease-out';
+                    });
+
+                    card.addEventListener('mouseleave', function () {
+                        this.style.transform = '';
+                        this.style.transition = 'transform 0.4s ease';
+                    });
+                });
+            }
+
+            // ============================================================
+            // REVOLUTIONARY FLOATING BUBBLES SYSTEM
+            // ============================================================
+            const revolutionaries = [
+                {
+                    id: "bhagat",
+                    nameBn: "ভগত সিং",
+                    nameEn: "Bhagat Singh",
+                    sub: "ভারতের বীর বিপ্লবী ও সমাজতান্ত্রিক ভাবাদর্শের অগ্রদূত",
+                    desc: "ভারতের স্বাধীনতা সংগ্রামের অন্যতম কনিষ্ঠ ও প্রভাবশালী বিপ্লবী। তিনি হিন্দুস্তান সোশ্যালিস্ট রিপাবলিকান অ্যাসোসিয়েশন (HSRA)-এর অন্যতম প্রধান নেতা ছিলেন এবং সমাজতান্ত্রিক সমাজ গঠনের মাধ্যমে মানুষের ওপর মানুষের শোষণের অবসানে বিশ্বাসী ছিলেন। ১৯৩১ সালের ২৩শে মার্চ লাহোর জেলে ব্রিটিশ শাসকেরা তাঁকে ফাঁসি দেয়।",
+                    img: "assets/images/rev-bhagat.png",
+                    link: "martyrs.html"
+                },
+                {
+                    id: "azad",
+                    nameBn: "চন্দ্রশেখর আজাদ",
+                    nameEn: "Chandrashekhar Azad",
+                    sub: "সসস্ত্র স্বাধীনতা সংগ্রামের অমর নায়ক ও বিপ্লবী সংগঠক",
+                    desc: "হিন্দুস্তান সোশ্যালিস্ট রিপাবলিকান অ্যাসোসিয়েশনের সেনাপতি। কাকোরি ট্রেন ডাকাতি ও স্যান্ডার্স হত্যাকাণ্ডের সাথে যুক্ত অন্যতম মহান বিপ্লবী। তিনি আমৃত্যু আপসহীন সংগ্রাম পরিচালনা করেন এবং ব্রিটিশের হাতে বন্দী না হওয়ার শপথ রক্ষায় এলাহাবাদের আলফ্রেড পার্কে নিজের পিস্তল দিয়ে শেষ গুলিতে আত্মবলিদান দেন।",
+                    img: "assets/images/rev-azad.png",
+                    link: "martyrs.html"
+                },
+                {
+                    id: "subhas",
+                    nameBn: "নেতাজি সুভাষচন্দ্র বসু",
+                    nameEn: "Netaji Subhas Chandra Bose",
+                    sub: "মহান স্বাধীনতা সংগ্রামী ও আজাদ হিন্দ ফৌজের সর্বাধিনায়ক",
+                    desc: "ভারতের স্বাধীনতা সংগ্রামের এক কিংবদন্তি নেতা। তিনি ফরোয়ার্ড ব্লক দল গঠন করেন এবং দ্বিতীয় বিশ্বযুদ্ধের সময় ভারতের স্বাধীনতার জন্য ভারতের জাতীয় সেনাবাহিনী (আজাদ হিন্দ ফৌজ) পরিচালনা করেন। তাঁর আদর্শ ও নেতৃত্ব ভারতের যুবসমাজকে বৈপ্লবিক জাতীয়তাবাদে উদ্বুদ্ধ করে।",
+                    img: "assets/images/rev-subhas.png",
+                    link: "about.html"
+                },
+                {
+                    id: "ems",
+                    nameBn: "ই. এম. এস. নাম্বুদিরিপাদ",
+                    nameEn: "E.M.S. Namboodiripad",
+                    sub: "প্রখ্যাত মার্ক্সবাদী চিন্তাবিদ ও কেরলের প্রথম মুখ্যমন্ত্রী",
+                    desc: "ভারতের কমিউনিস্ট আন্দোলনের অন্যতম মহান নেতা এবং একজন বিশিষ্ট তাত্ত্বিক। ১৯৫৭ সালে গণতান্ত্রিকভাবে নির্বাচিত বিশ্বের প্রথম কমিউনিস্ট সরকারের মুখ্যমন্ত্রী হন কেরলে। তাঁর আমলে ভূমি সংস্কার ও গণশিক্ষা কার্যক্রম কেরলের প্রগতিশীল কাঠামোর ভিত্তি স্থাপন করে।",
+                    img: "assets/images/rev-ems.png",
+                    link: "about.html"
+                },
+                {
+                    id: "pritilata",
+                    nameBn: "প্রীতিলতা ওয়াদ্দেদার",
+                    nameEn: "Pritilata Waddedar",
+                    sub: "ভারতের স্বাধীনতা সংগ্রামের প্রথম নারী সশস্ত্র শহীদ",
+                    desc: "মাস্টারদা সূর্য সেনের অন্যতম বিপ্লবী সহযোদ্ধা। তিনি ১৯৩২ সালে পাহাড়তলী ইউরোপীয় ক্লাব আক্রমণের নেতৃত্ব দেন এবং ব্রিটিশ পুলিশের হাতে ধরা না দিয়ে পটাশিয়াম সায়ানাইড খেয়ে আত্মবলিদান দেন। তাঁর আত্মত্যাগ নারীদের সশস্ত্র বিপ্লবী আন্দোলনে উদ্বুদ্ধ করেছিল।",
+                    img: "assets/images/rev-pritilata.png",
+                    link: "martyrs.html"
+                },
+                {
+                    id: "khudiram",
+                    nameBn: "ক্ষুদিরাম বসু",
+                    nameEn: "Khudiram Bose",
+                    sub: "সশস্ত্র বিপ্লবী আন্দোলনের কনিষ্ঠতম অগ্নিশিশু শহীদ",
+                    desc: "মাত্র ১৮ বছর বয়সে ফাঁসির মঞ্চে হাসিমুখে জীবন দেওয়া ভারতের স্বাধীনতা সংগ্রামের কনিষ্ঠতম শহীদ। মুজাফফরপুর কিংসফোর্ড হত্যার চেষ্টার অভিযোগে তাঁকে ফাঁসি দেওয়া হয়। ফাঁসির মঞ্চে ওঠার সময় তাঁর গান 'একবার বিদায় দে মা ঘুরে আসি' চিরকালের বৈপ্লবিক মন্ত্র হয়ে ওঠে।",
+                    img: "assets/images/rev-khudiram.png",
+                    link: "martyrs.html"
+                },
+                {
+                    id: "surjo",
+                    nameBn: "মাস্টারদা সূর্য সেন",
+                    nameEn: "Masterda Surjo Sen",
+                    sub: "চট্টগ্রাম অস্ত্রাগার লুণ্ঠনের মহানায়ক ও শিক্ষক",
+                    desc: "ভারতের স্বাধীনতা সংগ্রামের এক প্রবাদপ্রতিম বিপ্লবী নেতা। তাঁর নেতৃত্বে ১৯৩০ সালে চট্টগ্রামের ব্রিটিশ অস্ত্রাগার লুণ্ঠন করা হয় এবং জালালাবাদ পাহাড়ে ব্রিটিশ বাহিনীর সাথে ঐতিহাসিক যুদ্ধ হয়। ১৯৩৪ সালে ব্রিটিশ সরকার তাঁকে নৃশংস অত্যাচারের পর ফাঁসি দেয়।",
+                    img: "assets/images/rev-surjo.png",
+                    link: "martyrs.html"
+                },
+                {
+                    id: "ambedkar",
+                    nameBn: "ডঃ বি. আর. আম্বেদকর",
+                    nameEn: "Dr. B. R. Ambedkar",
+                    sub: "দলিত মুক্তি আন্দোলনের পুরোধা ও সংবিধানের স্থপতি",
+                    desc: "ভারতের সংবিধানের প্রধান স্থপতি, সমাজ সংস্কারক ও বিশিষ্ট অর্থনীতিবিদ। তিনি ভারতের দলিত, অনগ্রসর শ্রেণী ও নারীদের অধিকার প্রতিষ্ঠার লড়াইয়ে জীবন উৎসর্গ করেছিলেন। তাঁর লেখনী শোষণের বিরুদ্ধে সামাজিক সমতা ও মানবাধিকারের ভিত্তিপ্রস্তর স্থাপন করেছে।",
+                    img: "assets/images/rev-ambedkar.png",
+                    link: "constitution.html"
+                },
+                {
+                    id: "gandhi",
+                    nameBn: "মহাত্মা গান্ধী",
+                    nameEn: "Mahatma Gandhi",
+                    sub: "ভারতের স্বাধীনতা আন্দোলনের সর্বজনীন অহিংস সংগ্রাম ও গণনেতা",
+                    desc: "ভারতের স্বাধীনতা আন্দোলনের অন্যতম প্রধান চালিকাশক্তি। তিনি সত্য ও অহিংসাকে মূল হাতিয়ার করে ব্রিটিশ রাজের বিরুদ্ধে অসহযোগ, আইন অমান্য ও ভারত ছাড়ো আন্দোলনের নেতৃত্ব দেন। ভারতীয় স্বাধীনতা সংগ্রামের গণচেতনা নির্মাণে তাঁর অবদান অনস্বীকার্য।",
+                    img: "assets/images/rev-gandhi.png",
+                    link: "about.html"
+                },
+                {
+                    id: "che",
+                    nameBn: "চে গুয়েভারা",
+                    nameEn: "Che Guevara",
+                    sub: "কিউবান বিপ্লবের অমর নায়ক ও সমাজতান্ত্রিক আদর্শের বিশ্বপ্রতীক",
+                    desc: "আর্জেন্টিনায় জন্ম নেওয়া বিশ্বখ্যাত মার্ক্সবাদী বিপ্লবী, চিকিৎসক, লেখক ও গেরিলা যুদ্ধের প্রধান রূপকার। কিউবান বিপ্লবের অন্যতম পুরোধা ব্যক্তিত্ব ও গেরিলা যুদ্ধের অন্যতম তাত্ত্বিক। শোষণের বিরুদ্ধে আন্তর্জাতিক সংহতি ও সমাজতান্ত্রিক লড়াইয়ের বিশ্বজনীন প্রতীক।",
+                    img: "assets/images/rev-che.png",
+                    link: "international.html"
+                },
+                {
+                    id: "fidel",
+                    nameBn: "ফিদেল কাস্ত্রো",
+                    nameEn: "Fidel Castro",
+                    sub: "কিউবার সমাজতান্ত্রিক বিপ্লবের অবিসংবাদিত রূপকার ও মহান রাষ্ট্রনায়ক",
+                    desc: "কিউবার মহান সমাজতান্ত্রিক বিপ্লবী ও দীর্ঘকালের রাষ্ট্রপ্রধান। তাঁর নেতৃত্বে কিউবার কমিউনিস্ট বিপ্লব সফল হয় এবং মার্কিন সাম্রাজ্যবাদের বিরুদ্ধে তিনি আমৃত্যু প্রতিরোধ গড়ে তোলেন। শিক্ষা ও চিকিৎসায় কিউবার সমাজতান্ত্রিক মডেল আজ বিশ্বখ্যাত।",
+                    img: "assets/images/rev-fidel.png",
+                    link: "international.html"
+                },
+                {
+                    id: "lenin",
+                    nameBn: "ভ্লাদিমির লেনিন",
+                    nameEn: "Vladimir Lenin",
+                    sub: "রুশ সমাজতান্ত্রিক বলশেভিক বিপ্লবের মহানায়ক ও প্রবক্তা",
+                    desc: "১৯১৭ সালের রুশ বলশেভিক বিপ্লবের মহানায়ক এবং সোভিয়েত ইউনিয়নের প্রতিষ্ঠাতা। তাঁর মার্ক্সবাদী তাত্ত্বিক রূপরেখা বিশ্বব্যাপী সমাজতান্ত্রিক আন্দোলনের ভিত্তি তৈরি করেছিল। তিনি শ্রমজীবী মানুষের সর্বহারা একনায়কতন্ত্রের ধারণাকে বাস্তবায়িত করেন।",
+                    img: "assets/images/rev-lenin.png",
+                    link: "international.html"
+                }
+            ];
+
+            const bubblesContainer = document.getElementById('heroBubblesContainer');
+            const infoCard = document.getElementById('revInfoCard');
+            const burstCanvas = document.getElementById('bubble-burst-canvas');
+            
+            if (bubblesContainer && infoCard && burstCanvas) {
+                const bCtx = burstCanvas.getContext('2d');
+                let burstParticles = [];
+                let burstAnimId = null;
+                
+                let respawnTimers = {};
+                let currentActiveLeaderIdx = null;
+
+                function shuffleArray(array) {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]];
+                    }
+                    return array;
+                }
+
+                let shuffledIndices = Array.from({length: 12}, (_, i) => i);
+                shuffleArray(shuffledIndices);
+
+                function resizeBurstCanvas() {
+                    const rect = burstCanvas.parentElement.getBoundingClientRect();
+                    burstCanvas.width = rect.width;
+                    burstCanvas.height = rect.height;
+                }
+                window.addEventListener('resize', resizeBurstCanvas);
+                resizeBurstCanvas();
+
+                function spawnBurstExplosion(x, y) {
+                    for (let i = 0; i < 15; i++) {
+                        const angle = Math.random() * Math.PI * 2;
+                        const speed = Math.random() * 4 + 2.5;
+                        burstParticles.push({
+                            x: x,
+                            y: y,
+                            vx: Math.cos(angle) * speed,
+                            vy: Math.sin(angle) * speed,
+                            size: Math.random() * 5 + 3,
+                            alpha: 1.0,
+                            decay: Math.random() * 0.045 + 0.02,
+                            type: 'shard',
+                            color: Math.random() > 0.5 ? 'rgba(255, 45, 60, 0.85)' : 'rgba(255, 255, 255, 0.9)'
+                        });
+                    }
+                    for (let i = 0; i < 8; i++) {
+                        const angle = Math.random() * Math.PI * 2;
+                        const speed = Math.random() * 3 + 1.5;
+                        burstParticles.push({
+                            x: x,
+                            y: y,
+                            vx: Math.cos(angle) * speed,
+                            vy: Math.sin(angle) * speed,
+                            size: Math.random() * 9 + 8,
+                            alpha: 1.0,
+                            decay: Math.random() * 0.03 + 0.015,
+                            type: 'star',
+                            angle: Math.random() * Math.PI * 2,
+                            spin: (Math.random() - 0.5) * 0.25
+                        });
+                    }
+                    
+                    if (!burstAnimId) {
+                        animateBurst();
+                    }
+                }
+
+                function animateBurst() {
+                    bCtx.clearRect(0, 0, burstCanvas.width, burstCanvas.height);
+                    
+                    if (burstParticles.length === 0) {
+                        burstAnimId = null;
+                        return;
+                    }
+                    
+                    for (let i = burstParticles.length - 1; i >= 0; i--) {
+                        let p = burstParticles[i];
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.vy += 0.16;
+                        p.vx *= 0.97;
+                        p.alpha -= p.decay;
+                        
+                        if (p.alpha <= 0) {
+                            burstParticles.splice(i, 1);
+                            continue;
+                        }
+                        
+                        bCtx.globalAlpha = p.alpha;
+                        if (p.type === 'shard') {
+                            bCtx.beginPath();
+                            bCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                            bCtx.fillStyle = p.color;
+                            bCtx.fill();
+                        } else {
+                            bCtx.save();
+                            bCtx.translate(p.x, p.y);
+                            p.angle += p.spin;
+                            bCtx.rotate(p.angle);
+                            bCtx.font = `${p.size}px Arial`;
+                            bCtx.fillStyle = '#ff2d3c';
+                            bCtx.textAlign = 'center';
+                            bCtx.textBaseline = 'middle';
+                            bCtx.fillText('★', 0, 0);
+                            bCtx.restore();
+                        }
+                    }
+                    
+                    bCtx.globalAlpha = 1.0;
+                    burstAnimId = requestAnimationFrame(animateBurst);
+                }
+
+                function showInfoCard(leader, leaderIdx) {
+                    document.getElementById('revInfoAvatar').src = leader.img;
+                    document.getElementById('revInfoAvatar').alt = leader.nameEn;
+                    document.getElementById('revInfoNameBn').textContent = leader.nameBn;
+                    document.getElementById('revInfoNameEn').textContent = leader.nameEn;
+                    document.getElementById('revInfoSub').textContent = leader.sub;
+                    document.getElementById('revInfoDesc').textContent = leader.desc;
+                    document.getElementById('revInfoLink').href = leader.link;
+                    
+                    currentActiveLeaderIdx = leaderIdx;
+                    infoCard.classList.add('active');
+                }
+
+                function closeBiographyCard() {
+                    // Recreate any empty slots immediately
+                    for (let i = 0; i < 12; i++) {
+                        if (!document.querySelector(`.rev-bubble-slot.slot-${i}`)) {
+                            recreateBubble(i, shuffledIndices[i]);
+                        }
+                    }
+                    // Clear all pending timeouts
+                    for (let key in respawnTimers) {
+                        clearTimeout(respawnTimers[key]);
+                        delete respawnTimers[key];
+                    }
+                    currentActiveLeaderIdx = null;
+                    infoCard.classList.remove('active');
+                }
+
+                function recreateBubble(slotIdx, leaderIdx) {
+                    if (!document.querySelector(`.rev-bubble-slot.slot-${slotIdx}`)) {
+                        createBubble(slotIdx, leaderIdx);
+                    }
+                }
+
+                function createBubble(slotIdx, leaderIdx) {
+                    const leader = revolutionaries[leaderIdx];
+                    const slotWrapper = document.createElement('div');
+                    slotWrapper.className = `rev-bubble-slot slot-${slotIdx}`;
+
+                    const bubble = document.createElement('div');
+                    bubble.className = 'rev-bubble';
+                    bubble.innerHTML = `<img src="${leader.img}" alt="${leader.nameEn}" class="rev-bubble-img">`;
+                    
+                    bubble.dataset.hovered = 'false';
+                    bubble.addEventListener('mouseenter', () => { bubble.dataset.hovered = 'true'; });
+                    bubble.addEventListener('mouseleave', () => { bubble.dataset.hovered = 'false'; });
+
+                    bubble.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        
+                        const rect = bubble.getBoundingClientRect();
+                        const colRect = burstCanvas.getBoundingClientRect();
+                        const x = rect.left + rect.width / 2 - colRect.left;
+                        const y = rect.top + rect.height / 2 - colRect.top;
+                        
+                        bubble.classList.add('burst-pop');
+                        spawnBurstExplosion(x, y);
+                        showInfoCard(leader, leaderIdx);
+                        
+                        setTimeout(() => {
+                            slotWrapper.remove();
+                        }, 120);
+
+                        respawnTimers[leaderIdx] = setTimeout(() => {
+                            if (currentActiveLeaderIdx === leaderIdx) {
+                                infoCard.classList.remove('active');
+                                currentActiveLeaderIdx = null;
+                            }
+                            recreateBubble(slotIdx, leaderIdx);
+                        }, 8000);
+                    });
+
+                    slotWrapper.appendChild(bubble);
+                    bubblesContainer.appendChild(slotWrapper);
+                    
+                    setTimeout(() => {
+                        bubble.classList.add('show-bubble');
+                    }, 50);
+                }
+
+                // Spawn all 12 bubbles on screen at start (randomized order)
+                for (let i = 0; i < 12; i++) {
+                    createBubble(i, shuffledIndices[i]);
+                }
+
+                // Dynamic physics mouse repulsion for bubbles
+                document.addEventListener('mousemove', (e) => {
+                    const mouseX = e.clientX;
+                    const mouseY = e.clientY;
+                    const slots = document.querySelectorAll('.rev-bubble-slot');
+                    
+                    slots.forEach(slot => {
+                        const bubble = slot.querySelector('.rev-bubble');
+                        if (!bubble || bubble.classList.contains('burst-pop')) return;
+                        
+                        const rect = bubble.getBoundingClientRect();
+                        const bx = rect.left + rect.width / 2;
+                        const by = rect.top + rect.height / 2;
+                        
+                        const dx = bx - mouseX;
+                        const dy = by - mouseY;
+                        const dist = Math.hypot(dx, dy);
+                        
+                        let tx = 0;
+                        let ty = 0;
+                        if (dist < 180) {
+                            const force = (180 - dist) / 180;
+                            const strength = 32; // push strength in px
+                            const angle = Math.atan2(dy, dx);
+                            tx = Math.cos(angle) * force * strength;
+                            ty = Math.sin(angle) * force * strength;
+                        }
+                        
+                        const isHovered = bubble.dataset.hovered === 'true';
+                        const scale = isHovered ? 1.15 : 1.0;
+                        
+                        bubble.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+                        bubble.style.transition = 'transform 0.28s cubic-bezier(0.25, 0.8, 0.25, 1)';
+                    });
+                });
+
+                const closeBtn = document.getElementById('closeRevInfo');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        closeBiographyCard();
+                    });
+                }
+
+                document.addEventListener('click', (e) => {
+                    if (infoCard.classList.contains('active')) {
+                        if (!infoCard.contains(e.target) && !e.target.closest('.rev-bubble')) {
+                            closeBiographyCard();
+                        }
                     }
                 });
             }

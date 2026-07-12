@@ -279,6 +279,17 @@ a:hover {
   z-index: 1;
 }
 
+.hero-network-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.65;
+}
+
 .text-accent {
   color: var(--accent-color) !important;
 }
@@ -314,6 +325,10 @@ a:hover {
 }
 
 .hero-slogan {
+  display: block;
+}
+
+.glitch-line {
   font-family: "Noto Serif Bengali", serif;
   font-size: 3.6rem;
   font-weight: 900;
@@ -324,7 +339,106 @@ a:hover {
   background-clip: text;
   color: transparent;
   display: block;
-  text-shadow: none; /* remove default shadows for text-clip */
+  position: relative;
+  transition: text-shadow 0.3s ease;
+}
+
+/* Pulsing red glow when hovering over the slogan */
+.hero-slogan:hover .glitch-line {
+  text-shadow: 0 0 15px rgba(255, 30, 56, 0.45), 0 0 30px rgba(255, 30, 56, 0.2);
+}
+
+/* Glitch Pseudo-elements */
+.glitch-line::before,
+.glitch-line::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: block;
+  clip-path: inset(50% 0 50% 0); /* initially hidden or middle-sliced */
+  pointer-events: none;
+}
+
+.glitch-line::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff0000;
+  color: #ff3344;
+  -webkit-text-fill-color: #ff3344;
+}
+
+.glitch-line::after {
+  left: -2px;
+  text-shadow: -2px 0 #00ffff, 0 2px 3px rgba(255,0,0,0.5);
+  color: #ffd700;
+  -webkit-text-fill-color: #ffd700;
+}
+
+/* Hover glitch trigger */
+.glitch-line:hover::before {
+  animation: glitch-anim-1 1s infinite linear alternate-reverse;
+}
+
+.glitch-line:hover::after {
+  animation: glitch-anim-2 1s infinite linear alternate-reverse;
+}
+
+/* CSS Glitch keyframes */
+@keyframes glitch-anim-1 {
+  0% {
+    clip-path: inset(40% 0 61% 0);
+    transform: skew(0.3deg);
+  }
+  20% {
+    clip-path: inset(92% 0 1% 0);
+    transform: skew(-0.5deg);
+  }
+  40% {
+    clip-path: inset(15% 0 80% 0);
+    transform: skew(0.8deg);
+  }
+  60% {
+    clip-path: inset(80% 0 5% 0);
+    transform: skew(-0.2deg);
+  }
+  80% {
+    clip-path: inset(3% 0 92% 0);
+    transform: skew(0.5deg);
+  }
+  100% {
+    clip-path: inset(62% 0 15% 0);
+    transform: skew(-0.8deg);
+  }
+}
+
+@keyframes glitch-anim-2 {
+  0% {
+    clip-path: inset(25% 0 58% 0);
+    transform: skew(-0.8deg);
+  }
+  20% {
+    clip-path: inset(70% 0 10% 0);
+    transform: skew(0.4deg);
+  }
+  40% {
+    clip-path: inset(5% 0 88% 0);
+    transform: skew(-0.5deg);
+  }
+  60% {
+    clip-path: inset(90% 0 3% 0);
+    transform: skew(0.8deg);
+  }
+  80% {
+    clip-path: inset(12% 0 75% 0);
+    transform: skew(-0.2deg);
+  }
+  100% {
+    clip-path: inset(55% 0 25% 0);
+    transform: skew(0.5deg);
+  }
 }
 
 /* Glassmorphic Visual Showcase Card */
@@ -1064,3 +1178,396 @@ section::before {
   box-shadow: 0 0 25px var(--accent-color) !important;
   transform: translateY(-2px) !important;
 }
+
+/* Card SVG Border Line Drawing Animation */
+.card-border-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.card-border-svg .border-rect {
+  fill: none;
+  stroke: var(--accent-color);
+  stroke-width: 2.5px;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Hover and active triggers */
+*:hover > .card-border-svg .border-rect,
+.rights-card-container.active-flip .rights-card-front .border-rect,
+.rights-card-container.active-flip .rights-card-back .border-rect {
+  stroke-dashoffset: 0;
+}
+
+[data-theme="light"] .card-border-svg .border-rect {
+  stroke: rgba(214, 0, 28, 0.85);
+}
+
+/* ============================================================
+   FLOATING REVOLUTIONARY BUBBLES SYSTEM
+   ============================================================ */
+.hero-visual-col {
+  overflow: visible !important;
+}
+
+.hero-bubbles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Translucent Crystal-Clear Spheres slot wrapper */
+.rev-bubble-slot {
+  position: absolute;
+  width: 82px;
+  height: 82px;
+  pointer-events: none; /* let clicks pass to child .rev-bubble */
+  z-index: 6;
+}
+
+.rev-bubble {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 0 16px rgba(255, 45, 60, 0.28), 0 0 15px rgba(255, 45, 60, 0.12);
+  /* Glossy 3D reflection highlight overlay */
+  background-image: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* Greyscale portrait image style */
+.rev-bubble-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  filter: grayscale(100%) contrast(1.15);
+  transform: scale(0.92);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effects */
+.rev-bubble:hover {
+  box-shadow: inset 0 0 22px rgba(255, 45, 60, 0.5), 0 0 25px rgba(255, 45, 60, 0.38);
+  border-color: rgba(255, 45, 60, 0.45);
+}
+
+.rev-bubble:hover .rev-bubble-img {
+  filter: grayscale(0%) contrast(1.05);
+  transform: scale(1.0);
+}
+
+/* Bouncy Bubble-Inflate Animation */
+.rev-bubble.show-bubble {
+  animation: bubble-inflate-keyframes 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes bubble-inflate-keyframes {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.12); opacity: 0.85; }
+  85% { transform: scale(0.96); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Bubble Popping Fade-Out class */
+.rev-bubble.burst-pop {
+  animation: bubble-burst-keyframes 0.12s ease-out forwards;
+}
+
+@keyframes bubble-burst-keyframes {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0; filter: blur(3px); }
+}
+
+/* Floating Animations (Independent drift vectors with organic slow rotation) */
+.rev-bubble-slot.slot-0 { top: -45px; left: 8%; animation: float-slot-0 6.5s ease-in-out infinite; }
+.rev-bubble-slot.slot-1 { top: -55px; left: 32%; animation: float-slot-1 8.2s ease-in-out infinite; }
+.rev-bubble-slot.slot-2 { top: -55px; left: 58%; animation: float-slot-2 7.4s ease-in-out infinite; }
+.rev-bubble-slot.slot-3 { top: -45px; left: 82%; animation: float-slot-3 9.1s ease-in-out infinite; }
+.rev-bubble-slot.slot-4 { bottom: -45px; left: 8%; animation: float-slot-4 8.0s ease-in-out infinite; }
+.rev-bubble-slot.slot-5 { bottom: -55px; left: 32%; animation: float-slot-5 10.3s ease-in-out infinite; }
+.rev-bubble-slot.slot-6 { bottom: -55px; left: 58%; animation: float-slot-6 7.0s ease-in-out infinite; }
+.rev-bubble-slot.slot-7 { bottom: -45px; left: 82%; animation: float-slot-7 8.8s ease-in-out infinite; }
+.rev-bubble-slot.slot-8 { top: 24%; left: -42px; animation: float-slot-8 7.8s ease-in-out infinite; }
+.rev-bubble-slot.slot-9 { top: 60%; left: -42px; animation: float-slot-9 9.5s ease-in-out infinite; }
+.rev-bubble-slot.slot-10 { top: 24%; right: -42px; animation: float-slot-10 8.3s ease-in-out infinite; }
+.rev-bubble-slot.slot-11 { top: 60%; right: -42px; animation: float-slot-11 9.8s ease-in-out infinite; }
+
+@keyframes float-slot-0 {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(-11px) translateX(6px) rotate(4deg); }
+}
+@keyframes float-slot-1 {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(13px) translateX(-7px) rotate(-5deg); }
+}
+@keyframes float-slot-2 {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(-10px) translateX(-5px) rotate(3deg); }
+}
+@keyframes float-slot-3 {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(9px) translateX(7px) rotate(-4deg); }
+}
+@keyframes float-slot-4 {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(-12px) translateX(-6px) rotate(5deg); }
+}
+@keyframes float-slot-5 {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(10px) translateX(8px) rotate(-3deg); }
+}
+@keyframes float-slot-6 {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(-9px) translateX(5px) rotate(4deg); }
+}
+@keyframes float-slot-7 {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(11px) translateX(-6px) rotate(-4deg); }
+}
+@keyframes float-slot-8 {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(-8px) translateX(-4px) rotate(3deg); }
+}
+@keyframes float-slot-9 {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(10px) translateX(5px) rotate(-5deg); }
+}
+@keyframes float-slot-10 {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(-11px) translateX(6px) rotate(4deg); }
+}
+@keyframes float-slot-11 {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(10px) translateX(-7px) rotate(-3deg); }
+}
+
+/* Burst Canvas Overlay */
+.bubble-burst-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 8;
+}
+
+/* ============================================================
+   REVOLUTIONARY BIOGRAPHY DETAIL CARD
+   ============================================================ */
+.rev-info-card {
+  position: absolute;
+  right: -28px;
+  width: 320px;
+  z-index: 15;
+  border-radius: 12px;
+  padding: 22px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  background: linear-gradient(135deg, rgba(12, 13, 16, 0.95) 0%, rgba(45, 5, 10, 0.9) 100%);
+  border: 1px solid rgba(255, 45, 60, 0.28);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 45, 60, 0.18);
+  
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(40px) scale(0.92);
+  transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.rev-info-card.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0) scale(1);
+}
+
+/* Close Button */
+.rev-info-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--accent-color);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 0.2s, transform 0.2s;
+  padding: 0;
+  font-weight: bold;
+}
+
+.rev-info-close:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* Avatar Wrap */
+.rev-info-avatar-wrap {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 0 12px var(--accent-glow);
+  flex-shrink: 0;
+}
+
+.rev-info-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.1);
+}
+
+/* Header Info */
+.rev-info-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 45, 60, 0.12);
+  padding-bottom: 12px;
+}
+
+.rev-info-name-bn {
+  font-family: "Noto Serif Bengali", serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  margin-bottom: 2px;
+  color: #fff;
+}
+
+.rev-info-name-en {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Body Content */
+.rev-info-body {
+  margin-bottom: 18px;
+}
+
+.rev-info-sub {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.rev-info-desc {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-light-body);
+  margin-bottom: 0;
+}
+
+/* Footer Link Button */
+.rev-info-btn {
+  font-weight: 600 !important;
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  color: var(--contrast-color) !important;
+  box-shadow: 0 0 12px var(--accent-glow) !important;
+  transition: all 0.3s ease !important;
+  font-size: 0.85rem !important;
+  padding: 10px 16px !important;
+}
+
+.rev-info-btn:hover {
+  background-color: transparent !important;
+  color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 0 20px var(--accent-color) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+  .rev-bubble-slot {
+    width: 48px;
+    height: 48px;
+  }
+  
+  /* Top slots */
+  .rev-bubble-slot.slot-0 { top: -24px; left: 2%; }
+  .rev-bubble-slot.slot-1 { top: -30px; left: 28%; }
+  .rev-bubble-slot.slot-2 { top: -30px; left: 58%; }
+  .rev-bubble-slot.slot-3 { top: -24px; left: 84%; }
+  
+  /* Bottom slots */
+  .rev-bubble-slot.slot-4 { bottom: -24px; left: 2%; }
+  .rev-bubble-slot.slot-5 { bottom: -30px; left: 28%; }
+  .rev-bubble-slot.slot-6 { bottom: -30px; left: 58%; }
+  .rev-bubble-slot.slot-7 { bottom: -24px; left: 84%; }
+  
+  /* Left slots */
+  .rev-bubble-slot.slot-8 { top: 24%; left: -10px; }
+  .rev-bubble-slot.slot-9 { top: 60%; left: -10px; }
+  
+  /* Right slots */
+  .rev-bubble-slot.slot-10 { top: 24%; right: -10px; }
+  .rev-bubble-slot.slot-11 { top: 60%; right: -10px; }
+  
+  .rev-info-card {
+    right: 50%;
+    transform: translateX(50%) translateY(40px) scale(0.92);
+    width: 290px;
+    top: 10%;
+  }
+  
+  .rev-info-card.active {
+    transform: translateX(50%) translateY(0) scale(1);
+  }
+}
+
+/* Light Theme Overrides for Revolutionary Bio Card */
+[data-theme="light"] .rev-info-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 235, 238, 0.95) 100%);
+  border: 1px solid rgba(214, 0, 28, 0.3);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15), 0 0 25px rgba(214, 0, 28, 0.12);
+}
+
+[data-theme="light"] .rev-info-name-bn {
+  color: #0f1013;
+}
+
+[data-theme="light"] .rev-info-name-en {
+  color: #495057;
+}
+
+[data-theme="light"] .rev-info-sub {
+  color: rgba(214, 0, 28, 0.95);
+}
+
+[data-theme="light"] .rev-info-desc {
+  color: #343a40;
+}
+
+[data-theme="light"] .rev-info-close {
+  color: rgba(214, 0, 28, 0.85);
+}
+
+

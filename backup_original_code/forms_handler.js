@@ -1689,3 +1689,78 @@ document.head.appendChild(captchaShakeStyle);
         _syncLayoutWeights();
     }
 })();
+
+// ============================================================
+// GLOBAL CARD 3D TILT & SVG BORDER INJECTION
+// ============================================================
+(function() {
+    function initCardEffects() {
+        if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return;
+        }
+
+        const cardSelectors = [
+            '.leader-card', '.rights-card-front', '.rights-card-back', 
+            '.ideology-card', '.modern-card', '.structure-card', 
+            '.link-card', '.doc-card', '.analysis-card', 
+            '.martyr-card', '.committee-card', '.stat-card', '.publication-card'
+        ];
+
+        const cards = document.querySelectorAll(cardSelectors.join(', '));
+        cards.forEach(card => {
+            // 1. Dynamic SVG border injection (except for .stat-card)
+            if (!card.classList.contains('stat-card') && !card.querySelector('.card-border-svg')) {
+                const svgNS = "http://www.w3.org/2000/svg";
+                const svg = document.createElementNS(svgNS, "svg");
+                svg.setAttribute("class", "card-border-svg");
+                svg.setAttribute("viewBox", "0 0 100 100");
+                svg.setAttribute("preserveAspectRatio", "none");
+
+                const rect = document.createElementNS(svgNS, "rect");
+                rect.setAttribute("x", "0");
+                rect.setAttribute("y", "0");
+                rect.setAttribute("width", "100");
+                rect.setAttribute("height", "100");
+                rect.setAttribute("rx", "4");
+                rect.setAttribute("ry", "4");
+                rect.setAttribute("class", "border-rect");
+
+                svg.appendChild(rect);
+                
+                // Ensure card has positioning context
+                const computedStyle = window.getComputedStyle(card);
+                if (computedStyle.position === 'static') {
+                    card.style.position = 'relative';
+                }
+                
+                card.appendChild(svg);
+            }
+
+            // 2. 3D Tilt Effect
+            card.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width;
+                const y = (e.clientY - rect.top) / rect.height;
+
+                const maxTilt = 8;
+                const rotateX = (y - 0.5) * -maxTilt;
+                const rotateY = (x - 0.5) * maxTilt;
+
+                this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+                this.style.transition = 'transform 0.08s ease-out';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.transition = 'transform 0.4s ease';
+            });
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCardEffects);
+    } else {
+        initCardEffects();
+    }
+})();
+
