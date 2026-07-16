@@ -449,6 +449,14 @@
             background: rgba(0, 0, 0, 0.2);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             padding: 0 30px;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+            -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+        }
+        .modal-tabs::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome/Safari/Opera */
         }
 
         .modal-tab-link {
@@ -464,6 +472,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
         .modal-tab-link:hover {
@@ -753,6 +763,70 @@
             font-size: 0.88rem;
             color: var(--text-muted);
             line-height: 1.6;
+        }
+
+        /* Mobile Responsive adjustments for Custom Modal Popup */
+        @media (max-width: 768px) {
+            .custom-modal-overlay {
+                padding: 10px;
+            }
+            .custom-modal-box {
+                max-height: 90vh;
+            }
+            .custom-modal-header {
+                padding: 16px 20px;
+            }
+            .custom-modal-header h2 {
+                font-size: 1.15rem;
+                gap: 8px;
+            }
+            .modal-tabs {
+                padding: 0 15px;
+            }
+            .modal-tab-link {
+                padding: 12px 14px;
+                font-size: 0.85rem;
+                gap: 6px;
+            }
+            .custom-modal-body {
+                padding: 20px;
+                font-size: 0.92rem;
+            }
+            .custom-modal-footer {
+                padding: 12px 20px;
+            }
+            .modal-data-table th, .modal-data-table td {
+                padding: 8px 12px;
+                font-size: 0.82rem;
+            }
+            .modal-resolution-card {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .custom-modal-overlay {
+                padding: 5px;
+            }
+            .custom-modal-box {
+                max-height: 95vh;
+            }
+            .custom-modal-header {
+                padding: 12px 15px;
+            }
+            .custom-modal-header h2 {
+                font-size: 1.05rem;
+            }
+            .modal-tabs {
+                padding: 0 10px;
+            }
+            .modal-tab-link {
+                padding: 10px 12px;
+                font-size: 0.8rem;
+            }
+            .custom-modal-body {
+                padding: 15px;
+            }
         }
     </style>
     <!-- Theme Flash Prevention -->
